@@ -1,5 +1,6 @@
 package domain.models;
 
+
 public class AutenticacionExterna {
     private int id;
     private String nombreProveedor;
