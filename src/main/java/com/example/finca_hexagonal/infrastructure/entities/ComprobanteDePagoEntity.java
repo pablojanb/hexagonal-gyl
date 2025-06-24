@@ -5,22 +5,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "modoDePago")
+@Table(name = "comprobante_de_pago")
 
-public class ModoDePagoEntity {
+public class ComprobanteDePagoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name="pago_id")
+    @OneToOne
+    @JoinColumn(name = "pago_id")
     private PagoEntity pago;
 
-    private String tipo;
-    private  String detalles;
+    @ManyToOne
+    @JoinColumn(name = "modo_de_pago_id")
+    private  ModoDePagoEntity modoDePago;
+
+    private String descripcion;
+    private BigDecimal monto;
 }
