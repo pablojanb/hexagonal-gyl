@@ -1,11 +1,10 @@
 package com.example.finca_hexagonal.domain.ports.in.pagos;
 
 import com.example.finca_hexagonal.domain.models.Pago;
-
-import java.awt.print.Pageable;
 import org.springframework.data.domain.Page;
 
-public class FindPagoUseCase {
+import java.awt.print.Pageable;
 
+public interface FindPagosUseCase {
     Page<Pago> getAll(Pageable pageable);
 }
