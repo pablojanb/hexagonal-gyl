@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class DireccionDTOResponse {
+
     private Long id_direccion;
     private String calle;
     private int altura;

@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.domain.models.Direccion;
 public interface DeleteDireccionUseCase {
     boolean delete(Long id_direccion);
 
+
     Direccion logicalDeletion(Direccion direccion);
 
 }

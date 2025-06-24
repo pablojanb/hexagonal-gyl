@@ -67,6 +67,7 @@ public class Direccion {
 
     public void setAclaracion(String aclaracion) {
         this.aclaracion = aclaracion;
+
     }
 }
 
