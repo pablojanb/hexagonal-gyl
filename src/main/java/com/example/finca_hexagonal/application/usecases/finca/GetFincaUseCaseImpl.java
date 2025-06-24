@@ -6,6 +6,7 @@ import com.example.finca_hexagonal.domain.ports.out.FincaRespositoryPort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GetFincaUseCaseImpl implements GetFincaUseCase {
@@ -21,7 +22,7 @@ public class GetFincaUseCaseImpl implements GetFincaUseCase {
     }
 
     @Override
-    public Finca getFincaById(int id) {
+    public Optional<Finca> getFincaById(int id) {
         return fincaRespositoryPort.getById(id);
     }
 }

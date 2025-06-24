@@ -6,6 +6,7 @@ import com.example.finca_hexagonal.infrastructure.mappers.FincaMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.FincaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FincaRepositoryAdapter implements FincaRespositoryPort {
     private final FincaRepository fincaRepository;
@@ -28,12 +29,12 @@ public class FincaRepositoryAdapter implements FincaRespositoryPort {
     }
 
     @Override
-    public Finca getById(int id) {
+    public Optional<Finca> getById(int id) {
         return null;
     }
 
     @Override
-    public Finca update(int id, Finca finca) {
+    public Optional<Finca> update(int id, Finca finca) {
         return null;
     }
 

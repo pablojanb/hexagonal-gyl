@@ -5,6 +5,8 @@ import com.example.finca_hexagonal.domain.ports.in.finca.UpdateFincaUseCase;
 import com.example.finca_hexagonal.domain.ports.out.FincaRespositoryPort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UpdateFincaUseCaseImpl implements UpdateFincaUseCase {
     private final FincaRespositoryPort fincaRespositoryPort;
@@ -14,7 +16,7 @@ public class UpdateFincaUseCaseImpl implements UpdateFincaUseCase {
     }
 
     @Override
-    public Finca updateFinca(int id, Finca finca) {
+    public Optional<Finca> updateFinca(int id, Finca finca) {
         return fincaRespositoryPort.update(id, finca);
     }
 }

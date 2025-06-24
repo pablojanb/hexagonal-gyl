@@ -8,6 +8,7 @@ import com.example.finca_hexagonal.domain.ports.in.finca.UpdateFincaUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FincaService implements CreateFincaUseCase, DeleteFincaUseCase, UpdateFincaUseCase, GetFincaUseCase {
@@ -40,12 +41,12 @@ public class FincaService implements CreateFincaUseCase, DeleteFincaUseCase, Upd
     }
 
     @Override
-    public Finca getFincaById(int id) {
+    public Optional<Finca> getFincaById(int id) {
         return getFincaUseCase.getFincaById(id);
     }
 
     @Override
-    public Finca updateFinca(int id, Finca finca) {
+    public Optional<Finca> updateFinca(int id, Finca finca) {
         return updateFincaUseCase.updateFinca(id, finca);
     }
 }

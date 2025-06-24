@@ -31,13 +31,17 @@ public class FincaController {
 
     @GetMapping("/getFincaById/{fincaId}")
     public ResponseEntity<Finca> getFincaById(@PathVariable int fincaId){
-        return new ResponseEntity<>(fincaService.getFincaById(fincaId), HttpStatus.OK);
+        return fincaService.getFincaById(fincaId)
+                .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/updateFinca/{fincaId}")
     public ResponseEntity<Finca> updateFinca(@PathVariable int fincaId,
-                             @RequestBody Finca finca){
-        return new ResponseEntity<>(fincaService.updateFinca(fincaId, finca), HttpStatus.OK);
+                             @RequestBody Finca fincaUpdate){
+        return fincaService.updateFinca(fincaId, fincaUpdate)
+                .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/deleteFincaById/{fincaId}")
