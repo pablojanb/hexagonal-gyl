@@ -6,6 +6,10 @@ public interface UpdateFecha_EspecialUseCase {
     Fecha_Especial update(Fecha_Especial fecha_Especial);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 8211f84 (Direccion y Fecha_Especial)
+=======
+
+>>>>>>> 06956d0 (cambios prueba)
