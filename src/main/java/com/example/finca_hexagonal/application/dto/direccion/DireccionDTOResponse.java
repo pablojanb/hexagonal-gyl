@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class DireccionDTOResponse {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
     private Long id_direccion;
     private String calle;
     private int altura;

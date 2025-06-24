@@ -8,5 +8,8 @@ import java.util.Optional;
 public interface FindFecha_EspecialUseCase {
     List<Fecha_Especial> getAll();
     Optional<Fecha_Especial> getById(Long id_fecha);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
 }

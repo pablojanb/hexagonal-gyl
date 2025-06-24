@@ -20,7 +20,10 @@ public interface DireccionModelPort {
 
     boolean delete(Long id_direccion);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
     Direccion logicalDeletion(Direccion direccion);
 
 }

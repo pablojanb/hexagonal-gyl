@@ -104,5 +104,4 @@ public class Fecha_Especial {
         this.finca_id = finca_id;
     }
 
-
 }

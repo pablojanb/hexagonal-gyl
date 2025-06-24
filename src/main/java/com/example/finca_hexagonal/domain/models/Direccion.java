@@ -68,12 +68,9 @@ public class Direccion {
     public void setAclaracion(String aclaracion) {
         this.aclaracion = aclaracion;
 
+
     }
-<<<<<<< .merge_file_41rqQO
+
 }
 
 
-
-=======
-}
->>>>>>> .merge_file_UQmegI

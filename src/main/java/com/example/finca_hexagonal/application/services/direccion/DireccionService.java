@@ -21,5 +21,8 @@ public interface DireccionService {
 
     DireccionDTOResponse logicalDelete(Long id_direccion);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
 }
