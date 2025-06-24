@@ -19,6 +19,7 @@ public interface Fecha_EspecialModelPort {
 
     boolean delete(Long id_fecha);
 
+
     Fecha_Especial logicalDelete(Fecha_Especial fecha_Especial);
 
 }

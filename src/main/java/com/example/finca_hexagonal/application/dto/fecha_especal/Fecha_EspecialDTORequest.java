@@ -19,4 +19,5 @@ public class Fecha_EspecialDTORequest {
     private BigDecimal descuento;
     private BigDecimal recargo;
     private String motivo;
+
 }

@@ -21,4 +21,5 @@ public class Fecha_EspecialDTOResponse {
     private BigDecimal recargo;
     private String motivo;
     private Long finca_id;
+
 }
