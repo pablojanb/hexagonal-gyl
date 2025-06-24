@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.domain.models;
 
 public class ImagenFinca {
     private Long idImagen;
-    private String url;|
+    private String url;
     private boolean esPortada;
     private Long fincaId;
 
