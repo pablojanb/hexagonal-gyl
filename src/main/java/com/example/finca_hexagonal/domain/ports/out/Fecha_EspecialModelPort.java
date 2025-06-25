@@ -19,14 +19,5 @@ public interface Fecha_EspecialModelPort {
 
     boolean delete(Long id_fecha);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 8211f84 (Direccion y Fecha_Especial)
-=======
-
->>>>>>> 06956d0 (cambios prueba)
-    Fecha_Especial logicalDelete(Fecha_Especial fecha_Especial);
 
 }
