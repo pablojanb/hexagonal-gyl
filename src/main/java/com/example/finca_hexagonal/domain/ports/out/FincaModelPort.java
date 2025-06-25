@@ -5,12 +5,12 @@ import com.example.finca_hexagonal.domain.models.Finca;
 import java.util.List;
 import java.util.Optional;
 
-public interface FincaRespositoryPort {
+public interface FincaModelPort {
     Finca save(Finca finca);
 
-    List<Finca> getAll();
+    List<Finca> findAll();
 
-    Optional<Finca> getById(int id);
+    Optional<Finca> findById(int id);
 
     Optional<Finca> update(int id, Finca finca);
 

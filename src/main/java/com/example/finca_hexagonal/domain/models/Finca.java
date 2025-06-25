@@ -6,14 +6,14 @@ public class Finca {
     private int id;
     private String nombre;
     private Propietario propietario;
-    private Detalle detalle;
+    private DetalleFinca detalle;
     private Direccion direccion;
     private BigDecimal tarifa_hora;
 
     public Finca() {
     }
 
-    public Finca(int id, String nombre, Propietario propietario, Detalle detalle, Direccion direccion, BigDecimal tarifa_hora) {
+    public Finca(int id, String nombre, Propietario propietario, DetalleFinca detalle, Direccion direccion, BigDecimal tarifa_hora) {
         this.id = id;
         this.nombre = nombre;
         this.propietario = propietario;
@@ -46,11 +46,11 @@ public class Finca {
         this.propietario = propietario;
     }
 
-    public Detalle getDetalle() {
+    public DetalleFinca getDetalle() {
         return detalle;
     }
 
-    public void setDetalle(Detalle detalle) {
+    public void setDetalle(DetalleFinca detalle) {
         this.detalle = detalle;
     }
 

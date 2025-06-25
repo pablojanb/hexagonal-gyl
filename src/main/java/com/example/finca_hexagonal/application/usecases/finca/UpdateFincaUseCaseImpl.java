@@ -2,21 +2,21 @@ package com.example.finca_hexagonal.application.usecases.finca;
 
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.ports.in.finca.UpdateFincaUseCase;
-import com.example.finca_hexagonal.domain.ports.out.FincaRespositoryPort;
+import com.example.finca_hexagonal.domain.ports.out.FincaModelPort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class UpdateFincaUseCaseImpl implements UpdateFincaUseCase {
-    private final FincaRespositoryPort fincaRespositoryPort;
+    private final FincaModelPort fincaModelPort;
 
-    public UpdateFincaUseCaseImpl(FincaRespositoryPort fincaRespositoryPort) {
-        this.fincaRespositoryPort = fincaRespositoryPort;
+    public UpdateFincaUseCaseImpl(FincaModelPort fincaModelPort) {
+        this.fincaModelPort = fincaModelPort;
     }
 
     @Override
     public Optional<Finca> updateFinca(int id, Finca finca) {
-        return fincaRespositoryPort.update(id, finca);
+        return fincaModelPort.update(id, finca);
     }
 }

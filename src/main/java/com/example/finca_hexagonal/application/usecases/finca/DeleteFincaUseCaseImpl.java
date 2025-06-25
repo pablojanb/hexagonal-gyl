@@ -1,19 +1,19 @@
 package com.example.finca_hexagonal.application.usecases.finca;
 
 import com.example.finca_hexagonal.domain.ports.in.finca.DeleteFincaUseCase;
-import com.example.finca_hexagonal.domain.ports.out.FincaRespositoryPort;
+import com.example.finca_hexagonal.domain.ports.out.FincaModelPort;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DeleteFincaUseCaseImpl implements DeleteFincaUseCase {
-    private final FincaRespositoryPort fincaRespositoryPort;
+    private final FincaModelPort fincaModelPort;
 
-    public DeleteFincaUseCaseImpl(FincaRespositoryPort fincaRespositoryPort) {
-        this.fincaRespositoryPort = fincaRespositoryPort;
+    public DeleteFincaUseCaseImpl(FincaModelPort fincaModelPort) {
+        this.fincaModelPort = fincaModelPort;
     }
 
     @Override
     public boolean deleteFincaById(int id) {
-        return fincaRespositoryPort.deleteById(id);
+        return fincaModelPort.deleteById(id);
     }
 }

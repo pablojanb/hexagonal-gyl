@@ -1,7 +1,7 @@
 package com.example.finca_hexagonal.application.services;
 
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.ports.in.finca.DetalleFincaService;
+import com.example.finca_hexagonal.domain.ports.in.detalle_finca.DetalleFincaService;
 import com.example.finca_hexagonal.domain.ports.out.DetalleFincaRepository;
 import org.springframework.stereotype.Service;
 

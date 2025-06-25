@@ -90,4 +90,3 @@ public class Pago {
         this.estado_pago = estado_pago;
     }
 }
-
