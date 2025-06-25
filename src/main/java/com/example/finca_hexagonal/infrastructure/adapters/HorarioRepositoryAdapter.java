@@ -30,7 +30,7 @@ public class HorarioRepositoryAdapter implements HorarioModelPort {
     }
 
     @Override
-    public boolean deleteById(int horarioId) {
+    public boolean deleteById(Long horarioId) {
         if (jpaHorarioRepository.existsById(horarioId)){
             jpaHorarioRepository.deleteById(horarioId);
             return true;
@@ -46,12 +46,12 @@ public class HorarioRepositoryAdapter implements HorarioModelPort {
     }
 
     @Override
-    public Optional<Horario> findById(int horarioId) {
+    public Optional<Horario> findById(Long horarioId) {
         return jpaHorarioRepository.findById(horarioId).map(horarioMappers::toDomainModel);
     }
 
     @Override
-    public Optional<Horario> update(int horarioId, Horario horario) {
+    public Optional<Horario> update(Long horarioId, Horario horario) {
         if (jpaHorarioRepository.existsById(horarioId)){
             HorarioEntity horarioEntity = horarioMappers.fromDomainModel(horario);
             HorarioEntity updateHorarioEntity = jpaHorarioRepository.save(horarioEntity);

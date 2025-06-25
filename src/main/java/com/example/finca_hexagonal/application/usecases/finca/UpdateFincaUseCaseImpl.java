@@ -16,7 +16,7 @@ public class UpdateFincaUseCaseImpl implements UpdateFincaUseCase {
     }
 
     @Override
-    public Optional<Finca> updateFinca(int id, Finca finca) {
+    public Optional<Finca> updateFinca(Long id, Finca finca) {
         return fincaModelPort.update(id, finca);
     }
 }

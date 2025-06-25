@@ -8,11 +8,11 @@ import java.util.Optional;
 public interface HorarioModelPort {
     Horario save(Horario horario);
 
-    boolean deleteById(int horarioId);
+    boolean deleteById(Long horarioId);
 
     List<Horario> findAll();
 
-    Optional<Horario> findById(int horarioId);
+    Optional<Horario> findById(Long horarioId);
 
-    Optional<Horario> update(int horarioId, Horario horario);
+    Optional<Horario> update(Long horarioId, Horario horario);
 }

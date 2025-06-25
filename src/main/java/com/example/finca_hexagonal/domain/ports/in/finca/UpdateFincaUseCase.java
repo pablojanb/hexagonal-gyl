@@ -5,5 +5,5 @@ import com.example.finca_hexagonal.domain.models.Finca;
 import java.util.Optional;
 
 public interface UpdateFincaUseCase {
-    Optional<Finca> updateFinca(int id, Finca finca);
+    Optional<Finca> updateFinca(Long id, Finca finca);
 }
