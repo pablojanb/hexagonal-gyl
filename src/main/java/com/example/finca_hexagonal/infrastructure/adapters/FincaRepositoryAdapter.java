@@ -36,12 +36,12 @@ public class FincaRepositoryAdapter implements FincaModelPort {
     }
 
     @Override
-    public Optional<Finca> findById(int id) {
+    public Optional<Finca> findById(Long id) {
         return jpaFincaRepository.findById(id).map(fincaMappers::toDomainModel);
     }
 
     @Override
-    public Optional<Finca> update(int id, Finca finca) {
+    public Optional<Finca> update(Long id, Finca finca) {
         if (jpaFincaRepository.existsById(id)){
             FincaEntity fincaEntity = fincaMappers.fromDomainModel(finca);
             FincaEntity updateFincaEntity = jpaFincaRepository.save(fincaEntity);
@@ -51,7 +51,7 @@ public class FincaRepositoryAdapter implements FincaModelPort {
     }
 
     @Override
-    public boolean deleteById(int id) {
+    public boolean deleteById(Long id) {
         if (jpaFincaRepository.existsById(id)){
             jpaFincaRepository.deleteById(id);
             return true;

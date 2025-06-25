@@ -21,7 +21,7 @@ public class GetHorarioUseCaseImpl implements GetHorarioUseCase {
     }
 
     @Override
-    public Optional<Horario> getHorarioById(int horarioId) {
+    public Optional<Horario> getHorarioById(Long horarioId) {
         return horarioModelPort.findById(horarioId);
     }
 }

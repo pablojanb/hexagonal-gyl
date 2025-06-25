@@ -10,9 +10,9 @@ public interface FincaModelPort {
 
     List<Finca> findAll();
 
-    Optional<Finca> findById(int id);
+    Optional<Finca> findById(Long id);
 
-    Optional<Finca> update(int id, Finca finca);
+    Optional<Finca> update(Long id, Finca finca);
 
-    boolean deleteById(int id);
+    boolean deleteById(Long id);
 }

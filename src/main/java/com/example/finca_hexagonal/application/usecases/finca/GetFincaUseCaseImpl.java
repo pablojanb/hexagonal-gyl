@@ -22,7 +22,7 @@ public class GetFincaUseCaseImpl implements GetFincaUseCase {
     }
 
     @Override
-    public Optional<Finca> getFincaById(int id) {
+    public Optional<Finca> getFincaById(Long id) {
         return fincaModelPort.findById(id);
     }
 }

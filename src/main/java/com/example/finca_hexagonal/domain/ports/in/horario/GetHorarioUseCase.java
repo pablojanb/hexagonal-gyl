@@ -9,5 +9,5 @@ public interface GetHorarioUseCase {
 
     List<Horario> getAllHorarios();
 
-    Optional<Horario> getHorarioById(int horarioId);
+    Optional<Horario> getHorarioById(Long horarioId);
 }

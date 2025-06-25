@@ -13,7 +13,7 @@ public class DeleteFincaUseCaseImpl implements DeleteFincaUseCase {
     }
 
     @Override
-    public boolean deleteFincaById(int id) {
+    public boolean deleteFincaById(Long id) {
         return fincaModelPort.deleteById(id);
     }
 }

@@ -13,7 +13,7 @@ public class DeleteHorarioUseCaseImpl implements DeleteHorarioUseCase {
         this.horarioModelPort = horarioModelPort;
     }
     @Override
-    public boolean deleteHorario(int horarioId) {
+    public boolean deleteHorario(Long horarioId) {
         return horarioModelPort.deleteById(horarioId);
     }
 }

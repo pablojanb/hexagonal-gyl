@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.services.HorarioService;
+import com.example.finca_hexagonal.application.services.HorarioService.impl.HorarioModelService;
 import com.example.finca_hexagonal.domain.models.Horario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/horarios")
 public class HorarioController {
-    private final HorarioService horarioService;
+    private final HorarioModelService horarioService;
 
-    public HorarioController(HorarioService fincaService) {
+    public HorarioController(HorarioModelService fincaService) {
         this.horarioService = fincaService;
     }
 
@@ -29,14 +29,14 @@ public class HorarioController {
     }
 
     @GetMapping("/getHorarioById/{horarioId}")
-    public ResponseEntity<Horario> getHorarioById(@PathVariable int horarioId){
+    public ResponseEntity<Horario> getHorarioById(@PathVariable Long horarioId){
         return horarioService.getHorarioById(horarioId)
                 .map(horario -> new ResponseEntity<>(horario, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/updateHorario/{horarioId}")
-    public ResponseEntity<Horario> updateHorario(@PathVariable int horarioId,
+    public ResponseEntity<Horario> updateHorario(@PathVariable Long horarioId,
                                                  @RequestBody Horario horarioUpdate){
         return horarioService.updateHorario(horarioId, horarioUpdate)
                 .map(horario -> new ResponseEntity<>(horario, HttpStatus.OK))
@@ -44,7 +44,7 @@ public class HorarioController {
     }
 
     @DeleteMapping("/deleteHorarioById/{horarioId}")
-    public ResponseEntity<Void> deleteHorarioById(@PathVariable int horarioId){
+    public ResponseEntity<Void> deleteHorarioById(@PathVariable Long horarioId){
         if (horarioService.deleteHorario(horarioId)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
