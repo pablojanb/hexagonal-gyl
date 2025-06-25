@@ -6,5 +6,4 @@ public interface DeleteDireccionUseCase {
     boolean delete(Long id_direccion);
 
 
-
 }
