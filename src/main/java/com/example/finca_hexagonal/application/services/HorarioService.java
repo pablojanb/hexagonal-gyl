@@ -5,10 +5,12 @@ import com.example.finca_hexagonal.domain.ports.in.horario.CreateHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.DeleteHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.GetHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.UpdateHorarioUseCase;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class HorarioService implements CreateHorarioUseCase, DeleteHorarioUseCase, UpdateHorarioUseCase, GetHorarioUseCase {
 
     private final CreateHorarioUseCase createHorarioUseCase;
