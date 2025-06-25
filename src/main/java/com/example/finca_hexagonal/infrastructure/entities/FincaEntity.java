@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.entities;
 
-import com.example.finca_hexagonal.domain.models.Detalle;
+import com.example.finca_hexagonal.domain.models.DetalleFinca;
 import com.example.finca_hexagonal.domain.models.Direccion;
 import com.example.finca_hexagonal.domain.models.Propietario;
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class FincaEntity {
     @OneToOne
     private Propietario propietario;
     @OneToOne
-    private Detalle detalle;
+    private DetalleFinca detalle;
     @OneToOne
     private Direccion direccion;
     private BigDecimal tarifa_hora;
