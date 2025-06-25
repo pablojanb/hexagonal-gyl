@@ -14,7 +14,5 @@ public class DireccionDTORequest {
     private String provincia;
     private String aclaracion;
 
-    // comentario
-
 
 }
