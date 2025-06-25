@@ -69,7 +69,11 @@ public class Direccion {
         this.aclaracion = aclaracion;
 
     }
+<<<<<<< .merge_file_41rqQO
 }
 
 
 
+=======
+}
+>>>>>>> .merge_file_UQmegI
