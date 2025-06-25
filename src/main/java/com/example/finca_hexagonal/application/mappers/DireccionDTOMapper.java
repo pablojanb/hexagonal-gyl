@@ -1,4 +1,6 @@
 package com.example.finca_hexagonal.application.mappers;
 
-public class DireccionDTOMapper {
+
+//@Mapper(componentModel = "spring")
+public abstract class DireccionDTOMapper {
 }
