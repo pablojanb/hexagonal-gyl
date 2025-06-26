@@ -4,6 +4,7 @@ import com.example.finca_hexagonal.domain.models.Pago;
 import org.springframework.data.domain.Page;
 
 import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Optional;
 
 public interface FindPagosUseCase {
@@ -12,5 +13,8 @@ public interface FindPagosUseCase {
     Optional<Pago> getById(Integer id);
 
    Page<Pago> filterPagoByParams(Pageable pageable,
-                                 Boolean estado_pago,)
+                                 Boolean estado_pagoBrowser,
+                                 Long idBrowser);
+
+   List<Pago> getByReservaId (Long reserva_id);
 }
