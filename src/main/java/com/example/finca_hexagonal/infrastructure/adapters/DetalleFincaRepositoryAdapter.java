@@ -1,7 +1,7 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.ports.out.DetalleFincaRepository;
+import com.example.finca_hexagonal.domain.ports.out.DetalleFincaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.DetalleFincaEntity;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaDetalleFincaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class DetalleFincaRepositoryAdapter implements DetalleFincaRepository {
+public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
 
     private final JpaDetalleFincaRepository jpaRepository;
 

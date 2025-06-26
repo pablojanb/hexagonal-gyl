@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.application.services;
 
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
 import com.example.finca_hexagonal.domain.ports.in.finca.DetalleFincaService;
-import com.example.finca_hexagonal.domain.ports.out.DetalleFincaRepository;
+import com.example.finca_hexagonal.domain.ports.out.DetalleFincaModelPort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class DetalleFincaServiceImpl implements DetalleFincaService {
 
-    private final DetalleFincaRepository repository;
+    private final DetalleFincaModelPort repository;
 
-    public DetalleFincaServiceImpl(DetalleFincaRepository repository) {
+    public DetalleFincaServiceImpl(DetalleFincaModelPort repository) {
         this.repository = repository;
     }
 

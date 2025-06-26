@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.application.services;
 
 import com.example.finca_hexagonal.domain.models.ImagenFinca;
 import com.example.finca_hexagonal.domain.ports.in.finca.ImagenFincaService;
-import com.example.finca_hexagonal.domain.ports.out.ImagenFincaRepository;
+import com.example.finca_hexagonal.domain.ports.out.ImagenFincaModelPort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class ImagenFincaServiceImpl implements ImagenFincaService {
 
-    private final ImagenFincaRepository repository;
+    private final ImagenFincaModelPort repository;
 
-    public ImagenFincaServiceImpl(ImagenFincaRepository repository) {
+    public ImagenFincaServiceImpl(ImagenFincaModelPort repository) {
         this.repository = repository;
     }
 

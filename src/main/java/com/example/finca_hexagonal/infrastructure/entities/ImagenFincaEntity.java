@@ -4,12 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "imagen_finca")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "imagen_finca")
 public class ImagenFincaEntity {
 
     @Id
