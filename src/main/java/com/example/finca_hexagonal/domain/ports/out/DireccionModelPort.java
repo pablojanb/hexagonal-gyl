@@ -21,6 +21,5 @@ public interface DireccionModelPort {
     boolean delete(Long id_direccion);
 
 
-    Direccion logicalDeletion(Direccion direccion);
 
 }

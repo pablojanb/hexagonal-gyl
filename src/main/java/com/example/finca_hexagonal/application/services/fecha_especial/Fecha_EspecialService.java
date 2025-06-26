@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.application.services.fecha_especial;
 
-
+// Implementa
 import com.example.finca_hexagonal.application.dto.fecha_especal.Fecha_EspecialDTORequest;
 import com.example.finca_hexagonal.application.dto.fecha_especal.Fecha_EspecialDTOResponse;
 
@@ -22,5 +22,12 @@ public interface Fecha_EspecialService {
 
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
+=======
+
+>>>>>>> 06956d0 (cambios prueba)
 }

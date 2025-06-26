@@ -13,13 +13,13 @@ public class Fecha_Especial {
     private BigDecimal descuento;
     private BigDecimal recargo;
     private String motivo;
-    private Long finca_id;
+    private Finca finca;
 
     public Fecha_Especial() {
     }
 
     public Fecha_Especial(Long id_fecha, LocalDateTime fecha, LocalDateTime dia_semana, LocalDateTime hora_inicio
-            , LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo, Long finca_id) {
+            , LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo, Finca finca) {
 
         this.id_fecha = id_fecha;
         this.fecha = fecha;
@@ -29,7 +29,7 @@ public class Fecha_Especial {
         this.descuento = descuento;
         this.recargo = recargo;
         this.motivo = motivo;
-        this.finca_id = finca_id;
+        this.finca = finca;
     }
 
     public Long getId_fecha() {
@@ -96,12 +96,12 @@ public class Fecha_Especial {
         this.motivo = motivo;
     }
 
-    public Long getFinca_id() {
-        return finca_id;
+    public Finca getFinca_id() {
+        return finca;
     }
 
-    public void setFinca_id(Long finca_id) {
-        this.finca_id = finca_id;
+    public void setFinca_id(Finca finca) {
+        this.finca = finca;
     }
 
 

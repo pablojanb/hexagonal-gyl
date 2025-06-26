@@ -16,7 +16,7 @@ public class UpdateHorarioUseCaseImpl implements UpdateHorarioUseCase {
         this.horarioModelPort = horarioModelPort;
     }
     @Override
-    public Optional<Horario> updateHorario(int horarioId, Horario horario) {
+    public Optional<Horario> updateHorario(Long horarioId, Horario horario) {
         return horarioModelPort.update(horarioId, horario);
     }
 }

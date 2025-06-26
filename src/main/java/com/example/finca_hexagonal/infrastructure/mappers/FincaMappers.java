@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class FincaMappers {
     public FincaEntity fromDomainModel(Finca finca){
-        return new FincaEntity(finca.getId(), finca.getNombre(), finca.getPropietario(), finca.getDetalle(), finca.getDireccion(), finca.getTarifa_hora());
+        return new FincaEntity();
     }
 
     public Finca toDomainModel(FincaEntity fincaEntity){
-        return new Finca(fincaEntity.getId(), fincaEntity.getNombre(), fincaEntity.getPropietario(), fincaEntity.getDetalle(), fincaEntity.getDireccion(), fincaEntity.getTarifa_hora());
+        return new Finca();
     }
 }

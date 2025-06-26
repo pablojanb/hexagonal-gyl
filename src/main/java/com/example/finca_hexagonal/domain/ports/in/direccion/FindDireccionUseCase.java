@@ -9,5 +9,12 @@ public interface FindDireccionUseCase {
     List<Direccion> getAll();
     Optional<Direccion> findById(Long id_direccion);
     Optional<Direccion> findByAltura(int altura);
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
+=======
+
+>>>>>>> 06956d0 (cambios prueba)
 }

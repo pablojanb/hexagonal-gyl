@@ -9,5 +9,5 @@ public interface GetFincaUseCase {
 
     List<Finca> getAllFincas();
 
-    Optional<Finca> getFincaById(int id);
+    Optional<Finca> getFincaById(Long id);
 }
