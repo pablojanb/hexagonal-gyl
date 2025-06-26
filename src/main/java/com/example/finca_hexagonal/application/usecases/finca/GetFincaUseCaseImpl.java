@@ -2,26 +2,27 @@ package com.example.finca_hexagonal.application.usecases.finca;
 
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.ports.in.finca.GetFincaUseCase;
-import com.example.finca_hexagonal.domain.ports.out.FincaRespositoryPort;
+import com.example.finca_hexagonal.domain.ports.out.FincaModelPort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GetFincaUseCaseImpl implements GetFincaUseCase {
-    private final FincaRespositoryPort fincaRespositoryPort;
+    private final FincaModelPort fincaModelPort;
 
-    public GetFincaUseCaseImpl(FincaRespositoryPort fincaRespositoryPort) {
-        this.fincaRespositoryPort = fincaRespositoryPort;
+    public GetFincaUseCaseImpl(FincaModelPort fincaModelPort) {
+        this.fincaModelPort = fincaModelPort;
     }
 
     @Override
     public List<Finca> getAllFincas() {
-        return fincaRespositoryPort.getAll();
+        return fincaModelPort.findAll();
     }
 
     @Override
-    public Finca getFincaById(int id) {
-        return fincaRespositoryPort.getById(id);
+    public Optional<Finca> getFincaById(Long id) {
+        return fincaModelPort.findById(id);
     }
 }

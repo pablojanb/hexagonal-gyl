@@ -2,7 +2,8 @@ package com.example.finca_hexagonal.domain.ports.in.finca;
 
 import com.example.finca_hexagonal.domain.models.Finca;
 
-public interface UpdateFincaUseCase {
+import java.util.Optional;
 
-    Finca updateFinca(int id, Finca finca);
+public interface UpdateFincaUseCase {
+    Optional<Finca> updateFinca(Long id, Finca finca);
 }
