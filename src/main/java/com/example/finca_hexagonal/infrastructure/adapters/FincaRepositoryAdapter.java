@@ -3,7 +3,7 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.ports.out.FincaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.FincaEntity;
-import com.example.finca_hexagonal.infrastructure.mappers.FincaMappers;
+import com.example.finca_hexagonal.infrastructure.mappers.FincaModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaFincaRepository;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 @Component
 public class FincaRepositoryAdapter implements FincaModelPort {
     private final JpaFincaRepository jpaFincaRepository;
-    private final FincaMappers fincaMappers;
+    private final FincaModelMappers fincaMappers;
 
-    public FincaRepositoryAdapter(JpaFincaRepository fincaRepository, FincaMappers fincaMappers) {
+    public FincaRepositoryAdapter(JpaFincaRepository fincaRepository, FincaModelMappers fincaMappers) {
         this.jpaFincaRepository = fincaRepository;
         this.fincaMappers = fincaMappers;
     }
