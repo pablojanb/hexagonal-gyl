@@ -13,12 +13,9 @@ public class Documentacion {
         this.escritura_propiedad = escritura_propiedad;
         this.plano_catastral = plano_catastral;
         this.impuesto_bienesInmuebles = impuesto_bienesInmuebles;
-
     }
 
-    public Documentacion(){
-
-    }
+    public Documentacion(){}
 
     public int getId() {
         return id;
@@ -59,4 +56,5 @@ public class Documentacion {
     public void setImpuesto_bienesInmuebles(String impuesto_bienesInmuebles) {
         this.impuesto_bienesInmuebles = impuesto_bienesInmuebles;
     }
+
 }

@@ -1,6 +1,5 @@
 package com.example.finca_hexagonal.domain.ports.in.pagos;
 
-import com.example.finca_hexagonal.domain.models.Pago;
 import org.springframework.data.domain.Page;
 
 import java.awt.print.Pageable;
