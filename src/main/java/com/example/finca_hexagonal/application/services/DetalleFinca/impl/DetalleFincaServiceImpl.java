@@ -1,14 +1,14 @@
-package com.example.finca_hexagonal.application.services;
+package com.example.finca_hexagonal.application.services.DetalleFinca.impl;
 
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.ports.in.finca.DetalleFincaService;
+import com.example.finca_hexagonal.domain.ports.in.finca.DetalleFincaModelService;
 import com.example.finca_hexagonal.domain.ports.out.DetalleFincaModelPort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DetalleFincaServiceImpl implements DetalleFincaService {
+public class DetalleFincaServiceImpl implements DetalleFincaModelService {
 
     private final DetalleFincaModelPort repository;
 
@@ -18,26 +18,26 @@ public class DetalleFincaServiceImpl implements DetalleFincaService {
 
     @Override
     public DetalleFinca crearDetalle(DetalleFinca detalle) {
-        return repository.guardar(detalle);
+        return repository.save(detalle);
     }
 
     @Override
-    public DetalleFinca obtenerPorId(Long id) {
-        return repository.buscarPorId(id).orElse(null);
+    public DetalleFinca findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public List<DetalleFinca> listarTodos() {
-        return repository.buscarTodos();
+        return repository.findAll();
     }
 
     @Override
     public DetalleFinca actualizarDetalle(DetalleFinca detalle) {
-        return repository.actualizar(detalle);
+        return repository.update(detalle);
     }
 
     @Override
-    public void eliminarDetalle(Long id) {
-        repository.eliminar(id);
+    public void delete(Long id) {
+        repository.delete(id);
     }
 }

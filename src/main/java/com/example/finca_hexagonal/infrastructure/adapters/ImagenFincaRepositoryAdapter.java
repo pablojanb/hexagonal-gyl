@@ -48,12 +48,12 @@ public class ImagenFincaRepositoryAdapter implements ImagenFincaModelPort {
     }
 
     @Override
-    public List<ImagenFinca> buscarPorFinca(Long fincaId) {
+    public List<ImagenFinca> findByFinca(Long fincaId) {
         return jpaRepository.findByFincaId(fincaId).stream().map(this::toModel).collect(Collectors.toList());
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void delete(Long id) {
         jpaRepository.deleteById(id);
     }
 }

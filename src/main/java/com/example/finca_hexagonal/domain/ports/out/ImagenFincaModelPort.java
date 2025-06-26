@@ -6,10 +6,10 @@ import java.util.Optional;
 
 public interface ImagenFincaModelPort {
 
-    ImagenFinca guardar(ImagenFinca imagen);
+    ImagenFinca save(ImagenFinca imagen);
 
-    Optional<ImagenFinca> buscarPorId(Long id);
+    Optional<ImagenFinca> findById(Long id);
 
-    List<ImagenFinca> buscarPorFinca(Long fincaId);
-    void eliminar(Long id);
+    List<ImagenFinca> findByFinca(Long fincaId);
+    void delete(Long id);
 }

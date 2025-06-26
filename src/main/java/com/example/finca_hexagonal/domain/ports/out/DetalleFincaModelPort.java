@@ -6,13 +6,13 @@ import java.util.Optional;
 
 public interface DetalleFincaModelPort {
 
-    DetalleFinca guardar(DetalleFinca detalle);
+    DetalleFinca save(DetalleFinca detalle);
 
-    Optional<DetalleFinca> buscarPorId(Long id);
+    Optional<DetalleFinca> findById(Long id);
 
-    List<DetalleFinca> buscarTodos();
+    List<DetalleFinca> findAll();
 
-    DetalleFinca actualizar(DetalleFinca detalle);
-    void eliminar(Long id);
+    DetalleFinca update(DetalleFinca detalle);
+    void delete(Long id);
 }
 

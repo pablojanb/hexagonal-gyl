@@ -1,4 +1,4 @@
-package com.example.finca_hexagonal.application.services;
+package com.example.finca_hexagonal.application.services.ImagenFinca.impl;
 
 import com.example.finca_hexagonal.domain.models.ImagenFinca;
 import com.example.finca_hexagonal.domain.ports.in.finca.ImagenFincaService;
@@ -28,11 +28,11 @@ public class ImagenFincaServiceImpl implements ImagenFincaService {
 
     @Override
     public List<ImagenFinca> listarPorFinca(Long fincaId) {
-        return repository.buscarPorFinca(fincaId);
+        return repository.findByFinca(fincaId);
     }
 
     @Override
     public void eliminarImagen(Long id) {
-        repository.eliminar(id);
+        repository.delete(id);
     }
 }
