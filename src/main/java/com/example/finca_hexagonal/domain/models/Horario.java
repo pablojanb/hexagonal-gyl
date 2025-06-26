@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Time;
 
 public class Horario {
-    private int id;
+    private Long id;
     private Finca finca;
     private Time hora_inicio;
     private Time hora_fin;
@@ -15,7 +15,7 @@ public class Horario {
     public Horario() {
     }
 
-    public Horario(int id, Finca finca, Time hora_inicio, Time hora_fin, String dia_Semana, BigDecimal descuento, BigDecimal recargo) {
+    public Horario(Long id, Finca finca, Time hora_inicio, Time hora_fin, String dia_Semana, BigDecimal descuento, BigDecimal recargo) {
         this.id = id;
         this.finca = finca;
         this.hora_inicio = hora_inicio;
@@ -25,11 +25,11 @@ public class Horario {
         this.recargo = recargo;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

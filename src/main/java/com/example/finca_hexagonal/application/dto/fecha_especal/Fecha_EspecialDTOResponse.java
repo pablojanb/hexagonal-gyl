@@ -21,5 +21,12 @@ public class Fecha_EspecialDTOResponse {
     private BigDecimal recargo;
     private String motivo;
     private Long finca_id;
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
+=======
+
+>>>>>>> 06956d0 (cambios prueba)
 }

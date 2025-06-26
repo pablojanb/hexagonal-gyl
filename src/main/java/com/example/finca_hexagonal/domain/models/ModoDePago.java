@@ -1,31 +1,31 @@
 package com.example.finca_hexagonal.domain.models;
 
-public class Modo_de_pago {
-    private Integer id;
-    private Integer pago_id;
+public class ModoDePago {
+    private Long id;
+    private Long pago_id;
     private String tipo;
     private String detalles;
 
-    public Modo_de_pago(Integer id, Integer pago_id, String tipo, String detalles) {
+    public ModoDePago(Long id, Long pago_id, String tipo, String detalles) {
         this.id = id;
         this.pago_id = pago_id;
         this.tipo = tipo;
         this.detalles = detalles;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getPago_id() {
+    public Long getPago_id() {
         return pago_id;
     }
 
-    public void setPago_id(Integer pago_id) {
+    public void setPago_id(Long pago_id) {
         this.pago_id = pago_id;
     }
 

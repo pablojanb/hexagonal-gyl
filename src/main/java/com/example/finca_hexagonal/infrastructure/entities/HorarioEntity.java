@@ -1,6 +1,5 @@
 package com.example.finca_hexagonal.infrastructure.entities;
 
-import com.example.finca_hexagonal.domain.models.Finca;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,10 +16,10 @@ import java.sql.Time;
 public class HorarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "finca_id")
-    private Finca finca;
+    private FincaEntity finca;
     @Temporal(TemporalType.TIME)
     private Time hora_inicio;
     @Temporal(TemporalType.TIME)

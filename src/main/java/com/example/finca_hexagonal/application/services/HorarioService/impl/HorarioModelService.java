@@ -1,4 +1,4 @@
-package com.example.finca_hexagonal.application.services;
+package com.example.finca_hexagonal.application.services.HorarioService.impl;
 
 import com.example.finca_hexagonal.domain.models.Horario;
 import com.example.finca_hexagonal.domain.ports.in.horario.CreateHorarioUseCase;
@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HorarioService implements CreateHorarioUseCase, DeleteHorarioUseCase, UpdateHorarioUseCase, GetHorarioUseCase {
+public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioUseCase, UpdateHorarioUseCase, GetHorarioUseCase {
 
     private final CreateHorarioUseCase createHorarioUseCase;
     private final DeleteHorarioUseCase deleteHorarioUseCase;
     private final UpdateHorarioUseCase updateHorarioUseCase;
     private final GetHorarioUseCase getHorarioUseCase;
 
-    public HorarioService(CreateHorarioUseCase createHorarioUseCase, DeleteHorarioUseCase deleteHorarioUseCase, UpdateHorarioUseCase updateHorarioUseCase, GetHorarioUseCase getHorarioUseCase) {
+    public HorarioModelService(CreateHorarioUseCase createHorarioUseCase, DeleteHorarioUseCase deleteHorarioUseCase, UpdateHorarioUseCase updateHorarioUseCase, GetHorarioUseCase getHorarioUseCase) {
         this.createHorarioUseCase = createHorarioUseCase;
         this.deleteHorarioUseCase = deleteHorarioUseCase;
         this.updateHorarioUseCase = updateHorarioUseCase;
@@ -32,7 +32,7 @@ public class HorarioService implements CreateHorarioUseCase, DeleteHorarioUseCas
     }
 
     @Override
-    public boolean deleteHorario(int horarioId) {
+    public boolean deleteHorario(Long horarioId) {
         return deleteHorarioUseCase.deleteHorario(horarioId);
     }
 
@@ -42,12 +42,12 @@ public class HorarioService implements CreateHorarioUseCase, DeleteHorarioUseCas
     }
 
     @Override
-    public Optional<Horario> getHorarioById(int horarioId) {
+    public Optional<Horario> getHorarioById(Long horarioId) {
         return getHorarioUseCase.getHorarioById(horarioId);
     }
 
     @Override
-    public Optional<Horario> updateHorario(int horarioId, Horario horario) {
+    public Optional<Horario> updateHorario(Long horarioId, Horario horario) {
         return updateHorarioUseCase.updateHorario(horarioId, horario);
     }
 }

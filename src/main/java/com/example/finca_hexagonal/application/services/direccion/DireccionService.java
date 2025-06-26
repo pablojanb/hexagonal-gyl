@@ -21,5 +21,12 @@ public interface DireccionService {
 
     DireccionDTOResponse logicalDelete(Long id_direccion);
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8211f84 (Direccion y Fecha_Especial)
+=======
+
+>>>>>>> 06956d0 (cambios prueba)
 }
