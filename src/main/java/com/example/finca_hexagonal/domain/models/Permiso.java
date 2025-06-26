@@ -1,4 +1,4 @@
-package domain.models;
+package com.example.finca_hexagonal.domain.models;
 
 public class Permiso {
     private int id;
@@ -8,9 +8,7 @@ public class Permiso {
         this.id = id;
         this.nombre = nombre;
     }
-    public Permiso(){
-
-    }
+    public Permiso(){}
 
     public int getId() {
         return id;
