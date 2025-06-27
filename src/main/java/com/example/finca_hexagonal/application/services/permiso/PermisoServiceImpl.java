@@ -10,9 +10,11 @@ import com.example.finca_hexagonal.domain.ports.in.permiso.FindPermisoUseCase;
 import com.example.finca_hexagonal.domain.ports.in.permiso.UpdatePermisoUseCase;
 import com.example.finca_hexagonal.infrastructure.exceptions.OperationFailedException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PermisoServiceImpl implements IPermisoService {
 
     //Inyectamos los casos de Uso

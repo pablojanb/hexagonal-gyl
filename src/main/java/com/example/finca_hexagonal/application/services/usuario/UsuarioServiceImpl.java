@@ -9,10 +9,12 @@ import com.example.finca_hexagonal.domain.ports.in.usuario.CreateUsuarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.DeleteUsuarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.FindUsuarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.UpdateUsuarioUseCase;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 
+@Service
 public class UsuarioServiceImpl implements IUsuarioService{
 
     private final CreateUsuarioUseCase createUsuarioUseCase;

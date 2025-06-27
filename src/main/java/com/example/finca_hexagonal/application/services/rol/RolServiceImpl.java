@@ -7,9 +7,11 @@ import com.example.finca_hexagonal.domain.ports.in.rol.CreateRolUseCase;
 import com.example.finca_hexagonal.domain.ports.in.rol.DeleteRolUseCase;
 import com.example.finca_hexagonal.domain.ports.in.rol.FindRolUseCase;
 import com.example.finca_hexagonal.domain.ports.in.rol.UpdateRolUseCase;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RolServiceImpl implements IRolService{
 
     private final CreateRolUseCase createRolUseCase;

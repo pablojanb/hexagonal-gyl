@@ -2,16 +2,51 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.rol.RolRequestDTO;
 import com.example.finca_hexagonal.application.dto.rol.RolResponseDTO;
+import com.example.finca_hexagonal.application.services.rol.IRolService;
+import com.example.finca_hexagonal.domain.models.Permiso;
 import com.example.finca_hexagonal.domain.models.Rol;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+@Mapper(componentModel = "spring",uses = {PermisoDTOMapper.class})
 public abstract class RolDTOMapper {
 
+    private final IRolService rolService;
+
+    public RolDTOMapper(IRolService rolService) {
+        this.rolService = rolService;
+    }
+
+
+    @Mappings(value = {
+                @Mapping(source = "nombre", target = "nombre"),
+                @Mapping(source = "permisoIdSet", target = "permisoSet", qualifiedByName = "mapIdsToPermisos")
+    })
     public abstract Rol toModel(RolRequestDTO rolRequestDTO);
 
+    @Mappings(value = {
+            @Mapping(source = "id", target = "id"),
+            @Mapping(source = "nombre", target = "nombre"),
+            @Mapping(source = "permisoSet", target = "permisoSet")
+    })
     public abstract RolResponseDTO toDTO(Rol rol);
+
 
     public abstract List<RolResponseDTO> toListDto(List<Rol> rol);
 
+    public abstract Rol toModelFromResponseDTO(RolResponseDTO rolResponseDTO);
+
+    @Named("mapIdsToRoles")
+    public Set<Rol> mapIdsToRoles(Set<Long> ids) {
+        if (ids == null) return null;
+        return ids.stream()
+                .map(id -> toModelFromResponseDTO(rolService.findById(id)))
+                .collect(Collectors.toSet());
+    }
 }
