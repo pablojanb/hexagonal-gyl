@@ -3,11 +3,11 @@ package com.example.finca_hexagonal.domain.models;
 import java.util.Set;
 
 public class Rol {
-    private int id;
+    private Long id;
     private String nombre;
     private Set<Permiso> permisoSet;
 
-    public Rol(int id, String nombre, Set<Permiso> permisoSet){
+    public Rol(Long id, String nombre, Set<Permiso> permisoSet){
         this.id = id;
         this.nombre = nombre;
         this.permisoSet = permisoSet;
@@ -15,7 +15,7 @@ public class Rol {
 
     public Rol(){}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -23,7 +23,7 @@ public class Rol {
         return nombre;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -31,6 +31,7 @@ public class PermisoRepositoryAdapter implements PermisoModelPort {
         return List.of();
     }
 
+
     @Override
     public Optional<Permiso> findById(Long id) {
         return Optional.empty();

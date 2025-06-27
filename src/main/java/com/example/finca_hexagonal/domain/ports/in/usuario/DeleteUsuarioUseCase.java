@@ -5,5 +5,5 @@ import com.example.finca_hexagonal.domain.models.Usuario;
 public interface DeleteUsuarioUseCase {
     Boolean deleteById(Long id);
 
-    Usuario logicalDeletion(Usuario usuario);
+    Boolean logicalDeletion(Usuario usuario);
 }

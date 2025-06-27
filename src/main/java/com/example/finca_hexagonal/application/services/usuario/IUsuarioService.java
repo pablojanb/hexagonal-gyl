@@ -11,6 +11,6 @@ public interface IUsuarioService {
     UsuarioResponseDTO findById(Long id);
     List<UsuarioResponseDTO> findAll();
     UsuarioResponseDTO deleteById(Long id);
-    UsuarioResponseDTO update(UsuarioRequestDTO usuarioRequestDTO);
+    UsuarioResponseDTO update(Long id, UsuarioRequestDTO usuarioRequestDTO);
     UsuarioResponseDTO findByUsername(String username);
 }

@@ -10,5 +10,5 @@ public interface IRolService {
     RolResponseDTO findById(Long id);
     List<RolResponseDTO> findAll();
     RolResponseDTO deleteById(Long id);
-    RolResponseDTO update(RolRequestDTO rolRequestDTO);
+    RolResponseDTO update(Long id, RolRequestDTO rolRequestDTO);
 }

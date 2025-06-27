@@ -9,5 +9,5 @@ public interface IPermisoService {
     PermisoResponseDTO findById(Long id);
     List<PermisoResponseDTO> findAll();
     PermisoResponseDTO deleteById(Long id);
-    PermisoResponseDTO update(PermisoRequestDTO permisoRequestDTO);
+    PermisoResponseDTO update(Long id, PermisoRequestDTO permisoRequestDTO);
 }

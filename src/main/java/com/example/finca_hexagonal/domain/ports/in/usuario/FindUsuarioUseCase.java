@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface FindUsuarioUseCase {
     List<Usuario> getAll();
 
-    Optional<Usuario> getById(int id);
+    Optional<Usuario> getById(Long id);
 
     Optional<Usuario> getByName(String nombre_usuario);
 
