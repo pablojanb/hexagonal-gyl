@@ -1,18 +1,16 @@
-package domain.models;
+package com.example.finca_hexagonal.domain.models;
 
 public class Permiso {
-    private int id;
+    private Long id;
     private String nombre;
 
-    public Permiso(int id, String nombre){
+    public Permiso(Long id, String nombre){
         this.id = id;
         this.nombre = nombre;
     }
-    public Permiso(){
+    public Permiso(){}
 
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -20,7 +18,7 @@ public class Permiso {
         return nombre;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

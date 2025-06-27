@@ -1,6 +1,6 @@
-package domain.ports.in.Rol;
+package com.example.finca_hexagonal.domain.ports.in.rol;
 
-import domain.models.Rol;
+import com.example.finca_hexagonal.domain.models.Rol;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface FindRolUseCase {
     List<Rol> getAll();
 
-    Optional<Rol> getById(int id);
+    Optional<Rol> getById(Long id);
     Optional<Rol> getByName(String nombre);
 }

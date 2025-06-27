@@ -1,61 +1,104 @@
-package domain.models;
+package com.example.finca_hexagonal.domain.models;
+
+import java.util.Set;
 
 public class Usuario {
-    private int id;
+
+    private Long id;
+    private String username;
     private String email;
-    private String nombre_usuario;
-    private String contraseña;
-    private String cuenta_activa;
+    private String password;
 
-    public Usuario(int id, String email, String nombre_usuario, String contraseña, String cuenta_activa){
+    private boolean enabled;
+    private boolean accountNotExpired;
+    private boolean credentialsNotExpired;
+    private boolean accountNotLocked;
+
+    private Set<Rol> rolSet;
+
+    public Usuario(Long id, String username, String email, String password, boolean enabled, boolean accountNotExpired, boolean credentialsNotExpired, boolean accountNotLocked, Set<Rol> rolSet) {
         this.id = id;
+        this.username = username;
         this.email = email;
-        this.nombre_usuario = nombre_usuario;
-        this.contraseña = contraseña;
-        this.cuenta_activa = cuenta_activa;
+        this.password = password;
+        this.enabled = enabled;
+        this.accountNotExpired = accountNotExpired;
+        this.credentialsNotExpired = credentialsNotExpired;
+        this.accountNotLocked = accountNotLocked;
+        this.rolSet = rolSet;
     }
 
-    public Usuario(){
+    public Usuario() {}
 
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getNombre_usuario() {
-        return nombre_usuario;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public String getCuenta_activa() {
-        return cuenta_activa;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setCuenta_activa(String cuenta_activa) {
-        this.cuenta_activa = cuenta_activa;
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isAccountNotExpired() {
+        return accountNotExpired;
+    }
+
+    public void setAccountNotExpired(boolean accountNotExpired) {
+        this.accountNotExpired = accountNotExpired;
+    }
+
+    public boolean isCredentialsNotExpired() {
+        return credentialsNotExpired;
+    }
+
+    public void setCredentialsNotExpired(boolean credentialsNotExpired) {
+        this.credentialsNotExpired = credentialsNotExpired;
+    }
+
+    public boolean isAccountNotLocked() {
+        return accountNotLocked;
+    }
+
+    public void setAccountNotLocked(boolean accountNotLocked) {
+        this.accountNotLocked = accountNotLocked;
+    }
+
+    public Set<Rol> getRolSet() {
+        return rolSet;
+    }
+
+    public void setRolSet(Set<Rol> rolSet) {
+        this.rolSet = rolSet;
     }
 }
