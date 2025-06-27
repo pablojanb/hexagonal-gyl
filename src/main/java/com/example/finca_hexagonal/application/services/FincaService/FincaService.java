@@ -1,7 +1,6 @@
 package com.example.finca_hexagonal.application.services.FincaService;
 
 import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
-import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
 
 import java.util.List;

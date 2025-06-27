@@ -33,10 +33,10 @@ public abstract class FincaDTOMapper {
     public abstract Finca toModel(FincaRequestDTO fincaDto);
 
     @Mapping(source = "propietario.id", target = "id_propietario")
-    @Mapping(source = "detalle.id", target = "id_detalle")
-    @Mapping(source = "direccion.id", target = "id_direccion")
     @Mapping(source = "propietario.nombre", target = "propietario")
+    @Mapping(source = "direccion.id", target = "id_direccion")
     @Mapping(source = "direccion.calle", target = "direccion")
+    @Mapping(source = "detalle.id", target = "id_detalle")
     public abstract FincaResponseDTOSimplified toDtoSimplified(Finca finca);
 
     public abstract List<FincaResponseDTOSimplified> toDtoSimplifiedList(List<Finca> finca);

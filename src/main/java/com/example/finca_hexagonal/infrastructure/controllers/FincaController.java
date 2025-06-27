@@ -3,7 +3,6 @@ package com.example.finca_hexagonal.infrastructure.controllers;
 import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
 import com.example.finca_hexagonal.application.services.FincaService.FincaService;
-import com.example.finca_hexagonal.domain.models.Finca;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,7 @@ public class FincaController {
 
 
     @PostMapping
-    public ResponseEntity<FincaResponseDTOSimplified> createFinca(FincaRequestDTO fincaDTO){
+    public ResponseEntity<FincaResponseDTOSimplified> createFinca(@RequestBody FincaRequestDTO fincaDTO){
         return new ResponseEntity<>(fincaService.createFinca(fincaDTO), HttpStatus.CREATED);
     }
 

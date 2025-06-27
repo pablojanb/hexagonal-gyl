@@ -1,18 +1,25 @@
 package com.example.finca_hexagonal.application.services.FincaService.impl;
 
 import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
-import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
 import com.example.finca_hexagonal.application.mappers.FincaDTOMapper;
+import com.example.finca_hexagonal.application.services.FincaService.FincaService;
 import com.example.finca_hexagonal.domain.models.Finca;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FincaServiceImpl implements com.example.finca_hexagonal.application.services.FincaService.FincaService {
+@Service
+public class FincaServiceImpl implements FincaService {
 
-    private FincaModelService fincaModelService;
-    private FincaDTOMapper fincaDTOMapper;
+    private final FincaModelService fincaModelService;
+    private final FincaDTOMapper fincaDTOMapper;
+
+    public FincaServiceImpl(FincaModelService fincaModelService, FincaDTOMapper fincaDTOMapper) {
+        this.fincaModelService = fincaModelService;
+        this.fincaDTOMapper = fincaDTOMapper;
+    }
 
     @Override
     public FincaResponseDTOSimplified createFinca(FincaRequestDTO fincaDto) {

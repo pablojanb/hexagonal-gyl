@@ -5,14 +5,21 @@ import com.example.finca_hexagonal.application.dto.horarios.HorarioResponseDTO;
 import com.example.finca_hexagonal.application.mappers.HorarioDTOMapper;
 import com.example.finca_hexagonal.application.services.HorarioService.HorarioService;
 import com.example.finca_hexagonal.domain.models.Horario;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class HorarioServiceImpl implements HorarioService {
 
-    private HorarioModelService horarioModelService;
-    private HorarioDTOMapper horarioDTOMapper;
+    private final HorarioModelService horarioModelService;
+    private final HorarioDTOMapper horarioDTOMapper;
+
+    public HorarioServiceImpl(HorarioModelService horarioModelService, HorarioDTOMapper horarioDTOMapper) {
+        this.horarioModelService = horarioModelService;
+        this.horarioDTOMapper = horarioDTOMapper;
+    }
 
     @Override
     public HorarioResponseDTO createHorario(HorarioRequestDTO horarioDTO) {

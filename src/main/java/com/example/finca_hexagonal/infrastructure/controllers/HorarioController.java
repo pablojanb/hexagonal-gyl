@@ -20,7 +20,7 @@ public class HorarioController {
 
 
     @PostMapping
-    public ResponseEntity<HorarioResponseDTO> createHorario(HorarioRequestDTO horario){
+    public ResponseEntity<HorarioResponseDTO> createHorario(@RequestBody HorarioRequestDTO horario){
         return new ResponseEntity<>(horarioService.createHorario(horario), HttpStatus.CREATED);
     }
 
