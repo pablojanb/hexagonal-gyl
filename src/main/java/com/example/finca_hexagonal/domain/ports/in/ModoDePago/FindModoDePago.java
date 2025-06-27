@@ -10,7 +10,7 @@ public interface FindModoDePago {
 
     Optional<ModoDePago> getById(Long id);
 
-    Optional<ModoDePago> findByTipo(String tipo);
+    Optional<ModoDePago> getByTipo(String tipo);
 
     List<ModoDePago> getByPagoId(Long pago_id);
 }

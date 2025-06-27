@@ -21,5 +21,5 @@ public interface FindReservaUseCase {
     Page<Reserva> filterReservaByReservaParams(Pageable pageable,
                                                Long clienteIdBrowser,
                                                Long FincaIdBrowser,
-                                               Boolean estadoReservaBroweser);
+                                               Boolean estadoReservaBrowser);
 }
