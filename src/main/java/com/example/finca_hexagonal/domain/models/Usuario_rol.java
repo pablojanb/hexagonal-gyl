@@ -1,4 +1,4 @@
-package domain.models;
+package application.domain.models;
 
 public class Usuario_rol {
     private int id;
