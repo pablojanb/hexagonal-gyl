@@ -34,10 +34,6 @@ public class DireccionModelService implements CreateDireccionUseCase, UpdateDire
         return false;
     }
 
-    @Override
-    public Direccion logicalDeletion(Direccion direccion) {
-        return null;
-    }
 
     @Override
     public List<Direccion> getAll() {
