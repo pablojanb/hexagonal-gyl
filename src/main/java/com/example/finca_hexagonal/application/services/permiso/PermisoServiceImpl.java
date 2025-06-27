@@ -8,6 +8,7 @@ import com.example.finca_hexagonal.domain.ports.in.permiso.CreatePermisoUseCase;
 import com.example.finca_hexagonal.domain.ports.in.permiso.DeletePermisoUseCase;
 import com.example.finca_hexagonal.domain.ports.in.permiso.FindPermisoUseCase;
 import com.example.finca_hexagonal.domain.ports.in.permiso.UpdatePermisoUseCase;
+import com.example.finca_hexagonal.infrastructure.exceptions.OperationFailedException;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
