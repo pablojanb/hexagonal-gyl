@@ -12,11 +12,16 @@ public class ImagenFincaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_imagen")
     private Long idImagen;
 
     private String url;
+
+    @Column(name = "es_portada")
     private boolean esPortada;
 
-    @Column(name = "finca_id")
-    private Long fincaId;
+    @ManyToOne
+    @JoinColumn(name = "finca_id")
+    private FincaEntity finca;
+
 }
