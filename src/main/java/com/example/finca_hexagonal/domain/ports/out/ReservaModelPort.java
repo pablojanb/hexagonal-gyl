@@ -3,7 +3,6 @@ package com.example.finca_hexagonal.domain.ports.out;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import java.util.Optional;
 
 public interface ReservaModelPort {
@@ -11,11 +10,11 @@ public interface ReservaModelPort {
 
     Page<Reserva> findAll(Pageable pageable);
 
-    Optional<Reserva> findById(Long id);
+    Optional<Reserva> findById(Long id);  // <--- ahora funciona bien
 
-    Page<Reserva> findByFincaId(Long fincaId,Pageable pageable);
+    Page<Reserva> findByFincaId(Long fincaId, Pageable pageable);
 
-    Page<Reserva> findByClienteId(Long clienteId,Pageable pageable);
+    Page<Reserva> findByClienteId(Long clienteId, Pageable pageable);
 
     Page<Reserva> findByEstadoReserva(Boolean estadoReserva, Pageable pageable);
 
@@ -27,5 +26,7 @@ public interface ReservaModelPort {
     Reserva update(Reserva reserva);
 
     Boolean delete(Long id);
+
     Reserva logicalDeletion(Reserva reserva);
 }
+
