@@ -3,7 +3,8 @@ package com.example.finca_hexagonal.application.dto.pago;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class PagoDTORequest {
+public class PagoDTOResponse {
+
 
     private Integer id;
     private Integer reserva_id;
@@ -14,9 +15,9 @@ public class PagoDTORequest {
     private BigDecimal recargo_aplicado;
     private Boolean estado_pago;
 
-    public PagoDTORequest(){};
+    public PagoDTOResponse(){};
 
-    public PagoDTORequest(Integer id, Integer reserva_id, BigDecimal monto_total, Integer modo_pago_id, LocalDateTime fecha_hora, BigDecimal desucento_aplicado, BigDecimal recargo_aplicado, Boolean estado_pago) {
+    public PagoDTOResponse(Integer id, Integer reserva_id, BigDecimal monto_total, Integer modo_pago_id, LocalDateTime fecha_hora, BigDecimal desucento_aplicado, BigDecimal recargo_aplicado, Boolean estado_pago) {
         this.id = id;
         this.reserva_id = reserva_id;
         this.monto_total = monto_total;
