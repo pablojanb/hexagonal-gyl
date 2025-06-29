@@ -36,12 +36,25 @@ public class FincaServiceImpl implements FincaService {
 
     @Override
     public Optional<FincaResponseDTOSimplified> getFincaById(Long id) {
-        return Optional.empty();
+        Finca finca = fincaModelService.getFincaById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
+        return Optional.of(fincaDTOMapper.toDtoSimplified(finca));
     }
 
     @Override
     public Optional<FincaResponseDTOSimplified> updateFinca(Long id, FincaRequestDTO fincaDto) {
-        return Optional.empty();
+        Finca fincaToUpdate = fincaModelService.getFincaById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
+        Finca newData = fincaDTOMapper.toModel(fincaDto);
+        fincaToUpdate.setNombre(newData.getNombre());
+        fincaToUpdate.setPropietario(newData.getPropietario());
+        fincaToUpdate.setDetalle(newData.getDetalle());
+        fincaToUpdate.setDireccion(newData.getDireccion());
+        fincaToUpdate.setTarifaHora(fincaDto.getTarifaHora());
+        Finca fincaUpdated = fincaModelService.updateFinca(id, fincaToUpdate)
+                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
+
+        return Optional.of(fincaDTOMapper.toDtoSimplified(fincaUpdated));
     }
 
     @Override

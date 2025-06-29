@@ -5,20 +5,20 @@ import java.math.BigDecimal;
 
 public class FincaRequestDTO {
     private String nombre;
-    private Long id_propietario;
-    private Long id_detalleFinca;
-    private Long id_direccion;
-    private BigDecimal tarifa_hora;
+    private Long idPropietario;
+    private Long idDetalleFinca;
+    private Long idDireccion;
+    private BigDecimal tarifaHora;
 
     public FincaRequestDTO() {
     }
 
-    public FincaRequestDTO(String nombre, Long id_propietario, Long id_detalleFinca, Long id_direccion, BigDecimal tarifa_hora) {
+    public FincaRequestDTO(String nombre, Long idPropietario, Long idDetalleFinca, Long idDireccion, BigDecimal tarifaHora) {
         this.nombre = nombre;
-        this.id_propietario = id_propietario;
-        this.id_detalleFinca = id_detalleFinca;
-        this.id_direccion = id_direccion;
-        this.tarifa_hora = tarifa_hora;
+        this.idPropietario = idPropietario;
+        this.idDetalleFinca = idDetalleFinca;
+        this.idDireccion = idDireccion;
+        this.tarifaHora = tarifaHora;
     }
 
     public String getNombre() {
@@ -29,35 +29,35 @@ public class FincaRequestDTO {
         this.nombre = nombre;
     }
 
-    public Long getId_propietario() {
-        return id_propietario;
+    public Long getIdPropietario() {
+        return idPropietario;
     }
 
-    public void setId_propietario(Long id_propietario) {
-        this.id_propietario = id_propietario;
+    public void setIdPropietario(Long idPropietario) {
+        this.idPropietario = idPropietario;
     }
 
-    public Long getId_detalleFinca() {
-        return id_detalleFinca;
+    public Long getIdDetalleFinca() {
+        return idDetalleFinca;
     }
 
-    public void setId_detalleFinca(Long id_detalleFinca) {
-        this.id_detalleFinca = id_detalleFinca;
+    public void setIdDetalleFinca(Long idDetalleFinca) {
+        this.idDetalleFinca = idDetalleFinca;
     }
 
-    public Long getId_direccion() {
-        return id_direccion;
+    public Long getIdDireccion() {
+        return idDireccion;
     }
 
-    public void setId_direccion(Long id_direccion) {
-        this.id_direccion = id_direccion;
+    public void setIdDireccion(Long idDireccion) {
+        this.idDireccion = idDireccion;
     }
 
-    public BigDecimal getTarifa_hora() {
-        return tarifa_hora;
+    public BigDecimal getTarifaHora() {
+        return tarifaHora;
     }
 
-    public void setTarifa_hora(BigDecimal tarifa_hora) {
-        this.tarifa_hora = tarifa_hora;
+    public void setTarifaHora(BigDecimal tarifaHora) {
+        this.tarifaHora = tarifaHora;
     }
 }
