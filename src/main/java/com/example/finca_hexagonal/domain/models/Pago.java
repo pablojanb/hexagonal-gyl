@@ -9,7 +9,7 @@ public class Pago {
     private BigDecimal monto_total;
     private Integer modo_pago_id;
     private LocalDateTime fecha_hora;
-    private BigDecimal desuento_aplicado;
+    private BigDecimal desucento_aplicado;
     private BigDecimal recargo_aplicado;
     private Boolean estado_pago;
 
@@ -18,7 +18,7 @@ public class Pago {
     public Pago(Boolean estado_pago, BigDecimal recargo_aplicado, BigDecimal desuento_aplicado, LocalDateTime fecha_hora, Integer modo_pago_id, BigDecimal monto_total, Integer reserva_id, Integer id) {
         this.estado_pago = estado_pago;
         this.recargo_aplicado = recargo_aplicado;
-        this.desuento_aplicado = desuento_aplicado;
+        this.desucento_aplicado = desuento_aplicado;
         this.fecha_hora = fecha_hora;
         this.modo_pago_id = modo_pago_id;
         this.monto_total = monto_total;
@@ -66,12 +66,12 @@ public class Pago {
         this.fecha_hora = fecha_hora;
     }
 
-    public BigDecimal getDesuento_aplicado() {
-        return desuento_aplicado;
+    public BigDecimal getDesucento_aplicado() {
+        return desucento_aplicado;
     }
 
-    public void setDesuento_aplicado(BigDecimal desuento_aplicado) {
-        this.desuento_aplicado = desuento_aplicado;
+    public void setDesucento_aplicado(BigDecimal desucento_aplicado) {
+        this.desucento_aplicado = desucento_aplicado;
     }
 
     public BigDecimal getRecargo_aplicado() {
