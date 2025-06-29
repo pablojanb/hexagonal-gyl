@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimpli
 import com.example.finca_hexagonal.application.mappers.FincaDTOMapper;
 import com.example.finca_hexagonal.application.services.FincaService.FincaService;
 import com.example.finca_hexagonal.domain.models.Finca;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

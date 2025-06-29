@@ -7,6 +7,7 @@ import com.example.finca_hexagonal.application.services.FincaService.impl.FincaM
 import com.example.finca_hexagonal.application.services.HorarioService.HorarioService;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Horario;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
