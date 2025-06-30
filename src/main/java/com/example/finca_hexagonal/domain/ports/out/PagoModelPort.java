@@ -12,7 +12,7 @@ public interface PagoModelPort {
 
     Page<Pago> findAll(Pageable pageable);
 
-    Optional<Pago> findId(Long id);
+    Optional<Pago> findById(Long id);
 
     Page<Pago> filterPagoByParams(Pageable pageable,
                                   Boolean estado_pagoBrowser,

@@ -1,13 +1,12 @@
 package com.example.finca_hexagonal.application.dto.reserva;
 
-import java.security.PublicKey;
 import java.util.Date;
 
-public class ReservaDTOResponse {
+public class ReservaResponseDTO {
 
-    private Long fincaId;
+    private Long id_finca;
 
-    private Long clienteId;
+    private Long id_cliente;
 
     private Date desde;
 
@@ -15,32 +14,32 @@ public class ReservaDTOResponse {
 
     private Boolean estadoReserva;
 
-    public  ReservaDTOResponse(){
+    public ReservaResponseDTO(){
 
     };
 
-    public ReservaDTOResponse(Long fincaId, Long clienteId, Date desde, Date hasta, Boolean estadoReserva) {
-        this.fincaId = fincaId;
-        this.clienteId = clienteId;
+    public ReservaResponseDTO(Long fincaId, Long clienteId, Date desde, Date hasta, Boolean estadoReserva) {
+        this.id_finca = fincaId;
+        this.id_cliente = clienteId;
         this.desde = desde;
         this.hasta = hasta;
         this.estadoReserva = estadoReserva;
     }
 
-    public Long getFincaId() {
-        return fincaId;
+    public Long getId_finca() {
+        return id_finca;
     }
 
-    public void setFincaId(Long fincaId) {
-        this.fincaId = fincaId;
+    public void setId_finca(Long id_finca) {
+        this.id_finca = id_finca;
     }
 
-    public Long getClienteId() {
-        return clienteId;
+    public Long getId_cliente() {
+        return id_cliente;
     }
 
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
+    public void setId_cliente(Long id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public Date getDesde() {

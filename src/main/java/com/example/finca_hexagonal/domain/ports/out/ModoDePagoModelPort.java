@@ -9,13 +9,13 @@ import java.util.Optional;
 public interface ModoDePagoModelPort {
     ModoDePago save(ModoDePago modoDePago);
 
-    List<ModoDePago> getAll(Long id);
+    List<ModoDePago> findAll(Long id);
 
-    Optional<ModoDePago> getById(Long id);
+    Optional<ModoDePago> findById(Long id);
 
     Optional<ModoDePago> findByTipo(String tipo);
 
-    List<ModoDePago> getByPagoId(Long pago_id);
+    List<ModoDePago> findByPagoId(Long pago_id);
 
     Reserva update(Reserva reserva);
 

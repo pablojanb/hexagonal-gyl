@@ -1,4 +1,4 @@
-package domain.models;
+package com.example.finca_hexagonal.domain.models;
 
 public class Cliente {
     private int id;
