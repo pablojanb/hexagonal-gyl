@@ -11,9 +11,9 @@ public interface RolModelPort {
 
     List<Rol> findAll();
 
-    Optional<Rol> findById(Long id);
+    Rol findById(Long id);
 
-    Optional<Rol> findByName(String nombre);
+    Rol findByName(String nombre);
 
     Rol update(Rol rol);
 

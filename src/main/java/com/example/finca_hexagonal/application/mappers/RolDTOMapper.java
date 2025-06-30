@@ -25,7 +25,8 @@ public abstract class RolDTOMapper {
 
 
     @Mappings(value = {
-                @Mapping(source = "nombre", target = "nombre"),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(source = "nombre", target = "nombre"),
                 @Mapping(source = "permisoIdSet", target = "permisoSet", qualifiedByName = "mapIdsToPermisos")
     })
     public abstract Rol toModel(RolRequestDTO rolRequestDTO);

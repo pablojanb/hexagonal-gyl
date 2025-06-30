@@ -28,7 +28,7 @@ public class PermisoController {
         return ResponseEntity.ok(permisoService.findById(id));
     }
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     public ResponseEntity<PermisoResponseDTO> saveUsuario(@RequestBody PermisoRequestDTO  permisoRequestDTO){
         return ResponseEntity.ok(permisoService.create(permisoRequestDTO));
     }

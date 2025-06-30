@@ -3,10 +3,13 @@ package com.example.finca_hexagonal.application.usecases.permiso;
 import com.example.finca_hexagonal.domain.models.Permiso;
 import com.example.finca_hexagonal.domain.ports.in.permiso.FindPermisoUseCase;
 import com.example.finca_hexagonal.domain.ports.out.PermisoModelPort;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+@Service
 public class FindPermisoUseCaseImpl implements FindPermisoUseCase {
 
     private final PermisoModelPort permisoModelPort;
@@ -16,7 +19,7 @@ public class FindPermisoUseCaseImpl implements FindPermisoUseCase {
     }
 
     @Override
-    public Optional<Permiso> findPermisoById(Long id) {
+    public Permiso findPermisoById(Long id) {
         return permisoModelPort.findById(id);
     }
 

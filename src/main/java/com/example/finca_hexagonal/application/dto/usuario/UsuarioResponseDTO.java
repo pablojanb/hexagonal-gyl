@@ -8,6 +8,6 @@ import java.util.Set;
 public record UsuarioResponseDTO(Long id,
                                  String username,
                                  String email,
-                                 Set<RolResponseDTO>  permisoSet,
+                                 Set<RolResponseDTO>  rolResponseDTOSet,
                                  boolean enabled) {
 }

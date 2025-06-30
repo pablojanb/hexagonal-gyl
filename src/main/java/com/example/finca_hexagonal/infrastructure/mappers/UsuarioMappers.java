@@ -12,11 +12,30 @@ import java.util.List;
 public abstract class UsuarioMappers {
 
     @Mappings({
-            @Mapping(source = "", target = ""),
+            @Mapping(target = "id", ignore = true),
+            @Mapping(source = "username", target = "username"),
+            @Mapping(source = "email", target = "email"),
+            @Mapping(source = "password", target = "password"),
+            @Mapping(source = "enabled", target = "enabled"),
+            @Mapping(source = "accountNotExpired", target = "accountNotExpired"),
+            @Mapping(source = "credentialsNotExpired", target = "credentialsNotExpired"),
+            @Mapping(source = "accountNotLocked", target = "accountNotLocked"),
+            @Mapping(source = "rolSet", target = "rolEntitySet")
     })
     public abstract UsuarioEntity toEntity(Usuario usuario);
 
-    public abstract Usuario toDomain(UsuarioEntity usuario);
+    @Mappings({
+            @Mapping(source = "id", target = "id"),
+            @Mapping(source = "username", target = "username"),
+            @Mapping(source = "email", target = "email"),
+            @Mapping(source = "password", target = "password"),
+            @Mapping(source = "enabled", target = "enabled"),
+            @Mapping(source = "accountNotExpired", target = "accountNotExpired"),
+            @Mapping(source = "credentialsNotExpired", target = "credentialsNotExpired"),
+            @Mapping(source = "accountNotLocked", target = "accountNotLocked"),
+            @Mapping(source = "rolEntitySet", target = "rolSet")
+    })
+    public abstract Usuario toModel(UsuarioEntity usuarioEntity);
 
     public abstract List<UsuarioEntity> toListEntity(List<Usuario> usuarioList);
 

@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface FindRolUseCase {
     List<Rol> getAll();
 
-    Optional<Rol> getById(Long id);
-    Optional<Rol> getByName(String nombre);
+    Rol getById(Long id);
+    Rol getByName(String nombre);
 }

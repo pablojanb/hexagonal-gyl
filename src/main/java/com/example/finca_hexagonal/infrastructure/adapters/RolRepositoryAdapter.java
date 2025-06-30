@@ -1,55 +1,69 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
-import com.example.finca_hexagonal.application.mappers.RolDTOMapper;
 import com.example.finca_hexagonal.domain.models.Rol;
 import com.example.finca_hexagonal.domain.ports.out.RolModelPort;
+import com.example.finca_hexagonal.infrastructure.entities.RolEntity;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import com.example.finca_hexagonal.infrastructure.mappers.RolMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaRolRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+
+@Service
 public class RolRepositoryAdapter implements RolModelPort {
 
     private final JpaRolRepository jpaRolRepository;
-    private final RolDTOMapper rolDTOMapper;
+    private final RolMappers rolMappers;
 
-    public RolRepositoryAdapter(JpaRolRepository jpaRolRepository, RolDTOMapper rolDTOMapper) {
+    public RolRepositoryAdapter(JpaRolRepository jpaRolRepository, RolMappers rolMappers) {
         this.jpaRolRepository = jpaRolRepository;
-        this.rolDTOMapper = rolDTOMapper;
+        this.rolMappers = rolMappers;
     }
 
     @Override
     public Rol save(Rol rol) {
-        return null;
+        RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
+        return rolMappers.toModel(rolEntity);
     }
 
     @Override
     public List<Rol> findAll() {
-        return List.of();
+        return rolMappers.toModelList(jpaRolRepository.findAll());
     }
 
     @Override
-    public Optional<Rol> findById(Long id) {
-        return Optional.empty();
+    public Rol findById(Long id) {
+        RolEntity rolEntity = jpaRolRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Error, rol con id: "+id+" no encontrado"));
+        return rolMappers.toModel(rolEntity);
     }
 
     @Override
-    public Optional<Rol> findByName(String nombre) {
-        return Optional.empty();
+    public Rol findByName(String nombre) {
+        RolEntity rolEntity = jpaRolRepository.findRolEntityByNombre(nombre)
+                .orElseThrow(()-> new EntityNotFoundException("Error, rol con nombre: "+nombre+" no encontrado"));
+
+        return rolMappers.toModel(rolEntity);
     }
 
     @Override
     public Rol update(Rol rol) {
-        return null;
+        RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
+        return rolMappers.toModel(rolEntity);
     }
 
     @Override
     public Boolean deleteById(Long id) {
-        return null;
+        Rol rol = findById(id);
+        jpaRolRepository.delete(rolMappers.toEntity(rol));
+        return true;
     }
 
     @Override
     public Rol logicalDeletion(Rol rol) {
-        return null;
+        RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
+        return rolMappers.toModel(rolEntity);
     }
 }

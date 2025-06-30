@@ -20,17 +20,17 @@ public class RolController {
         this.rolService = rolService;
     }
 
-    @GetMapping()
+    @GetMapping("/find/id/{id}")
     public ResponseEntity<RolResponseDTO> findRolById(@PathVariable Long id){
         return ResponseEntity.ok(rolService.findById(id));
     }
 
-    @GetMapping()
+    @GetMapping("/find/all")
     public ResponseEntity<List<RolResponseDTO>> findAllRol(){
         return ResponseEntity.ok(rolService.findAll());
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/id/{id}")
     public ResponseEntity<RolResponseDTO> deleteRolById(@PathVariable Long id){
         return ResponseEntity.ok(rolService.deleteById(id));
     }

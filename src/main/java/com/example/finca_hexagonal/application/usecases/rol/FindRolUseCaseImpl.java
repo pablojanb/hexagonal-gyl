@@ -3,10 +3,12 @@ package com.example.finca_hexagonal.application.usecases.rol;
 import com.example.finca_hexagonal.domain.models.Rol;
 import com.example.finca_hexagonal.domain.ports.in.rol.FindRolUseCase;
 import com.example.finca_hexagonal.domain.ports.out.RolModelPort;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FindRolUseCaseImpl implements FindRolUseCase {
 
     private final RolModelPort rolModelPort;
@@ -21,12 +23,12 @@ public class FindRolUseCaseImpl implements FindRolUseCase {
     }
 
     @Override
-    public Optional<Rol> getById(Long id) {
+    public Rol getById(Long id) {
         return rolModelPort.findById(id);
     }
 
     @Override
-    public Optional<Rol> getByName(String nombre) {
+    public Rol getByName(String nombre) {
         return rolModelPort.findByName(nombre);
     }
 }
