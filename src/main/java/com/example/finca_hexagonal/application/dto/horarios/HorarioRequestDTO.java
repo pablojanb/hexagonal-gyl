@@ -1,58 +1,58 @@
 package com.example.finca_hexagonal.application.dto.horarios;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.sql.Time;
 
 public class HorarioRequestDTO {
-    private Long idFinca;
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
-    private String diaSemana;
+    private Long id_finca;
+    private Time hora_inicio;
+    private Time hora_fin;
+    private String dia_Semana;
     private BigDecimal descuento;
     private BigDecimal recargo;
 
     public HorarioRequestDTO() {
     }
 
-    public HorarioRequestDTO(Long idFinca, LocalTime horaInicio, LocalTime horaFin, String diaSemana, BigDecimal descuento, BigDecimal recargo) {
-        this.idFinca = idFinca;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.diaSemana = diaSemana;
+    public HorarioRequestDTO(Long id_finca, Time hora_inicio, Time hora_fin, String dia_Semana, BigDecimal descuento, BigDecimal recargo) {
+        this.id_finca = id_finca;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.dia_Semana = dia_Semana;
         this.descuento = descuento;
         this.recargo = recargo;
     }
 
-    public Long getIdFinca() {
-        return idFinca;
+    public Long getId_finca() {
+        return id_finca;
     }
 
-    public void setIdFinca(Long idFinca) {
-        this.idFinca = idFinca;
+    public void setId_finca(Long id_finca) {
+        this.id_finca = id_finca;
     }
 
-    public LocalTime getHoraInicio() {
-        return horaInicio;
+    public Time getHora_inicio() {
+        return hora_inicio;
     }
 
-    public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
+    public void setHora_inicio(Time hora_inicio) {
+        this.hora_inicio = hora_inicio;
     }
 
-    public LocalTime getHoraFin() {
-        return horaFin;
+    public Time getHora_fin() {
+        return hora_fin;
     }
 
-    public void setHoraFin(LocalTime horaFin) {
-        this.horaFin = horaFin;
+    public void setHora_fin(Time hora_fin) {
+        this.hora_fin = hora_fin;
     }
 
-    public String getDiaSemana() {
-        return diaSemana;
+    public String getDia_Semana() {
+        return dia_Semana;
     }
 
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
+    public void setDia_Semana(String dia_Semana) {
+        this.dia_Semana = dia_Semana;
     }
 
     public BigDecimal getDescuento() {

@@ -42,16 +42,6 @@ public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioU
     }
 
     @Override
-    public List<Horario> getAllHorariosByFincaId(Long id) {
-        return getHorarioUseCase.getAllHorariosByFincaId(id);
-    }
-
-    @Override
-    public List<Horario> getAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
-        return getHorarioUseCase.getAllHorariosByFincaIdAndDayOfWeek(id, dayOfWeek);
-    }
-
-    @Override
     public Optional<Horario> getHorarioById(Long horarioId) {
         return getHorarioUseCase.getHorarioById(horarioId);
     }

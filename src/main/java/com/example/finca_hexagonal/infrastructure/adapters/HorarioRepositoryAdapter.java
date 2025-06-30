@@ -46,20 +46,6 @@ public class HorarioRepositoryAdapter implements HorarioModelPort {
     }
 
     @Override
-    public List<Horario> findAllHorariosByFincaId(Long id) {
-        return jpaHorarioRepository.findByFincaId(id).stream()
-                .map(horarioMappers::toDomainModel)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Horario> findAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
-        return jpaHorarioRepository.findByFincaIdAndDiaSemana(id, dayOfWeek).stream()
-                .map(horarioMappers::toDomainModel)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public Optional<Horario> findById(Long horarioId) {
         return jpaHorarioRepository.findById(horarioId).map(horarioMappers::toDomainModel);
     }

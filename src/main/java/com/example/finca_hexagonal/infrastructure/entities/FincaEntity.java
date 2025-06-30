@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "fincas")
 public class FincaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -19,7 +18,8 @@ public class FincaEntity {
     private DetalleFincaEntity detalle;
     @OneToOne
     private DireccionEntity direccion;
-    private BigDecimal tarifaHora;
+
+    private BigDecimal tarifa_hora;
 
     @OneToMany(mappedBy = "finca")
     private List<HorarioEntity> horarios;
@@ -28,7 +28,7 @@ public class FincaEntity {
     private List<ImagenFincaEntity> imagenesFinca;
 
     @OneToMany(mappedBy = "finca")
-    private List<FechaEspecialEntity> fechasEspFinca;
+    private List<Fecha_EspecialEntity> fechasEspFinca;
 
     @OneToMany(mappedBy = "finca")
     private List<ReservaEntity> reservasFinca;
@@ -36,13 +36,13 @@ public class FincaEntity {
     public FincaEntity() {
     }
 
-    public FincaEntity(Long id, String nombre, PropietarioEntity propietario, DetalleFincaEntity detalle, DireccionEntity direccion, BigDecimal tarifaHora, List<HorarioEntity> horarios, List<ImagenFincaEntity> imagenesFinca, List<FechaEspecialEntity> fechasEspFinca, List<ReservaEntity> reservasFinca) {
+    public FincaEntity(Long id, String nombre, PropietarioEntity propietario, DetalleFincaEntity detalle, DireccionEntity direccion, BigDecimal tarifa_hora, List<HorarioEntity> horarios, List<ImagenFincaEntity> imagenesFinca, List<Fecha_EspecialEntity> fechasEspFinca, List<ReservaEntity> reservasFinca) {
         this.id = id;
         this.nombre = nombre;
         this.propietario = propietario;
         this.detalle = detalle;
         this.direccion = direccion;
-        this.tarifaHora = tarifaHora;
+        this.tarifa_hora = tarifa_hora;
         this.horarios = horarios;
         this.imagenesFinca = imagenesFinca;
         this.fechasEspFinca = fechasEspFinca;
@@ -89,12 +89,12 @@ public class FincaEntity {
         this.direccion = direccion;
     }
 
-    public BigDecimal getTarifaHora() {
-        return tarifaHora;
+    public BigDecimal getTarifa_hora() {
+        return tarifa_hora;
     }
 
-    public void setTarifaHora(BigDecimal tarifaHora) {
-        this.tarifaHora = tarifaHora;
+    public void setTarifa_hora(BigDecimal tarifa_hora) {
+        this.tarifa_hora = tarifa_hora;
     }
 
     public List<HorarioEntity> getHorarios() {
@@ -113,11 +113,11 @@ public class FincaEntity {
         this.imagenesFinca = imagenesFinca;
     }
 
-    public List<FechaEspecialEntity> getFechasEspFinca() {
+    public List<Fecha_EspecialEntity> getFechasEspFinca() {
         return fechasEspFinca;
     }
 
-    public void setFechasEspFinca(List<FechaEspecialEntity> fechasEspFinca) {
+    public void setFechasEspFinca(List<Fecha_EspecialEntity> fechasEspFinca) {
         this.fechasEspFinca = fechasEspFinca;
     }
 

@@ -5,7 +5,6 @@ import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimpli
 import com.example.finca_hexagonal.application.mappers.FincaDTOMapper;
 import com.example.finca_hexagonal.application.services.FincaService.FincaService;
 import com.example.finca_hexagonal.domain.models.Finca;
-import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,25 +36,12 @@ public class FincaServiceImpl implements FincaService {
 
     @Override
     public Optional<FincaResponseDTOSimplified> getFincaById(Long id) {
-        Finca finca = fincaModelService.getFincaById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
-        return Optional.of(fincaDTOMapper.toDtoSimplified(finca));
+        return Optional.empty();
     }
 
     @Override
     public Optional<FincaResponseDTOSimplified> updateFinca(Long id, FincaRequestDTO fincaDto) {
-        Finca fincaToUpdate = fincaModelService.getFincaById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
-        Finca newData = fincaDTOMapper.toModel(fincaDto);
-        fincaToUpdate.setNombre(newData.getNombre());
-        fincaToUpdate.setPropietario(newData.getPropietario());
-        fincaToUpdate.setDetalle(newData.getDetalle());
-        fincaToUpdate.setDireccion(newData.getDireccion());
-        fincaToUpdate.setTarifaHora(fincaDto.getTarifaHora());
-        Finca fincaUpdated = fincaModelService.updateFinca(id, fincaToUpdate)
-                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
-
-        return Optional.of(fincaDTOMapper.toDtoSimplified(fincaUpdated));
+        return Optional.empty();
     }
 
     @Override

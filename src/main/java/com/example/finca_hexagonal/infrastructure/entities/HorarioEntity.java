@@ -3,34 +3,33 @@ package com.example.finca_hexagonal.infrastructure.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.sql.Time;
 
 @Entity
-@Table(name = "horarios")
 public class HorarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "fincaId")
+    @JoinColumn(name = "finca_id")
     private FincaEntity finca;
     @Temporal(TemporalType.TIME)
-    private LocalTime horaInicio;
+    private Time hora_inicio;
     @Temporal(TemporalType.TIME)
-    private LocalTime horaFin;
-    private String diaSemana;
+    private Time hora_fin;
+    private String dia_Semana;
     private BigDecimal descuento;
     private BigDecimal recargo;
 
     public HorarioEntity() {
     }
 
-    public HorarioEntity(Long id, FincaEntity finca, LocalTime horaInicio, LocalTime horaFin, String diaSemana, BigDecimal descuento, BigDecimal recargo) {
+    public HorarioEntity(Long id, FincaEntity finca, Time hora_inicio, Time hora_fin, String dia_Semana, BigDecimal descuento, BigDecimal recargo) {
         this.id = id;
         this.finca = finca;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.diaSemana = diaSemana;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+        this.dia_Semana = dia_Semana;
         this.descuento = descuento;
         this.recargo = recargo;
     }
@@ -51,28 +50,28 @@ public class HorarioEntity {
         this.finca = finca;
     }
 
-    public LocalTime getHoraInicio() {
-        return horaInicio;
+    public Time getHora_inicio() {
+        return hora_inicio;
     }
 
-    public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
+    public void setHora_inicio(Time hora_inicio) {
+        this.hora_inicio = hora_inicio;
     }
 
-    public LocalTime getHoraFin() {
-        return horaFin;
+    public Time getHora_fin() {
+        return hora_fin;
     }
 
-    public void setHoraFin(LocalTime horaFin) {
-        this.horaFin = horaFin;
+    public void setHora_fin(Time hora_fin) {
+        this.hora_fin = hora_fin;
     }
 
-    public String getDiaSemana() {
-        return diaSemana;
+    public String getDia_Semana() {
+        return dia_Semana;
     }
 
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
+    public void setDia_Semana(String dia_Semana) {
+        this.dia_Semana = dia_Semana;
     }
 
     public BigDecimal getDescuento() {

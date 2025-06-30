@@ -1,4 +1,4 @@
-package com.example.finca_hexagonal.domain.models;
+package domain.models;
 
 
 public class AutenticacionExterna {

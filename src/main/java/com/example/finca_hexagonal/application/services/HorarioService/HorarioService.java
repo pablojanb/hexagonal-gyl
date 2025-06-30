@@ -11,10 +11,6 @@ public interface HorarioService {
 
     List<HorarioResponseDTO> getAllHorarios();
 
-    List<HorarioResponseDTO> getAllHorariosByFincaId(Long id);
-
-    List<HorarioResponseDTO> getAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek);
-
     Optional<HorarioResponseDTO> getHorarioById(Long horarioId);
 
     boolean deleteHorario(Long horarioId);
