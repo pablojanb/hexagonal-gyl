@@ -1,7 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.domain.models.ImagenFinca;
-import com.example.finca_hexagonal.domain.ports.in.detalle_finca.ImagenFincaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +17,13 @@ public class ImagenFincaController {
     }
 
     @PostMapping
-    public ResponseEntity<ImagenFinca> crear(@RequestBody ImagenFinca imagen) {
-        return ResponseEntity.ok(service.crearImagen(imagen));
+    public ResponseEntity<ImagenFinca> create(@RequestBody ImagenFinca imagen) {
+        return ResponseEntity.ok(service.create(imagen));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ImagenFinca> obtener(@PathVariable Long id) {
-        ImagenFinca img = service.obtenerPorId(id);
+    public ResponseEntity<ImagenFinca> getById(@PathVariable Long id) {
+        ImagenFinca img = service.getById(id);
         return (img != null) ? ResponseEntity.ok(img) : ResponseEntity.notFound().build();
     }
 
@@ -35,7 +34,7 @@ public class ImagenFincaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        service.eliminarImagen(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

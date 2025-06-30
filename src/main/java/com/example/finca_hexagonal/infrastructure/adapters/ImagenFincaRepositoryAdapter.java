@@ -1,7 +1,7 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
 import com.example.finca_hexagonal.domain.models.ImagenFinca;
-import com.example.finca_hexagonal.domain.ports.out.ImagenFincaRepository;
+import com.example.finca_hexagonal.domain.ports.out.ImagenFincaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.ImagenFincaEntity;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaImagenFincaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class ImagenFincaRepositoryAdapter implements ImagenFincaRepository {
+public class ImagenFincaRepositoryAdapter implements ImagenFincaModelPort {
 
     private final JpaImagenFincaRepository jpaRepository;
 
@@ -48,12 +48,12 @@ public class ImagenFincaRepositoryAdapter implements ImagenFincaRepository {
     }
 
     @Override
-    public List<ImagenFinca> buscarPorFinca(Long fincaId) {
+    public List<ImagenFinca> findByFinca(Long fincaId) {
         return jpaRepository.findByFincaId(fincaId).stream().map(this::toModel).collect(Collectors.toList());
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void delete(Long id) {
         jpaRepository.deleteById(id);
     }
 }
