@@ -1,57 +1,69 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
-import com.example.finca_hexagonal.application.mappers.UsuarioDTOMapper;
 import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.domain.ports.out.UsuarioModelPort;
+import com.example.finca_hexagonal.infrastructure.entities.UsuarioEntity;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import com.example.finca_hexagonal.infrastructure.mappers.UsuarioMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaUsuarioRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+
+@Service
 public class UsuarioRepositoryAdapter implements UsuarioModelPort {
 
-    private final UsuarioDTOMapper usuarioDTOMapper;
+    private final UsuarioMappers usuarioMappers;
     private final JpaUsuarioRepository jpaUsuarioRepository;
 
-    public UsuarioRepositoryAdapter(UsuarioDTOMapper usuarioDTOMapper,
+    public UsuarioRepositoryAdapter(UsuarioMappers usuarioMappers,
                                     JpaUsuarioRepository jpaUsuarioRepository) {
-        this.usuarioDTOMapper = usuarioDTOMapper;
+        this.usuarioMappers = usuarioMappers;
         this.jpaUsuarioRepository = jpaUsuarioRepository;
     }
 
-
     @Override
     public Usuario save(Usuario usuario) {
-        return null;
+        UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
+        return usuarioMappers.toModel(usuarioEntity);
     }
 
     @Override
     public List<Usuario> findAll() {
-        return List.of();
+        return usuarioMappers.toListModel(jpaUsuarioRepository.findAll());
     }
 
     @Override
-    public Optional<Usuario> findById(Long id) {
-        return Optional.empty();
+    public Usuario findById(Long id) {
+        UsuarioEntity usuarioEntity = jpaUsuarioRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Error, usuario con el id "+" no encontrado"));
+        return usuarioMappers.toModel(usuarioEntity);
     }
 
     @Override
-    public Optional<Usuario> findByName(String nombre_usuario) {
-        return Optional.empty();
+    public Usuario findByName(String username) {
+        UsuarioEntity usuarioEntity = jpaUsuarioRepository.findUsuarioEntityByUsername(username)
+                .orElseThrow(()->new EntityNotFoundException("Error, usuario con username "+username+" no encontrado"));
+        return usuarioMappers.toModel(usuarioEntity);
     }
 
     @Override
     public Usuario update(Usuario usuario) {
-        return null;
+        UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
+        return usuarioMappers.toModel(usuarioEntity);
     }
 
     @Override
     public Boolean deleteById(Long id) {
-        return null;
+        Usuario usuario = findById(id);
+        jpaUsuarioRepository.delete(usuarioMappers.toEntity(usuario));
+        return true;
     }
 
     @Override
-    public Usuario logicalDeletion(Usuario usuario) {
-        return null;
+    public Boolean logicalDeletion(Usuario usuario) {
+        UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
+        return true;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.application.dto.reserva.ReservaRequestDTO;
-import com.example.finca_hexagonal.application.dto.reserva.ReservaResponseDTO;
+import com.example.finca_hexagonal.application.dto.reserva.ReservaRequestDTO;
 import com.example.finca_hexagonal.application.services.Reserva.ReservaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

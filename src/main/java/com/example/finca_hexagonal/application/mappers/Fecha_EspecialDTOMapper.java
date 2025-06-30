@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public abstract class Fecha_EspecialDTOMapper {
 
     public abstract Fecha_Especial toModel(Fecha_EspecialDTORequest fecha_EspecialDTORequest);

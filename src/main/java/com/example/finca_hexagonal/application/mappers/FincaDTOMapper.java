@@ -12,7 +12,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public abstract class FincaDTOMapper {
 
     /*
@@ -27,23 +27,23 @@ public abstract class FincaDTOMapper {
 
      */
 
-    @Mapping(source = "idPropietario", target = "propietario", qualifiedByName = "mapPropietarioDtoToPropietario")
-    @Mapping(source = "idDetalleFinca", target = "detalle", qualifiedByName = "mapDetalleDtoToDetalle")
-    @Mapping(source = "idDireccion", target = "direccion", qualifiedByName = "mapDireccionDtoDireccion")
+    @Mapping(source = "id_propietario", target = "propietario", qualifiedByName = "mapPropietarioDtoToPropietario")
+    @Mapping(source = "id_detalleFinca", target = "detalle", qualifiedByName = "mapDetalleDtoTodetalle")
+    @Mapping(source = "id_direccion", target = "direccion", qualifiedByName = "mapDireccionDtodireccion")
     public abstract Finca toModel(FincaRequestDTO fincaDto);
 
-    @Mapping(source = "propietario.id", target = "idPropietario")
-    @Mapping(source = "detalle.id", target = "idDetalle")
-    @Mapping(source = "direccion.id", target = "idDireccion")
+    @Mapping(source = "propietario.id", target = "id_propietario")
     @Mapping(source = "propietario.nombre", target = "propietario")
+    @Mapping(source = "direccion.id", target = "id_direccion")
     @Mapping(source = "direccion.calle", target = "direccion")
+    @Mapping(source = "detalle.id", target = "id_detalle")
     public abstract FincaResponseDTOSimplified toDtoSimplified(Finca finca);
 
     public abstract List<FincaResponseDTOSimplified> toDtoSimplifiedList(List<Finca> finca);
 
-    @Mapping(source = "propietario.id", target = "idPropietario")
-    @Mapping(source = "detalle.id", target = "idDetalle")
-    @Mapping(source = "direccion.id", target = "idDireccion")
+    @Mapping(source = "propietario.id", target = "id_propietario")
+    @Mapping(source = "detalle.id", target = "id_detalle")
+    @Mapping(source = "direccion.id", target = "id_direccion")
     @Mapping(source = "propietario.nombre", target = "propietario")
     @Mapping(source = "direccion.calle", target = "direccion")
     public abstract FincaResponseDTO toDto(Finca finca);
@@ -51,18 +51,21 @@ public abstract class FincaDTOMapper {
 
 /*
     @Named("mapPropietarioDtoToPropietario")
-    protected Propietario mapPropietarioDtoToPropietario(Long idPropietario) {
-        return propietarioModelService.getById(idPropietario);
+    protected Propietario mapPropietarioDtoToPropietario(Long id_propietario) {
+        return propietarioModelService.getById(id_propietario)
+                .orElseThrow(() -> new IllegalArgumentException("Propietario not found: " + id_propietario));
     }
 
-    @Named("mapDetalleDtoToDetalle")
-    protected DetalleFinca mapDetalleDtoToDetalle(Long idDetalleFinca) {
-        return detalleModelService.getById(idDetalleFinca);
+    @Named("mapDetalleDtoTodetalle")
+    protected Detalle mapDetalleDtoTodetalle(Long id_detalleFinca) {
+        return detalleModelService.getById(id_detalleFinca)
+                .orElseThrow(() -> new IllegalArgumentException("Detalle not found: " + id_detalleFinca));
     }
 
-    @Named("mapDireccionDtoDireccion")
-    protected Direccion mapDireccionDtoDireccion(Long idDireccion) {
-        return direccionModelService.getById(idDireccion);
+    @Named("mapDireccionDtodireccion")
+    protected Direccion mapDireccionDtodireccion(Long id_direccion) {
+        return direccionModelService.getById(id_direccion)
+                .orElseThrow(() -> new IllegalArgumentException("Direccion not found: " + id_direccion));
     }
 
  */

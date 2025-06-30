@@ -12,10 +12,6 @@ public interface HorarioModelPort {
 
     List<Horario> findAll();
 
-    List<Horario> findAllHorariosByFincaId(Long id);
-
-    List<Horario> findAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek);
-
     Optional<Horario> findById(Long horarioId);
 
     Optional<Horario> update(Long horarioId, Horario horario);

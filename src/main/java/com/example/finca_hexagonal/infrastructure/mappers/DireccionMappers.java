@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 
 public abstract class DireccionMappers {
 

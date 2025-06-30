@@ -6,7 +6,7 @@ import com.example.finca_hexagonal.domain.models.Reserva;
 import java.util.List;
 import java.util.Optional;
 
-public interface ModoDePagoModelPort {
+public interface ModDePagoModelPort {
     ModoDePago save(ModoDePago modoDePago);
 
     List<ModoDePago> findAll(Long id);

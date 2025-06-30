@@ -21,29 +21,23 @@ public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
 
     private DetalleFincaEntity toEntity(DetalleFinca model) {
         return DetalleFincaEntity.builder()
-                .idDetalle(model.getIdDetalle())
+                .id(model.getId())
                 .descripcion(model.getDescripcion())
                 .cantHabitacion(model.getCantHabitacion())
                 .cantBano(model.getCantBano())
                 .metrosCuadrados(model.getMetrosCuadrados())
                 .capacidadMaxima(model.getCapacidadMaxima())
-                .wifi(model.isWifi())
-                .piscina(model.isPiscina())
-                .parrilla(model.isParrilla())
                 .build();
     }
 
     private DetalleFinca toModel(DetalleFincaEntity entity) {
         return new DetalleFinca(
-                entity.getIdDetalle(),
+                entity.getId(),
                 entity.getDescripcion(),
                 entity.getCantHabitacion(),
                 entity.getCantBano(),
                 entity.getMetrosCuadrados(),
-                entity.getCapacidadMaxima(),
-                entity.isWifi(),
-                entity.isPiscina(),
-                entity.isParrilla()
+                entity.getCapacidadMaxima()
         );
     }
 

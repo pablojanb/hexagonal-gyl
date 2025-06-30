@@ -1,6 +1,7 @@
-package domain.ports.in.Contacto;
+package com.example.finca_hexagonal.domain.ports.in.Contacto;
 
-import domain.models.Propietario;
+
+import com.example.finca_hexagonal.domain.models.Propietario;
 
 public interface DeleteContactoUseCase {
     Boolean delete(int id);

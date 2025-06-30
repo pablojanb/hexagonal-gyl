@@ -10,9 +10,11 @@ import com.example.finca_hexagonal.domain.ports.in.permiso.FindPermisoUseCase;
 import com.example.finca_hexagonal.domain.ports.in.permiso.UpdatePermisoUseCase;
 import com.example.finca_hexagonal.infrastructure.exceptions.OperationFailedException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PermisoServiceImpl implements IPermisoService {
 
     //Inyectamos los casos de Uso
@@ -45,9 +47,8 @@ public class PermisoServiceImpl implements IPermisoService {
     }
 
     @Override
-    public PermisoResponseDTO findById(Long id) {
-        Permiso permiso = findPermisoUseCase.findPermisoById(id)
-                .orElseThrow( ()-> new EntityNoFoundException("Permiso con id "+ " no encontrado") );
+    public PermisoResponseDTO findById(Long id) throws  EntityNotFoundException {
+        Permiso permiso = findPermisoUseCase.findPermisoById(id);
         return permisoDTOMapper.toDTO(permiso);
     }
 
@@ -58,10 +59,7 @@ public class PermisoServiceImpl implements IPermisoService {
 
     @Override
     public PermisoResponseDTO deleteById(Long id) {
-
-        Permiso permiso = findPermisoUseCase.findPermisoById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Error al eliminar, Permiso con id "+ " no encontrado.") );
-
+        Permiso permiso = findPermisoUseCase.findPermisoById(id);
         Boolean isDeleted = deletePermisoUseCase.deletePermisoById(permiso.getId());
         if(!isDeleted){
             return permisoDTOMapper.toDTO(permiso);
@@ -72,10 +70,8 @@ public class PermisoServiceImpl implements IPermisoService {
     @Override
     public PermisoResponseDTO update(Long id, PermisoRequestDTO permisoRequestDTO) {
 
-        Permiso permiso = findPermisoUseCase.findPermisoById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Error al actualizar, Permiso con id "+ " no encontrado.") );
-
-        permiso.setNombre(permisoRequestDTO.name());
+        Permiso permiso = findPermisoUseCase.findPermisoById(id);
+        permiso.setNombre(permisoRequestDTO.nombre());
         Permiso newPermiso = updatePermisoUseCase.updatePermiso(permiso);
         return permisoDTOMapper.toDTO(newPermiso);
     }

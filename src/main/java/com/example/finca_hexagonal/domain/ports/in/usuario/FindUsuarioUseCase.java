@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface FindUsuarioUseCase {
     List<Usuario> getAll();
 
-    Optional<Usuario> getById(Long id);
+    Usuario getById(Long id);
 
-    Optional<Usuario> getByName(String nombre_usuario);
+    Usuario getByName(String nombre_usuario);
 
 }

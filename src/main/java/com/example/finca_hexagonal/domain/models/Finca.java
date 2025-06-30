@@ -9,8 +9,9 @@ public class Finca {
     private Propietario propietario;
     private DetalleFinca detalle;
     private Direccion direccion;
-    private BigDecimal tarifaHora;
+    private BigDecimal tarifa_hora;
 
+    private List<Horario> horarios;
     private List<ImagenFinca> imagenesFinca;
     private List<Fecha_Especial> fechasEspeciales;
     private List<Reserva> reservasFinca;
@@ -19,13 +20,14 @@ public class Finca {
     public Finca() {
     }
 
-    public Finca(Long id, String nombre, Propietario propietario, DetalleFinca detalle, Direccion direccion, BigDecimal tarifaHora, List<ImagenFinca> imagenesFinca, List<Fecha_Especial> fechasEspeciales, List<Reserva> reservasFinca) {
+    public Finca(Long id, String nombre, Propietario propietario, DetalleFinca detalle, Direccion direccion, BigDecimal tarifa_hora, List<Horario> horarios, List<ImagenFinca> imagenesFinca, List<Fecha_Especial> fechasEspeciales, List<Reserva> reservasFinca) {
         this.id = id;
         this.nombre = nombre;
         this.propietario = propietario;
         this.detalle = detalle;
         this.direccion = direccion;
-        this.tarifaHora = tarifaHora;
+        this.tarifa_hora = tarifa_hora;
+        this.horarios = horarios;
         this.imagenesFinca = imagenesFinca;
         this.fechasEspeciales = fechasEspeciales;
         this.reservasFinca = reservasFinca;
@@ -71,12 +73,20 @@ public class Finca {
         this.direccion = direccion;
     }
 
-    public BigDecimal getTarifaHora() {
-        return tarifaHora;
+    public BigDecimal getTarifa_hora() {
+        return tarifa_hora;
     }
 
-    public void setTarifaHora(BigDecimal tarifaHora) {
-        this.tarifaHora = tarifaHora;
+    public void setTarifa_hora(BigDecimal tarifa_hora) {
+        this.tarifa_hora = tarifa_hora;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 
     public List<ImagenFinca> getImagenesFinca() {

@@ -15,12 +15,9 @@ public class DireccionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
-    private DireccionEntity idDireccion;
-
-
-    private DireccionEntity Direccion;
+    private String calle;
+    private int altura;
+    private String ciudad;
 
     private Boolean enabled;
 }

@@ -10,7 +10,7 @@ public interface PermisoModelPort {
 
     List<Permiso> findAll();
 
-    Optional<Permiso> findById(Long id);
+    Permiso findById(Long id);
     
     Permiso update(Permiso permiso);
 
