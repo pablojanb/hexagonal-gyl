@@ -62,8 +62,8 @@ public class UsuarioRepositoryAdapter implements UsuarioModelPort {
     }
 
     @Override
-    public Usuario logicalDeletion(Usuario usuario) {
+    public Boolean logicalDeletion(Usuario usuario) {
         UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
-        return usuarioMappers.toModel(usuarioEntity);
+        return true;
     }
 }

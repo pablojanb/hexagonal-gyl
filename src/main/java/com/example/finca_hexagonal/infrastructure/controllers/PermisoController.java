@@ -19,17 +19,17 @@ public class PermisoController {
     }
 
     @GetMapping("/find/all")
-    public ResponseEntity<List<PermisoResponseDTO>> findAllUsuario(){
+    public ResponseEntity<List<PermisoResponseDTO>> findAllPermiso(){
         return ResponseEntity.ok(permisoService.findAll());
     }
 
     @GetMapping("/find/id/{id}")
-    public ResponseEntity<PermisoResponseDTO> findUsuarioById(@PathVariable Long id){
+    public ResponseEntity<PermisoResponseDTO> findPermisoById(@PathVariable Long id){
         return ResponseEntity.ok(permisoService.findById(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PermisoResponseDTO> saveUsuario(@RequestBody PermisoRequestDTO  permisoRequestDTO){
+    public ResponseEntity<PermisoResponseDTO> createPermiso(@RequestBody PermisoRequestDTO  permisoRequestDTO){
         return ResponseEntity.ok(permisoService.create(permisoRequestDTO));
     }
 

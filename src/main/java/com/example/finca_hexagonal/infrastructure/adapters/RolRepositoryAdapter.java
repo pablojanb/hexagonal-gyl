@@ -62,8 +62,8 @@ public class RolRepositoryAdapter implements RolModelPort {
     }
 
     @Override
-    public Rol logicalDeletion(Rol rol) {
+    public Boolean logicalDeletion(Rol rol) {
         RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
-        return rolMappers.toModel(rolEntity);
+        return true;
     }
 }

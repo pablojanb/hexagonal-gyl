@@ -1,7 +1,9 @@
 package com.example.finca_hexagonal.application.mappers;
 
+import com.example.finca_hexagonal.application.dto.permiso.PermisoResponseDTO;
 import com.example.finca_hexagonal.application.dto.rol.RolRequestDTO;
 import com.example.finca_hexagonal.application.dto.rol.RolResponseDTO;
+import com.example.finca_hexagonal.application.services.permiso.IPermisoService;
 import com.example.finca_hexagonal.application.services.rol.IRolService;
 import com.example.finca_hexagonal.domain.models.Permiso;
 import com.example.finca_hexagonal.domain.models.Rol;
@@ -9,6 +11,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Set;
@@ -17,12 +20,10 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring",uses = {PermisoDTOMapper.class})
 public abstract class RolDTOMapper {
 
-    private final IRolService rolService;
 
-    public RolDTOMapper(IRolService rolService) {
-        this.rolService = rolService;
-    }
 
+    @Autowired
+    private IPermisoService permisoService;
 
     @Mappings(value = {
             @Mapping(target = "id", ignore = true),
@@ -41,13 +42,14 @@ public abstract class RolDTOMapper {
 
     public abstract List<RolResponseDTO> toListDto(List<Rol> rol);
 
-    public abstract Rol toModelFromResponseDTO(RolResponseDTO rolResponseDTO);
 
-    @Named("mapIdsToRoles")
-    public Set<Rol> mapIdsToRoles(Set<Long> ids) {
+    public abstract Permiso toModelFromResponse(PermisoResponseDTO permisoResponseDTO);
+
+    @Named("mapIdsToPermisos")
+    public Set<Permiso> mapIdsToPermisos(Set<Long> ids) {
         if (ids == null) return null;
         return ids.stream()
-                .map(id -> toModelFromResponseDTO(rolService.findById(id)))
+                .map(id -> toModelFromResponse(permisoService.findById(id)))
                 .collect(Collectors.toSet());
     }
 }

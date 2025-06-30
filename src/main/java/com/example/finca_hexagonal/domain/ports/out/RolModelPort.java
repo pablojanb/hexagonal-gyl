@@ -19,5 +19,5 @@ public interface RolModelPort {
 
     Boolean deleteById(Long id);
 
-    Rol logicalDeletion(Rol rol);
+    Boolean logicalDeletion(Rol rol);
 }

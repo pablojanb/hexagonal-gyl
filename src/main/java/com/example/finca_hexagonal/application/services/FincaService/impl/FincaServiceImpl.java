@@ -13,7 +13,33 @@ import java.util.Optional;
 @Service
 public class FincaServiceImpl implements FincaService {
 
-    private final FincaModelService fincaModelService;
+
+    @Override
+    public FincaResponseDTOSimplified createFinca(FincaRequestDTO fincaDto) {
+        return null;
+    }
+
+    @Override
+    public List<FincaResponseDTOSimplified> getAllFincas() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<FincaResponseDTOSimplified> getFincaById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<FincaResponseDTOSimplified> updateFinca(Long id, FincaRequestDTO fincaDto) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean deleteFincaById(Long id) {
+        return false;
+    }
+
+    /*
     private final FincaDTOMapper fincaDTOMapper;
 
     public FincaServiceImpl(FincaModelService fincaModelService, FincaDTOMapper fincaDTOMapper) {
@@ -48,4 +74,7 @@ public class FincaServiceImpl implements FincaService {
     public boolean deleteFincaById(Long id) {
         return fincaModelService.deleteFincaById(id);
     }
+
+
+     */
 }

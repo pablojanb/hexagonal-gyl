@@ -18,5 +18,5 @@ public interface UsuarioModelPort {
 
     Boolean deleteById(Long id);
 
-    Usuario logicalDeletion(Usuario usuario);
+    Boolean logicalDeletion(Usuario usuario);
 }

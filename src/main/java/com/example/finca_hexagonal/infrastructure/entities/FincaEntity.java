@@ -21,14 +21,14 @@ public class FincaEntity {
 
     private BigDecimal tarifa_hora;
 
-    @OneToMany(mappedBy = "finca")
+    @OneToMany
     private List<HorarioEntity> horarios;
 
-    @OneToMany(mappedBy = "finca")
+    @OneToMany
     private List<ImagenFincaEntity> imagenesFinca;
 
-    @OneToMany(mappedBy = "finca")
-    private List<Fecha_EspecialEntity> fechasEspFinca;
+    @OneToMany
+    private List<FechaEspecialEntity> fechasEspFinca;
 
     @OneToMany(mappedBy = "finca")
     private List<ReservaEntity> reservasFinca;
@@ -36,7 +36,7 @@ public class FincaEntity {
     public FincaEntity() {
     }
 
-    public FincaEntity(Long id, String nombre, PropietarioEntity propietario, DetalleFincaEntity detalle, DireccionEntity direccion, BigDecimal tarifa_hora, List<HorarioEntity> horarios, List<ImagenFincaEntity> imagenesFinca, List<Fecha_EspecialEntity> fechasEspFinca, List<ReservaEntity> reservasFinca) {
+    public FincaEntity(Long id, String nombre, PropietarioEntity propietario, DetalleFincaEntity detalle, DireccionEntity direccion, BigDecimal tarifa_hora, List<HorarioEntity> horarios, List<ImagenFincaEntity> imagenesFinca, List<FechaEspecialEntity> fechasEspFinca, List<ReservaEntity> reservasFinca) {
         this.id = id;
         this.nombre = nombre;
         this.propietario = propietario;
@@ -113,11 +113,11 @@ public class FincaEntity {
         this.imagenesFinca = imagenesFinca;
     }
 
-    public List<Fecha_EspecialEntity> getFechasEspFinca() {
+    public List<FechaEspecialEntity> getFechasEspFinca() {
         return fechasEspFinca;
     }
 
-    public void setFechasEspFinca(List<Fecha_EspecialEntity> fechasEspFinca) {
+    public void setFechasEspFinca(List<FechaEspecialEntity> fechasEspFinca) {
         this.fechasEspFinca = fechasEspFinca;
     }
 

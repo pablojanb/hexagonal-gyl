@@ -5,8 +5,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "detalle_finca")
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -14,14 +13,12 @@ public class DetalleFincaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idDetalle;
+    private Long id;
 
     private String descripcion;
     private int cantHabitacion;
     private int cantBano;
     private double metrosCuadrados;
     private int capacidadMaxima;
-    private boolean wifi;
-    private boolean piscina;
-    private boolean parrilla;
+
 }

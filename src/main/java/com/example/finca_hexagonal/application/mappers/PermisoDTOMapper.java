@@ -7,20 +7,12 @@ import com.example.finca_hexagonal.domain.models.Permiso;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.Named;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public abstract class PermisoDTOMapper {
 
-    private final IPermisoService permisoService;
-
-    public PermisoDTOMapper(IPermisoService permisoService) {
-        this.permisoService = permisoService;
-    }
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
@@ -36,13 +28,5 @@ public abstract class PermisoDTOMapper {
 
     public abstract List<PermisoResponseDTO> toListDto(List<Permiso> permisos);
 
-    public abstract Permiso toModelFromResponse(PermisoResponseDTO permisoResponseDTO);
 
-    @Named("mapIdsToPermisos")
-    public Set<Permiso> mapIdsToPermisos(Set<Long> ids) {
-        if (ids == null) return null;
-        return ids.stream()
-                .map(id -> toModelFromResponse(permisoService.findById(id)))
-                .collect(Collectors.toSet());
-    }
 }

@@ -28,5 +28,4 @@ public abstract class RolMappers {
 
     public abstract List<Rol> toModelList(List<RolEntity> rolEntityList);
 
-    public abstract RolEntity toEntityList(List<Rol> rolList);
 }
