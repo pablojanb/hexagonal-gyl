@@ -1,17 +1,17 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.ports.out.DetalleFincaRepository;
+import com.example.finca_hexagonal.domain.ports.out.DetalleFincaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.DetalleFincaEntity;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaDetalleFincaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
-public class DetalleFincaRepositoryAdapter implements DetalleFincaRepository {
+@Component
+public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
 
     private final JpaDetalleFincaRepository jpaRepository;
 
@@ -58,7 +58,7 @@ public class DetalleFincaRepositoryAdapter implements DetalleFincaRepository {
     }
 
     @Override
-    public List<DetalleFinca> buscarTodos() {
+    public List<DetalleFinca> findAll() {
         return jpaRepository.findAll().stream().map(this::toModel).collect(Collectors.toList());
     }
 
@@ -68,7 +68,7 @@ public class DetalleFincaRepositoryAdapter implements DetalleFincaRepository {
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void delete(Long id) {
         jpaRepository.deleteById(id);
     }
 }
