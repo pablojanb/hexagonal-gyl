@@ -20,11 +20,11 @@ public abstract class HorarioDTOMapper {
         this.fincaModelService = fincaModelService;
     }
 
-    @Mapping(source = "id_finca", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
+    @Mapping(source = "idFinca", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
     public abstract Horario toModel(HorarioRequestDTO horarioDto);
 
 
-    @Mapping(source = "finca.id", target = "id_finca")
+    @Mapping(source = "finca.id", target = "idFinca")
     @Mapping(source = "finca.nombre", target = "finca")
     public abstract HorarioResponseDTO toDto(Horario horario);
 

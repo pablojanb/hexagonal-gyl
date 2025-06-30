@@ -1,9 +1,10 @@
-package com.example.finca_hexagonal.domain.models;
+package com.example.finca_hexagonal.application.dto.pago;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Pago {
+public class PagoDTORequest {
+
     private Integer id;
     private Integer reserva_id;
     private BigDecimal monto_total;
@@ -13,17 +14,17 @@ public class Pago {
     private BigDecimal recargo_aplicado;
     private Boolean estado_pago;
 
-    public  Pago(){};
+    public PagoDTORequest(){};
 
-    public Pago(Boolean estado_pago, BigDecimal recargo_aplicado, BigDecimal desuento_aplicado, LocalDateTime fecha_hora, Integer modo_pago_id, BigDecimal monto_total, Integer reserva_id, Integer id) {
-        this.estado_pago = estado_pago;
-        this.recargo_aplicado = recargo_aplicado;
-        this.desucento_aplicado = desuento_aplicado;
-        this.fecha_hora = fecha_hora;
-        this.modo_pago_id = modo_pago_id;
-        this.monto_total = monto_total;
-        this.reserva_id = reserva_id;
+    public PagoDTORequest(Integer id, Integer reserva_id, BigDecimal monto_total, Integer modo_pago_id, LocalDateTime fecha_hora, BigDecimal desucento_aplicado, BigDecimal recargo_aplicado, Boolean estado_pago) {
         this.id = id;
+        this.reserva_id = reserva_id;
+        this.monto_total = monto_total;
+        this.modo_pago_id = modo_pago_id;
+        this.fecha_hora = fecha_hora;
+        this.desucento_aplicado = desucento_aplicado;
+        this.recargo_aplicado = recargo_aplicado;
+        this.estado_pago = estado_pago;
     }
 
     public Integer getId() {

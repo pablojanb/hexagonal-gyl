@@ -22,6 +22,7 @@ public class FincaController {
 
     @PostMapping
     public ResponseEntity<FincaResponseDTOSimplified> createFinca(@RequestBody FincaRequestDTO fincaDTO){
+
         return new ResponseEntity<>(fincaService.createFinca(fincaDTO), HttpStatus.CREATED);
     }
 
@@ -39,7 +40,7 @@ public class FincaController {
 
     @PutMapping("/updateFinca/{fincaId}")
     public ResponseEntity<FincaResponseDTOSimplified> updateFinca(@PathVariable Long fincaId,
-                             @RequestBody FincaRequestDTO fincaUpdate){
+                                                                  @RequestBody FincaRequestDTO fincaUpdate){
         return fincaService.updateFinca(fincaId, fincaUpdate)
                 .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
