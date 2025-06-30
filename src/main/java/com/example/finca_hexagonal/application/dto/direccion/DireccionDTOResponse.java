@@ -16,5 +16,4 @@ public class DireccionDTOResponse {
     private String ciudad;
     private String provincia;
     private String aclaracion;
-
 }
