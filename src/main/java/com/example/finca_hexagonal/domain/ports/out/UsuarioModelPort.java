@@ -10,9 +10,9 @@ public interface UsuarioModelPort {
 
     List<Usuario> findAll();
 
-    Optional<Usuario> findById(Long id);
+    Usuario findById(Long id);
 
-    Optional<Usuario> findByName(String nombre_usuario);
+    Usuario findByName(String username);
 
     Usuario update(Usuario usuario);
 

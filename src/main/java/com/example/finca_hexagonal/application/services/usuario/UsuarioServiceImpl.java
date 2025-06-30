@@ -3,6 +3,7 @@ package com.example.finca_hexagonal.application.services.usuario;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
 import com.example.finca_hexagonal.application.mappers.UsuarioDTOMapper;
+import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.domain.ports.in.rol.DeleteRolUseCase;
 import com.example.finca_hexagonal.domain.ports.in.rol.FindRolUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.CreateUsuarioUseCase;
@@ -39,31 +40,42 @@ public class UsuarioServiceImpl implements IUsuarioService{
 
     @Override
     public UsuarioResponseDTO create(UsuarioRequestDTO usuarioRequestDTO) {
-        return null;
+        Usuario usuario = usuarioDTOMapper.toModel(usuarioRequestDTO);
+        Usuario newUsuario = createUsuarioUseCase.create(usuario);
+
+        return usuarioDTOMapper.toDto(newUsuario);
     }
 
     @Override
     public UsuarioResponseDTO findById(Long id) {
-        return null;
+        Usuario usuario = findUsuarioUseCase.getById(id);
+        return usuarioDTOMapper.toDto(usuario);
     }
 
     @Override
     public List<UsuarioResponseDTO> findAll() {
-        return List.of();
+        return usuarioDTOMapper.toListDto(findUsuarioUseCase.getAll());
     }
 
     @Override
     public UsuarioResponseDTO deleteById(Long id) {
-        return null;
+        Usuario usuario = findUsuarioUseCase.getById(id);
+        deleteUsuarioUseCase.deleteById(id);
+        return usuarioDTOMapper.toDto(usuario);
     }
 
     @Override
     public UsuarioResponseDTO update(Long id, UsuarioRequestDTO usuarioRequestDTO) {
-        return null;
+        Usuario usuario = findUsuarioUseCase.getById(id);
+        usuario.setUsername(usuarioRequestDTO.username());
+        usuario.setEmail(usuarioRequestDTO.email());
+        Usuario newUsuario = updateUsuarioUseCase.update(usuario);
+        return usuarioDTOMapper.toDto(newUsuario);
     }
 
     @Override
     public UsuarioResponseDTO findByUsername(String username) {
-        return null;
+        Usuario usuario = findUsuarioUseCase.getByName(username);
+        return usuarioDTOMapper.toDto(usuario);
     }
 }

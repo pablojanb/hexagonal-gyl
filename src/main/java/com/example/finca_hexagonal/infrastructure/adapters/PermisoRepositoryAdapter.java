@@ -3,12 +3,14 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Permiso;
 import com.example.finca_hexagonal.domain.ports.out.PermisoModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.PermisoEntity;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import com.example.finca_hexagonal.infrastructure.mappers.PermisoMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaPermisoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public class PermisoRepositoryAdapter implements PermisoModelPort {
 
     private final JpaPermisoRepository jpaPermisoRepository;
@@ -21,29 +23,35 @@ public class PermisoRepositoryAdapter implements PermisoModelPort {
 
     @Override
     public Permiso save(Permiso permiso) {
-        PermisoEntity permisoEntity = permisoMappers.toEntity(permiso);
-        jpaPermisoRepository.save(permisoEntity);
+        PermisoEntity permisoEntity = jpaPermisoRepository.save(permisoMappers.toEntity(permiso));
         return permisoMappers.toModel(permisoEntity);
     }
 
     @Override
     public List<Permiso> findAll() {
-        return List.of();
+        List<PermisoEntity> permisoEntityList = jpaPermisoRepository.findAll();
+        return permisoMappers.toModelList(permisoEntityList);
     }
 
 
     @Override
-    public Optional<Permiso> findById(Long id) {
-        return Optional.empty();
+    public Permiso findById(Long id) {
+        PermisoEntity permisoEntity = jpaPermisoRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException("Error, Permiso no encontrado."));
+        return permisoMappers.toModel(permisoEntity);
     }
 
     @Override
     public Permiso update(Permiso permiso) {
-        return null;
+        PermisoEntity permisoEntity = permisoMappers.toEntity(findById(permiso.getId()));
+        jpaPermisoRepository.save(permisoEntity);
+        return permisoMappers.toModel(permisoEntity);
     }
 
     @Override
     public Boolean deleteById(Long id) {
-        return null;
+        PermisoEntity permisoEntity = permisoMappers.toEntity(findById(id));
+        jpaPermisoRepository.delete(permisoEntity);
+        return true;
     }
 }
