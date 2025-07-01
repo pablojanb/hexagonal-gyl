@@ -1,49 +1,39 @@
-package com.example.finca_hexagonal.infrastructure.entities;
-
-import jakarta.persistence.*;
+package com.example.finca_hexagonal.application.dto.fechaEspecial;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-@Entity
-@Table(name = "fechas_especiales")
-public class FechaEspecialEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class FechaEspecialRequestDTO {
+    private Long idFinca;
     private LocalDateTime fecha;
-    @Column(name = "dia_semana")
-    private LocalDateTime diaSemana;
+    private String dia_semana;
     private LocalDateTime hora_inicio;
     private LocalDateTime hora_fin;
     private BigDecimal descuento;
     private BigDecimal recargo;
     private String motivo;
-    @ManyToOne
-    @JoinColumn(name = "finca_id")
-    private FincaEntity finca;
 
-    public FechaEspecialEntity() {
+    public FechaEspecialRequestDTO() {
     }
 
-    public FechaEspecialEntity(Long id, LocalDateTime fecha, LocalDateTime diaSemana, LocalDateTime hora_inicio, LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo, FincaEntity finca) {
-        this.id = id;
+    public FechaEspecialRequestDTO(Long idFinca, LocalDateTime fecha,String dia_semana, LocalDateTime hora_inicio, LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo) {
+        this.idFinca = idFinca;
         this.fecha = fecha;
-        this.diaSemana = diaSemana;
+        this.dia_semana = dia_semana;
         this.hora_inicio = hora_inicio;
         this.hora_fin = hora_fin;
         this.descuento = descuento;
         this.recargo = recargo;
         this.motivo = motivo;
-        this.finca = finca;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdFinca() {
+        return idFinca;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFinca(Long idFinca) {
+        this.idFinca = idFinca;
     }
 
     public LocalDateTime getFecha() {
@@ -54,14 +44,12 @@ public class FechaEspecialEntity {
         this.fecha = fecha;
     }
 
-    public LocalDateTime getDiaSemana() {
-
-        return diaSemana;
+    public String getDia_semana() {
+        return dia_semana;
     }
 
-    public void setDiasemana(LocalDateTime diaSemana) {
-
-        this.diaSemana = diaSemana;
+    public void setDia_semana(String dia_semana) {
+        this.dia_semana = dia_semana;
     }
 
     public LocalDateTime getHora_inicio() {
@@ -102,13 +90,5 @@ public class FechaEspecialEntity {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
-    }
-
-    public FincaEntity getFinca() {
-        return finca;
-    }
-
-    public void setFinca(FincaEntity finca) {
-        this.finca = finca;
     }
 }

@@ -17,13 +17,13 @@ public class FincaResponseDTO {
     private List<DetalleFinca> detalles;
     private List<Horario> horarios;
     private List<ImagenFinca> imagenesFinca;
-    private List<Fecha_Especial> fechasEspeciales;
+    private List<FechaEspecial> fechasEspeciales;
     private List<Reserva> reservasFinca;
 
     public FincaResponseDTO() {
     }
 
-    public FincaResponseDTO(Long id, String nombre, Long idUsuario, String usuario, Long idDireccion, String direccion, BigDecimal tarifaHora, List<DetalleFinca> detalles, List<Horario> horarios, List<ImagenFinca> imagenesFinca, List<Fecha_Especial> fechasEspeciales, List<Reserva> reservasFinca) {
+    public FincaResponseDTO(Long id, String nombre, Long idUsuario, String usuario, Long idDireccion, String direccion, BigDecimal tarifaHora, List<DetalleFinca> detalles, List<Horario> horarios, List<ImagenFinca> imagenesFinca, List<FechaEspecial> fechasEspeciales, List<Reserva> reservasFinca) {
         this.id = id;
         this.nombre = nombre;
         this.idUsuario = idUsuario;
@@ -118,11 +118,11 @@ public class FincaResponseDTO {
         this.imagenesFinca = imagenesFinca;
     }
 
-    public List<Fecha_Especial> getFechasEspeciales() {
+    public List<FechaEspecial> getFechasEspeciales() {
         return fechasEspeciales;
     }
 
-    public void setFechasEspeciales(List<Fecha_Especial> fechasEspeciales) {
+    public void setFechasEspeciales(List<FechaEspecial> fechasEspeciales) {
         this.fechasEspeciales = fechasEspeciales;
     }
 
