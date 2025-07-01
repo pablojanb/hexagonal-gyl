@@ -6,25 +6,23 @@ import java.math.BigDecimal;
 public class FincaResponseDTOSimplified {
     private Long id;
     private String nombre;
-    private Long id_propietario;
-    private String propietario;
-    private Long id_direccion;
+    private Long idUsuario;
+    private String usuario;
+    private Long idDireccion;
     private String direccion;
-    private BigDecimal tarifa_hora;
-    private Long id_detalle;
+    private BigDecimal tarifaHora;
 
     public FincaResponseDTOSimplified() {
     }
 
-    public FincaResponseDTOSimplified(Long id, String nombre, Long id_propietario, String propietario, Long id_direccion, String direccion, BigDecimal tarifa_hora, Long id_detalle) {
+    public FincaResponseDTOSimplified(Long id, String nombre, Long idUsuario, String usuario, Long idDireccion, String direccion, BigDecimal tarifaHora) {
         this.id = id;
         this.nombre = nombre;
-        this.id_propietario = id_propietario;
-        this.propietario = propietario;
-        this.id_direccion = id_direccion;
+        this.idUsuario = idUsuario;
+        this.usuario = usuario;
+        this.idDireccion = idDireccion;
         this.direccion = direccion;
-        this.tarifa_hora = tarifa_hora;
-        this.id_detalle = id_detalle;
+        this.tarifaHora = tarifaHora;
     }
 
     public Long getId() {
@@ -43,28 +41,28 @@ public class FincaResponseDTOSimplified {
         this.nombre = nombre;
     }
 
-    public Long getId_propietario() {
-        return id_propietario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_propietario(Long id_propietario) {
-        this.id_propietario = id_propietario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getPropietario() {
-        return propietario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setPropietario(String propietario) {
-        this.propietario = propietario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public Long getId_direccion() {
-        return id_direccion;
+    public Long getIdDireccion() {
+        return idDireccion;
     }
 
-    public void setId_direccion(Long id_direccion) {
-        this.id_direccion = id_direccion;
+    public void setIdDireccion(Long idDireccion) {
+        this.idDireccion = idDireccion;
     }
 
     public String getDireccion() {
@@ -75,19 +73,11 @@ public class FincaResponseDTOSimplified {
         this.direccion = direccion;
     }
 
-    public BigDecimal getTarifa_hora() {
-        return tarifa_hora;
+    public BigDecimal getTarifaHora() {
+        return tarifaHora;
     }
 
-    public void setTarifa_hora(BigDecimal tarifa_hora) {
-        this.tarifa_hora = tarifa_hora;
-    }
-
-    public Long getId_detalle() {
-        return id_detalle;
-    }
-
-    public void setId_detalle(Long id_detalle) {
-        this.id_detalle = id_detalle;
+    public void setTarifaHora(BigDecimal tarifaHora) {
+        this.tarifaHora = tarifaHora;
     }
 }

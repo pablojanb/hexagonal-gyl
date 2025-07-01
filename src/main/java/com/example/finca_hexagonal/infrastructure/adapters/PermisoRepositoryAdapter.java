@@ -3,55 +3,61 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Permiso;
 import com.example.finca_hexagonal.domain.ports.out.PermisoModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.PermisoEntity;
-import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
-import com.example.finca_hexagonal.infrastructure.mappers.PermisoMappers;
+import com.example.finca_hexagonal.infrastructure.mappers.PermisoModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaPermisoRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Service
+@Component
 public class PermisoRepositoryAdapter implements PermisoModelPort {
 
     private final JpaPermisoRepository jpaPermisoRepository;
-    private final PermisoMappers permisoMappers;
+    private final PermisoModelMappers permisoModelMappers;
 
-    public PermisoRepositoryAdapter(JpaPermisoRepository jpaPermisoRepository, PermisoMappers permisoMappers) {
+    public PermisoRepositoryAdapter(JpaPermisoRepository jpaPermisoRepository, PermisoModelMappers permisoModelMappers) {
         this.jpaPermisoRepository = jpaPermisoRepository;
-        this.permisoMappers = permisoMappers;
+        this.permisoModelMappers = permisoModelMappers;
     }
 
     @Override
     public Permiso save(Permiso permiso) {
-        PermisoEntity permisoEntity = jpaPermisoRepository.save(permisoMappers.toEntity(permiso));
-        return permisoMappers.toModel(permisoEntity);
+        PermisoEntity permisoEntity = permisoModelMappers.fromDomainModel(permiso);
+        PermisoEntity newPermisoEntity = jpaPermisoRepository.save(permisoEntity);
+        return permisoModelMappers.toDomainModel(newPermisoEntity);
     }
 
     @Override
     public List<Permiso> findAll() {
-        List<PermisoEntity> permisoEntityList = jpaPermisoRepository.findAll();
-        return permisoMappers.toModelList(permisoEntityList);
-    }
-
-
-    @Override
-    public Permiso findById(Long id) {
-        PermisoEntity permisoEntity = jpaPermisoRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Error, Permiso no encontrado."));
-        return permisoMappers.toModel(permisoEntity);
+        return jpaPermisoRepository.findAll().stream()
+                .map(permisoModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Permiso update(Permiso permiso) {
-        PermisoEntity permisoEntity = permisoMappers.toEntity(findById(permiso.getId()));
-        jpaPermisoRepository.save(permisoEntity);
-        return permisoMappers.toModel(permisoEntity);
+    public Optional<Permiso> findById(Long id) {
+        return jpaPermisoRepository.findById(id).map(permisoModelMappers::toDomainModel);
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-        PermisoEntity permisoEntity = permisoMappers.toEntity(findById(id));
-        jpaPermisoRepository.delete(permisoEntity);
-        return true;
+    public Optional<Permiso> updateById(Long id, Permiso updatePermiso) {
+        if (jpaPermisoRepository.existsById(id)){
+            PermisoEntity permisoEntity = permisoModelMappers.fromDomainModel(updatePermiso);
+            permisoEntity.setId(id);
+            PermisoEntity updateReservaEntity = jpaPermisoRepository.save(permisoEntity);
+            return Optional.of(permisoModelMappers.toDomainModel(updateReservaEntity));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        if (jpaPermisoRepository.existsById(id)){
+            jpaPermisoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

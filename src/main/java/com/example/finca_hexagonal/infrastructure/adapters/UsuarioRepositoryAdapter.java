@@ -3,67 +3,59 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.domain.ports.out.UsuarioModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.UsuarioEntity;
-import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
-import com.example.finca_hexagonal.infrastructure.mappers.UsuarioMappers;
+import com.example.finca_hexagonal.infrastructure.mappers.UsuarioModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaUsuarioRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-
-@Service
+@Component
 public class UsuarioRepositoryAdapter implements UsuarioModelPort {
-
-    private final UsuarioMappers usuarioMappers;
     private final JpaUsuarioRepository jpaUsuarioRepository;
+    private final UsuarioModelMappers usuarioModelMappers;
 
-    public UsuarioRepositoryAdapter(UsuarioMappers usuarioMappers,
-                                    JpaUsuarioRepository jpaUsuarioRepository) {
-        this.usuarioMappers = usuarioMappers;
+    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, UsuarioModelMappers usuarioModelMappers) {
         this.jpaUsuarioRepository = jpaUsuarioRepository;
+        this.usuarioModelMappers = usuarioModelMappers;
     }
 
     @Override
     public Usuario save(Usuario usuario) {
-        UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
-        return usuarioMappers.toModel(usuarioEntity);
+        UsuarioEntity usuarioEntity = usuarioModelMappers.fromDomainModel(usuario);
+        UsuarioEntity NewUsuarioEntity = jpaUsuarioRepository.save(usuarioEntity);
+        return usuarioModelMappers.toDomainModel(NewUsuarioEntity);
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        if (jpaUsuarioRepository.existsById(id)){
+            jpaUsuarioRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<Usuario> findAll() {
-        return usuarioMappers.toListModel(jpaUsuarioRepository.findAll());
+        return jpaUsuarioRepository.findAll().stream()
+                .map(usuarioModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Usuario findById(Long id) {
-        UsuarioEntity usuarioEntity = jpaUsuarioRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Error, usuario con el id "+" no encontrado"));
-        return usuarioMappers.toModel(usuarioEntity);
+    public Optional<Usuario> findById(Long id) {
+        return jpaUsuarioRepository.findById(id).map(usuarioModelMappers::toDomainModel);
     }
 
     @Override
-    public Usuario findByName(String username) {
-        UsuarioEntity usuarioEntity = jpaUsuarioRepository.findUsuarioEntityByUsername(username)
-                .orElseThrow(()->new EntityNotFoundException("Error, usuario con username "+username+" no encontrado"));
-        return usuarioMappers.toModel(usuarioEntity);
-    }
-
-    @Override
-    public Usuario update(Usuario usuario) {
-        UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
-        return usuarioMappers.toModel(usuarioEntity);
-    }
-
-    @Override
-    public Boolean deleteById(Long id) {
-        Usuario usuario = findById(id);
-        jpaUsuarioRepository.delete(usuarioMappers.toEntity(usuario));
-        return true;
-    }
-
-    @Override
-    public Boolean logicalDeletion(Usuario usuario) {
-        UsuarioEntity usuarioEntity = jpaUsuarioRepository.save(usuarioMappers.toEntity(usuario));
-        return true;
+    public Optional<Usuario> updateById(Long id, Usuario usuarioUpdate) {
+        if (jpaUsuarioRepository.existsById(id)){
+            UsuarioEntity usuarioEntity = usuarioModelMappers.fromDomainModel(usuarioUpdate);
+            UsuarioEntity updateUsuarioEntity = jpaUsuarioRepository.save(usuarioEntity);
+            return Optional.of(usuarioModelMappers.toDomainModel(updateUsuarioEntity));
+        }
+        return Optional.empty();
     }
 }

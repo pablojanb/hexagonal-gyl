@@ -6,7 +6,7 @@ import com.example.finca_hexagonal.domain.ports.out.PermisoModelPort;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreatePermisoUseCaseImpl implements CreatePermisoUseCase{
+public class CreatePermisoUseCaseImpl implements CreatePermisoUseCase {
 
     private final PermisoModelPort permisoModelPort;
 

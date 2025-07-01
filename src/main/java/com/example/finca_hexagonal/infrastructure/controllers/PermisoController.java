@@ -1,40 +1,53 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.dto.permiso.PermisoRequestDTO;
-import com.example.finca_hexagonal.application.dto.permiso.PermisoResponseDTO;
-import com.example.finca_hexagonal.application.services.permiso.IPermisoService;
+import com.example.finca_hexagonal.application.services.Permiso.impl.PermisoModelService;
+import com.example.finca_hexagonal.domain.models.Permiso;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/permiso")
+@RequestMapping("/api/permisos")
 public class PermisoController {
 
-    private IPermisoService permisoService;
+    private final PermisoModelService permisoModelService;
 
-    public PermisoController(IPermisoService permisoService) {
-        this.permisoService = permisoService;
+    public PermisoController(PermisoModelService permisoModelService) {
+        this.permisoModelService = permisoModelService;
     }
 
-    @GetMapping("/find/all")
-    public ResponseEntity<List<PermisoResponseDTO>> findAllPermiso(){
-        return ResponseEntity.ok(permisoService.findAll());
+    @PostMapping
+    public ResponseEntity<Permiso> createPermiso(@RequestBody Permiso permiso){
+        return new ResponseEntity<>(permisoModelService.createPermiso(permiso), HttpStatus.CREATED);
     }
 
-    @GetMapping("/find/id/{id}")
-    public ResponseEntity<PermisoResponseDTO> findPermisoById(@PathVariable Long id){
-        return ResponseEntity.ok(permisoService.findById(id));
+    @GetMapping("/getAllPermisos")
+    public ResponseEntity<List<Permiso>> getAllPermisos(){
+        return new ResponseEntity<>(permisoModelService.getAllPermisos(), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<PermisoResponseDTO> createPermiso(@RequestBody PermisoRequestDTO  permisoRequestDTO){
-        return ResponseEntity.ok(permisoService.create(permisoRequestDTO));
+    @GetMapping("/getPermisoById/{permisoId}")
+    public ResponseEntity<Permiso> getPermisoById(@PathVariable Long permisoId){
+        return permisoModelService.getPermiso(permisoId)
+                .map(permiso -> new ResponseEntity<>(permiso, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<PermisoResponseDTO> deleteById(@PathVariable Long id){
-        return ResponseEntity.ok(permisoService.deleteById(id));
+    @PutMapping("/updatePermiso/{permisoId}")
+    public ResponseEntity<Permiso> updatePermiso(@PathVariable Long permisoId,
+                                                 @RequestBody Permiso permisoUpdate){
+        return permisoModelService.updatePermiso(permisoId, permisoUpdate)
+                .map(permiso -> new ResponseEntity<>(permiso, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/deletePermisoById/{permisoId}")
+    public ResponseEntity<Void> deletePermisoById(@PathVariable Long permisoId){
+        if (permisoModelService.deletePermiso(permisoId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
