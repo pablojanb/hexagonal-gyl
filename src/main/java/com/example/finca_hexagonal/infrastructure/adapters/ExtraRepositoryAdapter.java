@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ExtraRepositoryAdapter implements ExtraModelPort {
@@ -38,12 +39,14 @@ public class ExtraRepositoryAdapter implements ExtraModelPort {
 
     @Override
     public List<Extra> findAll() {
-        return List.of();
+        return jpaExtraRepository.findAll().stream()
+                .map(extraModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Extra> findById(Long id) {
-        return Optional.empty();
+        return jpaExtraRepository.findById(id).map(extraModelMappers::toDomainModel);
     }
 
     @Override

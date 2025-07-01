@@ -6,6 +6,8 @@ import com.example.finca_hexagonal.application.dto.extras.ExtraResponseDTO;
 import com.example.finca_hexagonal.application.mappers.ExtraDTOMapper;
 import com.example.finca_hexagonal.application.services.Extra.ExtraService;
 import com.example.finca_hexagonal.domain.models.Extra;
+import com.example.finca_hexagonal.domain.models.Finca;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,12 +38,15 @@ public class ExtraServiceImpl implements ExtraService {
 
     @Override
     public List<ExtraResponseDTO> getAllExtras() {
-        return List.of();
+        List<Extra> extras = extraModelService.getAllExtras();
+        return extraDTOMapper.toDtoList(extras);
     }
 
     @Override
     public Optional<ExtraResponseDTO> getExtraById(Long id) {
-        return Optional.empty();
+        Extra extra = extraModelService.getExtra(id)
+                .orElseThrow(() -> new EntityNotFoundException("Extra no encontrado: " + id));
+        return Optional.of(extraDTOMapper.toDto(extra));
     }
 
     @Override
