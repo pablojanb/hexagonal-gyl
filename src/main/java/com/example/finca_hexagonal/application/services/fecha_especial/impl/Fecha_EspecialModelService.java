@@ -46,4 +46,9 @@ public class Fecha_EspecialModelService implements CreateFecha_EspecialUseCase, 
     public Fecha_Especial update(Fecha_Especial fecha_Especial) {
         return null;
     }
+
+    @Override
+    public Fecha_Especial create(Fecha_Especial fecha_Especial) {
+        return null;
+    }
 }
