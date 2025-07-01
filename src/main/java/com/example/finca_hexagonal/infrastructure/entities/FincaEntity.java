@@ -33,6 +33,9 @@ public class FincaEntity {
     @OneToMany(mappedBy = "finca")
     private List<ReservaEntity> reservasFinca;
 
+    @ManyToMany
+    private List<ExtraEntity> extras;
+
     public FincaEntity() {
     }
 

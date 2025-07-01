@@ -1,5 +1,7 @@
 package com.example.finca_hexagonal.application.dto.reservas;
 
+
+import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,12 +16,11 @@ public class ReservaResponseDTO {
     private LocalTime desde;
     private LocalTime hasta;
     private BigDecimal total;
-    private Boolean estadoReserva;
+    private EstadoReserva estadoReserva;
 
-    public ReservaResponseDTO() {
-    }
+    public ReservaResponseDTO() {}
 
-    public ReservaResponseDTO(Long id, Long idFinca, String finca, Long idUsuario, String usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, Boolean estadoReserva) {
+    public ReservaResponseDTO(Long id, Long idFinca, String finca, Long idUsuario, String usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
         this.id = id;
         this.idFinca = idFinca;
         this.finca = finca;
@@ -104,11 +105,11 @@ public class ReservaResponseDTO {
         this.total = total;
     }
 
-    public Boolean getEstadoReserva() {
+    public EstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
 
-    public void setEstadoReserva(Boolean estadoReserva) {
+    public void setEstadoReserva(EstadoReserva estadoReserva) {
         this.estadoReserva = estadoReserva;
     }
 }

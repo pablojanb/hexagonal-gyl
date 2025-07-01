@@ -1,6 +1,9 @@
+
 package com.example.finca_hexagonal.infrastructure.entities;
 
+import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,24 +13,28 @@ import java.time.LocalTime;
 public class ReservaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "fincaId")
+    @JoinColumn(name = "finca_id")
     private FincaEntity finca;
+
     @ManyToOne
-    @JoinColumn(name = "usuarioId")
+    @JoinColumn(name = "usuario_id")
     private UsuarioEntity usuario;
+
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
     private BigDecimal total;
-    private Boolean estadoReserva;
 
-    public ReservaEntity() {
-    }
+    @Enumerated(EnumType.STRING)
+    private EstadoReserva estadoReserva;
 
-    public ReservaEntity(Long id, FincaEntity finca, UsuarioEntity usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, Boolean estadoReserva) {
+    public ReservaEntity() {}
+
+    public ReservaEntity(Long id, FincaEntity finca, UsuarioEntity usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
         this.id = id;
         this.finca = finca;
         this.usuario = usuario;
@@ -94,11 +101,11 @@ public class ReservaEntity {
         this.total = total;
     }
 
-    public Boolean getEstadoReserva() {
+    public EstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
 
-    public void setEstadoReserva(Boolean estadoReserva) {
+    public void setEstadoReserva(EstadoReserva estadoReserva) {
         this.estadoReserva = estadoReserva;
     }
 }
