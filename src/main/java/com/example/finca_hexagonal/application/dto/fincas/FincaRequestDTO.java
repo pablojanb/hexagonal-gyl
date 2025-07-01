@@ -3,21 +3,18 @@ package com.example.finca_hexagonal.application.dto.fincas;
 
 import java.math.BigDecimal;
 
-
 public class FincaRequestDTO {
     private String nombre;
-    private Long idPropietario;
-    private Long idDetalleFinca;
+    private Long idUsuario;
     private Long idDireccion;
     private BigDecimal tarifaHora;
 
     public FincaRequestDTO() {
     }
 
-    public FincaRequestDTO(String nombre, Long idPropietario, Long idDetalleFinca, Long idDireccion, BigDecimal tarifaHora) {
+    public FincaRequestDTO(String nombre, Long idUsuario, Long idDireccion, BigDecimal tarifaHora) {
         this.nombre = nombre;
-        this.idPropietario = idPropietario;
-        this.idDetalleFinca = idDetalleFinca;
+        this.idUsuario = idUsuario;
         this.idDireccion = idDireccion;
         this.tarifaHora = tarifaHora;
     }
@@ -30,20 +27,12 @@ public class FincaRequestDTO {
         this.nombre = nombre;
     }
 
-    public Long getIdPropietario() {
-        return idPropietario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdPropietario(Long idPropietario) {
-        this.idPropietario = idPropietario;
-    }
-
-    public Long getIdDetalleFinca() {
-        return idDetalleFinca;
-    }
-
-    public void setIdDetalleFinca(Long idDetalleFinca) {
-        this.idDetalleFinca = idDetalleFinca;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public Long getIdDireccion() {
@@ -62,4 +51,3 @@ public class FincaRequestDTO {
         this.tarifaHora = tarifaHora;
     }
 }
-

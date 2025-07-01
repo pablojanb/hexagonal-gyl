@@ -36,6 +36,17 @@ public class HorarioController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/findAllHorariosByFincaId/{fincaId}")
+    public ResponseEntity<List<HorarioResponseDTO>> findAllHorariosByFincaId(@PathVariable Long fincaId){
+        return new ResponseEntity<>(horarioService.getAllHorariosByFincaId(fincaId), HttpStatus.OK);
+    }
+
+    @GetMapping("/findByFincaIdAndDiaSemana/{fincaId}/{diaSemana}")
+    public ResponseEntity<List<HorarioResponseDTO>> findByFincaIdAndDiaSemana(@PathVariable Long fincaId,
+                                                                              @PathVariable String diaSemana){
+        return new ResponseEntity<>(horarioService.getAllHorariosByFincaIdAndDayOfWeek(fincaId, diaSemana), HttpStatus.OK);
+    }
+
     @PutMapping("/updateHorario/{horarioId}")
     public ResponseEntity<HorarioResponseDTO> updateHorario(@PathVariable Long horarioId,
                                                  @RequestBody HorarioRequestDTO horarioUpdate){

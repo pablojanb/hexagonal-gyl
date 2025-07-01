@@ -21,6 +21,16 @@ public class GetHorarioUseCaseImpl implements GetHorarioUseCase {
     }
 
     @Override
+    public List<Horario> getAllHorariosByFincaId(Long id) {
+        return horarioModelPort.findAllHorariosByFincaId(id);
+    }
+
+    @Override
+    public List<Horario> getAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
+        return horarioModelPort.findAllHorariosByFincaIdAndDayOfWeek(id, dayOfWeek);
+    }
+
+    @Override
     public Optional<Horario> getHorarioById(Long horarioId) {
         return horarioModelPort.findById(horarioId);
     }

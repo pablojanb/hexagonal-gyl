@@ -1,8 +1,5 @@
-package com.example.finca_hexagonal.domain.ports.in.Reserva;
-
-import com.example.finca_hexagonal.domain.models.Reserva;
+package com.example.finca_hexagonal.domain.ports.in.reserva;
 
 public interface DeleteReservaUseCase {
-    Boolean delete(Long id);
-    Reserva logicalDeletion(Reserva reserva);
+    boolean deleteReserva(Long reservaId);
 }

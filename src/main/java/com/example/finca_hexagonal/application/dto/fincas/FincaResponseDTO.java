@@ -1,25 +1,20 @@
 package com.example.finca_hexagonal.application.dto.fincas;
 
-import com.example.finca_hexagonal.domain.models.Fecha_Especial;
-import com.example.finca_hexagonal.domain.models.Horario;
-import com.example.finca_hexagonal.domain.models.ImagenFinca;
-import com.example.finca_hexagonal.domain.models.Reserva;
-
+import com.example.finca_hexagonal.domain.models.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-
 public class FincaResponseDTO {
     private Long id;
     private String nombre;
-    private Long idPropietario;
-    private String propietario;
+    private Long idUsuario;
+    private String usuario;
     private Long idDireccion;
     private String direccion;
     private BigDecimal tarifaHora;
-    private Long idDetalle;
 
+    private List<DetalleFinca> detalles;
     private List<Horario> horarios;
     private List<ImagenFinca> imagenesFinca;
     private List<Fecha_Especial> fechasEspeciales;
@@ -28,15 +23,15 @@ public class FincaResponseDTO {
     public FincaResponseDTO() {
     }
 
-    public FincaResponseDTO(Long id, String nombre, Long idPropietario, String propietario, Long idDireccion, String direccion, BigDecimal tarifaHora, Long idDetalle, List<Horario> horarios, List<ImagenFinca> imagenesFinca, List<Fecha_Especial> fechasEspeciales, List<Reserva> reservasFinca) {
+    public FincaResponseDTO(Long id, String nombre, Long idUsuario, String usuario, Long idDireccion, String direccion, BigDecimal tarifaHora, List<DetalleFinca> detalles, List<Horario> horarios, List<ImagenFinca> imagenesFinca, List<Fecha_Especial> fechasEspeciales, List<Reserva> reservasFinca) {
         this.id = id;
         this.nombre = nombre;
-        this.idPropietario = idPropietario;
-        this.propietario = propietario;
+        this.idUsuario = idUsuario;
+        this.usuario = usuario;
         this.idDireccion = idDireccion;
         this.direccion = direccion;
         this.tarifaHora = tarifaHora;
-        this.idDetalle = idDetalle;
+        this.detalles = detalles;
         this.horarios = horarios;
         this.imagenesFinca = imagenesFinca;
         this.fechasEspeciales = fechasEspeciales;
@@ -59,20 +54,20 @@ public class FincaResponseDTO {
         this.nombre = nombre;
     }
 
-    public Long getIdPropietario() {
-        return idPropietario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdPropietario(Long idPropietario) {
-        this.idPropietario = idPropietario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getPropietario() {
-        return propietario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setPropietario(String propietario) {
-        this.propietario = propietario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public Long getIdDireccion() {
@@ -99,12 +94,12 @@ public class FincaResponseDTO {
         this.tarifaHora = tarifaHora;
     }
 
-    public Long getIdDetalle() {
-        return idDetalle;
+    public List<DetalleFinca> getDetalles() {
+        return detalles;
     }
 
-    public void setIdDetalle(Long idDetalle) {
-        this.idDetalle = idDetalle;
+    public void setDetalles(List<DetalleFinca> detalles) {
+        this.detalles = detalles;
     }
 
     public List<Horario> getHorarios() {

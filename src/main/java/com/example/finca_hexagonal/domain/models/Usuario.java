@@ -1,34 +1,41 @@
 package com.example.finca_hexagonal.domain.models;
 
-import java.util.Set;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario {
-
     private Long id;
-    private String username;
+    private String nombre;
+    private String apellido;
+    private String dni;
+    private String telefono;
     private String email;
+    private String emailAlternativo;
+    private String username;
     private String password;
+    private LocalDate fechaNac;
+    private boolean cuentaActiva;
+    private List<Rol> roles = new ArrayList<>();
 
-    private boolean enabled;
-    private boolean accountNotExpired;
-    private boolean credentialsNotExpired;
-    private boolean accountNotLocked;
-
-    private Set<Rol> rolSet;
-
-    public Usuario(Long id, String username, String email, String password, boolean enabled, boolean accountNotExpired, boolean credentialsNotExpired, boolean accountNotLocked, Set<Rol> rolSet) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.enabled = enabled;
-        this.accountNotExpired = accountNotExpired;
-        this.credentialsNotExpired = credentialsNotExpired;
-        this.accountNotLocked = accountNotLocked;
-        this.rolSet = rolSet;
+    public Usuario() {
     }
 
-    public Usuario() {}
+    public Usuario(Long id, String nombre, String apellido, String dni, String telefono, String email, String emailAlternativo, String username, String password, LocalDate fechaNac, boolean cuentaActiva, List<Rol> roles) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+        this.emailAlternativo = emailAlternativo;
+        this.username = username;
+        this.password = password;
+        this.fechaNac = fechaNac;
+        this.cuentaActiva = cuentaActiva;
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -38,12 +45,36 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEmail() {
@@ -54,6 +85,22 @@ public class Usuario {
         this.email = email;
     }
 
+    public String getEmailAlternativo() {
+        return emailAlternativo;
+    }
+
+    public void setEmailAlternativo(String emailAlternativo) {
+        this.emailAlternativo = emailAlternativo;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -62,43 +109,27 @@ public class Usuario {
         this.password = password;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public LocalDate getFechaNac() {
+        return fechaNac;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setFechaNac(LocalDate fechaNac) {
+        this.fechaNac = fechaNac;
     }
 
-    public boolean isAccountNotExpired() {
-        return accountNotExpired;
+    public boolean isCuentaActiva() {
+        return cuentaActiva;
     }
 
-    public void setAccountNotExpired(boolean accountNotExpired) {
-        this.accountNotExpired = accountNotExpired;
+    public void setCuentaActiva(boolean cuentaActiva) {
+        this.cuentaActiva = cuentaActiva;
     }
 
-    public boolean isCredentialsNotExpired() {
-        return credentialsNotExpired;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setCredentialsNotExpired(boolean credentialsNotExpired) {
-        this.credentialsNotExpired = credentialsNotExpired;
-    }
-
-    public boolean isAccountNotLocked() {
-        return accountNotLocked;
-    }
-
-    public void setAccountNotLocked(boolean accountNotLocked) {
-        this.accountNotLocked = accountNotLocked;
-    }
-
-    public Set<Rol> getRolSet() {
-        return rolSet;
-    }
-
-    public void setRolSet(Set<Rol> rolSet) {
-        this.rolSet = rolSet;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }

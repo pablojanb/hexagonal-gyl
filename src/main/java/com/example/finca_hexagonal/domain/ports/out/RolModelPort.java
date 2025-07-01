@@ -6,18 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RolModelPort {
-
     Rol save(Rol rol);
+
+    boolean deleteById(Long id);
+
+    Optional<Rol> updateById(Long id, Rol rolUpdate);
 
     List<Rol> findAll();
 
-    Rol findById(Long id);
+    Optional<Rol> findById(Long id);
 
-    Rol findByName(String nombre);
-
-    Rol update(Rol rol);
-
-    Boolean deleteById(Long id);
-
-    Boolean logicalDeletion(Rol rol);
 }

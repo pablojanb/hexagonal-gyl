@@ -3,6 +3,7 @@ package com.example.finca_hexagonal.application.dto.horarios;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 
+
 public class HorarioRequestDTO {
     private Long idFinca;
     private LocalTime horaInicio;

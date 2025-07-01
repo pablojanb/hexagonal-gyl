@@ -1,29 +1,28 @@
 package com.example.finca_hexagonal.application.dto.fincas;
 
+
 import java.math.BigDecimal;
 
 public class FincaResponseDTOSimplified {
     private Long id;
     private String nombre;
-    private Long idPropietario;
-    private String propietario;
+    private Long idUsuario;
+    private String usuario;
     private Long idDireccion;
     private String direccion;
     private BigDecimal tarifaHora;
-    private Long idDetalle;
 
     public FincaResponseDTOSimplified() {
     }
 
-    public FincaResponseDTOSimplified(Long id, String nombre, Long idPropietario, String propietario, Long idDireccion, String direccion, BigDecimal tarifaHora, Long idDetalle) {
+    public FincaResponseDTOSimplified(Long id, String nombre, Long idUsuario, String usuario, Long idDireccion, String direccion, BigDecimal tarifaHora) {
         this.id = id;
         this.nombre = nombre;
-        this.idPropietario = idPropietario;
-        this.propietario = propietario;
+        this.idUsuario = idUsuario;
+        this.usuario = usuario;
         this.idDireccion = idDireccion;
         this.direccion = direccion;
         this.tarifaHora = tarifaHora;
-        this.idDetalle = idDetalle;
     }
 
     public Long getId() {
@@ -42,20 +41,20 @@ public class FincaResponseDTOSimplified {
         this.nombre = nombre;
     }
 
-    public Long getIdPropietario() {
-        return idPropietario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdPropietario(Long idPropietario) {
-        this.idPropietario = idPropietario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getPropietario() {
-        return propietario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setPropietario(String propietario) {
-        this.propietario = propietario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public Long getIdDireccion() {
@@ -80,13 +79,5 @@ public class FincaResponseDTOSimplified {
 
     public void setTarifaHora(BigDecimal tarifaHora) {
         this.tarifaHora = tarifaHora;
-    }
-
-    public Long getIdDetalle() {
-        return idDetalle;
-    }
-
-    public void setIdDetalle(Long idDetalle) {
-        this.idDetalle = idDetalle;
     }
 }

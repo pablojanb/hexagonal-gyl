@@ -15,7 +15,7 @@ public class CreateRolUseCaseImpl implements CreateRolUseCase {
     }
 
     @Override
-    public Rol create(Rol rol) {
+    public Rol createRol(Rol rol) {
         return rolModelPort.save(rol);
     }
 }

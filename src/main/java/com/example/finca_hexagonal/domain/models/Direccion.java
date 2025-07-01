@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.domain.models;
 
 
 public class Direccion {
-    private Long id_direccion;
+    private Long id;
     private String calle;
     private int altura;
     private String ciudad;
@@ -10,7 +10,7 @@ public class Direccion {
     private String aclaracion;
 
     public Direccion(Long id_direccion, String calle, String ciudad, int altura, String provincia, String aclaracion) {
-        this.id_direccion = id_direccion;
+        this.id = id_direccion;
         this.calle = calle;
         this.ciudad = ciudad;
         this.altura = altura;
@@ -21,12 +21,12 @@ public class Direccion {
     public Direccion() {
     }
 
-    public Long getId_direccion() {
-        return id_direccion;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_direccion(Long id_direccion) {
-        this.id_direccion = id_direccion;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCalle() {
@@ -67,9 +67,7 @@ public class Direccion {
 
     public void setAclaracion(String aclaracion) {
         this.aclaracion = aclaracion;
-
     }
-
 }
 
 

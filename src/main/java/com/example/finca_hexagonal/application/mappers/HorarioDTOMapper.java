@@ -2,29 +2,28 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.horarios.HorarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.horarios.HorarioResponseDTO;
-
 import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Horario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class HorarioDTOMapper {
 
-    private final FincaModelService fincaModelService;
+    @Autowired
+    private FincaModelService fincaModelService;
 
-    public HorarioDTOMapper(FincaModelService fincaModelService) {
-        this.fincaModelService = fincaModelService;
-    }
 
-    @Mapping(source = "id_horario", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
+    @Mapping(source = "idFinca", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
     public abstract Horario toModel(HorarioRequestDTO horarioDto);
 
-    @Mapping(source = "finca.id", target = "id_finca")
+
+    @Mapping(source = "finca.id", target = "idFinca")
     @Mapping(source = "finca.nombre", target = "finca")
     public abstract HorarioResponseDTO toDto(Horario horario);
 

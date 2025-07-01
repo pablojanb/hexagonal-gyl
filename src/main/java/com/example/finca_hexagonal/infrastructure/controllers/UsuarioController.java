@@ -1,46 +1,55 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequestDTO;
+import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequstDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
-import com.example.finca_hexagonal.application.services.usuario.IUsuarioService;
+import com.example.finca_hexagonal.application.services.Usuario.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
-    private final IUsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
-    public UsuarioController(IUsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/find/username/{username}")
-    public ResponseEntity<UsuarioResponseDTO> findUsuariolByUsername(@PathVariable String username){
-        return ResponseEntity.ok(usuarioService.findByUsername(username));
+
+    @PostMapping
+    public ResponseEntity<UsuarioResponseDTO> createUsuario(@RequestBody UsuarioRequstDTO usuarioDTO){
+        return new ResponseEntity<>(usuarioService.createUsuario(usuarioDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/find/id/{id}")
-    public ResponseEntity<UsuarioResponseDTO> findUsuarioById(@PathVariable Long id){
-        return ResponseEntity.ok(usuarioService.findById(id));
+    @GetMapping("/getAllUsuarios")
+    public ResponseEntity<List<UsuarioResponseDTO>> getAllUsuarios(){
+        return new ResponseEntity<>(usuarioService.getAllUsuarios(), HttpStatus.OK);
     }
 
-    @GetMapping("/find/all")
-    public ResponseEntity<List<UsuarioResponseDTO>> findAll(){
-        return ResponseEntity.ok(usuarioService.findAll());
+    @GetMapping("/getUsuarioById/{usuarioId}")
+    public ResponseEntity<UsuarioResponseDTO> getUsuarioById(@PathVariable Long usuarioId){
+        return usuarioService.getUsuarioById(usuarioId)
+                .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<UsuarioResponseDTO> deleteById(@PathVariable Long id){
-        return ResponseEntity.ok(usuarioService.deleteById(id));
+    @PutMapping("/updateUsuario/{usuarioId}")
+    public ResponseEntity<UsuarioResponseDTO> updateFinca(@PathVariable Long usuarioId,
+                                                                  @RequestBody UsuarioRequstDTO usuarioUpdate){
+        return usuarioService.updateById(usuarioId, usuarioUpdate)
+                .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody UsuarioRequestDTO usuarioRequestDTO){
-        return ResponseEntity.ok(usuarioService.create(usuarioRequestDTO));
+    @DeleteMapping("/deleteUsuarioById/{usuarioId}")
+    public ResponseEntity<Void> deleteUsuarioById(@PathVariable Long usuarioId){
+        if (usuarioService.deleteUsuarioById(usuarioId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 }
