@@ -3,6 +3,7 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Extra;
 import com.example.finca_hexagonal.domain.ports.out.ExtraModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.ExtraEntity;
+import com.example.finca_hexagonal.infrastructure.entities.FincaEntity;
 import com.example.finca_hexagonal.infrastructure.mappers.ExtraModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaExtraRepository;
 import org.springframework.stereotype.Component;
@@ -51,6 +52,11 @@ public class ExtraRepositoryAdapter implements ExtraModelPort {
 
     @Override
     public Optional<Extra> updateById(Long id, Extra extraUpdate) {
+        if (jpaExtraRepository.existsById(id)){
+            ExtraEntity extraEntity = extraModelMappers.fromDomainModel(extraUpdate);
+            ExtraEntity updateExtraEntity = jpaExtraRepository.save(extraEntity);
+            return Optional.of(extraModelMappers.toDomainModel(updateExtraEntity));
+        }
         return Optional.empty();
     }
 }

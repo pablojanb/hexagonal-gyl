@@ -38,6 +38,14 @@ public class ExtraController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @PutMapping("/updateExtra/{extraId}")
+    public ResponseEntity<ExtraResponseDTO> updateExtra(@PathVariable Long extraId,
+                                                        @RequestBody ExtraRequestDTO extraUpdate){
+        return extraService.updateExtraById(extraId, extraUpdate)
+                .map(extra -> new ResponseEntity<>(extra, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @DeleteMapping("/deleteExtraById/{extraId}")
     public ResponseEntity<Void> deleteExtraById(@PathVariable Long extraId){
         if (extraService.deleteExtraById(extraId)){

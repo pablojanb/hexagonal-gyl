@@ -51,6 +51,13 @@ public class ExtraServiceImpl implements ExtraService {
 
     @Override
     public Optional<ExtraResponseDTO> updateExtraById(Long id, ExtraRequestDTO extraUpdateDto) {
-        return Optional.empty();
+        Extra extraToUpdate = extraModelService.getExtra(id)
+                .orElseThrow(() -> new EntityNotFoundException("Extra no encontrado: " + id));
+        Extra newData = extraDTOMapper.toModel(extraUpdateDto);
+        extraToUpdate.setNombre(newData.getNombre());
+        Extra extraUpdated = extraModelService.updateExtra(id, extraToUpdate)
+                .orElseThrow(() -> new EntityNotFoundException("Extra no encontrado: " + id));
+
+        return Optional.of(extraDTOMapper.toDto(extraUpdated));
     }
 }
