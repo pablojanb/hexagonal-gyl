@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.domain.ports.in.rol.UpdateRolUseCase;
 import com.example.finca_hexagonal.domain.ports.out.RolModelPort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
 @Service
 public class UpdateRolUseCaseImpl implements UpdateRolUseCase {
@@ -16,7 +17,7 @@ public class UpdateRolUseCaseImpl implements UpdateRolUseCase {
     }
 
     @Override
-    public Rol update(Rol rol) {
-        return rolModelPort.update(rol);
+    public Optional<Rol> updateRol(Long id, Rol rolUpdate) {
+        return rolModelPort.updateById(id, rolUpdate);
     }
 }

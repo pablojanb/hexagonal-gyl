@@ -1,50 +1,50 @@
-package domain.models;
+package com.example.finca_hexagonal.domain.models;
 
 public class Contacto {
-    private int id;
+    private Long id;
+    private String telefono;
     private String email;
-    private int telefono;
-    private String email_alternativo;
+    private String emailAlternativo;
 
-    public Contacto(int id, String email, int telefono, String email_alternativo){
+    public Contacto() {
+    }
+
+    public Contacto(Long id, String telefono, String email, String emailAlternativo) {
         this.id = id;
-        this.email = email;
         this.telefono = telefono;
-        this.email_alternativo = email_alternativo;
-    }
-    public Contacto(){
-
+        this.email = email;
+        this.emailAlternativo = emailAlternativo;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public String getEmail_alternativo() {
-        return email_alternativo;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public String getEmailAlternativo() {
+        return emailAlternativo;
     }
 
-    public void setEmail_alternativo(String email_alternativo) {
-        this.email_alternativo = email_alternativo;
+    public void setEmailAlternativo(String emailAlternativo) {
+        this.emailAlternativo = emailAlternativo;
     }
 }

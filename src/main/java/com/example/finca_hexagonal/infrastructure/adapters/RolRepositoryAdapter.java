@@ -3,67 +3,61 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Rol;
 import com.example.finca_hexagonal.domain.ports.out.RolModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.RolEntity;
-import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
-import com.example.finca_hexagonal.infrastructure.mappers.RolMappers;
+import com.example.finca_hexagonal.infrastructure.mappers.RolModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaRolRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-
-@Service
+@Component
 public class RolRepositoryAdapter implements RolModelPort {
-
     private final JpaRolRepository jpaRolRepository;
-    private final RolMappers rolMappers;
+    private final RolModelMappers rolModelMappers;
 
-    public RolRepositoryAdapter(JpaRolRepository jpaRolRepository, RolMappers rolMappers) {
+    public RolRepositoryAdapter(JpaRolRepository jpaRolRepository, RolModelMappers rolModelMappers) {
         this.jpaRolRepository = jpaRolRepository;
-        this.rolMappers = rolMappers;
+        this.rolModelMappers = rolModelMappers;
     }
 
     @Override
     public Rol save(Rol rol) {
-        RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
-        return rolMappers.toModel(rolEntity);
+        RolEntity rolEntity = rolModelMappers.fromDomainModel(rol);
+        RolEntity newRolEntity = jpaRolRepository.save(rolEntity);
+        return rolModelMappers.toDomainModel(newRolEntity);
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        if (jpaRolRepository.existsById(id)){
+            jpaRolRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Optional<Rol> updateById(Long id, Rol rolUpdate) {
+        if (jpaRolRepository.existsById(id)){
+            RolEntity rolEntity = rolModelMappers.fromDomainModel(rolUpdate);
+            rolEntity.setId(id);
+            RolEntity updateRolEntity = jpaRolRepository.save(rolEntity);
+            return Optional.of(rolModelMappers.toDomainModel(updateRolEntity));
+        }
+        return Optional.empty();
     }
 
     @Override
     public List<Rol> findAll() {
-        return rolMappers.toModelList(jpaRolRepository.findAll());
+        return jpaRolRepository.findAll().stream()
+                .map(rolModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Rol findById(Long id) {
-        RolEntity rolEntity = jpaRolRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Error, rol con id: "+id+" no encontrado"));
-        return rolMappers.toModel(rolEntity);
+    public Optional<Rol> findById(Long id) {
+        return jpaRolRepository.findById(id).map(rolModelMappers::toDomainModel);
     }
 
-    @Override
-    public Rol findByName(String nombre) {
-        RolEntity rolEntity = jpaRolRepository.findRolEntityByNombre(nombre)
-                .orElseThrow(()-> new EntityNotFoundException("Error, rol con nombre: "+nombre+" no encontrado"));
-
-        return rolMappers.toModel(rolEntity);
-    }
-
-    @Override
-    public Rol update(Rol rol) {
-        RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
-        return rolMappers.toModel(rolEntity);
-    }
-
-    @Override
-    public Boolean deleteById(Long id) {
-        Rol rol = findById(id);
-        jpaRolRepository.delete(rolMappers.toEntity(rol));
-        return true;
-    }
-
-    @Override
-    public Boolean logicalDeletion(Rol rol) {
-        RolEntity rolEntity = jpaRolRepository.save(rolMappers.toEntity(rol));
-        return true;
-    }
 }

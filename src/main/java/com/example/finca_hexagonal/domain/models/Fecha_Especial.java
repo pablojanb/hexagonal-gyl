@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 
 public class Fecha_Especial {
-    private Long id_fecha;
+    private Long id;
     private LocalDateTime fecha;
     private LocalDateTime dia_semana;
     private LocalDateTime hora_inicio;
@@ -18,10 +18,8 @@ public class Fecha_Especial {
     public Fecha_Especial() {
     }
 
-    public Fecha_Especial(Long id_fecha, LocalDateTime fecha, LocalDateTime dia_semana, LocalDateTime hora_inicio
-            , LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo, Finca finca) {
-
-        this.id_fecha = id_fecha;
+    public Fecha_Especial(Long id, LocalDateTime fecha, LocalDateTime dia_semana, LocalDateTime hora_inicio, LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo, Finca finca) {
+        this.id = id;
         this.fecha = fecha;
         this.dia_semana = dia_semana;
         this.hora_inicio = hora_inicio;
@@ -32,12 +30,12 @@ public class Fecha_Especial {
         this.finca = finca;
     }
 
-    public Long getId_fecha() {
-        return id_fecha;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_fecha(Long id_fecha) {
-        this.id_fecha = id_fecha;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getFecha() {
@@ -56,20 +54,20 @@ public class Fecha_Especial {
         this.dia_semana = dia_semana;
     }
 
-    public LocalDateTime getHora_fin() {
-        return hora_fin;
-    }
-
-    public void setHora_fin(LocalDateTime hora_fin) {
-        this.hora_fin = hora_fin;
-    }
-
     public LocalDateTime getHora_inicio() {
         return hora_inicio;
     }
 
     public void setHora_inicio(LocalDateTime hora_inicio) {
         this.hora_inicio = hora_inicio;
+    }
+
+    public LocalDateTime getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(LocalDateTime hora_fin) {
+        this.hora_fin = hora_fin;
     }
 
     public BigDecimal getDescuento() {
@@ -96,13 +94,11 @@ public class Fecha_Especial {
         this.motivo = motivo;
     }
 
-    public Finca getFinca_id() {
+    public Finca getFinca() {
         return finca;
     }
 
-    public void setFinca_id(Finca finca) {
+    public void setFinca(Finca finca) {
         this.finca = finca;
     }
-
-
 }

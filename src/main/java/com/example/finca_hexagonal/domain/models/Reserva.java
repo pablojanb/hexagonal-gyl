@@ -3,12 +3,11 @@ package com.example.finca_hexagonal.domain.models;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import com.example.finca_hexagonal.domain.models.Cliente;
 
 public class Reserva {
     private Long id;
     private Finca finca;
-    private Cliente cliente;
+    private Usuario usuario;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
@@ -20,10 +19,10 @@ public class Reserva {
 
     }
 
-    public Reserva(Long id, Finca finca, Cliente cliente, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, Boolean estadoReserva) {
+    public Reserva(Long id, Finca finca, Usuario usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, Boolean estadoReserva) {
         this.id = id;
         this.finca = finca;
-        this.cliente = cliente;
+        this.usuario = usuario;
         this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
@@ -47,12 +46,12 @@ public class Reserva {
         this.finca = finca;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public LocalDate getFecha() {
