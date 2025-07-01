@@ -1,7 +1,6 @@
 package com.example.finca_hexagonal.application.usecases.reserva;
 
-import com.example.finca_hexagonal.domain.models.Reserva;
-import com.example.finca_hexagonal.domain.ports.in.Reserva.DeleteReservaUseCase;
+import com.example.finca_hexagonal.domain.ports.in.reserva.DeleteReservaUseCase;
 import com.example.finca_hexagonal.domain.ports.out.ReservaModelPort;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +14,7 @@ public class DeleteReservaUseCaseImpl implements DeleteReservaUseCase {
     }
 
     @Override
-    public Boolean delete(Long id) {
-        return reservaModelPort.delete(id);
+    public boolean deleteReserva(Long reservaId) {
+        return reservaModelPort.deleteById(reservaId);
     }
-
-    @Override
-    public Reserva logicalDeletion(Reserva reserva) {
-        return reservaModelPort.logicalDeletion(reserva);
-    }
-
-
 }

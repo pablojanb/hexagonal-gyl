@@ -3,71 +3,57 @@ package com.example.finca_hexagonal.application.mappers;
 import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
-import com.example.finca_hexagonal.domain.models.Direccion;
-import com.example.finca_hexagonal.domain.models.Finca;
-import com.example.finca_hexagonal.domain.models.Propietario;
+import com.example.finca_hexagonal.application.services.Direccion.DireccionModelService;
+import com.example.finca_hexagonal.application.services.Usuario.impl.UsuarioModelService;
+import com.example.finca_hexagonal.domain.models.*;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-//@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring")
 public abstract class FincaDTOMapper {
 
-    /*
-    private final PropietarioModelService propietarioModelService;
-    private final DireccionModelService direccionModelService;
-    private final DetalleModelService detalleModelService;
+    @Autowired
+    private UsuarioModelService usuarioModelService;
+    @Autowired
+    private DireccionModelService direccionModelService;
 
-    public FincaDTOMapper(PropietarioModelService propietarioModelService, DireccionModelService direccionModelService, DetalleModelService detalleModelService){
-        this.propietarioModelService = propietarioModelService;
-        this.direccionModelService = direccionModelService;
-        this.detalleModelService = detalleModelService;
 
-     */
-
-    @Mapping(source = "id_propietario", target = "propietario", qualifiedByName = "mapPropietarioDtoToPropietario")
-    @Mapping(source = "id_detalleFinca", target = "detalle", qualifiedByName = "mapDetalleDtoTodetalle")
-    @Mapping(source = "id_direccion", target = "direccion", qualifiedByName = "mapDireccionDtodireccion")
+    @Mapping(source = "idUsuario", target = "usuario", qualifiedByName = "mapUsuarioDtoToUsuario")
+    @Mapping(source = "idDireccion", target = "direccion", qualifiedByName = "mapDireccionDtoDireccion")
     public abstract Finca toModel(FincaRequestDTO fincaDto);
 
-    @Mapping(source = "propietario.id", target = "id_propietario")
-    @Mapping(source = "propietario.nombre", target = "propietario")
-    @Mapping(source = "direccion.id", target = "id_direccion")
+    @Mapping(source = "usuario.id", target = "idUsuario")
+    @Mapping(source = "direccion.id", target = "idDireccion")
+    @Mapping(source = "usuario.username", target = "usuario")
     @Mapping(source = "direccion.calle", target = "direccion")
-    @Mapping(source = "detalle.id", target = "id_detalle")
     public abstract FincaResponseDTOSimplified toDtoSimplified(Finca finca);
 
     public abstract List<FincaResponseDTOSimplified> toDtoSimplifiedList(List<Finca> finca);
 
-    @Mapping(source = "propietario.id", target = "id_propietario")
-    @Mapping(source = "detalle.id", target = "id_detalle")
-    @Mapping(source = "direccion.id", target = "id_direccion")
-    @Mapping(source = "propietario.nombre", target = "propietario")
+    @Mapping(source = "usuario.id", target = "idUsuario")
+    @Mapping(source = "direccion.id", target = "idDireccion")
+    @Mapping(source = "usuario.username", target = "usuario")
     @Mapping(source = "direccion.calle", target = "direccion")
     public abstract FincaResponseDTO toDto(Finca finca);
 
 
-/*
-    @Named("mapPropietarioDtoToPropietario")
-    protected Propietario mapPropietarioDtoToPropietario(Long id_propietario) {
-        return propietarioModelService.getById(id_propietario)
-                .orElseThrow(() -> new IllegalArgumentException("Propietario not found: " + id_propietario));
+
+    @Named("mapUsuarioDtoToUsuario")
+    protected Usuario mapUsuarioDtoToUsuario(Long idUsuario) {
+        return usuarioModelService.getById(idUsuario)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + idUsuario));
     }
 
-    @Named("mapDetalleDtoTodetalle")
-    protected Detalle mapDetalleDtoTodetalle(Long id_detalleFinca) {
-        return detalleModelService.getById(id_detalleFinca)
-                .orElseThrow(() -> new IllegalArgumentException("Detalle not found: " + id_detalleFinca));
+    @Named("mapDireccionDtoDireccion")
+    protected Direccion mapDireccionDtoDireccion(Long idDireccion) {
+        return direccionModelService.getById(idDireccion);
     }
 
-    @Named("mapDireccionDtodireccion")
-    protected Direccion mapDireccionDtodireccion(Long id_direccion) {
-        return direccionModelService.getById(id_direccion)
-                .orElseThrow(() -> new IllegalArgumentException("Direccion not found: " + id_direccion));
-    }
 
- */
 
 }

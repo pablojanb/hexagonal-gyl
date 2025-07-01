@@ -1,7 +1,7 @@
 package com.example.finca_hexagonal.application.usecases.reserva;
 
 import com.example.finca_hexagonal.domain.models.Reserva;
-import com.example.finca_hexagonal.domain.ports.in.Reserva.CreateReservaUseCase;
+import com.example.finca_hexagonal.domain.ports.in.reserva.CreateReservaUseCase;
 import com.example.finca_hexagonal.domain.ports.out.ReservaModelPort;
 import org.springframework.stereotype.Service;
 

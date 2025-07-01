@@ -5,11 +5,11 @@ import com.example.finca_hexagonal.domain.ports.out.ReservaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.ReservaEntity;
 import com.example.finca_hexagonal.infrastructure.mappers.ReservaModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaReservaRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ReservaRepositoryAdapter implements ReservaModelPort {
@@ -30,58 +30,33 @@ public class ReservaRepositoryAdapter implements ReservaModelPort {
     }
 
     @Override
-    public Page<Reserva> findAll(Pageable pageable) {
-        return jpaReservaRepository.findAll(pageable)
-                .map(reservaModelMappers::toDomainModel);
+    public List<Reserva> findAll() {
+        return jpaReservaRepository.findAll().stream()
+                .map(reservaModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Reserva> findById(Long id) {
-        return jpaReservaRepository.findById(id)
-                .map(reservaModelMappers::toDomainModel);
+    public Optional<Reserva> findById(Long reservaId) {
+        return jpaReservaRepository.findById(reservaId).map(reservaModelMappers::toDomainModel);
     }
 
     @Override
-    public Page<Reserva> findByFincaId(Long fincaId, Pageable pageable) {
-        return jpaReservaRepository.findByFincaId(fincaId, pageable)
-                .map(reservaModelMappers::toDomainModel);
+    public Optional<Reserva> updateById(Long reservaId, Reserva updateReserva) {
+        if (jpaReservaRepository.existsById(reservaId)){
+            ReservaEntity reservaEntity = reservaModelMappers.fromDomainModel(updateReserva);
+            ReservaEntity updateReservaEntity = jpaReservaRepository.save(reservaEntity);
+            return Optional.of(reservaModelMappers.toDomainModel(updateReservaEntity));
+        }
+        return Optional.empty();
     }
 
     @Override
-    public Page<Reserva> findByClienteId(Long clienteId, Pageable pageable) {
-        return jpaReservaRepository.findByClienteId(clienteId, pageable)
-                .map(reservaModelMappers::toDomainModel);
-    }
-
-    @Override
-    public Page<Reserva> findByEstadoReserva(Boolean estadoReserva, Pageable pageable) {
-        return jpaReservaRepository.findByEstadoReserva(estadoReserva, pageable)
-                .map(reservaModelMappers::toDomainModel);
-    }
-
-    @Override
-    public Page<Reserva> filterReservaByReservaParams(Pageable pageable, Long clienteIdBrowser, Long fincaIdBrowser, Boolean estadoReservaBrowser) {
-        return jpaReservaRepository.filterReservaByReservaParams(pageable, clienteIdBrowser, fincaIdBrowser, estadoReservaBrowser)
-                .map(reservaModelMappers::toDomainModel);
-    }
-
-    @Override
-    public Reserva update(Reserva reserva) {
-        return save(reserva); // Actualiza si ya existe, o crea si no
-    }
-
-    @Override
-    public Boolean delete(Long id) {
-        if (jpaReservaRepository.existsById(id)) {
-            jpaReservaRepository.deleteById(id);
+    public boolean deleteById(Long reservaId) {
+        if (jpaReservaRepository.existsById(reservaId)){
+            jpaReservaRepository.deleteById(reservaId);
             return true;
         }
         return false;
-    }
-
-    @Override
-    public Reserva logicalDeletion(Reserva reserva) {
-        reserva.setEstadoReserva(false); // Asumiendo que false significa "eliminado"
-        return save(reserva);
     }
 }

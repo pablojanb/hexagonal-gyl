@@ -1,43 +1,54 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.dto.apiresponse.ApiResponseDTO;
-import com.example.finca_hexagonal.application.dto.rol.RolRequestDTO;
-import com.example.finca_hexagonal.application.dto.rol.RolResponseDTO;
-import com.example.finca_hexagonal.application.services.rol.IRolService;
+import com.example.finca_hexagonal.application.services.Rol.impl.RolModelService;
+import com.example.finca_hexagonal.domain.models.Rol;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.handler.MappedInterceptor;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/rol")
+@RequestMapping("/api/roles")
 public class RolController {
 
-    private final IRolService rolService;
+    private final RolModelService rolModelService;
 
-    public RolController(IRolService rolService){
-        this.rolService = rolService;
+    public RolController(RolModelService rolModelService){
+        this.rolModelService = rolModelService;
     }
 
-    @GetMapping("/find/id/{id}")
-    public ResponseEntity<RolResponseDTO> findRolById(@PathVariable Long id){
-        return ResponseEntity.ok(rolService.findById(id));
+    @PostMapping
+    public ResponseEntity<Rol> createRol(@RequestBody Rol rol){
+        return new ResponseEntity<>(rolModelService.createRol(rol), HttpStatus.CREATED);
     }
 
-    @GetMapping("/find/all")
-    public ResponseEntity<List<RolResponseDTO>> findAllRol(){
-        return ResponseEntity.ok(rolService.findAll());
+    @GetMapping("/getAllRoles")
+    public ResponseEntity<List<Rol>> getAllRoles(){
+        return new ResponseEntity<>(rolModelService.getRoles(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/id/{id}")
-    public ResponseEntity<RolResponseDTO> deleteRolById(@PathVariable Long id){
-        return ResponseEntity.ok(rolService.deleteById(id));
+    @GetMapping("/getRolById/{rolId}")
+    public ResponseEntity<Rol> getRolById(@PathVariable Long rolId){
+        return rolModelService.getRol(rolId)
+                .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<RolResponseDTO> createRol(@RequestBody RolRequestDTO rolRequestDTO){
-        return ResponseEntity.ok(rolService.create(rolRequestDTO));
+    @PutMapping("/updateRol/{rolId}")
+    public ResponseEntity<Rol> updateRol(@PathVariable Long rolId,
+                                         @RequestBody Rol rolUpdate){
+        return rolModelService.updateRol(rolId, rolUpdate)
+                .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/deleteRolById/{rolId}")
+    public ResponseEntity<Void> deleteFincaById(@PathVariable Long rolId){
+        if (rolModelService.deleteRol(rolId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

@@ -5,20 +5,18 @@ import java.math.BigDecimal;
 
 public class FincaRequestDTO {
     private String nombre;
-    private Long id_propietario;
-    private Long id_detalleFinca;
-    private Long id_direccion;
-    private BigDecimal tarifa_hora;
+    private Long idUsuario;
+    private Long idDireccion;
+    private BigDecimal tarifaHora;
 
     public FincaRequestDTO() {
     }
 
-    public FincaRequestDTO(String nombre, Long id_propietario, Long id_detalleFinca, Long id_direccion, BigDecimal tarifa_hora) {
+    public FincaRequestDTO(String nombre, Long idUsuario, Long idDireccion, BigDecimal tarifaHora) {
         this.nombre = nombre;
-        this.id_propietario = id_propietario;
-        this.id_detalleFinca = id_detalleFinca;
-        this.id_direccion = id_direccion;
-        this.tarifa_hora = tarifa_hora;
+        this.idUsuario = idUsuario;
+        this.idDireccion = idDireccion;
+        this.tarifaHora = tarifaHora;
     }
 
     public String getNombre() {
@@ -29,35 +27,27 @@ public class FincaRequestDTO {
         this.nombre = nombre;
     }
 
-    public Long getId_propietario() {
-        return id_propietario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_propietario(Long id_propietario) {
-        this.id_propietario = id_propietario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Long getId_detalleFinca() {
-        return id_detalleFinca;
+    public Long getIdDireccion() {
+        return idDireccion;
     }
 
-    public void setId_detalleFinca(Long id_detalleFinca) {
-        this.id_detalleFinca = id_detalleFinca;
+    public void setIdDireccion(Long idDireccion) {
+        this.idDireccion = idDireccion;
     }
 
-    public Long getId_direccion() {
-        return id_direccion;
+    public BigDecimal getTarifaHora() {
+        return tarifaHora;
     }
 
-    public void setId_direccion(Long id_direccion) {
-        this.id_direccion = id_direccion;
-    }
-
-    public BigDecimal getTarifa_hora() {
-        return tarifa_hora;
-    }
-
-    public void setTarifa_hora(BigDecimal tarifa_hora) {
-        this.tarifa_hora = tarifa_hora;
+    public void setTarifaHora(BigDecimal tarifaHora) {
+        this.tarifaHora = tarifaHora;
     }
 }
