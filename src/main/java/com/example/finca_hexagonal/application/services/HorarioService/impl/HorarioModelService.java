@@ -28,6 +28,7 @@ public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioU
 
     @Override
     public Horario createHorario(Horario horario) {
+
         return createHorarioUseCase.createHorario(horario);
     }
 

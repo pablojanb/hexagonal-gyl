@@ -4,21 +4,20 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
-public class Fecha_Especial {
+public class FechaEspecial {
     private Long id;
     private LocalDateTime fecha;
-    private LocalDateTime dia_semana;
+    private String dia_semana;
     private LocalDateTime hora_inicio;
     private LocalDateTime hora_fin;
     private BigDecimal descuento;
     private BigDecimal recargo;
     private String motivo;
-    private Finca finca;
 
-    public Fecha_Especial() {
+    public FechaEspecial() {
     }
 
-    public Fecha_Especial(Long id, LocalDateTime fecha, LocalDateTime dia_semana, LocalDateTime hora_inicio, LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo, Finca finca) {
+    public FechaEspecial(Long id, LocalDateTime fecha, String dia_semana, LocalDateTime hora_inicio, LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo) {
         this.id = id;
         this.fecha = fecha;
         this.dia_semana = dia_semana;
@@ -27,7 +26,6 @@ public class Fecha_Especial {
         this.descuento = descuento;
         this.recargo = recargo;
         this.motivo = motivo;
-        this.finca = finca;
     }
 
     public Long getId() {
@@ -46,11 +44,11 @@ public class Fecha_Especial {
         this.fecha = fecha;
     }
 
-    public LocalDateTime getDia_semana() {
+    public String getDia_semana() {
         return dia_semana;
     }
 
-    public void setDia_semana(LocalDateTime dia_semana) {
+    public void setDia_semana(String dia_semana) {
         this.dia_semana = dia_semana;
     }
 
@@ -94,11 +92,4 @@ public class Fecha_Especial {
         this.motivo = motivo;
     }
 
-    public Finca getFinca() {
-        return finca;
-    }
-
-    public void setFinca(Finca finca) {
-        this.finca = finca;
-    }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/api/horarios")
 public class HorarioController {
     private final HorarioService horarioService;
-
     public HorarioController(HorarioService fincaService) {
         this.horarioService = fincaService;
     }
