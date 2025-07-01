@@ -45,7 +45,7 @@ public class ReservaController {
 
     @PutMapping("/updateReserva/{reservaId}")
     public ResponseEntity<ReservaResponseDTO> updateReserva(@PathVariable Long reservaId,
-                                                                  @RequestBody ReservaRequestDTO reservaUpdate){
+                                                            @RequestBody ReservaRequestDTO reservaUpdate){
         return reservaService.updateById(reservaId, reservaUpdate)
                 .map(reserva -> new ResponseEntity<>(reserva, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

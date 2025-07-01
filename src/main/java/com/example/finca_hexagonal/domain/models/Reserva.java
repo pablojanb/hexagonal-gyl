@@ -1,5 +1,7 @@
 package com.example.finca_hexagonal.domain.models;
 
+import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,14 +14,14 @@ public class Reserva {
     private LocalTime desde;
     private LocalTime hasta;
     private BigDecimal total;
-    private Boolean estadoReserva;
+    private EstadoReserva estadoReserva;
 
 
     public Reserva(){
 
     }
 
-    public Reserva(Long id, Finca finca, Usuario usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, Boolean estadoReserva) {
+    public Reserva(Long id, Finca finca, Usuario usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
         this.id = id;
         this.finca = finca;
         this.usuario = usuario;
@@ -86,11 +88,11 @@ public class Reserva {
         this.total = total;
     }
 
-    public Boolean getEstadoReserva() {
+    public EstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
 
-    public void setEstadoReserva(Boolean estadoReserva) {
+    public void setEstadoReserva(EstadoReserva estadoReserva) {
         this.estadoReserva = estadoReserva;
     }
 }

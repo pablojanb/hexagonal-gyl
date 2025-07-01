@@ -1,5 +1,6 @@
 package com.example.finca_hexagonal.application.dto.reservas;
 
+import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -9,12 +10,11 @@ public class ReservaRequestDTO {
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
-    private Boolean estadoReserva = false;
+    private EstadoReserva estadoReserva = EstadoReserva.PENDING;
 
-    public ReservaRequestDTO() {
-    }
+    public ReservaRequestDTO() {}
 
-    public ReservaRequestDTO(Long idFinca, Long idUsuario, LocalDate fecha, LocalTime desde, LocalTime hasta, Boolean estadoReserva) {
+    public ReservaRequestDTO(Long idFinca, Long idUsuario, LocalDate fecha, LocalTime desde, LocalTime hasta, EstadoReserva estadoReserva) {
         this.idFinca = idFinca;
         this.idUsuario = idUsuario;
         this.fecha = fecha;
@@ -63,11 +63,11 @@ public class ReservaRequestDTO {
         this.hasta = hasta;
     }
 
-    public Boolean getEstadoReserva() {
+    public EstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
 
-    public void setEstadoReserva(Boolean estadoReserva) {
+    public void setEstadoReserva(EstadoReserva estadoReserva) {
         this.estadoReserva = estadoReserva;
     }
 }
