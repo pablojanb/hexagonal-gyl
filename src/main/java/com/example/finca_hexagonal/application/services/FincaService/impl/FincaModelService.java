@@ -11,13 +11,40 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
 public class FincaModelService implements CreateFincaUseCase, DeleteFincaUseCase, UpdateFincaUseCase, GetFincaUseCase {
+    @Override
+    public Finca createFinca(Finca finca) {
+        return null;
+    }
 
-    private final CreateFincaUseCase createFincaUseCase;
+    @Override
+    public boolean deleteFincaById(Long id) {
+        return false;
+    }
+
+    @Override
+    public List<Finca> getAllFincas() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<Finca> getFincaById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Finca> updateFinca(Long id, Finca finca) {
+        return Optional.empty();
+    }
+
+    /*private final CreateFincaUseCase createFincaUseCase;
     private final DeleteFincaUseCase deleteFincaUseCase;
     private final GetFincaUseCase getFincaUseCase;
     private final UpdateFincaUseCase updateFincaUseCase;
+
 
     public FincaModelService(CreateFincaUseCase createFincaUseCase, DeleteFincaUseCase deleteFincaUseCase, GetFincaUseCase getFincaUseCase, UpdateFincaUseCase updateFincaUseCase) {
         this.createFincaUseCase = createFincaUseCase;
@@ -50,4 +77,6 @@ public class FincaModelService implements CreateFincaUseCase, DeleteFincaUseCase
     public Optional<Finca> updateFinca(Long id, Finca finca) {
         return updateFincaUseCase.updateFinca(id, finca);
     }
+
+     */
 }

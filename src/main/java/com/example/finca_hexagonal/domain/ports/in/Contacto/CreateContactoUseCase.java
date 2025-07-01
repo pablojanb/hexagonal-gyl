@@ -1,4 +1,5 @@
-package domain.ports.in.Contacto;
+package com.example.finca_hexagonal.domain.ports.in.Contacto;
+
 
 import domain.models.Contacto;
 

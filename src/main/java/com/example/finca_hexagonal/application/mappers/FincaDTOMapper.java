@@ -12,7 +12,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public abstract class FincaDTOMapper {
 
     /*

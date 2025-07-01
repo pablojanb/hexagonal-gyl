@@ -25,19 +25,11 @@ public class Fecha_EspecialModelService implements CreateFecha_EspecialUseCase, 
         this.findFecha_EspecialUseCase = findFecha_EspecialUseCase;
     }
 
-    @Override
-    public Fecha_Especial create(Fecha_Especial fecha_Especial) {
-        return null;
-    }
+
 
     @Override
     public boolean delete(Long id_fecha) {
         return false;
-    }
-
-    @Override
-    public Fecha_Especial logicalDelete(Fecha_Especial fecha_Especial) {
-        return null;
     }
 
     @Override

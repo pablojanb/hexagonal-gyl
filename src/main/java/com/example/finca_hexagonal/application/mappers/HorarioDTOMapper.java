@@ -2,6 +2,7 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.horarios.HorarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.horarios.HorarioResponseDTO;
+
 import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Horario;
@@ -20,9 +21,8 @@ public abstract class HorarioDTOMapper {
         this.fincaModelService = fincaModelService;
     }
 
-    @Mapping(source = "id_finca", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
+    @Mapping(source = "id_horario", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
     public abstract Horario toModel(HorarioRequestDTO horarioDto);
-
 
     @Mapping(source = "finca.id", target = "id_finca")
     @Mapping(source = "finca.nombre", target = "finca")

@@ -20,7 +20,4 @@ public interface Fecha_EspecialService {
 
     Fecha_EspecialDTOResponse logicalDelete(Long id_fecha);
 
-
-
-
 }

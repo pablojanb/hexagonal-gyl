@@ -1,6 +1,7 @@
-package domain.ports.in.Propietario;
+package com.example.finca_hexagonal.domain.ports.in.Propietario;
 
-import domain.models.Propietario;
+
+import com.example.finca_hexagonal.domain.models.Propietario;
 
 import java.util.List;
 import java.util.Optional;
