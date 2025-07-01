@@ -15,7 +15,7 @@ public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
     }
 
     @Override
-    public Usuario create(Usuario usuario) {
+    public Usuario createUsuario(Usuario usuario) {
         return usuarioModelPort.save(usuario);
     }
 }

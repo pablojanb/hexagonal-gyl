@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.application.services.fecha_especial;
 
-// Implementa
+/* Implementa
 import com.example.finca_hexagonal.application.dto.fecha_especal.Fecha_EspecialDTORequest;
 import com.example.finca_hexagonal.application.dto.fecha_especal.Fecha_EspecialDTOResponse;
 
@@ -21,3 +21,4 @@ public interface Fecha_EspecialService {
     Fecha_EspecialDTOResponse logicalDelete(Long id_fecha);
 
 }
+*/

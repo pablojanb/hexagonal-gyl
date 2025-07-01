@@ -8,15 +8,11 @@ import java.util.Optional;
 public interface UsuarioModelPort {
     Usuario save(Usuario usuario);
 
+    boolean deleteById(Long id);
+
     List<Usuario> findAll();
 
-    Usuario findById(Long id);
+    Optional<Usuario> findById(Long id);
 
-    Usuario findByName(String username);
-
-    Usuario update(Usuario usuario);
-
-    Boolean deleteById(Long id);
-
-    Boolean logicalDeletion(Usuario usuario);
+    Optional<Usuario> updateById(Long id, Usuario usuarioUpdate);
 }

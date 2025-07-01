@@ -1,33 +1,33 @@
 package com.example.finca_hexagonal.infrastructure.entities;
 
-import com.example.finca_hexagonal.domain.models.*;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+@Table(name = "fincas")
 public class FincaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nombre;
     @OneToOne
-    private PropietarioEntity propietario;
-    @OneToOne
-    private DetalleFincaEntity detalle;
+    private UsuarioEntity usuario;
     @OneToOne
     private DireccionEntity direccion;
+    private BigDecimal tarifaHora;
 
-    private BigDecimal tarifa_hora;
+    @OneToMany(mappedBy = "finca")
+    private List<DetalleFincaEntity> detalles;
 
-    @OneToMany
+    @OneToMany(mappedBy = "finca")
     private List<HorarioEntity> horarios;
 
-    @OneToMany
+    @OneToMany(mappedBy = "finca")
     private List<ImagenFincaEntity> imagenesFinca;
 
-    @OneToMany
+    @OneToMany(mappedBy = "finca")
     private List<FechaEspecialEntity> fechasEspFinca;
 
     @OneToMany(mappedBy = "finca")
@@ -36,13 +36,13 @@ public class FincaEntity {
     public FincaEntity() {
     }
 
-    public FincaEntity(Long id, String nombre, PropietarioEntity propietario, DetalleFincaEntity detalle, DireccionEntity direccion, BigDecimal tarifa_hora, List<HorarioEntity> horarios, List<ImagenFincaEntity> imagenesFinca, List<FechaEspecialEntity> fechasEspFinca, List<ReservaEntity> reservasFinca) {
+    public FincaEntity(Long id, String nombre, UsuarioEntity usuario, DireccionEntity direccion, BigDecimal tarifaHora, List<DetalleFincaEntity> detalles, List<HorarioEntity> horarios, List<ImagenFincaEntity> imagenesFinca, List<FechaEspecialEntity> fechasEspFinca, List<ReservaEntity> reservasFinca) {
         this.id = id;
         this.nombre = nombre;
-        this.propietario = propietario;
-        this.detalle = detalle;
+        this.usuario = usuario;
         this.direccion = direccion;
-        this.tarifa_hora = tarifa_hora;
+        this.tarifaHora = tarifaHora;
+        this.detalles = detalles;
         this.horarios = horarios;
         this.imagenesFinca = imagenesFinca;
         this.fechasEspFinca = fechasEspFinca;
@@ -65,20 +65,12 @@ public class FincaEntity {
         this.nombre = nombre;
     }
 
-    public PropietarioEntity getPropietario() {
-        return propietario;
+    public UsuarioEntity getUsuario() {
+        return usuario;
     }
 
-    public void setPropietario(PropietarioEntity propietario) {
-        this.propietario = propietario;
-    }
-
-    public DetalleFincaEntity getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(DetalleFincaEntity detalle) {
-        this.detalle = detalle;
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
 
     public DireccionEntity getDireccion() {
@@ -89,12 +81,20 @@ public class FincaEntity {
         this.direccion = direccion;
     }
 
-    public BigDecimal getTarifa_hora() {
-        return tarifa_hora;
+    public BigDecimal getTarifaHora() {
+        return tarifaHora;
     }
 
-    public void setTarifa_hora(BigDecimal tarifa_hora) {
-        this.tarifa_hora = tarifa_hora;
+    public void setTarifaHora(BigDecimal tarifaHora) {
+        this.tarifaHora = tarifaHora;
+    }
+
+    public List<DetalleFincaEntity> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<DetalleFincaEntity> detalles) {
+        this.detalles = detalles;
     }
 
     public List<HorarioEntity> getHorarios() {
