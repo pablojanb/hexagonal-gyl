@@ -22,7 +22,6 @@ public class FincaController {
 
     @PostMapping
     public ResponseEntity<FincaResponseDTOSimplified> createFinca(@RequestBody FincaRequestDTO fincaDTO){
-
         return new ResponseEntity<>(fincaService.createFinca(fincaDTO), HttpStatus.CREATED);
     }
 
