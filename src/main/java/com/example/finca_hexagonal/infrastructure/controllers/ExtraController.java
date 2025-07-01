@@ -7,10 +7,7 @@ import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimpli
 import com.example.finca_hexagonal.application.services.Extra.ExtraService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/extras")
@@ -25,5 +22,13 @@ public class ExtraController {
     @PostMapping
     public ResponseEntity<ExtraResponseDTO> createExtra(@RequestBody ExtraRequestDTO extraDTO){
         return new ResponseEntity<>(extraService.createExtra(extraDTO), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/deleteExtraById/{extraId}")
+    public ResponseEntity<Void> deleteExtraById(@PathVariable Long extraId){
+        if (extraService.deleteExtraById(extraId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

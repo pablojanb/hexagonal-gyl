@@ -31,7 +31,7 @@ public class ExtraServiceImpl implements ExtraService {
 
     @Override
     public boolean deleteExtraById(Long id) {
-        return false;
+        return extraModelService.deleteExtra(id);
     }
 
     @Override

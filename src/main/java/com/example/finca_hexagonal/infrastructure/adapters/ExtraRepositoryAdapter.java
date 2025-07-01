@@ -29,6 +29,10 @@ public class ExtraRepositoryAdapter implements ExtraModelPort {
 
     @Override
     public boolean deleteById(Long id) {
+        if (jpaExtraRepository.existsById(id)){
+            jpaExtraRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 
