@@ -3,7 +3,7 @@ package com.example.finca_hexagonal.application.mappers;
 import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
-import com.example.finca_hexagonal.application.services.Direccion.DireccionModelService;
+import com.example.finca_hexagonal.application.services.Direccion.impl.DireccionModelService;
 import com.example.finca_hexagonal.application.services.Usuario.impl.UsuarioModelService;
 import com.example.finca_hexagonal.domain.models.*;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
@@ -30,7 +30,7 @@ public abstract class FincaDTOMapper {
     @Mapping(source = "usuario.id", target = "idUsuario")
     @Mapping(source = "direccion.id", target = "idDireccion")
     @Mapping(source = "usuario.username", target = "usuario")
-    @Mapping(source = "direccion.calle", target = "direccion")
+    @Mapping(source = "direccion.direccion", target = "direccion")
     public abstract FincaResponseDTOSimplified toDtoSimplified(Finca finca);
 
     public abstract List<FincaResponseDTOSimplified> toDtoSimplifiedList(List<Finca> finca);
@@ -38,7 +38,7 @@ public abstract class FincaDTOMapper {
     @Mapping(source = "usuario.id", target = "idUsuario")
     @Mapping(source = "direccion.id", target = "idDireccion")
     @Mapping(source = "usuario.username", target = "usuario")
-    @Mapping(source = "direccion.calle", target = "direccion")
+    @Mapping(source = "direccion.direccion", target = "direccion")
     public abstract FincaResponseDTO toDto(Finca finca);
 
 
@@ -51,9 +51,7 @@ public abstract class FincaDTOMapper {
 
     @Named("mapDireccionDtoDireccion")
     protected Direccion mapDireccionDtoDireccion(Long idDireccion) {
-        return direccionModelService.getById(idDireccion);
+        return direccionModelService.getDireccionById(idDireccion)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + idDireccion));
     }
-
-
-
 }

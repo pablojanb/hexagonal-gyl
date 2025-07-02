@@ -21,7 +21,7 @@ public class DataInitializer implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
-
+/*
         // Crear Direcciones
         DireccionEntity direccion = new DireccionEntity();
         direccion.setAclaracion("Aclaracion direccion 1");
@@ -47,7 +47,7 @@ public class DataInitializer implements ApplicationRunner {
         direccion3.setProvincia("Santa fe");
         entityManager.persist(direccion3);
 
-        System.out.println("✅ Datos iniciales insertados correctamente.");
+        System.out.println("✅ Datos iniciales insertados correctamente.");*/
 
     }
 }

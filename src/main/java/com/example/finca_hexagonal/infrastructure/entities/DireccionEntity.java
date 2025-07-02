@@ -8,8 +8,7 @@ public class DireccionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String calle;
-    private int altura;
+    private String direccion;
     private String ciudad;
     private String provincia;
     private String aclaracion;
@@ -17,10 +16,9 @@ public class DireccionEntity {
     public DireccionEntity() {
     }
 
-    public DireccionEntity(Long id, String calle, int altura, String ciudad, String provincia, String aclaracion) {
+    public DireccionEntity(Long id, String direccion, String ciudad, String provincia, String aclaracion) {
         this.id = id;
-        this.calle = calle;
-        this.altura = altura;
+        this.direccion = direccion;
         this.ciudad = ciudad;
         this.provincia = provincia;
         this.aclaracion = aclaracion;
@@ -34,20 +32,12 @@ public class DireccionEntity {
         this.id = id;
     }
 
-    public String getCalle() {
-        return calle;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
-
-    public int getAltura() {
-        return altura;
-    }
-
-    public void setAltura(int altura) {
-        this.altura = altura;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getCiudad() {
