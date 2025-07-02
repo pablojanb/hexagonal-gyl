@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORespons
 import com.example.finca_hexagonal.application.mappers.DireccionDTOMapper;
 import com.example.finca_hexagonal.application.services.Direccion.DireccionService;
 import com.example.finca_hexagonal.domain.models.Direccion;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +39,14 @@ public class DireccionServiceImpl implements DireccionService {
 
     @Override
     public List<DireccionDTOResponse> getAllDirecciones() {
-        return List.of();
+        List<Direccion> direcciones = direccionModelService.getAllDirecciones();
+        return direccionDTOMapper.toDtoList(direcciones);
     }
 
     @Override
     public Optional<DireccionDTOResponse> getDireccionById(Long id) {
-        return Optional.empty();
+        Direccion direccion = direccionModelService.getDireccionById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + id));
+        return Optional.of(direccionDTOMapper.toDto(direccion));
     }
 }

@@ -32,7 +32,7 @@ public class ExtraController {
     }
 
     @GetMapping("/getExtraById/{extraId}")
-    public ResponseEntity<ExtraResponseDTO> getFincaById(@PathVariable Long extraId){
+    public ResponseEntity<ExtraResponseDTO> getExtraById(@PathVariable Long extraId){
         return extraService.getExtraById(extraId)
                 .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
