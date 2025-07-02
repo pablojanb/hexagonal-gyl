@@ -3,6 +3,7 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Direccion;
 import com.example.finca_hexagonal.domain.ports.out.DireccionModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.DireccionEntity;
+import com.example.finca_hexagonal.infrastructure.entities.ExtraEntity;
 import com.example.finca_hexagonal.infrastructure.mappers.DireccionModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.DireccionJpaRepository;
 import org.springframework.stereotype.Component;
@@ -39,6 +40,11 @@ public class DireccionRepositoryAdapter implements DireccionModelPort {
 
     @Override
     public Optional<Direccion> updateById(Long id, Direccion updateDireccion) {
+        if (direccionJpaRepository.existsById(id)){
+            DireccionEntity direccionEntity = direccionModelMappers.fromDomainModel(updateDireccion);
+            DireccionEntity updateDireccionEntity = direccionJpaRepository.save(direccionEntity);
+            return Optional.of(direccionModelMappers.toDomainModel(updateDireccionEntity));
+        }
         return Optional.empty();
     }
 

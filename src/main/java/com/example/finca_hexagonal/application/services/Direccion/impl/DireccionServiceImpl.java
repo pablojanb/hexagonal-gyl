@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORespons
 import com.example.finca_hexagonal.application.mappers.DireccionDTOMapper;
 import com.example.finca_hexagonal.application.services.Direccion.DireccionService;
 import com.example.finca_hexagonal.domain.models.Direccion;
+import com.example.finca_hexagonal.domain.models.Extra;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,17 @@ public class DireccionServiceImpl implements DireccionService {
 
     @Override
     public Optional<DireccionDTOResponse> updateDireccionById(Long id, DireccionDTORequest updateDireccionDto) {
-        return Optional.empty();
+        Direccion direccionToUpdate = direccionModelService.getDireccionById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + id));
+        Direccion newData = direccionDTOMapper.toModel(updateDireccionDto);
+        direccionToUpdate.setDireccion(newData.getDireccion());
+        direccionToUpdate.setCiudad(newData.getCiudad());
+        direccionToUpdate.setProvincia(newData.getProvincia());
+        direccionToUpdate.setAclaracion(newData.getAclaracion());
+        Direccion direccionUpdated = direccionModelService.updateDireccion(id, direccionToUpdate)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + id));
+
+        return Optional.of(direccionDTOMapper.toDto(direccionUpdated));
     }
 
     @Override

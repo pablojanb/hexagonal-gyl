@@ -2,6 +2,8 @@ package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest;
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
+import com.example.finca_hexagonal.application.dto.extras.ExtraRequestDTO;
+import com.example.finca_hexagonal.application.dto.extras.ExtraResponseDTO;
 import com.example.finca_hexagonal.application.services.Direccion.DireccionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,14 @@ public class DireccionController {
     @GetMapping("/getDireccionById/{extraId}")
     public ResponseEntity<DireccionDTOResponse> getDireccionById(@PathVariable Long extraId){
         return direccionService.getDireccionById(extraId)
+                .map(direccion -> new ResponseEntity<>(direccion, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("/updateDireccion/{direccionId}")
+    public ResponseEntity<DireccionDTOResponse> updateDireccion(@PathVariable Long direccionId,
+                                                        @RequestBody DireccionDTORequest direccionUpdate){
+        return direccionService.updateDireccionById(direccionId, direccionUpdate)
                 .map(direccion -> new ResponseEntity<>(direccion, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
