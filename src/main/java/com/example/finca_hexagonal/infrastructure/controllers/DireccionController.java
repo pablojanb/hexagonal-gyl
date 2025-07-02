@@ -5,10 +5,7 @@ import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORespons
 import com.example.finca_hexagonal.application.services.Direccion.DireccionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/direcciones")
@@ -23,5 +20,13 @@ public class DireccionController {
     @PostMapping
     public ResponseEntity<DireccionDTOResponse> createDireccion(@RequestBody DireccionDTORequest direccionDTO){
         return new ResponseEntity<>(direccionService.createDireccion(direccionDTO), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/deleteDireccionById/{extraId}")
+    public ResponseEntity<Void> deleteDireccionById(@PathVariable Long extraId){
+        if (direccionService.deleteById(extraId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

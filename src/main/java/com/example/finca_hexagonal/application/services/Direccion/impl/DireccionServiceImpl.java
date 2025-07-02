@@ -28,7 +28,7 @@ public class DireccionServiceImpl implements DireccionService {
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        return direccionModelService.deleteDireccion(id);
     }
 
     @Override

@@ -29,6 +29,10 @@ public class DireccionRepositoryAdapter implements DireccionModelPort {
 
     @Override
     public boolean deleteById(Long id) {
+        if (direccionJpaRepository.existsById(id)){
+            direccionJpaRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 
