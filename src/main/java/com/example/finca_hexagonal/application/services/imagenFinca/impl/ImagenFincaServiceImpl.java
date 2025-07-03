@@ -3,10 +3,9 @@ package com.example.finca_hexagonal.application.services.imagenFinca.impl;
 import com.example.finca_hexagonal.application.dto.imagenFinca.ImagenFincaDTORequest;
 import com.example.finca_hexagonal.application.dto.imagenFinca.ImagenFincaDTOResponse;
 import com.example.finca_hexagonal.application.mappers.ImagenFincaDTOMapper;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.application.services.imagenFinca.ImagenFincaService;
-import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.models.ImagenFinca;
-import com.example.finca_hexagonal.domain.models.Pago;
+import com.example.finca_hexagonal.domain.models.*;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +17,12 @@ public class ImagenFincaServiceImpl implements ImagenFincaService {
 
     private final ImagenFincaModelService imagenFincaModelService;
     private final ImagenFincaDTOMapper imagenFincaDTOMapper;
+    private final FincaModelService fincaModelService;
 
-    public ImagenFincaServiceImpl(ImagenFincaModelService imagenFincaModelService, ImagenFincaDTOMapper imagenFincaDTOMapper) {
+    public ImagenFincaServiceImpl(ImagenFincaModelService imagenFincaModelService, ImagenFincaDTOMapper imagenFincaDTOMapper, FincaModelService fincaModelService) {
         this.imagenFincaModelService = imagenFincaModelService;
         this.imagenFincaDTOMapper = imagenFincaDTOMapper;
+        this.fincaModelService = fincaModelService;
     }
 
     @Override
@@ -40,9 +41,16 @@ public class ImagenFincaServiceImpl implements ImagenFincaService {
 
     @Override
     public Optional<ImagenFincaDTOResponse> updateById(Long id, ImagenFincaDTORequest imagenDto) {
-        ImagenFinca imagenFinca = imagenFincaDTOMapper.toModel(imagenDto);
-        return imagenFincaModelService.update(id, imagenFinca)
-                .map(imagenFincaDTOMapper::toDto);
+        ImagenFinca imagenFinca = imagenFincaModelService.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Imagen no encontrada: " + imagenDto));
+        imagenFinca.setEsPortada(imagenDto.isEsPortada());
+        imagenFinca.setUrl(imagenDto.getUrl());
+        Finca finca = fincaModelService.getFincaById(imagenDto.getFincaId())
+                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + imagenDto.getFincaId()));
+        imagenFinca.setFinca(finca);
+        ImagenFinca updatedFinca = imagenFincaModelService.update(id, imagenFinca)
+                .orElseThrow(() -> new EntityNotFoundException("Imagen no encontrada: " + imagenDto));
+        return Optional.of(imagenFincaDTOMapper.toDto(updatedFinca));
     }
 
     @Override
