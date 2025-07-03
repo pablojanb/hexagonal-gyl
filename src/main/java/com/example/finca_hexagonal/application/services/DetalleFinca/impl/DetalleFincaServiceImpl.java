@@ -44,6 +44,6 @@ public class DetalleFincaServiceImpl implements DetalleFincaService {
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return detalleFincaModelService.delete(id);
     }
 }

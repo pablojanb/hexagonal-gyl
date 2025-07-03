@@ -46,6 +46,10 @@ public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
 
     @Override
     public boolean delete(Long id) {
+        if (jpaDetalleFincaRepository.existsById(id)){
+            jpaDetalleFincaRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 }
