@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class DocumentacionRepositoryAdapter implements DocumentacionModelPort {
@@ -30,12 +31,14 @@ public class DocumentacionRepositoryAdapter implements DocumentacionModelPort {
 
     @Override
     public List<Documentacion> findAll() {
-        return List.of();
+        return jpaDocumentacionRepository.findAll().stream()
+                .map(documentacionModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Documentacion> findById(Long id) {
-        return Optional.empty();
+        return jpaDocumentacionRepository.findById(id).map(documentacionModelMappers::toDomainModel);
     }
 
     @Override

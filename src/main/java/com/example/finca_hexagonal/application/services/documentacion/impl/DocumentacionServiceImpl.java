@@ -4,7 +4,9 @@ import com.example.finca_hexagonal.application.dto.documentacion.DocumentacionRe
 import com.example.finca_hexagonal.application.dto.documentacion.DocumentacionResponseDTO;
 import com.example.finca_hexagonal.application.mappers.DocumentacionDTOMapper;
 import com.example.finca_hexagonal.application.services.documentacion.DocumentacionService;
+import com.example.finca_hexagonal.domain.models.Direccion;
 import com.example.finca_hexagonal.domain.models.Documentacion;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,12 +32,15 @@ public class DocumentacionServiceImpl implements DocumentacionService {
 
     @Override
     public List<DocumentacionResponseDTO> getAllDocumentaciones() {
-        return List.of();
+        List<Documentacion> documentaciones = documentacionModelService.getAllDocumentaciones();
+        return documentacionDTOMapper.toDtoList(documentaciones);
     }
 
     @Override
     public Optional<DocumentacionResponseDTO> getById(Long id) {
-        return Optional.empty();
+        Documentacion documentacion = documentacionModelService.getDocumentacionById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Documentacion no encontrada: " + id));
+        return Optional.of(documentacionDTOMapper.toDto(documentacion));
     }
 
     @Override
