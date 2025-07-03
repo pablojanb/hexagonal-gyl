@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface GetReservaUseCase {
     List<Reserva> getAllReservas();
 
-    Optional<Reserva> getReserva(Long reservaId);
+    Optional<Reserva> getReservaById(Long reservaId);
 }

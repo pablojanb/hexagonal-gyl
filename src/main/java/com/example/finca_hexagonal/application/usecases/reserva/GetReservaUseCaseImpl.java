@@ -23,7 +23,7 @@ public class GetReservaUseCaseImpl implements GetReservaUseCase {
     }
 
     @Override
-    public Optional<Reserva> getReserva(Long reservaId) {
+    public Optional<Reserva> getReservaById(Long reservaId) {
         return reservaModelPort.findById(reservaId);
     }
 }
