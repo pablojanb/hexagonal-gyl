@@ -131,4 +131,12 @@ public class FincaEntity {
     public void setReservasFinca(List<ReservaEntity> reservasFinca) {
         this.reservasFinca = reservasFinca;
     }
+
+    public List<ExtraEntity> getExtras() {
+        return extras;
+    }
+
+    public void setExtras(List<ExtraEntity> extras) {
+        this.extras = extras;
+    }
 }

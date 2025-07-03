@@ -10,6 +10,9 @@ public interface ImagenFincaModelPort {
 
     Optional<ImagenFinca> findById(Long id);
 
+    Optional<ImagenFinca> updateById(Long id, ImagenFinca imagenFincaUpdate);
+
     List<ImagenFinca> findByFinca(Long fincaId);
-    void delete(Long id);
+
+    boolean delete(Long id);
 }

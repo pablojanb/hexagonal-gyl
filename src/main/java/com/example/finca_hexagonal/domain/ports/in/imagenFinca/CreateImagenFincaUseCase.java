@@ -1,4 +1,4 @@
-package com.example.finca_hexagonal.domain.ports.in.imagen_finca;
+package com.example.finca_hexagonal.domain.ports.in.imagenFinca;
 
 import com.example.finca_hexagonal.domain.models.ImagenFinca;
 

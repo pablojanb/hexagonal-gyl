@@ -4,13 +4,16 @@ public class ImagenFinca {
     private Long id;
     private String url;
     private boolean esPortada;
-    private Long fincaId;
+    private Finca finca;
 
-    public ImagenFinca(Long id, String url, boolean esPortada, Long fincaId) {
+    public ImagenFinca() {
+    }
+
+    public ImagenFinca(Long id, String url, boolean esPortada, Finca finca) {
         this.id = id;
         this.url = url;
         this.esPortada = esPortada;
-        this.fincaId = fincaId;
+        this.finca = finca;
     }
 
     public Long getId() {
@@ -37,11 +40,11 @@ public class ImagenFinca {
         this.esPortada = esPortada;
     }
 
-    public Long getFincaId() {
-        return fincaId;
+    public Finca getFinca() {
+        return finca;
     }
 
-    public void setFincaId(Long fincaId) {
-        this.fincaId = fincaId;
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 }
