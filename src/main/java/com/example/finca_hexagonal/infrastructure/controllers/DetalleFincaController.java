@@ -2,6 +2,8 @@ package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTORequest;
 import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTOResponse;
+import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest;
+import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
 import com.example.finca_hexagonal.application.services.detalleFinca.DetalleFincaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,14 @@ public class DetalleFincaController {
     @GetMapping("/getDetalleById/{detalleId}")
     public ResponseEntity<DetalleFincaDTOResponse> getDetalleById(@PathVariable Long detalleId){
         return detalleFincaService.findById(detalleId)
+                .map(detalle -> new ResponseEntity<>(detalle, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("/updateDetalle/{detalleId}")
+    public ResponseEntity<DetalleFincaDTOResponse> updateDetalle(@PathVariable Long detalleId,
+                                                                @RequestBody DetalleFincaDTORequest detalleUpdate){
+        return detalleFincaService.update(detalleId, detalleUpdate)
                 .map(detalle -> new ResponseEntity<>(detalle, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

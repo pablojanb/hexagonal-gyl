@@ -43,7 +43,12 @@ public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
     }
 
     @Override
-    public Optional<DetalleFinca> update(Long id, DetalleFinca detalle) {
+    public Optional<DetalleFinca> update(Long id, DetalleFinca detalleUpdate) {
+        if (jpaDetalleFincaRepository.existsById(id)){
+            DetalleFincaEntity detalleaEntity = detalleFincaModelMappers.fromDomainModel(detalleUpdate);
+            DetalleFincaEntity updateDetalleEntity = jpaDetalleFincaRepository.save(detalleaEntity);
+            return Optional.of(detalleFincaModelMappers.toDomainModel(updateDetalleEntity));
+        }
         return Optional.empty();
     }
 

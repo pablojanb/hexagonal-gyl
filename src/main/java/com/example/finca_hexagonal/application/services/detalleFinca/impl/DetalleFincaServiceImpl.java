@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTOR
 import com.example.finca_hexagonal.application.mappers.DetalleFincaDTOMapper;
 import com.example.finca_hexagonal.application.services.detalleFinca.DetalleFincaService;
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
+import com.example.finca_hexagonal.domain.models.Direccion;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +43,20 @@ public class DetalleFincaServiceImpl implements DetalleFincaService {
     }
 
     @Override
-    public Optional<DetalleFincaDTOResponse> update(Long id, DetalleFincaDTORequest detalle) {
-        return Optional.empty();
+    public Optional<DetalleFincaDTOResponse> update(Long id, DetalleFincaDTORequest detalleDto) {
+        DetalleFinca detalleToUpdate = detalleFincaModelService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Detalle no encontrado: " + id));
+        DetalleFinca newData = detalleFincaDTOMapper.toModel(detalleDto);
+        detalleToUpdate.setFinca(newData.getFinca());
+        detalleToUpdate.setCantBano(newData.getCantBano());
+        detalleToUpdate.setCantHabitacion(newData.getCantHabitacion());
+        detalleToUpdate.setDescripcion(newData.getDescripcion());
+        detalleToUpdate.setCapacidadMaxima(newData.getCapacidadMaxima());
+        detalleToUpdate.setMetrosCuadrados(newData.getMetrosCuadrados());
+        DetalleFinca detalleUpdated = detalleFincaModelService.update(id, detalleToUpdate)
+                .orElseThrow(() -> new EntityNotFoundException("Detalle no encontrado: " + id));
+
+        return Optional.of(detalleFincaDTOMapper.toDto(detalleUpdated));
     }
 
     @Override
