@@ -43,6 +43,11 @@ public class DocumentacionRepositoryAdapter implements DocumentacionModelPort {
 
     @Override
     public Optional<Documentacion> updateById(Long id, Documentacion documentacionUpdate) {
+        if (jpaDocumentacionRepository.existsById(id)){
+            DocumentacionEntity documentacionEntity = documentacionModelMappers.fromDomainModel(documentacionUpdate);
+            DocumentacionEntity updateDocumentacionEntity = jpaDocumentacionRepository.save(documentacionEntity);
+            return Optional.of(documentacionModelMappers.toDomainModel(updateDocumentacionEntity));
+        }
         return Optional.empty();
     }
 
