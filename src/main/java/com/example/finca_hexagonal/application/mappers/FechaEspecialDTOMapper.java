@@ -3,14 +3,10 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialRequestDTO;
 import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialResponseDTO;
-import com.example.finca_hexagonal.application.dto.horarios.HorarioRequestDTO;
-import com.example.finca_hexagonal.application.dto.horarios.HorarioResponseDTO;
-import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.models.Finca;
-import com.example.finca_hexagonal.domain.models.Horario;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 

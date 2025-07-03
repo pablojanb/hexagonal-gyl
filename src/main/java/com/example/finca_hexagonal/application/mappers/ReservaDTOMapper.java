@@ -2,8 +2,8 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.reservas.ReservaRequestDTO;
 import com.example.finca_hexagonal.application.dto.reservas.ReservaResponseDTO;
-import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
-import com.example.finca_hexagonal.application.services.Usuario.impl.UsuarioModelService;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
+import com.example.finca_hexagonal.application.services.usuario.impl.UsuarioModelService;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.domain.models.Usuario;

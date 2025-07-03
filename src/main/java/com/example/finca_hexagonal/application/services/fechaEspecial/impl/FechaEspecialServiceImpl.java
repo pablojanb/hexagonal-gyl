@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.application.services.fechaEspecial.impl;
 
 import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialRequestDTO;
 import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialResponseDTO;
-import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.application.services.fechaEspecial.FechaEspecialService;
 import org.springframework.stereotype.Service;
 

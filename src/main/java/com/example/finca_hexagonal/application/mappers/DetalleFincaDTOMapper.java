@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTORequest;
 import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTOResponse;
-import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
 import com.example.finca_hexagonal.domain.models.Finca;
 import org.mapstruct.Mapper;

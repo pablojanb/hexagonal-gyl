@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest;
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
-import com.example.finca_hexagonal.application.services.Direccion.DireccionService;
+import com.example.finca_hexagonal.application.services.direccion.DireccionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

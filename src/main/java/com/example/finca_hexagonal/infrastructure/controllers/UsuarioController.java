@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequstDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
-import com.example.finca_hexagonal.application.services.Usuario.UsuarioService;
+import com.example.finca_hexagonal.application.services.usuario.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

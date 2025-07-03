@@ -2,9 +2,7 @@ package com.example.finca_hexagonal.infrastructure.controllers;
 
 import com.example.finca_hexagonal.application.dto.extras.ExtraRequestDTO;
 import com.example.finca_hexagonal.application.dto.extras.ExtraResponseDTO;
-import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
-import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
-import com.example.finca_hexagonal.application.services.Extra.ExtraService;
+import com.example.finca_hexagonal.application.services.extra.ExtraService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

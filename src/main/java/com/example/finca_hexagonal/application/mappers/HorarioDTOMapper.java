@@ -2,7 +2,7 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.horarios.HorarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.horarios.HorarioResponseDTO;
-import com.example.finca_hexagonal.application.services.FincaService.impl.FincaModelService;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Horario;
 import org.mapstruct.Mapper;

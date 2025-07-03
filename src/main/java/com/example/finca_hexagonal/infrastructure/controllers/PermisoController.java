@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.services.Permiso.impl.PermisoModelService;
+import com.example.finca_hexagonal.application.services.permiso.impl.PermisoModelService;
 import com.example.finca_hexagonal.domain.models.Permiso;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

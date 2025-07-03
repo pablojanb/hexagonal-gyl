@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.services.Rol.impl.RolModelService;
+import com.example.finca_hexagonal.application.services.rol.impl.RolModelService;
 import com.example.finca_hexagonal.domain.models.Rol;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
