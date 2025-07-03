@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
@@ -31,12 +32,14 @@ public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
 
     @Override
     public Optional<DetalleFinca> findById(Long id) {
-        return Optional.empty();
+        return jpaDetalleFincaRepository.findById(id).map(detalleFincaModelMappers::toDomainModel);
     }
 
     @Override
     public List<DetalleFinca> findAll() {
-        return List.of();
+        return jpaDetalleFincaRepository.findAll().stream()
+                .map(detalleFincaModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override

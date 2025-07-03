@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTOR
 import com.example.finca_hexagonal.application.mappers.DetalleFincaDTOMapper;
 import com.example.finca_hexagonal.application.services.DetalleFinca.DetalleFincaService;
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,12 +30,15 @@ public class DetalleFincaServiceImpl implements DetalleFincaService {
 
     @Override
     public Optional<DetalleFincaDTOResponse> findById(Long id) {
-        return Optional.empty();
+        DetalleFinca detalle = detalleFincaModelService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Detalle no encontrado: " + id));
+        return Optional.of(detalleFincaDTOMapper.toDto(detalle));
     }
 
     @Override
     public List<DetalleFincaDTOResponse> findAll() {
-        return List.of();
+        List<DetalleFinca> detalles = detalleFincaModelService.getAll();
+        return detalleFincaDTOMapper.toDtoList(detalles);
     }
 
     @Override

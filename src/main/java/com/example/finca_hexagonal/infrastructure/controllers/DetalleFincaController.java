@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/detalles")
 public class DetalleFincaController {
@@ -20,6 +22,18 @@ public class DetalleFincaController {
     @PostMapping
     public ResponseEntity<DetalleFincaDTOResponse> createDetalleFinca(@RequestBody DetalleFincaDTORequest detalleDTO){
         return new ResponseEntity<>(detalleFincaService.save(detalleDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getAllDetalles")
+    public ResponseEntity<List<DetalleFincaDTOResponse>> getAllExtras(){
+        return new ResponseEntity<>(detalleFincaService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getDetalleById/{detalleId}")
+    public ResponseEntity<DetalleFincaDTOResponse> getDetalleById(@PathVariable Long detalleId){
+        return detalleFincaService.findById(detalleId)
+                .map(detalle -> new ResponseEntity<>(detalle, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/deleteDetalleFincaById/{detalleId}")
