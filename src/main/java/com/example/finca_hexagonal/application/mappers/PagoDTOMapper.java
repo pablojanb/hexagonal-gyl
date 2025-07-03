@@ -3,7 +3,7 @@ package com.example.finca_hexagonal.application.mappers;
 import com.example.finca_hexagonal.application.dto.pago.PagoRequestDTO;
 import com.example.finca_hexagonal.application.dto.pago.PagoResponseDTO;
 import com.example.finca_hexagonal.application.services.ModoDePago.Impl.ModoDePagoUseCaseService;
-import com.example.finca_hexagonal.application.services.Reserva.impl.ReservaModelService;
+import com.example.finca_hexagonal.application.services.reserva.impl.ReservaModelService;
 import com.example.finca_hexagonal.domain.models.ModoDePago;
 import com.example.finca_hexagonal.domain.models.Pago;
 import com.example.finca_hexagonal.domain.models.Reserva;
