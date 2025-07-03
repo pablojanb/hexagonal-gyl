@@ -5,7 +5,6 @@ import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTOR
 import com.example.finca_hexagonal.application.mappers.DetalleFincaDTOMapper;
 import com.example.finca_hexagonal.application.services.detalleFinca.DetalleFincaService;
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.models.Direccion;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 

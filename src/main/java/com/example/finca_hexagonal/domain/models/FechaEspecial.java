@@ -1,15 +1,17 @@
 package com.example.finca_hexagonal.domain.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class FechaEspecial {
     private Long id;
-    private LocalDateTime fecha;
-    private String dia_semana;
-    private LocalDateTime hora_inicio;
-    private LocalDateTime hora_fin;
+    private Finca finca;
+    private LocalDate fecha;
+    private String diaSemana;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
     private BigDecimal descuento;
     private BigDecimal recargo;
     private String motivo;
@@ -17,12 +19,13 @@ public class FechaEspecial {
     public FechaEspecial() {
     }
 
-    public FechaEspecial(Long id, LocalDateTime fecha, String dia_semana, LocalDateTime hora_inicio, LocalDateTime hora_fin, BigDecimal descuento, BigDecimal recargo, String motivo) {
+    public FechaEspecial(Long id, Finca finca, LocalDate fecha, String diaSemana, LocalTime horaInicio, LocalTime horaFin, BigDecimal descuento, BigDecimal recargo, String motivo) {
         this.id = id;
+        this.finca = finca;
         this.fecha = fecha;
-        this.dia_semana = dia_semana;
-        this.hora_inicio = hora_inicio;
-        this.hora_fin = hora_fin;
+        this.diaSemana = diaSemana;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
         this.descuento = descuento;
         this.recargo = recargo;
         this.motivo = motivo;
@@ -36,36 +39,44 @@ public class FechaEspecial {
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
+    public Finca getFinca() {
+        return finca;
+    }
+
+    public void setFinca(Finca finca) {
+        this.finca = finca;
+    }
+
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public String getDia_semana() {
-        return dia_semana;
+    public String getDiaSemana() {
+        return diaSemana;
     }
 
-    public void setDia_semana(String dia_semana) {
-        this.dia_semana = dia_semana;
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
-    public LocalDateTime getHora_inicio() {
-        return hora_inicio;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHora_inicio(LocalDateTime hora_inicio) {
-        this.hora_inicio = hora_inicio;
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public LocalDateTime getHora_fin() {
-        return hora_fin;
+    public LocalTime getHoraFin() {
+        return horaFin;
     }
 
-    public void setHora_fin(LocalDateTime hora_fin) {
-        this.hora_fin = hora_fin;
+    public void setHoraFin(LocalTime horaFin) {
+        this.horaFin = horaFin;
     }
 
     public BigDecimal getDescuento() {
@@ -91,5 +102,4 @@ public class FechaEspecial {
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
-
 }

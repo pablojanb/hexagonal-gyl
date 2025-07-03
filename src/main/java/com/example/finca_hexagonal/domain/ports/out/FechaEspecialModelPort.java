@@ -1,7 +1,6 @@
 package com.example.finca_hexagonal.domain.ports.out;
 
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
-import com.example.finca_hexagonal.domain.models.Horario;
 
 import java.util.List;
 import java.util.Optional;

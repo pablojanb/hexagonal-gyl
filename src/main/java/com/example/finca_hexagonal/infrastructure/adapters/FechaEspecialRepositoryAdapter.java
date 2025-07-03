@@ -1,8 +1,5 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
-
-
-
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.ports.out.FechaEspecialModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.FechaEspecialEntity;
@@ -27,7 +24,9 @@ public class FechaEspecialRepositoryAdapter implements FechaEspecialModelPort {
 
     @Override
     public FechaEspecial create(FechaEspecial fechaEspecial){
-        return null;
+        FechaEspecialEntity fechaEspecialEntity = fechaEspecialMappers.fromDomainModel(fechaEspecial);
+        FechaEspecialEntity newFechaEspecialEntity = jpaFechaEspecialRepository.save(fechaEspecialEntity);
+        return fechaEspecialMappers.toDomainModel(newFechaEspecialEntity);
     }
 
     @Override

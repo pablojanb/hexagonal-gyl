@@ -7,6 +7,7 @@ import com.example.finca_hexagonal.application.services.finca.impl.FincaModelSer
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.models.Finca;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,8 +20,11 @@ public abstract class FechaEspecialDTOMapper {
     @Autowired
     private FincaModelService fincaModelService;
 
+    @Mapping(source = "fincaId", target = "finca", qualifiedByName = "mapFincaDtoToFinca")
     public abstract FechaEspecial toModel(FechaEspecialRequestDTO fechaEspecialRequestDTO);
 
+    @Mapping(source = "finca.id", target = "fincaId")
+    @Mapping(source = "finca.nombre", target = "finca")
     public abstract FechaEspecialResponseDTO toDto(FechaEspecial fechaEspecial);
 
     public abstract List<FechaEspecialResponseDTO> toDtoList(List<FechaEspecial> fechaEspecial);
@@ -31,6 +35,5 @@ public abstract class FechaEspecialDTOMapper {
         return fincaModelService.getFincaById(id_finca)
                 .orElseThrow(() -> new IllegalArgumentException("Finca no encontrada: " + id_finca));
     }
-
 
 }

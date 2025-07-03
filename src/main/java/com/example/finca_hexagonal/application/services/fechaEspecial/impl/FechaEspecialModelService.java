@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-// todos Implementa los casos de uso
 
 @Service
 public class FechaEspecialModelService implements CreateFechaEspecialUseCase, DeleteFechaEspecialUseCase, UpdateFechaEspecialUseCase, GetFechaEspecialUseCase {
