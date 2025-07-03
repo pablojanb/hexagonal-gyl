@@ -32,7 +32,9 @@ public class FechaEspecialController {
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<FechaEspecialResponseDTO> getById(@PathVariable Long id) {
-        return new ResponseEntity<>(fechaEspecialService.getById(id), HttpStatus.OK);
+        return fechaEspecialService.getById(id)
+                .map(horario -> new ResponseEntity<>(horario, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/findAllFechaEspecialByFincaId/{fincaId}")
