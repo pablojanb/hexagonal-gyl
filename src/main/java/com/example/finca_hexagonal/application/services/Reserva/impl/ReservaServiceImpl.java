@@ -37,14 +37,14 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Optional<ReservaResponseDTO> getById(Long reservaId) {
-        Reserva reserva = reservaModelService.getReserva(reservaId)
+        Reserva reserva = reservaModelService.getReservaById(reservaId)
                 .orElseThrow(() -> new EntityNotFoundException("Reserva no encontrada: " + reservaId));
         return Optional.of(reservaDTOMapper.toDto(reserva));
     }
 
     @Override
     public Optional<ReservaResponseDTO> updateById(Long reservaId, ReservaRequestDTO updateReservaDto) {
-        Reserva reservaToUpdate = reservaModelService.getReserva(reservaId)
+        Reserva reservaToUpdate = reservaModelService.getReservaById(reservaId)
                 .orElseThrow(() -> new EntityNotFoundException("Reserva no encontrada: " + reservaId));
         Reserva newData = reservaDTOMapper.toModel(updateReservaDto);
         reservaToUpdate.setUsuario(newData.getUsuario());

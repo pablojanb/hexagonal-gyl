@@ -41,8 +41,8 @@ public class ReservaModelService implements CreateReservaUseCase, GetReservaUseC
     }
 
     @Override
-    public Optional<Reserva> getReserva(Long reservaId) {
-        return getReservaUseCase.getReserva(reservaId);
+    public Optional<Reserva> getReservaById(Long reservaId) {
+        return getReservaUseCase.getReservaById(reservaId);
     }
 
     @Override
