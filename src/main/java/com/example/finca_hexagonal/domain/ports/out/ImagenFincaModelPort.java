@@ -14,5 +14,7 @@ public interface ImagenFincaModelPort {
 
     List<ImagenFinca> findByFinca(Long fincaId);
 
+    List<ImagenFinca> getAllImagenFinca();
+
     boolean delete(Long id);
 }

@@ -44,6 +44,11 @@ public class ImagenFincaServiceImpl implements ImagenFincaService {
     }
 
     @Override
+    public List<ImagenFincaDTOResponse> getAllImagenFinca() {
+        return List.of();
+    }
+
+    @Override
     public boolean deleteById(Long id) {
         return false;
     }

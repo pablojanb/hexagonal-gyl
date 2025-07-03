@@ -26,4 +26,9 @@ public class GetImagenFincaUseCaseImpl implements GetImagenFincaUseCase {
     public Optional<ImagenFinca> findById(Long id) {
         return imagenFincaModelPort.findById(id);
     }
+
+    @Override
+    public List<ImagenFinca> getAllImagenFinca() {
+        return imagenFincaModelPort.getAllImagenFinca();
+    }
 }

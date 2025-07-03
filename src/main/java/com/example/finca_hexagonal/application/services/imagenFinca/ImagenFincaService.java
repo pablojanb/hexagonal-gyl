@@ -15,5 +15,7 @@ public interface ImagenFincaService {
 
     List<ImagenFincaDTOResponse> getByFincaId(Long fincaId);
 
+    List<ImagenFincaDTOResponse> getAllImagenFinca();
+
     boolean deleteById(Long id);
 }

@@ -52,6 +52,13 @@ public class ImagenFincaRepositoryAdapter implements ImagenFincaModelPort {
     }
 
     @Override
+    public List<ImagenFinca> getAllImagenFinca() {
+        return jpaImagenFincaRepository.findAll().stream()
+                .map(imagenFincaModelMappers::toDomainModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean delete(Long id) {
         if (jpaImagenFincaRepository.existsById(id)){
             jpaImagenFincaRepository.deleteById(id);

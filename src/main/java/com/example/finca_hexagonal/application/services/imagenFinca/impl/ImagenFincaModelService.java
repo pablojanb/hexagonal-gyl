@@ -46,6 +46,11 @@ public class ImagenFincaModelService implements CreateImagenFincaUseCase, GetIma
     }
 
     @Override
+    public List<ImagenFinca> getAllImagenFinca() {
+        return getImagenFincaUseCase.getAllImagenFinca();
+    }
+
+    @Override
     public Optional<ImagenFinca> update(Long id, ImagenFinca imagenFinca) {
         return updateImagenFincaUseCase.update(id, imagenFinca);
     }

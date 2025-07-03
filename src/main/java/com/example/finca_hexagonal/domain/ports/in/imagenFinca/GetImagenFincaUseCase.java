@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface GetImagenFincaUseCase {
     List<ImagenFinca> getAllByFincaId(Long id);
     Optional<ImagenFinca> findById(Long id);
+    List<ImagenFinca> getAllImagenFinca();
 }
