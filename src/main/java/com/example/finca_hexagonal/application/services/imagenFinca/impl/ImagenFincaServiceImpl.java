@@ -4,7 +4,10 @@ import com.example.finca_hexagonal.application.dto.imagenFinca.ImagenFincaDTOReq
 import com.example.finca_hexagonal.application.dto.imagenFinca.ImagenFincaDTOResponse;
 import com.example.finca_hexagonal.application.mappers.ImagenFincaDTOMapper;
 import com.example.finca_hexagonal.application.services.imagenFinca.ImagenFincaService;
+import com.example.finca_hexagonal.domain.models.DetalleFinca;
 import com.example.finca_hexagonal.domain.models.ImagenFinca;
+import com.example.finca_hexagonal.domain.models.Pago;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,26 +33,26 @@ public class ImagenFincaServiceImpl implements ImagenFincaService {
 
     @Override
     public Optional<ImagenFincaDTOResponse> getById(Long id) {
-        return Optional.empty();
+        ImagenFinca imagen = imagenFincaModelService.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Imagen no encontrada: " + id));
+        return Optional.of(imagenFincaDTOMapper.toDto(imagen));
     }
 
     @Override
-    public Optional<ImagenFincaDTOResponse> updateById(Long id, ImagenFincaDTORequest imagenFincaUpdate) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<ImagenFincaDTOResponse> getByFincaId(Long fincaId) {
-        return List.of();
+    public Optional<ImagenFincaDTOResponse> updateById(Long id, ImagenFincaDTORequest imagenDto) {
+        ImagenFinca imagenFinca = imagenFincaDTOMapper.toModel(imagenDto);
+        return imagenFincaModelService.update(id, imagenFinca)
+                .map(imagenFincaDTOMapper::toDto);
     }
 
     @Override
     public List<ImagenFincaDTOResponse> getAllImagenFinca() {
-        return List.of();
+        List<ImagenFinca> imagenFinca = imagenFincaModelService.getAllImagenFinca();
+        return imagenFincaDTOMapper.toDtoList(imagenFinca);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        return imagenFincaModelService.delete(id);
     }
 }

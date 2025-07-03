@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/imagenes-finca")
@@ -30,8 +31,8 @@ public class ImagenFincaController {
     }
 
     @GetMapping("/getImagenFincaById/{imagenFincaId}")
-    public ResponseEntity<List<ImagenFincaDTOResponse>> getImagenFincaById(@PathVariable Long imagenFincaId){
-        return new ResponseEntity<>(imagenFincaService.getByFincaId(imagenFincaId), HttpStatus.OK);
+    public ResponseEntity<Optional<ImagenFincaDTOResponse>> getImagenFincaById(@PathVariable Long imagenFincaId){
+        return new ResponseEntity<>(imagenFincaService.getById(imagenFincaId), HttpStatus.OK);
     }
 
     @PutMapping("/updateImagenFinca/{imagenFincaId}")
