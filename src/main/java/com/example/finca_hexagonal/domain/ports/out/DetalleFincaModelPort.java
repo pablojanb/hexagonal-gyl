@@ -12,7 +12,8 @@ public interface DetalleFincaModelPort {
 
     List<DetalleFinca> findAll();
 
-    DetalleFinca update(DetalleFinca detalle);
-    void delete(Long id);
+    Optional<DetalleFinca> update(Long id, DetalleFinca detalle);
+
+    boolean delete(Long id);
 }
 

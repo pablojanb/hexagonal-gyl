@@ -18,23 +18,18 @@ public class DetalleFincaEntity {
     private int cantBano;
     private double metrosCuadrados;
     private int capacidadMaxima;
-    private boolean wifi;
-    private boolean piscina;
-    private boolean parrilla;
 
     public DetalleFincaEntity() {
     }
 
-    public DetalleFincaEntity(Long id, String descripcion, int cantHabitacion, int cantBano, double metrosCuadrados, int capacidadMaxima, boolean wifi, boolean piscina, boolean parrilla) {
+    public DetalleFincaEntity(Long id, FincaEntity finca, String descripcion, int cantHabitacion, int cantBano, double metrosCuadrados, int capacidadMaxima) {
         this.id = id;
+        this.finca = finca;
         this.descripcion = descripcion;
         this.cantHabitacion = cantHabitacion;
         this.cantBano = cantBano;
         this.metrosCuadrados = metrosCuadrados;
         this.capacidadMaxima = capacidadMaxima;
-        this.wifi = wifi;
-        this.piscina = piscina;
-        this.parrilla = parrilla;
     }
 
     public Long getId() {
@@ -43,6 +38,14 @@ public class DetalleFincaEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public FincaEntity getFinca() {
+        return finca;
+    }
+
+    public void setFinca(FincaEntity finca) {
+        this.finca = finca;
     }
 
     public String getDescripcion() {
@@ -83,29 +86,5 @@ public class DetalleFincaEntity {
 
     public void setCapacidadMaxima(int capacidadMaxima) {
         this.capacidadMaxima = capacidadMaxima;
-    }
-
-    public boolean isWifi() {
-        return wifi;
-    }
-
-    public void setWifi(boolean wifi) {
-        this.wifi = wifi;
-    }
-
-    public boolean isPiscina() {
-        return piscina;
-    }
-
-    public void setPiscina(boolean piscina) {
-        this.piscina = piscina;
-    }
-
-    public boolean isParrilla() {
-        return parrilla;
-    }
-
-    public void setParrilla(boolean parrilla) {
-        this.parrilla = parrilla;
     }
 }
