@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ImagenFincaRepositoryAdapter implements ImagenFincaModelPort {
@@ -30,21 +31,32 @@ public class ImagenFincaRepositoryAdapter implements ImagenFincaModelPort {
 
     @Override
     public Optional<ImagenFinca> findById(Long id) {
-        return Optional.empty();
+        return jpaImagenFincaRepository.findById(id).map(imagenFincaModelMappers::toDomainModel);
     }
 
     @Override
     public Optional<ImagenFinca> updateById(Long id, ImagenFinca imagenFincaUpdate) {
+        if (jpaImagenFincaRepository.existsById(id)){
+            ImagenFincaEntity imagenFincaEntity = imagenFincaModelMappers.fromDomainModel(imagenFincaUpdate);
+            ImagenFincaEntity newImagenFincaEntity = jpaImagenFincaRepository.save(imagenFincaEntity);
+            return Optional.of(imagenFincaModelMappers.toDomainModel(newImagenFincaEntity));
+        }
         return Optional.empty();
     }
 
     @Override
     public List<ImagenFinca> findByFinca(Long fincaId) {
-        return List.of();
+        return jpaImagenFincaRepository.findAllByFincaId(fincaId).stream()
+                .map(imagenFincaModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean delete(Long id) {
+        if (jpaImagenFincaRepository.existsById(id)){
+            jpaImagenFincaRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 }
