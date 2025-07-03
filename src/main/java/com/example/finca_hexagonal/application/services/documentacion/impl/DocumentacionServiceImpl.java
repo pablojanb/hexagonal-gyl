@@ -59,6 +59,6 @@ public class DocumentacionServiceImpl implements DocumentacionService {
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        return documentacionModelService.deleteDocumentacion(id);
     }
 }

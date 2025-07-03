@@ -53,6 +53,10 @@ public class DocumentacionRepositoryAdapter implements DocumentacionModelPort {
 
     @Override
     public boolean deleteById(Long id) {
+        if (jpaDocumentacionRepository.existsById(id)){
+            jpaDocumentacionRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 }

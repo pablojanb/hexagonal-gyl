@@ -1,7 +1,5 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest;
-import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
 import com.example.finca_hexagonal.application.dto.documentacion.DocumentacionRequestDTO;
 import com.example.finca_hexagonal.application.dto.documentacion.DocumentacionResponseDTO;
 import com.example.finca_hexagonal.application.services.documentacion.DocumentacionService;
@@ -43,5 +41,13 @@ public class DocumentacionController {
         return documentacionService.updateById(documentacionId, documentacionUpdate)
                 .map(documentacion -> new ResponseEntity<>(documentacion, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/deleteDocumentacionById/{documentacionId}")
+    public ResponseEntity<Void> deleteDocumentacionById(@PathVariable Long documentacionId){
+        if (documentacionService.deleteById(documentacionId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
