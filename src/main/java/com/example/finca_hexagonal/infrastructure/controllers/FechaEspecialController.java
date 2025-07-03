@@ -32,12 +32,22 @@ public class FechaEspecialController {
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<FechaEspecialResponseDTO> getById(@PathVariable Long id) {
-        return new ResponseEntity<>(fechaEspecialService.getById(id), HttpStatus.OK);
+        return fechaEspecialService.getById(id)
+                .map(fecha -> new ResponseEntity<>(fecha, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/findAllFechaEspecialByFincaId/{fincaId}")
     public ResponseEntity <List<FechaEspecialResponseDTO>> findAllFechaEspecialByFincaId(@PathVariable Long fincaId) {
         return new ResponseEntity<>(fechaEspecialService.getAll(), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateFechaEspecial/{fechaId}")
+    public ResponseEntity<FechaEspecialResponseDTO> updateFecha(@PathVariable Long fechaId,
+                                                                  @RequestBody FechaEspecialRequestDTO fechaUpdate){
+        return fechaEspecialService.update(fechaId, fechaUpdate)
+                .map(fecha -> new ResponseEntity<>(fecha, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/delete/{idfecha}")

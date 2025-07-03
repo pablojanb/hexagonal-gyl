@@ -5,6 +5,7 @@ import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialRe
 import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialResponseDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FechaEspecialService {
 
@@ -12,9 +13,9 @@ public interface FechaEspecialService {
 
     List<FechaEspecialResponseDTO> getAll();
 
-    FechaEspecialResponseDTO getById(Long idfecha);
+    Optional<FechaEspecialResponseDTO> getById(Long idfecha);
 
-    FechaEspecialResponseDTO update(Long idfecha, FechaEspecialRequestDTO fechaEspeciaRequestlDTO);
+    Optional<FechaEspecialResponseDTO> update(Long idfecha, FechaEspecialRequestDTO fechaEspeciaRequestlDTO);
 
     boolean delete(Long idfecha);
 
