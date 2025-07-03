@@ -13,8 +13,6 @@ public interface ImagenFincaService {
 
     Optional<ImagenFincaDTOResponse> updateById(Long id, ImagenFincaDTORequest imagenFincaUpdate);
 
-    List<ImagenFincaDTOResponse> getByFincaId(Long fincaId);
-
     List<ImagenFincaDTOResponse> getAllImagenFinca();
 
     boolean deleteById(Long id);
