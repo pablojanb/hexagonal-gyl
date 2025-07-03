@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/modo-de-pago")
@@ -25,30 +26,56 @@ public class ModoDePagoController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
+
+
+
     @GetMapping
     public ResponseEntity<List<ModoDePagoResponseDTO>> getAll() {
         return new ResponseEntity<>(modoDePagoService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ModoDePagoResponseDTO> getById(@PathVariable Long id) {
-        return modoDePagoService.getById(id)
-                .map(modo -> new ResponseEntity<>(modo, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        Optional<ModoDePagoResponseDTO> resultado = modoDePagoService.getById(id);
+
+        if (resultado.isPresent()) {
+            return ResponseEntity.ok(resultado.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontró el modo de pago con el ID: " + id);
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ModoDePagoResponseDTO> update(@PathVariable Long id, @RequestBody ModoDePagoRequestDTO dto) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ModoDePagoRequestDTO dto) {
         return modoDePagoService.updateById(id, dto)
-                .map(updated -> new ResponseEntity<>(updated, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .map(updated -> ResponseEntity.ok("Modo de pago con ID " + id + " actualizado correctamente."))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("No se encontró un modo de pago con ID " + id + ". No se pudo actualizar."));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (modoDePagoService.delete(id)) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        List<ModoDePagoResponseDTO> modos = modoDePagoService.getAll();
+
+        if (modos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No existen modos de pago registrados. Por favor, agregue uno primero.");
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return modoDePagoService.getById(id)
+                .map(modo -> {
+                    boolean deleted = modoDePagoService.delete(id);
+                    if (deleted) {
+                        return ResponseEntity.ok("Modo de pago eliminado correctamente.");
+                    } else {
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body("Ocurrió un error al eliminar el modo de pago.");
+                    }
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Modo de pago con ID " + id + " no encontrado."));
     }
+
+
 }

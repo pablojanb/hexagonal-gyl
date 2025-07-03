@@ -25,6 +25,7 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public ReservaResponseDTO create(ReservaRequestDTO reservaDto) {
         Reserva reserva = reservaDTOMapper.toModel(reservaDto);
+        reserva.calcularTotalReserva();
         Reserva newReserva = reservaModelService.createReserva(reserva);
         return reservaDTOMapper.toDto(newReserva);
     }
