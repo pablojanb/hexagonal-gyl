@@ -1,74 +1,63 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
 import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.ports.out.DetalleFincaRepository;
+import com.example.finca_hexagonal.domain.ports.out.DetalleFincaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.DetalleFincaEntity;
+import com.example.finca_hexagonal.infrastructure.mappers.DetalleFincaModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaDetalleFincaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
-public class DetalleFincaRepositoryAdapter implements DetalleFincaRepository {
+@Component
+public class DetalleFincaRepositoryAdapter implements DetalleFincaModelPort {
 
-    private final JpaDetalleFincaRepository jpaRepository;
+    private final DetalleFincaModelMappers detalleFincaModelMappers;
+    private final JpaDetalleFincaRepository jpaDetalleFincaRepository;
 
-    public DetalleFincaRepositoryAdapter(JpaDetalleFincaRepository jpaRepository) {
-        this.jpaRepository = jpaRepository;
+    public DetalleFincaRepositoryAdapter(DetalleFincaModelMappers detalleFincaModelMappers, JpaDetalleFincaRepository jpaDetalleFincaRepository) {
+        this.detalleFincaModelMappers = detalleFincaModelMappers;
+        this.jpaDetalleFincaRepository = jpaDetalleFincaRepository;
     }
 
-    private DetalleFincaEntity toEntity(DetalleFinca model) {
-        return DetalleFincaEntity.builder()
-                .idDetalle(model.getIdDetalle())
-                .descripcion(model.getDescripcion())
-                .cantHabitacion(model.getCantHabitacion())
-                .cantBano(model.getCantBano())
-                .metrosCuadrados(model.getMetrosCuadrados())
-                .capacidadMaxima(model.getCapacidadMaxima())
-                .wifi(model.isWifi())
-                .piscina(model.isPiscina())
-                .parrilla(model.isParrilla())
-                .build();
-    }
 
-    private DetalleFinca toModel(DetalleFincaEntity entity) {
-        return new DetalleFinca(
-                entity.getIdDetalle(),
-                entity.getDescripcion(),
-                entity.getCantHabitacion(),
-                entity.getCantBano(),
-                entity.getMetrosCuadrados(),
-                entity.getCapacidadMaxima(),
-                entity.isWifi(),
-                entity.isPiscina(),
-                entity.isParrilla()
-        );
+    @Override
+    public DetalleFinca save(DetalleFinca detalle) {
+        DetalleFincaEntity detalleFincaEntity = detalleFincaModelMappers.fromDomainModel(detalle);
+        DetalleFincaEntity newDetalleFincaEntity = jpaDetalleFincaRepository.save(detalleFincaEntity);
+        return detalleFincaModelMappers.toDomainModel(newDetalleFincaEntity);
     }
 
     @Override
-    public DetalleFinca guardar(DetalleFinca detalle) {
-        return toModel(jpaRepository.save(toEntity(detalle)));
+    public Optional<DetalleFinca> findById(Long id) {
+        return jpaDetalleFincaRepository.findById(id).map(detalleFincaModelMappers::toDomainModel);
     }
 
     @Override
-    public Optional<DetalleFinca> buscarPorId(Long id) {
-        return jpaRepository.findById(id).map(this::toModel);
+    public List<DetalleFinca> findAll() {
+        return jpaDetalleFincaRepository.findAll().stream()
+                .map(detalleFincaModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<DetalleFinca> buscarTodos() {
-        return jpaRepository.findAll().stream().map(this::toModel).collect(Collectors.toList());
+    public Optional<DetalleFinca> update(Long id, DetalleFinca detalleUpdate) {
+        if (jpaDetalleFincaRepository.existsById(id)){
+            DetalleFincaEntity detalleaEntity = detalleFincaModelMappers.fromDomainModel(detalleUpdate);
+            DetalleFincaEntity updateDetalleEntity = jpaDetalleFincaRepository.save(detalleaEntity);
+            return Optional.of(detalleFincaModelMappers.toDomainModel(updateDetalleEntity));
+        }
+        return Optional.empty();
     }
 
     @Override
-    public DetalleFinca actualizar(DetalleFinca detalle) {
-        return toModel(jpaRepository.save(toEntity(detalle)));
-    }
-
-    @Override
-    public void eliminar(Long id) {
-        jpaRepository.deleteById(id);
+    public boolean delete(Long id) {
+        if (jpaDetalleFincaRepository.existsById(id)){
+            jpaDetalleFincaRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

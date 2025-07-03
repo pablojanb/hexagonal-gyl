@@ -1,25 +1,18 @@
 package com.example.finca_hexagonal.domain.ports.out;
 
-
-
 import com.example.finca_hexagonal.domain.models.Direccion;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface DireccionModelPort {
+    Direccion saveDireccion(Direccion direccion);
 
-    Direccion save(Direccion direccion);
+    boolean deleteById(Long id);
+
+    Optional<Direccion> updateById(Long id, Direccion updateDireccion);
+
     List<Direccion> findAll();
 
-    Optional<Direccion> findById(Long id_direccion);
-
-    Optional<Direccion> findByAltura(int altura);
-
-    Direccion update(Direccion direccion);
-
-    boolean delete(Long id_direccion);
-
-
-
+    Optional<Direccion> findById(Long id);
 }

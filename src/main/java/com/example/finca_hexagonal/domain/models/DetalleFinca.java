@@ -1,53 +1,81 @@
 package com.example.finca_hexagonal.domain.models;
 
 public class DetalleFinca {
-    private Long idDetalle;
+    private Long id;
+    private Finca finca;
     private String descripcion;
     private int cantHabitacion;
     private int cantBano;
     private double metrosCuadrados;
     private int capacidadMaxima;
-    private boolean wifi;
-    private boolean piscina;
-    private boolean parrilla;
 
-    public DetalleFinca(Long idDetalle, String descripcion, int cantHabitacion, int cantBano, double metrosCuadrados,
-                        int capacidadMaxima, boolean wifi, boolean piscina, boolean parrilla) {
-        this.idDetalle = idDetalle;
+    public DetalleFinca() {
+
+    }
+
+    public DetalleFinca(Long id, Finca finca, String descripcion, int cantHabitacion, int cantBano, double metrosCuadrados, int capacidadMaxima) {
+        this.id = id;
+        this.finca = finca;
         this.descripcion = descripcion;
         this.cantHabitacion = cantHabitacion;
         this.cantBano = cantBano;
         this.metrosCuadrados = metrosCuadrados;
         this.capacidadMaxima = capacidadMaxima;
-        this.wifi = wifi;
-        this.piscina = piscina;
-        this.parrilla = parrilla;
     }
 
-    public Long getIdDetalle() { return idDetalle; }
-    public void setIdDetalle(Long idDetalle) { this.idDetalle = idDetalle; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public int getCantHabitacion() { return cantHabitacion; }
-    public void setCantHabitacion(int cantHabitacion) { this.cantHabitacion = cantHabitacion; }
+    public Finca getFinca() {
+        return finca;
+    }
 
-    public int getCantBano() { return cantBano; }
-    public void setCantBano(int cantBano) { this.cantBano = cantBano; }
+    public void setFinca(Finca finca) {
+        this.finca = finca;
+    }
 
-    public double getMetrosCuadrados() { return metrosCuadrados; }
-    public void setMetrosCuadrados(double metrosCuadrados) { this.metrosCuadrados = metrosCuadrados; }
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-    public int getCapacidadMaxima() { return capacidadMaxima; }
-    public void setCapacidadMaxima(int capacidadMaxima) { this.capacidadMaxima = capacidadMaxima; }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-    public boolean isWifi() { return wifi; }
-    public void setWifi(boolean wifi) { this.wifi = wifi; }
+    public int getCantHabitacion() {
+        return cantHabitacion;
+    }
 
-    public boolean isPiscina() { return piscina; }
-    public void setPiscina(boolean piscina) { this.piscina = piscina; }
+    public void setCantHabitacion(int cantHabitacion) {
+        this.cantHabitacion = cantHabitacion;
+    }
 
-    public boolean isParrilla() { return parrilla; }
-    public void setParrilla(boolean parrilla) { this.parrilla = parrilla; }
+    public int getCantBano() {
+        return cantBano;
+    }
+
+    public void setCantBano(int cantBano) {
+        this.cantBano = cantBano;
+    }
+
+    public double getMetrosCuadrados() {
+        return metrosCuadrados;
+    }
+
+    public void setMetrosCuadrados(double metrosCuadrados) {
+        this.metrosCuadrados = metrosCuadrados;
+    }
+
+    public int getCapacidadMaxima() {
+        return capacidadMaxima;
+    }
+
+    public void setCapacidadMaxima(int capacidadMaxima) {
+        this.capacidadMaxima = capacidadMaxima;
+    }
 }

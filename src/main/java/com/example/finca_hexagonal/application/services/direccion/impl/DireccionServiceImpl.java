@@ -2,50 +2,61 @@ package com.example.finca_hexagonal.application.services.direccion.impl;
 
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest;
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
+import com.example.finca_hexagonal.application.mappers.DireccionDTOMapper;
 import com.example.finca_hexagonal.application.services.direccion.DireccionService;
+import com.example.finca_hexagonal.domain.models.Direccion;
+import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class DireccionServiceImpl implements DireccionService {
-    private final DireccionModelService direccionModelService;
-    // private final DireccionDTOMapper direccionDTOMapper;
 
-    public DireccionServiceImpl(DireccionModelService direccionModelService) {
-        this.direccionModelService = direccionModelService;
+    @Autowired
+    private DireccionModelService direccionModelService;
+    @Autowired
+    private DireccionDTOMapper direccionDTOMapper;
+
+    @Override
+    public DireccionDTOResponse createDireccion(DireccionDTORequest direccionDto) {
+        Direccion direccion = direccionDTOMapper.toModel(direccionDto);
+        Direccion newDireccion = direccionModelService.createDireccion(direccion);
+        return direccionDTOMapper.toDto(newDireccion);
     }
 
     @Override
-    public DireccionDTOResponse create(DireccionDTORequest direccionDto) {
-        return null;
+    public boolean deleteById(Long id) {
+        return direccionModelService.deleteDireccion(id);
     }
 
     @Override
-    public List<DireccionDTOResponse> getAll() {
-        return List.of();
+    public Optional<DireccionDTOResponse> updateDireccionById(Long id, DireccionDTORequest updateDireccionDto) {
+        Direccion direccionToUpdate = direccionModelService.getDireccionById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + id));
+        Direccion newData = direccionDTOMapper.toModel(updateDireccionDto);
+        direccionToUpdate.setDireccion(newData.getDireccion());
+        direccionToUpdate.setCiudad(newData.getCiudad());
+        direccionToUpdate.setProvincia(newData.getProvincia());
+        direccionToUpdate.setAclaracion(newData.getAclaracion());
+        Direccion direccionUpdated = direccionModelService.updateDireccion(id, direccionToUpdate)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + id));
+
+        return Optional.of(direccionDTOMapper.toDto(direccionUpdated));
     }
 
     @Override
-    public DireccionDTOResponse getById(Long id_direccion) {
-        return null;
+    public List<DireccionDTOResponse> getAllDirecciones() {
+        List<Direccion> direcciones = direccionModelService.getAllDirecciones();
+        return direccionDTOMapper.toDtoList(direcciones);
     }
 
     @Override
-    public DireccionDTOResponse getByAltura(int altura) {
-        return null;
-    }
-
-    @Override
-    public DireccionDTOResponse update(Long id_direccion, DireccionDTORequest direccionDto) {
-        return null;
-    }
-
-    @Override
-    public DireccionDTOResponse delete(Long id_direccion) {
-        return null;
-    }
-
-    @Override
-    public DireccionDTOResponse logicalDelete(Long id_direccion) {
-        return null;
+    public Optional<DireccionDTOResponse> getDireccionById(Long id) {
+        Direccion direccion = direccionModelService.getDireccionById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Direccion no encontrada: " + id));
+        return Optional.of(direccionDTOMapper.toDto(direccion));
     }
 }

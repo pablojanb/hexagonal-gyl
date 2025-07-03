@@ -1,13 +1,15 @@
 package com.example.finca_hexagonal.infrastructure.entities;
 
-
+import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "pago")
 public class PagoEntity {
@@ -20,18 +22,23 @@ public class PagoEntity {
     @JoinColumn(name = "reserva_id")
     private ReservaEntity reserva;
 
-    private BigDecimal monto_total;
+    @Column(name = "monto_total")
+    private BigDecimal montoTotal;
 
     @OneToOne
-    @JoinColumn(name = "modoPago_id")
+    @JoinColumn(name = "medio_de_pago_id")
     private ModoDePagoEntity modoDePago;
 
-    private LocalDateTime fecha_hora;
+    @Column(name = "fecha_hora")
+    private LocalDateTime fechaPago;
 
-    private BigDecimal descuento_aplicado;
+    @Column(name = "descuento_aplicado")
+    private BigDecimal descuentoAplicado;
 
-    private BigDecimal recargo_aplicado;
+    @Column(name = "recargo_aplicado")
+    private BigDecimal recargoAplicado;
 
-    private boolean estado_pago;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_pago")
+    private EstadoPago estadoPago;
 }

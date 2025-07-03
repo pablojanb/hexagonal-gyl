@@ -3,7 +3,7 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 import com.example.finca_hexagonal.domain.models.Horario;
 import com.example.finca_hexagonal.domain.ports.out.HorarioModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.HorarioEntity;
-import com.example.finca_hexagonal.infrastructure.mappers.HorarioMappers;
+import com.example.finca_hexagonal.infrastructure.mappers.HorarioModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaHorarioRepository;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 @Component
 public class HorarioRepositoryAdapter implements HorarioModelPort {
     private final JpaHorarioRepository jpaHorarioRepository;
-    private final HorarioMappers horarioMappers;
+    private final HorarioModelMappers horarioMappers;
 
-    public HorarioRepositoryAdapter(JpaHorarioRepository jpaHorarioRepository, HorarioMappers horarioMappers) {
+    public HorarioRepositoryAdapter(JpaHorarioRepository jpaHorarioRepository, HorarioModelMappers horarioMappers) {
         this.jpaHorarioRepository = jpaHorarioRepository;
         this.horarioMappers = horarioMappers;
     }
@@ -41,6 +41,20 @@ public class HorarioRepositoryAdapter implements HorarioModelPort {
     @Override
     public List<Horario> findAll() {
         return jpaHorarioRepository.findAll().stream()
+                .map(horarioMappers::toDomainModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Horario> findAllHorariosByFincaId(Long id) {
+        return jpaHorarioRepository.findByFincaId(id).stream()
+                .map(horarioMappers::toDomainModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Horario> findAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
+        return jpaHorarioRepository.findByFincaIdAndDiaSemana(id, dayOfWeek).stream()
                 .map(horarioMappers::toDomainModel)
                 .collect(Collectors.toList());
     }

@@ -1,12 +1,21 @@
 package com.example.finca_hexagonal.application.usecases.direccion;
 
-public class DeleteDireccionUseCaseImpl {
-<<<<<<< HEAD
-<<<<<<< HEAD
+import com.example.finca_hexagonal.domain.ports.in.direccion.DeleteDireccionUseCase;
+import com.example.finca_hexagonal.domain.ports.out.DireccionModelPort;
+import org.springframework.stereotype.Service;
 
-=======
->>>>>>> 8211f84 (Direccion y Fecha_Especial)
-=======
+@Service
+public class DeleteDireccionUseCaseImpl implements DeleteDireccionUseCase {
 
->>>>>>> 06956d0 (cambios prueba)
+    private final DireccionModelPort direccionModelPort;
+
+    public DeleteDireccionUseCaseImpl(DireccionModelPort direccionModelPort) {
+        this.direccionModelPort = direccionModelPort;
+    }
+
+    @Override
+    public boolean deleteDireccion(Long id) {
+        return direccionModelPort.deleteById(id);
+    }
 }
+

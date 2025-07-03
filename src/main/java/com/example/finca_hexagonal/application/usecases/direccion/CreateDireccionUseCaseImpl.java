@@ -1,12 +1,21 @@
 package com.example.finca_hexagonal.application.usecases.direccion;
 
-public class CreateDireccionUseCaseImpl {
-<<<<<<< HEAD
-<<<<<<< HEAD
+import com.example.finca_hexagonal.domain.models.Direccion;
+import com.example.finca_hexagonal.domain.ports.in.direccion.CreateDireccionUseCase;
+import com.example.finca_hexagonal.domain.ports.out.DireccionModelPort;
+import org.springframework.stereotype.Service;
 
-=======
->>>>>>> 8211f84 (Direccion y Fecha_Especial)
-=======
+@Service
+public class CreateDireccionUseCaseImpl implements CreateDireccionUseCase {
 
->>>>>>> 06956d0 (cambios prueba)
+    private final DireccionModelPort direccionModelPort;
+
+    public CreateDireccionUseCaseImpl(DireccionModelPort direccionModelPort) {
+        this.direccionModelPort = direccionModelPort;
+    }
+
+    @Override
+    public Direccion createDireccion(Direccion direccion) {
+        return direccionModelPort.saveDireccion(direccion);
+    }
 }

@@ -4,29 +4,16 @@ import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest
 import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
 
 import java.util.List;
-
+import java.util.Optional;
 
 public interface DireccionService {
-    DireccionDTOResponse create(DireccionDTORequest direccionDto);
+    DireccionDTOResponse createDireccion(DireccionDTORequest direccionDto);
 
-    List<DireccionDTOResponse> getAll();
+    boolean deleteById(Long id);
 
-    DireccionDTOResponse getById(Long id_direccion);
+    Optional<DireccionDTOResponse> updateDireccionById(Long id, DireccionDTORequest updateDireccionDto);
 
-    DireccionDTOResponse getByAltura(int altura);
+    List<DireccionDTOResponse> getAllDirecciones();
 
-    DireccionDTOResponse update(Long id_direccion, DireccionDTORequest direccionDto);
-
-    DireccionDTOResponse delete(Long id_direccion);
-
-    DireccionDTOResponse logicalDelete(Long id_direccion);
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 8211f84 (Direccion y Fecha_Especial)
-=======
-
->>>>>>> 06956d0 (cambios prueba)
+    Optional<DireccionDTOResponse> getDireccionById(Long id);
 }

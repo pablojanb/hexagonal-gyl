@@ -1,92 +1,119 @@
 package com.example.finca_hexagonal.domain.models;
 
+import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Pago {
-    private Integer id;
-    private Integer reserva_id;
-    private BigDecimal monto_total;
-    private Integer modo_pago_id;
-    private LocalDateTime fecha_hora;
-    private BigDecimal desuento_aplicado;
-    private BigDecimal recargo_aplicado;
-    private Boolean estado_pago;
+    private  Long id;
+    private Reserva reserva;
+    private LocalDateTime fechaHora;
+    private BigDecimal monto;
+    private BigDecimal descuentoAplicado;
+    private BigDecimal recargoAplicado;
+    private Long medioDePagoId;
+    private EstadoPago estadoPago;
+    private BigDecimal montoTotal;
 
-    public  Pago(){};
+    private ModoDePago modoDePago;
 
-    public Pago(Boolean estado_pago, BigDecimal recargo_aplicado, BigDecimal desuento_aplicado, LocalDateTime fecha_hora, Integer modo_pago_id, BigDecimal monto_total, Integer reserva_id, Integer id) {
-        this.estado_pago = estado_pago;
-        this.recargo_aplicado = recargo_aplicado;
-        this.desuento_aplicado = desuento_aplicado;
-        this.fecha_hora = fecha_hora;
-        this.modo_pago_id = modo_pago_id;
-        this.monto_total = monto_total;
-        this.reserva_id = reserva_id;
+    public Pago(){};
+
+    public Pago(Long id, Reserva reserva, LocalDateTime fechaHora, BigDecimal monto, BigDecimal descuentoAplicado, BigDecimal recargoAplicado, Long medioDePagoId, EstadoPago estadoPago, BigDecimal montoTotal, ModoDePago modoDePago) {
         this.id = id;
+        this.reserva = reserva;
+        this.fechaHora = fechaHora;
+        this.monto = monto;
+        this.descuentoAplicado = descuentoAplicado;
+        this.recargoAplicado = recargoAplicado;
+        this.medioDePagoId = medioDePagoId;
+        this.estadoPago = estadoPago;
+        this.montoTotal = montoTotal;
+        this.modoDePago = modoDePago;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getReserva_id() {
-        return reserva_id;
+    public Reserva getReserva() {
+        return reserva;
     }
 
-    public void setReserva_id(Integer reserva_id) {
-        this.reserva_id = reserva_id;
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
 
-    public BigDecimal getMonto_total() {
-        return monto_total;
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
     }
 
-    public void setMonto_total(BigDecimal monto_total) {
-        this.monto_total = monto_total;
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
-    public Integer getModo_pago_id() {
-        return modo_pago_id;
+    public BigDecimal getMonto() {
+        return monto;
     }
 
-    public void setModo_pago_id(Integer modo_pago_id) {
-        this.modo_pago_id = modo_pago_id;
+    public void setMonto(BigDecimal monto) {
+        this.monto = monto;
     }
 
-    public LocalDateTime getFecha_hora() {
-        return fecha_hora;
+    public BigDecimal getDescuentoAplicado() {
+        return descuentoAplicado;
     }
 
-    public void setFecha_hora(LocalDateTime fecha_hora) {
-        this.fecha_hora = fecha_hora;
+    public void setDescuentoAplicado(BigDecimal descuentoAplicado) {
+        this.descuentoAplicado = descuentoAplicado;
     }
 
-    public BigDecimal getDesuento_aplicado() {
-        return desuento_aplicado;
+    public BigDecimal getRecargoAplicado() {
+        return recargoAplicado;
     }
 
-    public void setDesuento_aplicado(BigDecimal desuento_aplicado) {
-        this.desuento_aplicado = desuento_aplicado;
+    public void setRecargoAplicado(BigDecimal recargoAplicado) {
+        this.recargoAplicado = recargoAplicado;
     }
 
-    public BigDecimal getRecargo_aplicado() {
-        return recargo_aplicado;
+    public Long getMedioDePagoId() {
+        return medioDePagoId;
     }
 
-    public void setRecargo_aplicado(BigDecimal recargo_aplicado) {
-        this.recargo_aplicado = recargo_aplicado;
+    public void setMedioDePagoId(Long medioDePagoId) {
+        this.medioDePagoId = medioDePagoId;
     }
 
-    public Boolean getEstado_pago() {
-        return estado_pago;
+    public EstadoPago getEstadoPago() {
+        return estadoPago;
     }
 
-    public void setEstado_pago(Boolean estado_pago) {
-        this.estado_pago = estado_pago;
+    public void setEstadoPago(EstadoPago estadoPago) {
+        this.estadoPago = estadoPago;
+    }
+
+    public BigDecimal getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(BigDecimal montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+
+    public ModoDePago getModoDePago() {
+        return modoDePago;
+    }
+
+    public void setModoDePago(ModoDePago modoDePago) {
+        this.modoDePago = modoDePago;
+    }
+
+    public LocalDateTime getFechaPago() {
+        return this.fechaHora;
     }
 }

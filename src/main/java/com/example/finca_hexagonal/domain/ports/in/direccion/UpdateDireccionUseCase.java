@@ -2,14 +2,8 @@ package com.example.finca_hexagonal.domain.ports.in.direccion;
 
 import com.example.finca_hexagonal.domain.models.Direccion;
 
+import java.util.Optional;
+
 public interface UpdateDireccionUseCase {
-    Direccion update(Direccion direccion);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 8211f84 (Direccion y Fecha_Especial)
-=======
-
->>>>>>> 06956d0 (cambios prueba)
+    Optional<Direccion> updateDireccion(Long id, Direccion updateDireccion);
 }

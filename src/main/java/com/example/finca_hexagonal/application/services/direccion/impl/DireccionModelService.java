@@ -3,59 +3,51 @@ package com.example.finca_hexagonal.application.services.direccion.impl;
 import com.example.finca_hexagonal.domain.models.Direccion;
 import com.example.finca_hexagonal.domain.ports.in.direccion.CreateDireccionUseCase;
 import com.example.finca_hexagonal.domain.ports.in.direccion.DeleteDireccionUseCase;
-import com.example.finca_hexagonal.domain.ports.in.direccion.FindDireccionUseCase;
+import com.example.finca_hexagonal.domain.ports.in.direccion.GetDireccionUseCase;
 import com.example.finca_hexagonal.domain.ports.in.direccion.UpdateDireccionUseCase;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public class DireccionModelService implements CreateDireccionUseCase, UpdateDireccionUseCase, DeleteDireccionUseCase, FindDireccionUseCase {
 
-    private CreateDireccionUseCase createDireccionUseCase;
-    private UpdateDireccionUseCase updateDireccionUseCase;
-    private DeleteDireccionUseCase deleteDireccionUseCase;
-    private FindDireccionUseCase findDireccionUseCase;
+@Service
+public class DireccionModelService implements CreateDireccionUseCase, GetDireccionUseCase, UpdateDireccionUseCase, DeleteDireccionUseCase {
 
-    public DireccionModelService(CreateDireccionUseCase createDireccionUseCase, UpdateDireccionUseCase updateDireccionUseCase, DeleteDireccionUseCase deleteDireccionUseCase, FindDireccionUseCase findDireccionUseCase) {
+    private final CreateDireccionUseCase createDireccionUseCase;
+    private final GetDireccionUseCase getDireccionUseCase;
+    private final UpdateDireccionUseCase updateDireccionUseCase;
+    private final DeleteDireccionUseCase deleteDireccionUseCase;
+
+    public DireccionModelService(CreateDireccionUseCase createDireccionUseCase, GetDireccionUseCase getDireccionUseCase, UpdateDireccionUseCase updateDireccionUseCase, DeleteDireccionUseCase deleteDireccionUseCase) {
         this.createDireccionUseCase = createDireccionUseCase;
+        this.getDireccionUseCase = getDireccionUseCase;
         this.updateDireccionUseCase = updateDireccionUseCase;
         this.deleteDireccionUseCase = deleteDireccionUseCase;
-        this.findDireccionUseCase = findDireccionUseCase;
-
     }
 
     @Override
-    public Direccion create(Direccion direccion) {
-        return null;
+    public Direccion createDireccion(Direccion direccion) {
+        return createDireccionUseCase.createDireccion(direccion);
     }
 
     @Override
-    public boolean delete(Long id_direccion) {
-        return false;
+    public boolean deleteDireccion(Long id) {
+        return deleteDireccionUseCase.deleteDireccion(id);
     }
 
     @Override
-    public Direccion logicalDeletion(Direccion direccion) {
-        return null;
+    public List<Direccion> getAllDirecciones() {
+        return getDireccionUseCase.getAllDirecciones();
     }
 
     @Override
-    public List<Direccion> getAll() {
-        return List.of();
+    public Optional<Direccion> getDireccionById(Long id) {
+        return getDireccionUseCase.getDireccionById(id);
     }
 
     @Override
-    public Optional<Direccion> findById(Long id_direccion) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Direccion> findByAltura(int altura) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Direccion update(Direccion direccion) {
-        return null;
+    public Optional<Direccion> updateDireccion(Long id, Direccion updateDireccion) {
+        return updateDireccionUseCase.updateDireccion(id, updateDireccion);
     }
 }

@@ -8,11 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class DireccionDTORequest {
-    private String calle;
-    private int altura;
+    private String direccion;
     private String ciudad;
     private String provincia;
     private String aclaracion;
-
-
 }

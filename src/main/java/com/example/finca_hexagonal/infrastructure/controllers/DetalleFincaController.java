@@ -1,7 +1,11 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.domain.models.DetalleFinca;
-import com.example.finca_hexagonal.domain.ports.in.DetalleFincaService;
+import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTORequest;
+import com.example.finca_hexagonal.application.dto.detalleFinca.DetalleFincaDTOResponse;
+import com.example.finca_hexagonal.application.dto.direccion.DireccionDTORequest;
+import com.example.finca_hexagonal.application.dto.direccion.DireccionDTOResponse;
+import com.example.finca_hexagonal.application.services.detalleFinca.DetalleFincaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,36 +15,42 @@ import java.util.List;
 @RequestMapping("/api/detalles")
 public class DetalleFincaController {
 
-    private final DetalleFincaService service;
+    private final DetalleFincaService detalleFincaService;
 
-    public DetalleFincaController(DetalleFincaService service) {
-        this.service = service;
+    public DetalleFincaController(DetalleFincaService detalleFincaService){
+        this.detalleFincaService = detalleFincaService;
     }
 
     @PostMapping
-    public ResponseEntity<DetalleFinca> crear(@RequestBody DetalleFinca detalle) {
-        return ResponseEntity.ok(service.crearDetalle(detalle));
+    public ResponseEntity<DetalleFincaDTOResponse> createDetalleFinca(@RequestBody DetalleFincaDTORequest detalleDTO){
+        return new ResponseEntity<>(detalleFincaService.save(detalleDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DetalleFinca> obtener(@PathVariable Long id) {
-        DetalleFinca detalle = service.obtenerPorId(id);
-        return (detalle != null) ? ResponseEntity.ok(detalle) : ResponseEntity.notFound().build();
+    @GetMapping("/getAllDetalles")
+    public ResponseEntity<List<DetalleFincaDTOResponse>> getAllExtras(){
+        return new ResponseEntity<>(detalleFincaService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<DetalleFinca>> listar() {
-        return ResponseEntity.ok(service.listarTodos());
+    @GetMapping("/getDetalleById/{detalleId}")
+    public ResponseEntity<DetalleFincaDTOResponse> getDetalleById(@PathVariable Long detalleId){
+        return detalleFincaService.findById(detalleId)
+                .map(detalle -> new ResponseEntity<>(detalle, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping
-    public ResponseEntity<DetalleFinca> actualizar(@RequestBody DetalleFinca detalle) {
-        return ResponseEntity.ok(service.actualizarDetalle(detalle));
+    @PutMapping("/updateDetalle/{detalleId}")
+    public ResponseEntity<DetalleFincaDTOResponse> updateDetalle(@PathVariable Long detalleId,
+                                                                @RequestBody DetalleFincaDTORequest detalleUpdate){
+        return detalleFincaService.update(detalleId, detalleUpdate)
+                .map(detalle -> new ResponseEntity<>(detalle, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        service.eliminarDetalle(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/deleteDetalleFincaById/{detalleId}")
+    public ResponseEntity<Void> deleteDetalleFincaById(@PathVariable Long detalleId){
+        if (detalleFincaService.delete(detalleId)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

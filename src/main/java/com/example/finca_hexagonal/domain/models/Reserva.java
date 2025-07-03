@@ -1,66 +1,82 @@
 package com.example.finca_hexagonal.domain.models;
 
+import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
+
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Reserva {
-    private Integer id;
-    private Integer finca_id;
-    private Integer cliente_id;
-    private Date desde;
-    private Date hasta;
+    private Long id;
+    private Finca finca;
+    private Usuario usuario;
+    private LocalDate fecha;
+    private LocalTime desde;
+    private LocalTime hasta;
+    private BigDecimal total;
+    private EstadoReserva estadoReserva;
+
 
     public Reserva(){
 
-    };
+    }
 
-    public Reserva(Integer id, Integer finca_id, Integer cliente_id, Date desde, Date hasta, BigDecimal total, Boolean estado_reserva) {
+    public Reserva(Long id, Finca finca, Usuario usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
         this.id = id;
-        this.finca_id = finca_id;
-        this.cliente_id = cliente_id;
+        this.finca = finca;
+        this.usuario = usuario;
+        this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
         this.total = total;
-        this.estado_reserva = estado_reserva;
+        this.estadoReserva = estadoReserva;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getFinca_id() {
-        return finca_id;
+    public Finca getFinca() {
+        return finca;
     }
 
-    public void setFinca_id(Integer finca_id) {
-        this.finca_id = finca_id;
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
-    public Integer getCliente_id() {
-        return cliente_id;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCliente_id(Integer cliente_id) {
-        this.cliente_id = cliente_id;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Date getDesde() {
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public LocalTime getDesde() {
         return desde;
     }
 
-    public void setDesde(Date desde) {
+    public void setDesde(LocalTime desde) {
         this.desde = desde;
     }
 
-    public Date getHasta() {
+    public LocalTime getHasta() {
         return hasta;
     }
 
-    public void setHasta(Date hasta) {
+    public void setHasta(LocalTime hasta) {
         this.hasta = hasta;
     }
 
@@ -72,16 +88,11 @@ public class Reserva {
         this.total = total;
     }
 
-    public Boolean getEstado_reserva() {
-        return estado_reserva;
+    public EstadoReserva getEstadoReserva() {
+        return estadoReserva;
     }
 
-    public void setEstado_reserva(Boolean estado_reserva) {
-        this.estado_reserva = estado_reserva;
+    public void setEstadoReserva(EstadoReserva estadoReserva) {
+        this.estadoReserva = estadoReserva;
     }
-
-    private BigDecimal total;
-    private Boolean estado_reserva;
-
-
 }

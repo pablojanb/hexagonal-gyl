@@ -1,23 +1,19 @@
-package domain.ports.out;
+package com.example.finca_hexagonal.domain.ports.out;
 
-import domain.models.Rol;
+import com.example.finca_hexagonal.domain.models.Rol;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface RolModelPort {
-
     Rol save(Rol rol);
+
+    boolean deleteById(Long id);
+
+    Optional<Rol> updateById(Long id, Rol rolUpdate);
 
     List<Rol> findAll();
 
-    Optional<Rol> findById(int id);
+    Optional<Rol> findById(Long id);
 
-    Optional<Rol> findByName(String nombre);
-
-    Rol update(Rol rol);
-
-    Boolean delete(int id);
-
-    Rol logicalDeletion(Rol rol);
 }

@@ -1,62 +1,60 @@
-package domain.models;
+package com.example.finca_hexagonal.domain.models;
 
 public class Documentacion {
-    private int id;
-    private int propietario_id;
-    private String escritura_propiedad;
-    private String plano_catastral;
-    private String impuesto_bienesInmuebles;
+    private Long id;
+    private Finca finca;
+    private String escrituraPropiedad;
+    private String planoCatastral;
+    private String impuestoBienesInmuebles;
 
-    public Documentacion(int id, int propietario_id, String escritura_propiedad, String plano_catastral, String impuesto_bienesInmuebles){
+    public Documentacion() {
+    }
+
+    public Documentacion(Long id, Finca finca, String escrituraPropiedad, String planoCatastral, String impuestoBienesInmuebles) {
         this.id = id;
-        this.propietario_id = propietario_id;
-        this.escritura_propiedad = escritura_propiedad;
-        this.plano_catastral = plano_catastral;
-        this.impuesto_bienesInmuebles = impuesto_bienesInmuebles;
-
+        this.finca = finca;
+        this.escrituraPropiedad = escrituraPropiedad;
+        this.planoCatastral = planoCatastral;
+        this.impuestoBienesInmuebles = impuestoBienesInmuebles;
     }
 
-    public Documentacion(){
-
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public int getPropietario_id() {
-        return propietario_id;
-    }
-
-    public String getEscritura_propiedad() {
-        return escritura_propiedad;
-    }
-
-    public String getPlano_catastral() {
-        return plano_catastral;
-    }
-
-    public String getImpuesto_bienesInmuebles() {
-        return impuesto_bienesInmuebles;
-    }
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setPropietario_id(int propietario_id) {
-        this.propietario_id = propietario_id;
+    public Finca getFinca() {
+        return finca;
     }
 
-    public void setEscritura_propiedad(String escritura_propiedad) {
-        this.escritura_propiedad = escritura_propiedad;
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
-    public void setPlano_catastral(String plano_catastral) {
-        this.plano_catastral = plano_catastral;
+    public String getEscrituraPropiedad() {
+        return escrituraPropiedad;
     }
 
-    public void setImpuesto_bienesInmuebles(String impuesto_bienesInmuebles) {
-        this.impuesto_bienesInmuebles = impuesto_bienesInmuebles;
+    public void setEscrituraPropiedad(String escrituraPropiedad) {
+        this.escrituraPropiedad = escrituraPropiedad;
+    }
+
+    public String getPlanoCatastral() {
+        return planoCatastral;
+    }
+
+    public void setPlanoCatastral(String planoCatastral) {
+        this.planoCatastral = planoCatastral;
+    }
+
+    public String getImpuestoBienesInmuebles() {
+        return impuestoBienesInmuebles;
+    }
+
+    public void setImpuestoBienesInmuebles(String impuestoBienesInmuebles) {
+        this.impuestoBienesInmuebles = impuestoBienesInmuebles;
     }
 }

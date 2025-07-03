@@ -1,6 +1,6 @@
-package domain.ports.out;
+package com.example.finca_hexagonal.domain.ports.out;
 
-import domain.models.Usuario;
+import com.example.finca_hexagonal.domain.models.Usuario;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,15 +8,11 @@ import java.util.Optional;
 public interface UsuarioModelPort {
     Usuario save(Usuario usuario);
 
+    boolean deleteById(Long id);
+
     List<Usuario> findAll();
 
-    Optional<Usuario> findById(int id);
+    Optional<Usuario> findById(Long id);
 
-    Optional<Usuario> findByName(String nombre_usuario);
-
-    Usuario update(Usuario usuario);
-
-    Boolean delete(int id);
-
-    Usuario logicalDeletion(Usuario usuario);
+    Optional<Usuario> updateById(Long id, Usuario usuarioUpdate);
 }
