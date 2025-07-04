@@ -94,5 +94,17 @@ public class Reserva {
 
     public void setEstadoReserva(EstadoReserva estadoReserva) {
         this.estadoReserva = estadoReserva;
+}
+
+
+    public void calcularTotalReserva() {
+        if (finca != null && finca.getTarifaHora() != null && desde != null && hasta != null) {
+            long horas = java.time.Duration.between(desde, hasta).toHours();
+            if (horas < 1) horas = 1;
+            this.total = finca.getTarifaHora().multiply(BigDecimal.valueOf(horas));
+        } else {
+            this.total = BigDecimal.ZERO;
+        }
     }
+
 }
