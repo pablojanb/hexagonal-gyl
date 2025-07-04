@@ -27,4 +27,9 @@ public class GetFechaEspecialUseCaseImpl implements GetFechaEspecialUseCase {
     public Optional<FechaEspecial> getById(Long id) {
         return fechaEspecialModelPort.getById(id);
     }
+
+    @Override
+    public List<FechaEspecial> getAllByFincaId(Long fincaId) {
+        return fechaEspecialModelPort.findAllFechaEspecialByFincaId(fincaId);
+    }
 }

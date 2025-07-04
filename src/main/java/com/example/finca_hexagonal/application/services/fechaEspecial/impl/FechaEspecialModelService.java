@@ -45,6 +45,11 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
     }
 
     @Override
+    public List<FechaEspecial> getAllByFincaId(Long fincaId) {
+        return getFechaEspecialUseCase.getAllByFincaId(fincaId);
+    }
+
+    @Override
     public Optional<FechaEspecial> update(Long id, FechaEspecial fechaEspecial) {
         return updateFechaEspecialUseCase.update(id, fechaEspecial);
     }

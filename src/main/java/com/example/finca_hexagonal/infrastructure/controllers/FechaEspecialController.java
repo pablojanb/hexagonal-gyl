@@ -15,8 +15,8 @@ import java.util.List;
 public class FechaEspecialController {
     private final FechaEspecialService fechaEspecialService;
 
-    public FechaEspecialController(FechaEspecialService fincaService) {
-        this.fechaEspecialService = fincaService;
+    public FechaEspecialController(FechaEspecialService fechaEspecialService) {
+        this.fechaEspecialService = fechaEspecialService;
     }
 
 
@@ -39,7 +39,7 @@ public class FechaEspecialController {
 
     @GetMapping("/findAllFechaEspecialByFincaId/{fincaId}")
     public ResponseEntity <List<FechaEspecialResponseDTO>> findAllFechaEspecialByFincaId(@PathVariable Long fincaId) {
-        return new ResponseEntity<>(fechaEspecialService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(fechaEspecialService.getAllByFincaId(fincaId), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{idfecha}")

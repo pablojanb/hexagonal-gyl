@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -65,6 +66,14 @@ public class FechaEspecialServiceImpl implements FechaEspecialService {
         FechaEspecial updatedFechaespecial = fechaEspecialModelService.update(idfecha, fechaEspecial)
                 .orElseThrow(() -> new EntityNotFoundException("Fecha especial no encontrada: " + idfecha));
         return Optional.of(fechaEspecialDTOMapper.toDto(updatedFechaespecial));
+    }
+
+    @Override
+    public List<FechaEspecialResponseDTO> getAllByFincaId(Long fincaId) {
+        return  fechaEspecialModelService.getAllByFincaId(fincaId)
+                .stream()
+                .map(fechaEspecialDTOMapper::toDto)
+                .collect(Collectors.toList());
     }
 
 

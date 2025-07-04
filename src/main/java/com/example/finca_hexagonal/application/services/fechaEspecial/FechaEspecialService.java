@@ -17,6 +17,8 @@ public interface FechaEspecialService {
 
     Optional<FechaEspecialResponseDTO> update(Long idfecha, FechaEspecialRequestDTO fechaEspeciaRequestlDTO);
 
+    List<FechaEspecialResponseDTO> getAllByFincaId(Long fincaId);
+
     boolean delete(Long idfecha);
 
 }

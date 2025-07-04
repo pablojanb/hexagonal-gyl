@@ -61,8 +61,8 @@ public class FechaEspecialRepositoryAdapter implements FechaEspecialModelPort {
     }
 
     @Override
-    public List<FechaEspecial> findAllFechaEspecialByFincaId(Long id) {
-        return jpaFechaEspecialRepository.findByFincaId(id).stream()
+    public List<FechaEspecial> findAllFechaEspecialByFincaId(Long fincaId) {
+        return jpaFechaEspecialRepository.findByFincaId(fincaId).stream()
                 .map(fechaEspecialMappers::toDomainModel)
                 .collect(Collectors.toList());
     }
