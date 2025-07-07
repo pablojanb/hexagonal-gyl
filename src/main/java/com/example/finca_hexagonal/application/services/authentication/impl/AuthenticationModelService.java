@@ -15,7 +15,7 @@ public class AuthenticationModelService implements LoginUseCase {
 
 
     @Override
-    public Usuario validarUsuarioCredenciales(String email, String password) {
-        return loginUseCase.validarUsuarioCredenciales(email, password);
+    public Usuario getByEmail(String email) {
+        return loginUseCase.getByEmail(email);
     }
 }

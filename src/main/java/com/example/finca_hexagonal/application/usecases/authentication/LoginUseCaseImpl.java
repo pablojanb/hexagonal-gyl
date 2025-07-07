@@ -14,7 +14,7 @@ public class LoginUseCaseImpl implements LoginUseCase {
     }
 
     @Override
-    public Usuario validarUsuarioCredenciales(String email, String password) {
-        return authenticationModelPort.findByEmail(email, password);
+    public Usuario getByEmail(String email) {
+        return authenticationModelPort.findByEmail(email);
     }
 }
