@@ -1,5 +1,8 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
+import com.example.finca_hexagonal.application.dto.rol.RolRequestDTO;
+import com.example.finca_hexagonal.application.dto.rol.RolResponseDTO;
+import com.example.finca_hexagonal.application.services.rol.RolService;
 import com.example.finca_hexagonal.application.services.rol.impl.RolModelService;
 import com.example.finca_hexagonal.domain.models.Rol;
 import org.springframework.http.HttpStatus;
@@ -12,40 +15,40 @@ import java.util.List;
 @RequestMapping("/api/roles")
 public class RolController {
 
-    private final RolModelService rolModelService;
+    private final RolService rolService;
 
-    public RolController(RolModelService rolModelService){
-        this.rolModelService = rolModelService;
+    public RolController(RolService rolService){
+        this.rolService = rolService;
     }
 
     @PostMapping
-    public ResponseEntity<Rol> createRol(@RequestBody Rol rol){
-        return new ResponseEntity<>(rolModelService.createRol(rol), HttpStatus.CREATED);
+    public ResponseEntity<RolResponseDTO> createRol(@RequestBody RolRequestDTO rol){
+        return new ResponseEntity<>(rolService.createRol(rol), HttpStatus.CREATED);
     }
 
     @GetMapping("/getAllRoles")
-    public ResponseEntity<List<Rol>> getAllRoles(){
-        return new ResponseEntity<>(rolModelService.getRoles(), HttpStatus.OK);
+    public ResponseEntity<List<RolResponseDTO>> getAllRoles(){
+        return new ResponseEntity<>(rolService.getRoles(), HttpStatus.OK);
     }
 
     @GetMapping("/getRolById/{rolId}")
-    public ResponseEntity<Rol> getRolById(@PathVariable Long rolId){
-        return rolModelService.getRol(rolId)
+    public ResponseEntity<RolResponseDTO> getRolById(@PathVariable Long rolId){
+        return rolService.getRolById(rolId)
                 .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/updateRol/{rolId}")
-    public ResponseEntity<Rol> updateRol(@PathVariable Long rolId,
-                                         @RequestBody Rol rolUpdate){
-        return rolModelService.updateRol(rolId, rolUpdate)
+    public ResponseEntity<RolResponseDTO> updateRol(@PathVariable Long rolId,
+                                         @RequestBody RolRequestDTO rolUpdate){
+        return rolService.updateRolById(rolId, rolUpdate)
                 .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/deleteRolById/{rolId}")
     public ResponseEntity<Void> deleteFincaById(@PathVariable Long rolId){
-        if (rolModelService.deleteRol(rolId)){
+        if (rolService.deleteRolById(rolId)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

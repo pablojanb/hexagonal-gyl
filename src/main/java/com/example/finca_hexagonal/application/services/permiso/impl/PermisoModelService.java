@@ -29,7 +29,6 @@ public class PermisoModelService implements CreatePermisoUseCase, GetPermisoUseC
 
     @Override
     public Permiso createPermiso(Permiso permiso) {
-        permiso.setRoles(new ArrayList<>());
         return createPermisoUseCase.createPermiso(permiso);
     }
 

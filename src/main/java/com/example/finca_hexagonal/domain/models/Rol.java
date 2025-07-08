@@ -6,16 +6,14 @@ public class Rol {
     private Long id;
     private String nombre;
     private List<Permiso> permisos;
-    private List<Usuario> usuarios;
 
     public Rol() {
     }
 
-    public Rol(Long id, String nombre, List<Permiso> permisos, List<Usuario> usuarios) {
+    public Rol(Long id, String nombre, List<Permiso> permisos) {
         this.id = id;
         this.nombre = nombre;
         this.permisos = permisos;
-        this.usuarios = usuarios;
     }
 
     public Long getId() {
@@ -40,13 +38,5 @@ public class Rol {
 
     public void setPermisos(List<Permiso> permisos) {
         this.permisos = permisos;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 }
