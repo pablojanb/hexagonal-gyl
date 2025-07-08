@@ -1,11 +1,12 @@
 package com.example.finca_hexagonal.application.services.usuario.impl;
 
-import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequstDTO;
+import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
 import com.example.finca_hexagonal.application.mappers.UsuarioDTOMapper;
 import com.example.finca_hexagonal.application.services.usuario.UsuarioService;
 import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import com.example.finca_hexagonal.infrastructure.utils.Password;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +20,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioServiceImpl(UsuarioDTOMapper usuarioDTOMapper, UsuarioModelService usuarioModelService) {
         this.usuarioDTOMapper = usuarioDTOMapper;
         this.usuarioModelService = usuarioModelService;
-    }
-
-    @Override
-    public UsuarioResponseDTO createUsuario(UsuarioRequstDTO usuarioDto) {
-        Usuario usuario = usuarioDTOMapper.toModel(usuarioDto);
-        Usuario newUsuario = usuarioModelService.createUsuario(usuario);
-        return usuarioDTOMapper.toDto(newUsuario);
     }
 
     @Override
@@ -47,14 +41,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Optional<UsuarioResponseDTO> updateById(Long id, UsuarioRequstDTO usuarioUpdateDto) {
+    public Optional<UsuarioResponseDTO> updateById(Long id, UsuarioRequestDTO usuarioUpdateDto) {
         Usuario usuarioToUpdate = usuarioModelService.getById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + id));
         Usuario newData = usuarioDTOMapper.toModel(usuarioUpdateDto);
         usuarioToUpdate.setNombre(newData.getNombre());
         usuarioToUpdate.setApellido(newData.getApellido());
         usuarioToUpdate.setUsername(newData.getUsername());
-        usuarioToUpdate.setPassword(newData.getPassword());
         usuarioToUpdate.setEmail(newData.getEmail());
         usuarioToUpdate.setTelefono(newData.getTelefono());
         usuarioToUpdate.setEmailAlternativo(newData.getEmailAlternativo());
@@ -62,6 +55,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioToUpdate.setCuentaActiva(newData.isCuentaActiva());
         usuarioToUpdate.setDni(newData.getDni());
         usuarioToUpdate.setRoles(newData.getRoles());
+        String hashPassword = Password.hashPassword(newData.getPassword());
+        usuarioToUpdate.setPassword(hashPassword);
         Usuario usuarioUpdated = usuarioModelService.updateUsuario(id, usuarioToUpdate)
                 .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
 

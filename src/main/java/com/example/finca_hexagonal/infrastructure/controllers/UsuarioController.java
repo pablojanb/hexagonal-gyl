@@ -1,6 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
-import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequstDTO;
+import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
 import com.example.finca_hexagonal.application.services.usuario.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-
-    @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> createUsuario(@RequestBody UsuarioRequstDTO usuarioDTO){
-        return new ResponseEntity<>(usuarioService.createUsuario(usuarioDTO), HttpStatus.CREATED);
-    }
-
     @GetMapping("/getAllUsuarios")
     public ResponseEntity<List<UsuarioResponseDTO>> getAllUsuarios(){
         return new ResponseEntity<>(usuarioService.getAllUsuarios(), HttpStatus.OK);
@@ -39,7 +33,7 @@ public class UsuarioController {
 
     @PutMapping("/updateUsuario/{usuarioId}")
     public ResponseEntity<UsuarioResponseDTO> updateFinca(@PathVariable Long usuarioId,
-                                                                  @RequestBody UsuarioRequstDTO usuarioUpdate){
+                                                                  @RequestBody UsuarioRequestDTO usuarioUpdate){
         return usuarioService.updateById(usuarioId, usuarioUpdate)
                 .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

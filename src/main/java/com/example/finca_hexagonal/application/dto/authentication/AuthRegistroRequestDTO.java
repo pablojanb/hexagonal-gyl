@@ -1,4 +1,4 @@
-package com.example.finca_hexagonal.application.dto.usuario;
+package com.example.finca_hexagonal.application.dto.authentication;
 
 import com.example.finca_hexagonal.domain.models.Rol;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioRequstDTO {
+public class AuthRegistroRequestDTO {
     private String nombre;
     private String apellido;
     private String dni;
@@ -19,10 +19,10 @@ public class UsuarioRequstDTO {
     private boolean cuentaActiva = true;
     private List<Rol> roles = new ArrayList<>();
 
-    public UsuarioRequstDTO() {
+    public AuthRegistroRequestDTO() {
     }
 
-    public UsuarioRequstDTO(String nombre, String apellido, String dni, String telefono, String email, String emailAlternativo, String username, String password, LocalDate fechaNac, boolean cuentaActiva, List<Rol> roles) {
+    public AuthRegistroRequestDTO(String nombre, String apellido, String dni, String telefono, String email, String emailAlternativo, String username, String password, LocalDate fechaNac, boolean cuentaActiva, List<Rol> roles) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
