@@ -5,5 +5,7 @@ import com.example.finca_hexagonal.domain.models.Usuario;
 public interface AuthenticationModelPort {
     Usuario findByEmail(String email);
 
+    Usuario findByUsername(String username);
+
     Usuario save(Usuario usuario);
 }

@@ -25,6 +25,12 @@ public class AuthenticationRepositoryAdapter implements AuthenticationModelPort 
     }
 
     @Override
+    public Usuario findByUsername(String username) {
+        UsuarioEntity usuarioEntity = jpaAuthenticationRepository.findByUsername(username);
+        return usuarioModelMappers.toDomainModel(usuarioEntity);
+    }
+
+    @Override
     public Usuario save(Usuario usuario) {
         UsuarioEntity usuarioEntity = usuarioModelMappers.fromDomainModel(usuario);
         UsuarioEntity NewUsuarioEntity = jpaAuthenticationRepository.save(usuarioEntity);

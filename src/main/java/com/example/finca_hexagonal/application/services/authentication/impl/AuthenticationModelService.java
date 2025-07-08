@@ -23,6 +23,11 @@ public class AuthenticationModelService implements LoginUseCase, CreateUsuarioUs
     }
 
     @Override
+    public Usuario getByUsername(String username) {
+        return loginUseCase.getByUsername(username);
+    }
+
+    @Override
     public Usuario createUsuario(Usuario usuario) {
         return createUsuarioUseCase.createUsuario(usuario);
     }

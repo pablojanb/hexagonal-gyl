@@ -40,7 +40,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public Optional<AuthenticationResponseDTO> validarUsuarioCredenciales(AuthLoginRequestDTO authDTO) {
         Usuario usuario = authenticationDTOMapper.toModel(authDTO);
-        Usuario usuarioLogueado = authenticationModelService.getByEmail(usuario.getEmail());
+        Usuario usuarioLogueado;
+
+        if (usuario.getEmail().equalsIgnoreCase("") || usuario.getEmail() == null) {
+            usuarioLogueado = authenticationModelService.getByUsername(usuario.getUsername());
+        } else {
+            usuarioLogueado = authenticationModelService.getByEmail(usuario.getEmail());
+        }
+
         boolean credencialesCorrectas = Password.verificarPassword(authDTO.getPassword(), usuarioLogueado);
         if (!credencialesCorrectas){
             return Optional.empty();

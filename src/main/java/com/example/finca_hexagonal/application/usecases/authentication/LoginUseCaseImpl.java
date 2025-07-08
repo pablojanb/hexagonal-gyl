@@ -17,4 +17,9 @@ public class LoginUseCaseImpl implements LoginUseCase {
     public Usuario getByEmail(String email) {
         return authenticationModelPort.findByEmail(email);
     }
+
+    @Override
+    public Usuario getByUsername(String username) {
+        return authenticationModelPort.findByUsername(username);
+    }
 }
