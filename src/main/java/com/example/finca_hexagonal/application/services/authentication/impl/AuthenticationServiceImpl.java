@@ -6,6 +6,7 @@ import com.example.finca_hexagonal.application.dto.authentication.Authentication
 import com.example.finca_hexagonal.application.mappers.AuthenticationDTOMapper;
 import com.example.finca_hexagonal.application.services.authentication.AuthenticationService;
 import com.example.finca_hexagonal.domain.models.Usuario;
+import com.example.finca_hexagonal.infrastructure.utils.JWTUtil;
 import com.example.finca_hexagonal.infrastructure.utils.Password;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final AuthenticationModelService authenticationModelService;
     private final AuthenticationDTOMapper authenticationDTOMapper;
+    private final JWTUtil jwtUtil;
 
-    public AuthenticationServiceImpl(AuthenticationModelService authenticationModelService, AuthenticationDTOMapper authenticationDTOMapper) {
+    public AuthenticationServiceImpl(AuthenticationModelService authenticationModelService, AuthenticationDTOMapper authenticationDTOMapper, JWTUtil jwtUtil) {
         this.authenticationModelService = authenticationModelService;
         this.authenticationDTOMapper = authenticationDTOMapper;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -28,17 +31,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String hashPassword = Password.hashPassword(usuario.getPassword());
         usuario.setPassword(hashPassword);
         Usuario newUsuario = authenticationModelService.createUsuario(usuario);
-        return authenticationDTOMapper.toDto(newUsuario);
+        String tokenJwt = jwtUtil.create(String.valueOf(newUsuario.getId()), newUsuario.getEmail());
+        AuthenticationResponseDTO responseDTO = authenticationDTOMapper.toDto(newUsuario);
+        responseDTO.setJwtToken(tokenJwt);
+        return responseDTO;
     }
 
     @Override
     public Optional<AuthenticationResponseDTO> validarUsuarioCredenciales(AuthLoginRequestDTO authDTO) {
         Usuario usuario = authenticationDTOMapper.toModel(authDTO);
-        Usuario newUsuario = authenticationModelService.getByEmail(usuario.getEmail());
-        boolean credencialesCorrectas = Password.verificarPassword(authDTO.getPassword(), newUsuario);
+        Usuario usuarioLogueado = authenticationModelService.getByEmail(usuario.getEmail());
+        boolean credencialesCorrectas = Password.verificarPassword(authDTO.getPassword(), usuarioLogueado);
         if (!credencialesCorrectas){
             return Optional.empty();
         }
-        return Optional.of(authenticationDTOMapper.toDto(newUsuario));
+        String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuarioLogueado.getEmail());
+        AuthenticationResponseDTO responseDTO = authenticationDTOMapper.toDto(usuarioLogueado);
+        responseDTO.setJwtToken(tokenJwt);
+        return Optional.of(responseDTO);
     }
 }

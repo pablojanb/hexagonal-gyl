@@ -18,4 +18,5 @@ public class AuthenticationResponseDTO {
     private String email;
     private String username;
     private List<Rol> roles = new ArrayList<>();
+    private String jwtToken;
 }
