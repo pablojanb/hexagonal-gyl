@@ -2,7 +2,6 @@ package com.example.finca_hexagonal.application.services.usuario.impl;
 
 
 import com.example.finca_hexagonal.domain.models.Usuario;
-import com.example.finca_hexagonal.domain.ports.in.usuario.CreateUsuarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.DeleteUsuarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.GetUsuarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.usuario.UpdateUsuarioUseCase;
@@ -12,23 +11,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioModelService implements CreateUsuarioUseCase, GetUsuarioUseCase, UpdateUsuarioUseCase, DeleteUsuarioUseCase {
+public class UsuarioModelService implements GetUsuarioUseCase, UpdateUsuarioUseCase, DeleteUsuarioUseCase {
 
-    private final CreateUsuarioUseCase createUsuarioUseCase;
     private final GetUsuarioUseCase getUsuarioUseCase;
     private final UpdateUsuarioUseCase updateUsuarioUseCase;
     private final DeleteUsuarioUseCase deleteUsuarioUseCase;
 
-    public UsuarioModelService(CreateUsuarioUseCase createUsuarioUseCase, GetUsuarioUseCase getUsuarioUseCase, UpdateUsuarioUseCase updateUsuarioUseCase, DeleteUsuarioUseCase deleteUsuarioUseCase) {
-        this.createUsuarioUseCase = createUsuarioUseCase;
+    public UsuarioModelService(GetUsuarioUseCase getUsuarioUseCase, UpdateUsuarioUseCase updateUsuarioUseCase, DeleteUsuarioUseCase deleteUsuarioUseCase) {
         this.getUsuarioUseCase = getUsuarioUseCase;
         this.updateUsuarioUseCase = updateUsuarioUseCase;
         this.deleteUsuarioUseCase = deleteUsuarioUseCase;
-    }
-
-    @Override
-    public Usuario createUsuario(Usuario usuario) {
-        return createUsuarioUseCase.createUsuario(usuario);
     }
 
     @Override

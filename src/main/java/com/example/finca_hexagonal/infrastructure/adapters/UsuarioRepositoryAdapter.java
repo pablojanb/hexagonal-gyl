@@ -22,13 +22,6 @@ public class UsuarioRepositoryAdapter implements UsuarioModelPort {
     }
 
     @Override
-    public Usuario save(Usuario usuario) {
-        UsuarioEntity usuarioEntity = usuarioModelMappers.fromDomainModel(usuario);
-        UsuarioEntity NewUsuarioEntity = jpaUsuarioRepository.save(usuarioEntity);
-        return usuarioModelMappers.toDomainModel(NewUsuarioEntity);
-    }
-
-    @Override
     public boolean deleteById(Long id) {
         if (jpaUsuarioRepository.existsById(id)){
             jpaUsuarioRepository.deleteById(id);

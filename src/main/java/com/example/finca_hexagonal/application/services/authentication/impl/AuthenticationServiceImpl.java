@@ -1,6 +1,7 @@
 package com.example.finca_hexagonal.application.services.authentication.impl;
 
-import com.example.finca_hexagonal.application.dto.authentication.AuthenticationRequestDTO;
+import com.example.finca_hexagonal.application.dto.authentication.AuthLoginRequestDTO;
+import com.example.finca_hexagonal.application.dto.authentication.AuthRegistroRequestDTO;
 import com.example.finca_hexagonal.application.dto.authentication.AuthenticationResponseDTO;
 import com.example.finca_hexagonal.application.mappers.AuthenticationDTOMapper;
 import com.example.finca_hexagonal.application.services.authentication.AuthenticationService;
@@ -22,7 +23,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Optional<AuthenticationResponseDTO> validarUsuarioCredenciales(AuthenticationRequestDTO authDTO) {
+    public AuthenticationResponseDTO createUsuario(AuthRegistroRequestDTO usuarioDto) {
+        Usuario usuario = authenticationDTOMapper.toModelFromRegistroDto(usuarioDto);
+        String hashPassword = Password.hashPassword(usuario.getPassword());
+        usuario.setPassword(hashPassword);
+        Usuario newUsuario = authenticationModelService.createUsuario(usuario);
+        return authenticationDTOMapper.toDto(newUsuario);
+    }
+
+    @Override
+    public Optional<AuthenticationResponseDTO> validarUsuarioCredenciales(AuthLoginRequestDTO authDTO) {
         Usuario usuario = authenticationDTOMapper.toModel(authDTO);
         Usuario newUsuario = authenticationModelService.getByEmail(usuario.getEmail());
         boolean credencialesCorrectas = Password.verificarPassword(authDTO.getPassword(), newUsuario);
