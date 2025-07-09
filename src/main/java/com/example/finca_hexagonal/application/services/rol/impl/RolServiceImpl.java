@@ -70,4 +70,16 @@ public class RolServiceImpl implements RolService {
                 .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + idRol));
         return Optional.of(rolDTOMapper.toDto(rolUpdated));
     }
+
+    @Override
+    public Optional<RolResponseDTO> deletePermisoFromRol(Long rolId, Long permisoId) {
+        Permiso permiso = permisoModelService.getPermiso(permisoId)
+                .orElseThrow(() -> new EntityNotFoundException("Permiso no encontrado con ID: " + permisoId));
+        Rol rol = rolModelService.getRol(rolId)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + rolId));
+        rol.getPermisos().removeIf(perm -> perm.getId() == permiso.getId());
+        Rol rolUpdated = rolModelService.updateRol(rolId, rol)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + rolId));
+        return Optional.of(rolDTOMapper.toDto(rolUpdated));
+    }
 }

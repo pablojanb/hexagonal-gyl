@@ -25,7 +25,6 @@ public class RolModelService implements CreateRolUseCase, GetRolUseCase, UpdateR
 
     @Override
     public Rol createRol(Rol rol) {
-        rol.setPermisos(new ArrayList<>());
         return createRolUseCase.createRol(rol);
     }
 

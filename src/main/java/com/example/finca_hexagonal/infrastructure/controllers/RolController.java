@@ -62,4 +62,12 @@ public class RolController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @DeleteMapping("/deletePermisoFromRol/{rolId}/{permisoId}")
+    public ResponseEntity<RolResponseDTO> deletePermisoFromRol(@PathVariable Long rolId,
+                                                         @PathVariable Long permisoId){
+        return rolService.deletePermisoFromRol(rolId, permisoId)
+                .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }
