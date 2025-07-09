@@ -48,5 +48,4 @@ public class RolModelService implements CreateRolUseCase, GetRolUseCase, UpdateR
     public Optional<Rol> updateRol(Long id, Rol rolUpdate) {
         return updateRolUseCase.updateRol(id, rolUpdate);
     }
-
 }
