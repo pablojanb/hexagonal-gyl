@@ -6,6 +6,7 @@ import com.example.finca_hexagonal.application.dto.authentication.Authentication
 import com.example.finca_hexagonal.application.mappers.AuthenticationDTOMapper;
 import com.example.finca_hexagonal.application.services.authentication.AuthenticationService;
 import com.example.finca_hexagonal.domain.models.Usuario;
+import com.example.finca_hexagonal.infrastructure.exceptions.InvalidCredentialsException;
 import com.example.finca_hexagonal.infrastructure.utils.JWTUtil;
 import com.example.finca_hexagonal.infrastructure.utils.Password;
 import org.springframework.stereotype.Service;
@@ -48,9 +49,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             usuarioLogueado = authenticationModelService.getByEmail(usuario.getEmail());
         }
 
+        if (usuarioLogueado == null) {
+            throw new InvalidCredentialsException("Credenciales inválidas");
+        }
+
         boolean credencialesCorrectas = Password.verificarPassword(authDTO.getPassword(), usuarioLogueado);
         if (!credencialesCorrectas){
-            return Optional.empty();
+            throw new InvalidCredentialsException("Credenciales inválidas");
         }
         String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuarioLogueado.getEmail());
         AuthenticationResponseDTO responseDTO = authenticationDTOMapper.toDto(usuarioLogueado);
