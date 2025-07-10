@@ -36,7 +36,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(DateConflictException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorMessageDTO> DateConflictException(DateConflictException ex) {
         ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessageDTO);

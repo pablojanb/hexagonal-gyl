@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -49,5 +50,11 @@ public class ReservaController {
         return reservaService.updateById(reservaId, reservaUpdate)
                 .map(reserva -> new ResponseEntity<>(reserva, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/getReservasByFincaIdAndFecha/{fincaId}/{fecha}")
+    public ResponseEntity<List<ReservaResponseDTO>> getReservasByFincaIdAndFecha(@PathVariable Long fincaId,
+                                                                           @PathVariable LocalDate fecha){
+        return new ResponseEntity<>(reservaService.getReservasByFincaIdAndFecha(fincaId, fecha), HttpStatus.OK);
     }
 }

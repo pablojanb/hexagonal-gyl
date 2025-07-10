@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -97,5 +98,11 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public boolean deleteById(Long reservaId) {
         return reservaModelService.deleteReserva(reservaId);
+    }
+
+    @Override
+    public List<ReservaResponseDTO> getReservasByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        List<Reserva> reservas = reservaModelService.getReservasByFincaIdAndFecha(fincaId, fecha);
+        return reservaDTOMapper.toDtoList(reservas);
     }
 }

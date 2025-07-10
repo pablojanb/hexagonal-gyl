@@ -1,5 +1,6 @@
 package com.example.finca_hexagonal.application.services.reserva.impl;
 
+import com.example.finca_hexagonal.application.dto.reservas.ReservaResponseDTO;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.domain.ports.in.reserva.CreateReservaUseCase;
 import com.example.finca_hexagonal.domain.ports.in.reserva.DeleteReservaUseCase;
@@ -8,6 +9,7 @@ import com.example.finca_hexagonal.domain.ports.in.reserva.UpdateReservaUseCase;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +51,11 @@ public class ReservaModelService implements CreateReservaUseCase, GetReservaUseC
     @Override
     public Optional<Reserva> updateReserva(Long reservaId, Reserva updateReserva) {
         return updateReservaUseCase.updateReserva(reservaId, updateReserva);
+    }
+
+    @Override
+    public List<Reserva> getReservasByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        return getReservaUseCase.getReservasByFincaIdAndFecha(fincaId, fecha);
     }
 
     public BigDecimal calcularTotalReserva(Reserva reserva) {
