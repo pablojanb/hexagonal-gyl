@@ -17,4 +17,6 @@ public interface UsuarioService {
     Optional<UsuarioResponseDTO> updateById(Long id, UsuarioRequestDTO usuarioUpdateDto);
 
     Optional<UsuarioResponseDTO> asignarRolAUsuario(Long usuarioId, Long rolId);
+
+    Optional<UsuarioResponseDTO> deleteRolFromUsuario(Long usuarioId, Long rolId);
 }

@@ -78,4 +78,16 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + usuarioId));
         return Optional.of(usuarioDTOMapper.toDto(usuarioUpdated));
     }
+
+    @Override
+    public Optional<UsuarioResponseDTO> deleteRolFromUsuario(Long usuarioId, Long rolId) {
+        Rol rol = rolModelService.getRol(rolId)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado: " + rolId));
+        Usuario usuario = usuarioModelService.getById(usuarioId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + usuarioId));
+        usuario.getRoles().removeIf(rolUser -> rolUser.getId() == rol.getId());
+        Usuario usuarioUpdated = usuarioModelService.updateUsuario(usuarioId, usuario)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + usuarioId));
+        return Optional.of(usuarioDTOMapper.toDto(usuarioUpdated));
+    }
 }

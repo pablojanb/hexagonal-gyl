@@ -54,4 +54,12 @@ public class UsuarioController {
                 .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @DeleteMapping("/deleteRolFromUsuario/{usuarioId}/{rolId}")
+    public ResponseEntity<UsuarioResponseDTO> deleteRolFromUsuario(@PathVariable Long usuarioId,
+                                                                   @PathVariable Long rolId){
+        return usuarioService.deleteRolFromUsuario(usuarioId, rolId)
+                .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }
