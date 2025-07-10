@@ -3,8 +3,10 @@ package com.example.finca_hexagonal.application.services.reserva.impl;
 import com.example.finca_hexagonal.application.dto.reservas.ReservaRequestDTO;
 import com.example.finca_hexagonal.application.dto.reservas.ReservaResponseDTO;
 import com.example.finca_hexagonal.application.mappers.ReservaDTOMapper;
+import com.example.finca_hexagonal.application.services.fechaEspecial.impl.FechaEspecialModelService;
 import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.application.services.reserva.ReservaService;
+import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
@@ -20,11 +22,13 @@ public class ReservaServiceImpl implements ReservaService {
     private final ReservaModelService reservaModelService;
     private final ReservaDTOMapper reservaDTOMapper;
     private final FincaModelService fincaModelService;
+    private final FechaEspecialModelService fechaEspecialModelService;
 
-    public ReservaServiceImpl(ReservaModelService reservaModelService, ReservaDTOMapper reservaDTOMapper, FincaModelService fincaModelService) {
+    public ReservaServiceImpl(ReservaModelService reservaModelService, ReservaDTOMapper reservaDTOMapper, FincaModelService fincaModelService, FechaEspecialModelService fechaEspecialModelService) {
         this.reservaModelService = reservaModelService;
         this.reservaDTOMapper = reservaDTOMapper;
         this.fincaModelService = fincaModelService;
+        this.fechaEspecialModelService = fechaEspecialModelService;
     }
 
     @Override
@@ -34,6 +38,12 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaDTOMapper.toModel(reservaDto);
         BigDecimal montoBase = reservaModelService.calcularTotalReserva(reserva);
         reserva.setTotal(montoBase);
+        List<FechaEspecial> fechasEspDeFinca = fechaEspecialModelService.getFechasEspByFincaId(finca.getId());
+        for (FechaEspecial fecha : fechasEspDeFinca) {
+            if (fecha.getFecha().isEqual(reserva.getFecha())) {
+                reserva.setTotal(montoBase.add(fecha.getRecargo()).subtract(fecha.getDescuento()));
+            }
+        }
         Reserva newReserva = reservaModelService.createReserva(reserva);
         return reservaDTOMapper.toDto(newReserva);
     }
