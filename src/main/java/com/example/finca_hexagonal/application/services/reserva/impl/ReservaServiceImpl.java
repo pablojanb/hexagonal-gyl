@@ -60,6 +60,20 @@ public class ReservaServiceImpl implements ReservaService {
                 }
             }
         }
+        List<Reserva> reservasAnteriores = reservaModelService.getReservasByFincaIdAndFecha(reserva.getFinca().getId(), reserva.getFecha());
+        for (Reserva reservaAnt : reservasAnteriores){
+            LocalTime reservaAnteriorInicio = reservaAnt.getDesde();
+            LocalTime reservaAnteriorFin = reservaAnt.getHasta();
+
+            LocalTime reservaNuevaInicio = reserva.getDesde();
+            LocalTime reservaNuevaFin = reserva.getHasta();
+            boolean noHayConflicto = (reservaNuevaInicio.isAfter(reservaAnteriorFin) || reservaNuevaInicio.equals(reservaAnteriorFin)) ||
+                    (reservaNuevaFin.isBefore(reservaAnteriorInicio) || reservaNuevaFin.equals(reservaAnteriorInicio));
+            if (!noHayConflicto) {
+                throw new DateConflictException("La finca no esta disponible en ese horario");
+            }
+        }
+
         Reserva newReserva = reservaModelService.createReserva(reserva);
         return reservaDTOMapper.toDto(newReserva);
     }

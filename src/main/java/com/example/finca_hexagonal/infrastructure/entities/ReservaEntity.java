@@ -24,6 +24,7 @@ public class ReservaEntity {
     @JoinColumn(name = "usuario_id")
     private UsuarioEntity usuario;
 
+    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
@@ -34,10 +35,11 @@ public class ReservaEntity {
 
     public ReservaEntity() {}
 
-    public ReservaEntity(Long id, FincaEntity finca, UsuarioEntity usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
+    public ReservaEntity(Long id, FincaEntity finca, UsuarioEntity usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
         this.id = id;
         this.finca = finca;
         this.usuario = usuario;
+        this.diaSemana = diaSemana;
         this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
@@ -67,6 +69,14 @@ public class ReservaEntity {
 
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
+    }
+
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
     public LocalDate getFecha() {

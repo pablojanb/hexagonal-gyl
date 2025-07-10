@@ -12,6 +12,7 @@ public class ReservaResponseDTO {
     private String finca;
     private Long idUsuario;
     private String usuario;
+    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
@@ -20,12 +21,13 @@ public class ReservaResponseDTO {
 
     public ReservaResponseDTO() {}
 
-    public ReservaResponseDTO(Long id, Long idFinca, String finca, Long idUsuario, String usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
+    public ReservaResponseDTO(Long id, Long idFinca, String finca, Long idUsuario, String usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
         this.id = id;
         this.idFinca = idFinca;
         this.finca = finca;
         this.idUsuario = idUsuario;
         this.usuario = usuario;
+        this.diaSemana = diaSemana;
         this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
@@ -71,6 +73,14 @@ public class ReservaResponseDTO {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
     public LocalDate getFecha() {

@@ -7,6 +7,7 @@ import java.time.LocalTime;
 public class ReservaRequestDTO {
     private Long idFinca;
     private Long idUsuario;
+    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
@@ -14,9 +15,10 @@ public class ReservaRequestDTO {
 
     public ReservaRequestDTO() {}
 
-    public ReservaRequestDTO(Long idFinca, Long idUsuario, LocalDate fecha, LocalTime desde, LocalTime hasta, EstadoReserva estadoReserva) {
+    public ReservaRequestDTO(Long idFinca, Long idUsuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, EstadoReserva estadoReserva) {
         this.idFinca = idFinca;
         this.idUsuario = idUsuario;
+        this.diaSemana = diaSemana;
         this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
@@ -37,6 +39,14 @@ public class ReservaRequestDTO {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
     public LocalDate getFecha() {
