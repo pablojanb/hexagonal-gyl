@@ -9,10 +9,13 @@ import com.example.finca_hexagonal.application.services.reserva.ReservaService;
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Reserva;
+import com.example.finca_hexagonal.infrastructure.exceptions.DateConflictException;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +44,19 @@ public class ReservaServiceImpl implements ReservaService {
         List<FechaEspecial> fechasEspDeFinca = fechaEspecialModelService.getFechasEspByFincaId(finca.getId());
         for (FechaEspecial fecha : fechasEspDeFinca) {
             if (fecha.getFecha().isEqual(reserva.getFecha())) {
-                reserva.setTotal(montoBase.add(fecha.getRecargo()).subtract(fecha.getDescuento()));
+
+                LocalTime horaAperturaFinca = fecha.getHoraInicio();
+                LocalTime horaCierreFinca = fecha.getHoraFin();
+
+                LocalTime horaInicioReserva = reserva.getDesde();
+                LocalTime horaFinReserva = reserva.getHasta();
+
+                if ((horaInicioReserva.isAfter(horaAperturaFinca) || horaInicioReserva.equals(horaAperturaFinca)) &&
+                        (horaFinReserva.isBefore(horaCierreFinca) || horaFinReserva.equals(horaCierreFinca))){
+                    reserva.setTotal(montoBase.add(fecha.getRecargo()).subtract(fecha.getDescuento()));
+                } else {
+                    throw new DateConflictException("La finca no esta disponible en ese horario");
+                }
             }
         }
         Reserva newReserva = reservaModelService.createReserva(reserva);
