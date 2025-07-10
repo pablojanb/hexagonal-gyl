@@ -1,9 +1,15 @@
 package com.example.finca_hexagonal.application.dto.reservas;
 
 import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
+import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class ReservaRequestDTO {
     private Long idFinca;
     private Long idUsuario;
@@ -11,73 +17,8 @@ public class ReservaRequestDTO {
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
+    private BigDecimal descuento = BigDecimal.valueOf(0);
+    private BigDecimal recargo = BigDecimal.valueOf(0);
+    private String detalle = "";
     private EstadoReserva estadoReserva = EstadoReserva.PENDING;
-
-    public ReservaRequestDTO() {}
-
-    public ReservaRequestDTO(Long idFinca, Long idUsuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, EstadoReserva estadoReserva) {
-        this.idFinca = idFinca;
-        this.idUsuario = idUsuario;
-        this.diaSemana = diaSemana;
-        this.fecha = fecha;
-        this.desde = desde;
-        this.hasta = hasta;
-        this.estadoReserva = estadoReserva;
-    }
-
-    public Long getIdFinca() {
-        return idFinca;
-    }
-
-    public void setIdFinca(Long idFinca) {
-        this.idFinca = idFinca;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getDiaSemana() {
-        return diaSemana;
-    }
-
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public LocalTime getDesde() {
-        return desde;
-    }
-
-    public void setDesde(LocalTime desde) {
-        this.desde = desde;
-    }
-
-    public LocalTime getHasta() {
-        return hasta;
-    }
-
-    public void setHasta(LocalTime hasta) {
-        this.hasta = hasta;
-    }
-
-    public EstadoReserva getEstadoReserva() {
-        return estadoReserva;
-    }
-
-    public void setEstadoReserva(EstadoReserva estadoReserva) {
-        this.estadoReserva = estadoReserva;
-    }
 }

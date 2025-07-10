@@ -55,6 +55,9 @@ public class ReservaServiceImpl implements ReservaService {
                 if ((horaInicioReserva.isAfter(horaAperturaFinca) || horaInicioReserva.equals(horaAperturaFinca)) &&
                         (horaFinReserva.isBefore(horaCierreFinca) || horaFinReserva.equals(horaCierreFinca))){
                     reserva.setTotal(montoBase.add(fecha.getRecargo()).subtract(fecha.getDescuento()));
+                    reserva.setDescuento(fecha.getDescuento());
+                    reserva.setRecargo(fecha.getRecargo());
+                    reserva.setDetalle(fecha.getMotivo());
                 } else {
                     throw new DateConflictException("La finca no esta disponible en ese horario");
                 }

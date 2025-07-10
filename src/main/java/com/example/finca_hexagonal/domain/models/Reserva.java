@@ -15,6 +15,9 @@ public class Reserva {
     private LocalTime desde;
     private LocalTime hasta;
     private BigDecimal total;
+    private BigDecimal descuento;
+    private BigDecimal recargo;
+    private String detalle;
     private EstadoReserva estadoReserva;
 
 
@@ -22,7 +25,7 @@ public class Reserva {
 
     }
 
-    public Reserva(Long id, Finca finca, Usuario usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
+    public Reserva(Long id, Finca finca, Usuario usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, BigDecimal descuento, BigDecimal recargo, String detalle, EstadoReserva estadoReserva) {
         this.id = id;
         this.finca = finca;
         this.usuario = usuario;
@@ -31,6 +34,9 @@ public class Reserva {
         this.desde = desde;
         this.hasta = hasta;
         this.total = total;
+        this.descuento = descuento;
+        this.recargo = recargo;
+        this.detalle = detalle;
         this.estadoReserva = estadoReserva;
     }
 
@@ -96,6 +102,30 @@ public class Reserva {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public BigDecimal getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(BigDecimal descuento) {
+        this.descuento = descuento;
+    }
+
+    public BigDecimal getRecargo() {
+        return recargo;
+    }
+
+    public void setRecargo(BigDecimal recargo) {
+        this.recargo = recargo;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     public EstadoReserva getEstadoReserva() {
