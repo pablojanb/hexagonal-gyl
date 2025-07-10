@@ -7,6 +7,7 @@ import com.example.finca_hexagonal.domain.ports.in.reserva.GetReservaUseCase;
 import com.example.finca_hexagonal.domain.ports.in.reserva.UpdateReservaUseCase;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,5 +49,15 @@ public class ReservaModelService implements CreateReservaUseCase, GetReservaUseC
     @Override
     public Optional<Reserva> updateReserva(Long reservaId, Reserva updateReserva) {
         return updateReservaUseCase.updateReserva(reservaId, updateReserva);
+    }
+
+    public BigDecimal calcularTotalReserva(Reserva reserva) {
+        if (reserva.getDesde() != null && reserva.getHasta() != null) {
+            long horas = java.time.Duration.between(reserva.getDesde(), reserva.getHasta()).toHours();
+            if (horas < 1) horas = 1;
+            return reserva.getFinca().getTarifaHora().multiply(BigDecimal.valueOf(horas));
+        } else {
+            return BigDecimal.ZERO;
+        }
     }
 }

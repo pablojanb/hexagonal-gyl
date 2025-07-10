@@ -3,11 +3,14 @@ package com.example.finca_hexagonal.application.services.reserva.impl;
 import com.example.finca_hexagonal.application.dto.reservas.ReservaRequestDTO;
 import com.example.finca_hexagonal.application.dto.reservas.ReservaResponseDTO;
 import com.example.finca_hexagonal.application.mappers.ReservaDTOMapper;
+import com.example.finca_hexagonal.application.services.finca.impl.FincaModelService;
 import com.example.finca_hexagonal.application.services.reserva.ReservaService;
+import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,16 +19,21 @@ public class ReservaServiceImpl implements ReservaService {
 
     private final ReservaModelService reservaModelService;
     private final ReservaDTOMapper reservaDTOMapper;
+    private final FincaModelService fincaModelService;
 
-    public ReservaServiceImpl(ReservaModelService reservaModelService, ReservaDTOMapper reservaDTOMapper) {
+    public ReservaServiceImpl(ReservaModelService reservaModelService, ReservaDTOMapper reservaDTOMapper, FincaModelService fincaModelService) {
         this.reservaModelService = reservaModelService;
         this.reservaDTOMapper = reservaDTOMapper;
+        this.fincaModelService = fincaModelService;
     }
 
     @Override
     public ReservaResponseDTO create(ReservaRequestDTO reservaDto) {
+        Finca finca = fincaModelService.getFincaById(reservaDto.getIdFinca())
+                .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + reservaDto.getIdFinca()));
         Reserva reserva = reservaDTOMapper.toModel(reservaDto);
-        reserva.calcularTotalReserva();
+        BigDecimal montoBase = reservaModelService.calcularTotalReserva(reserva);
+        reserva.setTotal(montoBase);
         Reserva newReserva = reservaModelService.createReserva(reserva);
         return reservaDTOMapper.toDto(newReserva);
     }
