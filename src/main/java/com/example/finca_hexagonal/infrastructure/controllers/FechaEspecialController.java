@@ -39,7 +39,7 @@ public class FechaEspecialController {
 
     @GetMapping("/findAllFechaEspecialByFincaId/{fincaId}")
     public ResponseEntity <List<FechaEspecialResponseDTO>> findAllFechaEspecialByFincaId(@PathVariable Long fincaId) {
-        return new ResponseEntity<>(fechaEspecialService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(fechaEspecialService.getAllByFincaId(fincaId), HttpStatus.OK);
     }
 
     @PutMapping("/updateFechaEspecial/{fechaId}")

@@ -19,4 +19,6 @@ public interface FechaEspecialService {
 
     boolean delete(Long idfecha);
 
+    List<FechaEspecialResponseDTO> getAllByFincaId(Long fincaId);
+
 }

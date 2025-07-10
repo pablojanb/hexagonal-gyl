@@ -1,6 +1,5 @@
 package com.example.finca_hexagonal.application.services.fechaEspecial.impl;
 
-
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.CreateFechaEspecialUseCase;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.DeleteFechaEspecialUseCase;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class FechaEspecialModelService implements CreateFechaEspecialUseCase, DeleteFechaEspecialUseCase, UpdateFechaEspecialUseCase, GetFechaEspecialUseCase {
@@ -27,8 +25,6 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
         this.getFechaEspecialUseCase = getFechaEspecialUseCase;
     }
 
-
-
     @Override
     public boolean deleteFechaEspecial(Long id) {
         return deleteFechaEspecialUseCase.deleteFechaEspecial(id);
@@ -42,6 +38,11 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
     @Override
     public Optional<FechaEspecial> getById(Long id) {
         return getFechaEspecialUseCase.getById(id);
+    }
+
+    @Override
+    public List<FechaEspecial> getFechasEspByFincaId(Long fincaId) {
+        return getFechaEspecialUseCase.getFechasEspByFincaId(fincaId);
     }
 
     @Override

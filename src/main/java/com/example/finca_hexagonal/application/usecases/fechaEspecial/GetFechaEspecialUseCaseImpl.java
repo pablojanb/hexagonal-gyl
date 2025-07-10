@@ -1,6 +1,5 @@
 package com.example.finca_hexagonal.application.usecases.fechaEspecial;
 
-
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.GetFechaEspecialUseCase;
 import com.example.finca_hexagonal.domain.ports.out.FechaEspecialModelPort;
@@ -17,7 +16,6 @@ public class GetFechaEspecialUseCaseImpl implements GetFechaEspecialUseCase {
         this.fechaEspecialModelPort = fechaEspecialModelPort;
     }
 
-
     @Override
     public List<FechaEspecial> getAll() {
         return fechaEspecialModelPort.getAll();
@@ -26,5 +24,10 @@ public class GetFechaEspecialUseCaseImpl implements GetFechaEspecialUseCase {
     @Override
     public Optional<FechaEspecial> getById(Long id) {
         return fechaEspecialModelPort.getById(id);
+    }
+
+    @Override
+    public List<FechaEspecial> getFechasEspByFincaId(Long fincaId) {
+        return fechaEspecialModelPort.findAllFechaEspecialByFincaId(fincaId);
     }
 }

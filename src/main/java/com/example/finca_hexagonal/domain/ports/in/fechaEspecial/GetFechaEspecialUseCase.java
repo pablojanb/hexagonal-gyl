@@ -10,4 +10,6 @@ public interface GetFechaEspecialUseCase {
     List<FechaEspecial> getAll();
 
     Optional<FechaEspecial> getById(Long id);
+
+    List<FechaEspecial> getFechasEspByFincaId(Long fincaId);
 }

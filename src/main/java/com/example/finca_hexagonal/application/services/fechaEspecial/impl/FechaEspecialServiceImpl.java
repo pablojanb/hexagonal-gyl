@@ -71,4 +71,10 @@ public class FechaEspecialServiceImpl implements FechaEspecialService {
     public boolean delete(Long idfecha) {
         return fechaEspecialModelService.deleteFechaEspecial(idfecha);
     }
+
+    @Override
+    public List<FechaEspecialResponseDTO> getAllByFincaId(Long fincaId) {
+        List<FechaEspecial> fechasEspeciales = fechaEspecialModelService.getFechasEspByFincaId(fincaId);
+        return fechaEspecialDTOMapper.toDtoList(fechasEspeciales);
+    }
 }
