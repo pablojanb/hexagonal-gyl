@@ -5,8 +5,10 @@ import com.example.finca_hexagonal.domain.ports.in.horario.CreateHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.DeleteHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.GetHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.UpdateHorarioUseCase;
+import com.example.finca_hexagonal.infrastructure.exceptions.DateConflictException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +62,22 @@ public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioU
     @Override
     public Optional<Horario> updateHorario(Long horarioId, Horario horario) {
         return updateHorarioUseCase.updateHorario(horarioId, horario);
+    }
+
+    public void validarSuperposiciones(Horario horario) {
+        List<Horario> horariosDelDia = this.getAllHorariosByFincaIdAndDayOfWeek(horario.getFinca().getId(), horario.getDiaSemana());
+        for (Horario hora : horariosDelDia){
+            LocalTime horarioAnteriorInicio = hora.getHoraInicio();
+            LocalTime horarioAnteriorFin = hora.getHoraFin();
+
+            LocalTime horarioNuevaInicio = horario.getHoraInicio();
+            LocalTime horarioNuevaFin = horario.getHoraFin();
+
+            boolean noHayConflicto = (horarioNuevaInicio.isAfter(horarioAnteriorFin) || horarioNuevaInicio.equals(horarioAnteriorFin)) ||
+                    (horarioNuevaFin.isBefore(horarioAnteriorInicio) || horarioNuevaFin.equals(horarioAnteriorInicio));
+            if (!noHayConflicto) {
+                throw new DateConflictException("El horario elegido se superpone con uno ya existente");
+            }
+        }
     }
 }
