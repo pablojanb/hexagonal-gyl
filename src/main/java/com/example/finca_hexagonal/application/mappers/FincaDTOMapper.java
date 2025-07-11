@@ -4,6 +4,7 @@ import com.example.finca_hexagonal.application.dto.fincas.FincaRequestDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTO;
 import com.example.finca_hexagonal.application.dto.fincas.FincaResponseDTOSimplified;
 import com.example.finca_hexagonal.application.services.direccion.impl.DireccionModelService;
+import com.example.finca_hexagonal.application.services.usuario.UsuarioService;
 import com.example.finca_hexagonal.application.services.usuario.impl.UsuarioModelService;
 import com.example.finca_hexagonal.domain.models.*;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
