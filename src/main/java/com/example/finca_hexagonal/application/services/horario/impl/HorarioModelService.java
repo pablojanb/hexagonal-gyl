@@ -67,16 +67,21 @@ public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioU
     public void validarSuperposiciones(Horario horario) {
         List<Horario> horariosDelDia = this.getAllHorariosByFincaIdAndDayOfWeek(horario.getFinca().getId(), horario.getDiaSemana());
         for (Horario hora : horariosDelDia){
-            LocalTime horarioAnteriorInicio = hora.getHoraInicio();
-            LocalTime horarioAnteriorFin = hora.getHoraFin();
+            if (hora.getDiaSemana().equalsIgnoreCase(horario.getDiaSemana())){
+                LocalTime horarioAnteriorInicio = hora.getHoraInicio();
+                LocalTime horarioAnteriorFin = hora.getHoraFin();
 
-            LocalTime horarioNuevaInicio = horario.getHoraInicio();
-            LocalTime horarioNuevaFin = horario.getHoraFin();
+                LocalTime horarioNuevaInicio = horario.getHoraInicio();
+                LocalTime horarioNuevaFin = horario.getHoraFin();
 
-            boolean noHayConflicto = (horarioNuevaInicio.isAfter(horarioAnteriorFin) || horarioNuevaInicio.equals(horarioAnteriorFin)) ||
-                    (horarioNuevaFin.isBefore(horarioAnteriorInicio) || horarioNuevaFin.equals(horarioAnteriorInicio));
-            if (!noHayConflicto) {
-                throw new DateConflictException("El horario elegido se superpone con uno ya existente");
+                boolean noHayConflicto = (horarioNuevaInicio.isAfter(horarioAnteriorFin) || horarioNuevaInicio.equals(horarioAnteriorFin)) ||
+                        (horarioNuevaFin.isBefore(horarioAnteriorInicio) || horarioNuevaFin.equals(horarioAnteriorInicio));
+                if (!noHayConflicto) {
+                    if ((hora.getId() == horario.getId())){
+                        return;
+                    }
+                    throw new DateConflictException("El horario elegido se superpone con uno ya existente");
+                }
             }
         }
     }

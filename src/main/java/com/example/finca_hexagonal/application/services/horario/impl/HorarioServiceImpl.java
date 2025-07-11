@@ -74,6 +74,7 @@ public class HorarioServiceImpl implements HorarioService {
         Finca finca = fincaModelService.getFincaById(horarioDTO.getIdFinca())
                 .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + horarioDTO.getIdFinca()));
         horario.setFinca(finca);
+        horarioModelService.validarSuperposiciones(horario);
         Horario updatedHorario = horarioModelService.updateHorario(horarioId, horario)
                 .orElseThrow(() -> new EntityNotFoundException("Horario no encontrado: " + horarioId));
         return Optional.of(horarioDTOMapper.toDto(updatedHorario));
