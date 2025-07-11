@@ -18,4 +18,8 @@ public interface UsuarioService {
 
     UsuarioResponseDTO createUsuario(UsuarioRequestDTO usuarioRequestDTO);
 
+
+    Optional<UsuarioResponseDTO> asignarRolAUsuario(Long usuarioId, Long rolId);
+
+    Optional<UsuarioResponseDTO> deleteRolFromUsuario(Long usuarioId, Long rolId);
 }

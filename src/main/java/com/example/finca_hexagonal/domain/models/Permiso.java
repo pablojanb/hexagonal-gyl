@@ -1,19 +1,15 @@
 package com.example.finca_hexagonal.domain.models;
 
-import java.util.List;
-
 public class Permiso {
     private Long id;
     private String nombre;
-    private List<Rol> roles;
 
     public Permiso() {
     }
 
-    public Permiso(Long id, String nombre, List<Rol> roles) {
+    public Permiso(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -30,13 +26,5 @@ public class Permiso {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public List<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
     }
 }

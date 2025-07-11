@@ -1,6 +1,8 @@
 package com.example.finca_hexagonal.infrastructure.exceptions.controller;
 
+import com.example.finca_hexagonal.infrastructure.exceptions.DateConflictException;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import com.example.finca_hexagonal.infrastructure.exceptions.InvalidCredentialsException;
 import com.example.finca_hexagonal.infrastructure.exceptions.dto.ErrorMessageDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorMessageDTO> NotFountException(EntityNotFoundException ex) {
         ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.NOT_FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessageDTO);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ErrorMessageDTO> InvalidCredentialsException(InvalidCredentialsException ex) {
+        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.UNAUTHORIZED, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessageDTO);
+    }
+
+    @ExceptionHandler(DateConflictException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorMessageDTO> DateConflictException(DateConflictException ex) {
+        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessageDTO);
     }
 
     //BAD REQUEST -> Validaciones

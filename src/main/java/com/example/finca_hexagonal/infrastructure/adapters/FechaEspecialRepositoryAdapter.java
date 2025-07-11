@@ -7,6 +7,7 @@ import com.example.finca_hexagonal.infrastructure.mappers.FechaEspecialModelMapp
 import com.example.finca_hexagonal.infrastructure.repositories.JpaFechaEspecialRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -65,5 +66,10 @@ public class FechaEspecialRepositoryAdapter implements FechaEspecialModelPort {
         return jpaFechaEspecialRepository.findByFincaId(id).stream()
                 .map(fechaEspecialMappers::toDomainModel)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<FechaEspecial> findFechaEspecialByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        return jpaFechaEspecialRepository.findByFincaIdAndFecha(fincaId, fecha).map(fechaEspecialMappers::toDomainModel);
     }
 }

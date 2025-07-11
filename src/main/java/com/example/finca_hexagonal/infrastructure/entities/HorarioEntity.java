@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 
-
 @Entity
 @Table(name = "horarios")
 public class HorarioEntity {

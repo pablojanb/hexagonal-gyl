@@ -4,6 +4,7 @@ import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialRe
 
 import com.example.finca_hexagonal.application.dto.fechaEspecial.FechaEspecialResponseDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +20,7 @@ public interface FechaEspecialService {
 
     boolean delete(Long idfecha);
 
+    List<FechaEspecialResponseDTO> getAllByFincaId(Long fincaId);
+
+    Optional<FechaEspecialResponseDTO> getFechaEspecialByFincaIdAndFecha(Long fincaId, LocalDate fecha);
 }

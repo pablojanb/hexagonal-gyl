@@ -1,16 +1,17 @@
 package com.example.finca_hexagonal.application.services.fechaEspecial.impl;
 
-
 import com.example.finca_hexagonal.domain.models.FechaEspecial;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.CreateFechaEspecialUseCase;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.DeleteFechaEspecialUseCase;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.GetFechaEspecialUseCase;
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.UpdateFechaEspecialUseCase;
+import com.example.finca_hexagonal.infrastructure.exceptions.DateConflictException;
 import org.springframework.stereotype.Service;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class FechaEspecialModelService implements CreateFechaEspecialUseCase, DeleteFechaEspecialUseCase, UpdateFechaEspecialUseCase, GetFechaEspecialUseCase {
@@ -26,8 +27,6 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
         this.updateFechaEspecialUseCase = updateFechaEspecialUseCase;
         this.getFechaEspecialUseCase = getFechaEspecialUseCase;
     }
-
-
 
     @Override
     public boolean deleteFechaEspecial(Long id) {
@@ -45,6 +44,11 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
     }
 
     @Override
+    public List<FechaEspecial> getFechasEspByFincaId(Long fincaId) {
+        return getFechaEspecialUseCase.getFechasEspByFincaId(fincaId);
+    }
+
+    @Override
     public Optional<FechaEspecial> update(Long id, FechaEspecial fechaEspecial) {
         return updateFechaEspecialUseCase.update(id, fechaEspecial);
     }
@@ -52,5 +56,17 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
     @Override
     public FechaEspecial create(FechaEspecial fechaEspecial) {
         return createFechaEspecialUseCase.create(fechaEspecial);
+    }
+
+    @Override
+    public Optional<FechaEspecial> getFechaEspecialByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        return getFechaEspecialUseCase.getFechaEspecialByFincaIdAndFecha(fincaId, fecha);
+    }
+
+    public void validarFechasExistentes(FechaEspecial fechaEspecial) {
+        Optional<FechaEspecial> fechaExistente = this.getFechaEspecialByFincaIdAndFecha(fechaEspecial.getFinca().getId(), fechaEspecial.getFecha());
+        if (fechaExistente.isPresent()){
+            throw new DateConflictException("Ya hay una fecha especial para: " + fechaEspecial.getFecha());
+        }
     }
 }
