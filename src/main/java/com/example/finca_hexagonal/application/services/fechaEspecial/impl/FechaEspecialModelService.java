@@ -7,6 +7,7 @@ import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.GetFechaEspecia
 import com.example.finca_hexagonal.domain.ports.in.fechaEspecial.UpdateFechaEspecialUseCase;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +54,10 @@ public class FechaEspecialModelService implements CreateFechaEspecialUseCase, De
     @Override
     public FechaEspecial create(FechaEspecial fechaEspecial) {
         return createFechaEspecialUseCase.create(fechaEspecial);
+    }
+
+    @Override
+    public Optional<FechaEspecial> getFechaEspecialByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        return getFechaEspecialUseCase.getFechaEspecialByFincaIdAndFecha(fincaId, fecha);
     }
 }
