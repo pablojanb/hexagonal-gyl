@@ -30,6 +30,7 @@ public class FechaEspecialServiceImpl implements FechaEspecialService {
     @Override
     public FechaEspecialResponseDTO create(FechaEspecialRequestDTO fechaEspecialRequestDTO) {
         FechaEspecial fechaEspecial = fechaEspecialDTOMapper.toModel(fechaEspecialRequestDTO);
+        fechaEspecialModelService.validarFechasExistentes(fechaEspecial);
         FechaEspecial newFechaEspecial = fechaEspecialModelService.create(fechaEspecial);
         return fechaEspecialDTOMapper.toDto(newFechaEspecial);
     }
