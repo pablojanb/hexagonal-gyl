@@ -1,5 +1,6 @@
 package com.example.finca_hexagonal.application.services.usuario.impl;
 
+import com.example.finca_hexagonal.application.config.EncriptPassword;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
 import com.example.finca_hexagonal.application.mappers.UsuarioDTOMapper;
@@ -8,7 +9,6 @@ import com.example.finca_hexagonal.application.services.usuario.UsuarioService;
 import com.example.finca_hexagonal.domain.models.Rol;
 import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
-import com.example.finca_hexagonal.infrastructure.utils.Password;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +19,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioDTOMapper usuarioDTOMapper;
     private final UsuarioModelService usuarioModelService;
     private final RolModelService rolModelService;
+    private final EncriptPassword encriptPassword;
 
-    public UsuarioServiceImpl(UsuarioDTOMapper usuarioDTOMapper, UsuarioModelService usuarioModelService, RolModelService rolModelService) {
+    public UsuarioServiceImpl(UsuarioDTOMapper usuarioDTOMapper,
+                              UsuarioModelService usuarioModelService,
+                              RolModelService rolModelService,
+                              EncriptPassword encriptPassword) {
         this.usuarioDTOMapper = usuarioDTOMapper;
         this.usuarioModelService = usuarioModelService;
         this.rolModelService = rolModelService;
+        this.encriptPassword = encriptPassword;
     }
 
     @Override
@@ -59,8 +64,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioToUpdate.setCuentaActiva(newData.isCuentaActiva());
         usuarioToUpdate.setDni(newData.getDni());
         usuarioToUpdate.setRoles(newData.getRoles());
-        String hashPassword = Password.hashPassword(newData.getPassword());
-        usuarioToUpdate.setPassword(hashPassword);
+
+        String password = encriptPassword.encriptPassword(usuarioToUpdate.getPassword());
+        usuarioToUpdate.setPassword(password);
         Usuario usuarioUpdated = usuarioModelService.updateUsuario(id, usuarioToUpdate)
                 .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + id));
 
@@ -89,5 +95,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioUpdated = usuarioModelService.updateUsuario(usuarioId, usuario)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + usuarioId));
         return Optional.of(usuarioDTOMapper.toDto(usuarioUpdated));
+    }
+
+    @Override
+    public UsuarioResponseDTO createUsuario(UsuarioRequestDTO usuarioRequestDTO) {
+        Usuario usuario = usuarioDTOMapper.toModel(usuarioRequestDTO);
+        usuario.setPassword(encriptPassword.encriptPassword(usuario.getPassword()));
+        Usuario usuarioCreado = usuarioModelService.createUsuario(usuario);
+        return usuarioDTOMapper.toDto(usuarioCreado);
     }
 }

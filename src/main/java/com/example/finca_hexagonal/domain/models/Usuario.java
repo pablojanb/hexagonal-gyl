@@ -17,9 +17,11 @@ public class Usuario {
     private String password;
     private LocalDate fechaNac;
     private boolean cuentaActiva;
-    private List<Rol> roles = new ArrayList<>();
+    private List<Rol> roles;
 
     public Usuario() {
+        this.cuentaActiva = true;
+        this.roles = new ArrayList<>();
     }
 
     public Usuario(Long id, String nombre, String apellido, String dni, String telefono, String email, String emailAlternativo, String username, String password, LocalDate fechaNac, boolean cuentaActiva, List<Rol> roles) {

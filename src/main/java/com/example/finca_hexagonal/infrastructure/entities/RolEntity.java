@@ -10,7 +10,7 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nombre;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "rol_permiso",
             joinColumns = @JoinColumn(name = "rol_id"),
@@ -50,4 +50,5 @@ public class RolEntity {
     public void setPermisos(List<PermisoEntity> permisos) {
         this.permisos = permisos;
     }
+
 }
