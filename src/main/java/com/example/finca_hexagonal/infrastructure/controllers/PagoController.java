@@ -4,11 +4,14 @@ import com.example.finca_hexagonal.application.dto.pago.PagoRequestDTO;
 import com.example.finca_hexagonal.application.dto.pago.PagoResponseDTO;
 import com.example.finca_hexagonal.application.services.Pago.PagoService;
 
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/pagos")
@@ -21,9 +24,27 @@ public class PagoController {
     }
 
     @PostMapping
-    public ResponseEntity<PagoResponseDTO> createPago(@RequestBody PagoRequestDTO dto) {
+    public ResponseEntity<PagoResponseDTO> createPago(@RequestBody PagoRequestDTO dto) throws Exception {
         PagoResponseDTO created = pagoService.save(dto);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/notificacion")
+    public ResponseEntity<Void> recibirNotificacionMercadoPago(@RequestBody Map<String, Object> payload,
+                                               @RequestHeader Map<String, String> headers) throws MPException, MPApiException {
+        Object dataObj = payload.get("data");
+        if (dataObj instanceof Map) {
+            Map<String, Object> data = (Map<String, Object>) dataObj;
+            Object idObj = data.get("id");
+
+            if (idObj != null) {
+                Long paymentId = Long.parseLong(idObj.toString());
+        pagoService.paymentProcess(paymentId);
+            }
+        }
+
+        return ResponseEntity.ok().build();
     }
 
 

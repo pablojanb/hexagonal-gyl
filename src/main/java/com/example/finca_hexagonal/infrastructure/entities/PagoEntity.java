@@ -18,12 +18,15 @@ public class PagoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "reserva_id")
     private ReservaEntity reserva;
 
     @Column(name = "monto_total")
     private BigDecimal montoTotal;
+
+    @Column(name = "monto")
+    private BigDecimal monto;
 
     @OneToOne
     @JoinColumn(name = "medio_de_pago_id")

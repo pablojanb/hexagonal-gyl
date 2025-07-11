@@ -8,26 +8,26 @@ import java.time.LocalDateTime;
 public class Pago {
     private  Long id;
     private Reserva reserva;
-    private LocalDateTime fechaHora;
+    private LocalDateTime fechaPago;
     private BigDecimal monto;
     private BigDecimal descuentoAplicado;
     private BigDecimal recargoAplicado;
-    private Long medioDePagoId;
     private EstadoPago estadoPago;
     private BigDecimal montoTotal;
-
     private ModoDePago modoDePago;
 
-    public Pago(){};
+    public Pago(){
+        this.fechaPago =  LocalDateTime.now();
+        this.estadoPago = EstadoPago.PENDING;
+    };
 
-    public Pago(Long id, Reserva reserva, LocalDateTime fechaHora, BigDecimal monto, BigDecimal descuentoAplicado, BigDecimal recargoAplicado, Long medioDePagoId, EstadoPago estadoPago, BigDecimal montoTotal, ModoDePago modoDePago) {
+    public Pago(Long id, Reserva reserva, LocalDateTime fechaHora, BigDecimal monto, BigDecimal descuentoAplicado, BigDecimal recargoAplicado, EstadoPago estadoPago, BigDecimal montoTotal, ModoDePago modoDePago) {
         this.id = id;
         this.reserva = reserva;
-        this.fechaHora = fechaHora;
+        this.fechaPago = fechaHora;
         this.monto = monto;
         this.descuentoAplicado = descuentoAplicado;
         this.recargoAplicado = recargoAplicado;
-        this.medioDePagoId = medioDePagoId;
         this.estadoPago = estadoPago;
         this.montoTotal = montoTotal;
         this.modoDePago = modoDePago;
@@ -49,12 +49,12 @@ public class Pago {
         this.reserva = reserva;
     }
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
+    public LocalDateTime getFechaPago() {
+        return fechaPago;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public void setFechaPago(LocalDateTime fechaPago) {
+        this.fechaPago = fechaPago;
     }
 
     public BigDecimal getMonto() {
@@ -81,13 +81,6 @@ public class Pago {
         this.recargoAplicado = recargoAplicado;
     }
 
-    public Long getMedioDePagoId() {
-        return medioDePagoId;
-    }
-
-    public void setMedioDePagoId(Long medioDePagoId) {
-        this.medioDePagoId = medioDePagoId;
-    }
 
     public EstadoPago getEstadoPago() {
         return estadoPago;
@@ -113,7 +106,5 @@ public class Pago {
         this.modoDePago = modoDePago;
     }
 
-    public LocalDateTime getFechaPago() {
-        return this.fechaHora;
-    }
+
 }
