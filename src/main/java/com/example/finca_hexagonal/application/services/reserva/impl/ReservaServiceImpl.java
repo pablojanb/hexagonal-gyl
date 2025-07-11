@@ -15,10 +15,8 @@ import com.example.finca_hexagonal.infrastructure.exceptions.DateConflictExcepti
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,41 +44,23 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaDTOMapper.toModel(reservaDto);
         BigDecimal montoBase = reservaModelService.calcularTotalReserva(reserva);
         reserva.setTotal(montoBase);
-        List<FechaEspecial> fechasEspDeFinca = fechaEspecialModelService.getFechasEspByFincaId(finca.getId());
-        for (FechaEspecial fecha : fechasEspDeFinca) {
-            if (fecha.getFecha().isEqual(reserva.getFecha())) {
 
-                LocalTime horaAperturaFinca = fecha.getHoraInicio();
-                LocalTime horaCierreFinca = fecha.getHoraFin();
-
-                LocalTime horaInicioReserva = reserva.getDesde();
-                LocalTime horaFinReserva = reserva.getHasta();
-
-                if ((horaInicioReserva.isAfter(horaAperturaFinca) || horaInicioReserva.equals(horaAperturaFinca)) &&
-                        (horaFinReserva.isBefore(horaCierreFinca) || horaFinReserva.equals(horaCierreFinca))){
-                    reserva.setTotal(montoBase.add(fecha.getRecargo()).subtract(fecha.getDescuento()));
-                    reserva.setDescuento(fecha.getDescuento());
-                    reserva.setRecargo(fecha.getRecargo());
-                    reserva.setDetalle(fecha.getMotivo());
-                } else {
-                    throw new DateConflictException("La finca no esta disponible en ese horario");
-                }
-            }
+        if (reserva.getDesde().isAfter(reserva.getHasta())){
+            throw new DateConflictException("La hora de inicio debe ser anterior a la hora de finalización");
         }
-        List<Reserva> reservasAnteriores = reservaModelService.getReservasByFincaIdAndFecha(reserva.getFinca().getId(), reserva.getFecha());
-        for (Reserva reservaAnt : reservasAnteriores){
-            LocalTime reservaAnteriorInicio = reservaAnt.getDesde();
-            LocalTime reservaAnteriorFin = reservaAnt.getHasta();
-
-            LocalTime reservaNuevaInicio = reserva.getDesde();
-            LocalTime reservaNuevaFin = reserva.getHasta();
-            boolean noHayConflicto = (reservaNuevaInicio.isAfter(reservaAnteriorFin) || reservaNuevaInicio.equals(reservaAnteriorFin)) ||
-                    (reservaNuevaFin.isBefore(reservaAnteriorInicio) || reservaNuevaFin.equals(reservaAnteriorInicio));
-            if (!noHayConflicto) {
+        Optional<FechaEspecial> fechaEspDeFinca = fechaEspecialModelService.getFechaEspecialByFincaIdAndFecha(finca.getId(), reserva.getFecha());
+        if (fechaEspDeFinca.isPresent()){
+            FechaEspecial fecha = fechaEspDeFinca.get();
+            reservaModelService.validarFechaEspecial(fecha, reserva);
+        } else {
+            List<Horario> horariosDeFinca = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(finca.getId(), reserva.getDiaSemana());
+            if (horariosDeFinca.isEmpty()) {
                 throw new DateConflictException("La finca no esta disponible en ese horario");
             }
+            reservaModelService.validarHorario(reserva, horariosDeFinca);
         }
-
+        List<Reserva> reservasAnteriores = reservaModelService.getReservasByFincaIdAndFecha(reserva.getFinca().getId(), reserva.getFecha());
+        reservaModelService.validarReservasAnteriores(reserva, reservasAnteriores);
         Reserva newReserva = reservaModelService.createReserva(reserva);
         return reservaDTOMapper.toDto(newReserva);
     }
