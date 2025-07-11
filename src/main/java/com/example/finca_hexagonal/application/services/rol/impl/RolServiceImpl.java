@@ -3,7 +3,9 @@ package com.example.finca_hexagonal.application.services.rol.impl;
 import com.example.finca_hexagonal.application.dto.rol.RolRequestDTO;
 import com.example.finca_hexagonal.application.dto.rol.RolResponseDTO;
 import com.example.finca_hexagonal.application.mappers.RolDTOMapper;
+import com.example.finca_hexagonal.application.services.permiso.impl.PermisoModelService;
 import com.example.finca_hexagonal.application.services.rol.RolService;
+import com.example.finca_hexagonal.domain.models.Permiso;
 import com.example.finca_hexagonal.domain.models.Rol;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class RolServiceImpl implements RolService {
 
     private final RolModelService rolModelService;
+    private final PermisoModelService permisoModelService;
     private final RolDTOMapper rolDTOMapper;
 
-    public RolServiceImpl(RolModelService rolModelService, RolDTOMapper rolDTOMapper) {
+    public RolServiceImpl(RolModelService rolModelService, PermisoModelService permisoModelService, RolDTOMapper rolDTOMapper) {
         this.rolModelService = rolModelService;
+        this.permisoModelService = permisoModelService;
         this.rolDTOMapper = rolDTOMapper;
     }
 
@@ -53,5 +57,29 @@ public class RolServiceImpl implements RolService {
         Rol rol = rolModelService.getRol(id)
                 .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + id));
         return Optional.of(rolDTOMapper.toDto(rol));
+    }
+
+    @Override
+    public Optional<RolResponseDTO> addPermisoARol(Long idRol, Long idPermiso) {
+        Permiso permiso = permisoModelService.getPermiso(idPermiso)
+                .orElseThrow(() -> new EntityNotFoundException("Permiso no encontrado con ID: " + idPermiso));
+        Rol rol = rolModelService.getRol(idRol)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + idRol));
+        rol.getPermisos().add(permiso);
+        Rol rolUpdated = rolModelService.updateRol(idRol, rol)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + idRol));
+        return Optional.of(rolDTOMapper.toDto(rolUpdated));
+    }
+
+    @Override
+    public Optional<RolResponseDTO> deletePermisoFromRol(Long rolId, Long permisoId) {
+        Permiso permiso = permisoModelService.getPermiso(permisoId)
+                .orElseThrow(() -> new EntityNotFoundException("Permiso no encontrado con ID: " + permisoId));
+        Rol rol = rolModelService.getRol(rolId)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + rolId));
+        rol.getPermisos().removeIf(perm -> perm.getId() == permiso.getId());
+        Rol rolUpdated = rolModelService.updateRol(rolId, rol)
+                .orElseThrow(() -> new EntityNotFoundException("Rol no encontrado con ID: " + rolId));
+        return Optional.of(rolDTOMapper.toDto(rolUpdated));
     }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,5 +13,5 @@ import java.util.List;
 @Data
 public class RolRequestDTO {
     private String nombre;
-    private List<Permiso> permisos;
+    private List<Permiso> permisos = new ArrayList<>();
 }
