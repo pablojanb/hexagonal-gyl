@@ -4,12 +4,9 @@ import com.example.finca_hexagonal.application.config.EncriptPassword;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioRequestDTO;
 import com.example.finca_hexagonal.application.dto.usuario.UsuarioResponseDTO;
 import com.example.finca_hexagonal.application.mappers.UsuarioDTOMapper;
-import com.example.finca_hexagonal.application.services.rol.impl.RolModelService;
 import com.example.finca_hexagonal.application.services.usuario.UsuarioService;
-import com.example.finca_hexagonal.domain.models.Rol;
 import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
-import com.example.finca_hexagonal.infrastructure.utils.Password;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
