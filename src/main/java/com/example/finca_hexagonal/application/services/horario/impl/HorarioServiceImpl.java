@@ -27,6 +27,7 @@ public class HorarioServiceImpl implements HorarioService {
     @Override
     public HorarioResponseDTO createHorario(HorarioRequestDTO horarioDTO) {
         Horario horario = horarioDTOMapper.toModel(horarioDTO);
+        horarioModelService.validarSuperposiciones(horario);
         Horario newHorario = horarioModelService.createHorario(horario);
         return horarioDTOMapper.toDto(newHorario);
     }
