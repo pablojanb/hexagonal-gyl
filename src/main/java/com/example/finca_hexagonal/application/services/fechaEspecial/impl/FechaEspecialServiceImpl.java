@@ -62,6 +62,7 @@ public class FechaEspecialServiceImpl implements FechaEspecialService {
         Finca finca = fincaModelService.getFincaById(fechaEspeciaRequestlDTO.getFincaId())
                 .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + fechaEspeciaRequestlDTO.getFincaId()));
         fechaEspecial.setFinca(finca);
+        fechaEspecialModelService.validarFechasExistentes(fechaEspecial);
         FechaEspecial updatedFechaespecial = fechaEspecialModelService.update(idfecha, fechaEspecial)
                 .orElseThrow(() -> new EntityNotFoundException("Fecha especial no encontrada: " + idfecha));
         return Optional.of(fechaEspecialDTOMapper.toDto(updatedFechaespecial));
