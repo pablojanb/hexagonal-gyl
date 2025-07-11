@@ -15,4 +15,11 @@ public interface UsuarioService {
     Optional<UsuarioResponseDTO> getUsuarioById(Long id);
 
     Optional<UsuarioResponseDTO> updateById(Long id, UsuarioRequestDTO usuarioUpdateDto);
+
+    UsuarioResponseDTO createUsuario(UsuarioRequestDTO usuarioRequestDTO);
+
+
+    Optional<UsuarioResponseDTO> asignarRolAUsuario(Long usuarioId, Long rolId);
+
+    Optional<UsuarioResponseDTO> deleteRolFromUsuario(Long usuarioId, Long rolId);
 }

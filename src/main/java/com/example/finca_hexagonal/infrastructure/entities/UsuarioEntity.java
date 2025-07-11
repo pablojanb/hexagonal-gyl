@@ -22,7 +22,14 @@ public class UsuarioEntity {
     private String password;
     private LocalDate fechaNac;
     private boolean cuentaActiva;
-    @ManyToMany
+
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "usuario_rol",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id")
+    )
     private List<RolEntity> roles = new ArrayList<>();
 
     public UsuarioEntity() {

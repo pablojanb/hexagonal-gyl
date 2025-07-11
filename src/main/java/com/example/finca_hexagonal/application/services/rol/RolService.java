@@ -16,4 +16,8 @@ public interface RolService {
     List<RolResponseDTO> getRoles();
 
     Optional<RolResponseDTO> getRolById(Long id);
+
+    Optional<RolResponseDTO> addPermisoARol(Long idRol, Long idPermiso);
+
+    Optional<RolResponseDTO> deletePermisoFromRol(Long rolId, Long permisoId);
 }

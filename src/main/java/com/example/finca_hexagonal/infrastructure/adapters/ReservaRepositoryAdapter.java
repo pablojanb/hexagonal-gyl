@@ -1,5 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
+import com.example.finca_hexagonal.application.dto.reservas.ReservaResponseDTO;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.domain.ports.out.ReservaModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.ReservaEntity;
@@ -7,6 +8,7 @@ import com.example.finca_hexagonal.infrastructure.mappers.ReservaModelMappers;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaReservaRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,5 +60,12 @@ public class ReservaRepositoryAdapter implements ReservaModelPort {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Reserva> findByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        return jpaReservaRepository.findByFincaIdAndFecha(fincaId, fecha).stream()
+                .map(reservaModelMappers::toDomainModel)
+                .collect(Collectors.toList());
     }
 }

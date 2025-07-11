@@ -2,8 +2,10 @@ package com.example.finca_hexagonal.infrastructure.adapters;
 
 import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.domain.ports.out.UsuarioModelPort;
+import com.example.finca_hexagonal.infrastructure.entities.RolEntity;
 import com.example.finca_hexagonal.infrastructure.entities.UsuarioEntity;
 import com.example.finca_hexagonal.infrastructure.mappers.UsuarioModelMappers;
+import com.example.finca_hexagonal.infrastructure.repositories.JpaRolRepository;
 import com.example.finca_hexagonal.infrastructure.repositories.JpaUsuarioRepository;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +17,13 @@ import java.util.stream.Collectors;
 public class UsuarioRepositoryAdapter implements UsuarioModelPort {
     private final JpaUsuarioRepository jpaUsuarioRepository;
     private final UsuarioModelMappers usuarioModelMappers;
+    private final JpaRolRepository jpaRolRepository;
 
-    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, UsuarioModelMappers usuarioModelMappers) {
+    public UsuarioRepositoryAdapter(JpaUsuarioRepository jpaUsuarioRepository, UsuarioModelMappers usuarioModelMappers,
+                                    JpaRolRepository jpaRolRepository) {
         this.jpaUsuarioRepository = jpaUsuarioRepository;
         this.usuarioModelMappers = usuarioModelMappers;
+        this.jpaRolRepository = jpaRolRepository;
     }
 
     @Override
@@ -50,5 +55,16 @@ public class UsuarioRepositoryAdapter implements UsuarioModelPort {
             return Optional.of(usuarioModelMappers.toDomainModel(updateUsuarioEntity));
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Usuario createUsuario(Usuario usuario) {
+        UsuarioEntity usuarioEntity = usuarioModelMappers.fromDomainModel(usuario);
+
+        Optional<RolEntity> rolEntity = jpaRolRepository.findById(1L);//Rol cliente
+
+        usuarioEntity.getRoles().add(rolEntity.get());
+        UsuarioEntity usuarioSaved = jpaUsuarioRepository.save(usuarioEntity);
+        return usuarioModelMappers.toDomainModel(usuarioSaved);
     }
 }

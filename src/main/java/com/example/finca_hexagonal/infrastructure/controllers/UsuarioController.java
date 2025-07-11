@@ -33,7 +33,7 @@ public class UsuarioController {
 
     @PutMapping("/updateUsuario/{usuarioId}")
     public ResponseEntity<UsuarioResponseDTO> updateFinca(@PathVariable Long usuarioId,
-                                                                  @RequestBody UsuarioRequestDTO usuarioUpdate){
+                                                          @RequestBody UsuarioRequestDTO usuarioUpdate){
         return usuarioService.updateById(usuarioId, usuarioUpdate)
                 .map(finca -> new ResponseEntity<>(finca, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -45,5 +45,21 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/asignarRolAUsuario/{usuarioId}/{rolId}")
+    public ResponseEntity<UsuarioResponseDTO> asignarRolAUsuario(@PathVariable Long usuarioId,
+                                                                 @PathVariable Long rolId){
+        return usuarioService.asignarRolAUsuario(usuarioId, rolId)
+                .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/deleteRolFromUsuario/{usuarioId}/{rolId}")
+    public ResponseEntity<UsuarioResponseDTO> deleteRolFromUsuario(@PathVariable Long usuarioId,
+                                                                   @PathVariable Long rolId){
+        return usuarioService.deleteRolFromUsuario(usuarioId, rolId)
+                .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

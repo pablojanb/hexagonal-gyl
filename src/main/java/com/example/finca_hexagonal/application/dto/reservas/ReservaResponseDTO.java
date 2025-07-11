@@ -12,24 +12,32 @@ public class ReservaResponseDTO {
     private String finca;
     private Long idUsuario;
     private String usuario;
+    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
     private BigDecimal total;
+    private BigDecimal descuento;
+    private BigDecimal recargo;
+    private String detalle;
     private EstadoReserva estadoReserva;
 
     public ReservaResponseDTO() {}
 
-    public ReservaResponseDTO(Long id, Long idFinca, String finca, Long idUsuario, String usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
+    public ReservaResponseDTO(Long id, Long idFinca, String finca, Long idUsuario, String usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, BigDecimal descuento, BigDecimal recargo, String detalle, EstadoReserva estadoReserva) {
         this.id = id;
         this.idFinca = idFinca;
         this.finca = finca;
         this.idUsuario = idUsuario;
         this.usuario = usuario;
+        this.diaSemana = diaSemana;
         this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
         this.total = total;
+        this.descuento = descuento;
+        this.recargo = recargo;
+        this.detalle = detalle;
         this.estadoReserva = estadoReserva;
     }
 
@@ -73,6 +81,14 @@ public class ReservaResponseDTO {
         this.usuario = usuario;
     }
 
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
+    }
+
     public LocalDate getFecha() {
         return fecha;
     }
@@ -103,6 +119,30 @@ public class ReservaResponseDTO {
 
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public BigDecimal getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(BigDecimal descuento) {
+        this.descuento = descuento;
+    }
+
+    public BigDecimal getRecargo() {
+        return recargo;
+    }
+
+    public void setRecargo(BigDecimal recargo) {
+        this.recargo = recargo;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     public EstadoReserva getEstadoReserva() {

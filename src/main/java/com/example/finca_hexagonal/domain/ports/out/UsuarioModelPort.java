@@ -14,4 +14,7 @@ public interface UsuarioModelPort {
     Optional<Usuario> findById(Long id);
 
     Optional<Usuario> updateById(Long id, Usuario usuarioUpdate);
+
+    Usuario createUsuario(Usuario usuario);
+
 }

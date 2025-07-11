@@ -54,4 +54,20 @@ public class RolController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PostMapping("/addPermisoARol/{rolId}/{permisoId}")
+    public ResponseEntity<RolResponseDTO> addPermisoARol(@PathVariable Long rolId,
+                                                         @PathVariable Long permisoId){
+        return rolService.addPermisoARol(rolId, permisoId)
+                .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/deletePermisoFromRol/{rolId}/{permisoId}")
+    public ResponseEntity<RolResponseDTO> deletePermisoFromRol(@PathVariable Long rolId,
+                                                         @PathVariable Long permisoId){
+        return rolService.deletePermisoFromRol(rolId, permisoId)
+                .map(rol -> new ResponseEntity<>(rol, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }

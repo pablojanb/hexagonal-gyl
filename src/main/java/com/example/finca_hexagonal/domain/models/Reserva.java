@@ -10,10 +10,14 @@ public class Reserva {
     private Long id;
     private Finca finca;
     private Usuario usuario;
+    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
     private BigDecimal total;
+    private BigDecimal descuento;
+    private BigDecimal recargo;
+    private String detalle;
     private EstadoReserva estadoReserva;
 
 
@@ -21,14 +25,18 @@ public class Reserva {
 
     }
 
-    public Reserva(Long id, Finca finca, Usuario usuario, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, EstadoReserva estadoReserva) {
+    public Reserva(Long id, Finca finca, Usuario usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, BigDecimal descuento, BigDecimal recargo, String detalle, EstadoReserva estadoReserva) {
         this.id = id;
         this.finca = finca;
         this.usuario = usuario;
+        this.diaSemana = diaSemana;
         this.fecha = fecha;
         this.desde = desde;
         this.hasta = hasta;
         this.total = total;
+        this.descuento = descuento;
+        this.recargo = recargo;
+        this.detalle = detalle;
         this.estadoReserva = estadoReserva;
     }
 
@@ -54,6 +62,14 @@ public class Reserva {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
     }
 
     public LocalDate getFecha() {
@@ -88,6 +104,30 @@ public class Reserva {
         this.total = total;
     }
 
+    public BigDecimal getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(BigDecimal descuento) {
+        this.descuento = descuento;
+    }
+
+    public BigDecimal getRecargo() {
+        return recargo;
+    }
+
+    public void setRecargo(BigDecimal recargo) {
+        this.recargo = recargo;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
     public EstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
@@ -95,16 +135,5 @@ public class Reserva {
     public void setEstadoReserva(EstadoReserva estadoReserva) {
         this.estadoReserva = estadoReserva;
 }
-
-
-    public void calcularTotalReserva() {
-        if (finca != null && finca.getTarifaHora() != null && desde != null && hasta != null) {
-            long horas = java.time.Duration.between(desde, hasta).toHours();
-            if (horas < 1) horas = 1;
-            this.total = finca.getTarifaHora().multiply(BigDecimal.valueOf(horas));
-        } else {
-            this.total = BigDecimal.ZERO;
-        }
-    }
 
 }

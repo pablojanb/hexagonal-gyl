@@ -1,11 +1,9 @@
 package com.example.finca_hexagonal.application.dto.permiso;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class PermisoResponseDTO {
     private Long id;
