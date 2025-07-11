@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 public class FechaEspecial {
     private Long id;
     private Finca finca;

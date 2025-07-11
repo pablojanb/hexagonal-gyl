@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,7 +40,15 @@ public class FechaEspecialController {
 
     @GetMapping("/findAllFechaEspecialByFincaId/{fincaId}")
     public ResponseEntity <List<FechaEspecialResponseDTO>> findAllFechaEspecialByFincaId(@PathVariable Long fincaId) {
-        return new ResponseEntity<>(fechaEspecialService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(fechaEspecialService.getAllByFincaId(fincaId), HttpStatus.OK);
+    }
+
+    @GetMapping("/findFechaEspecialByFincaIdAndFecha/{fincaId}/{fecha}")
+    public ResponseEntity<FechaEspecialResponseDTO> findFechaEspecialByFincaIdAndFecha(@PathVariable Long fincaId,
+                                                                                       @PathVariable LocalDate fecha) {
+        return fechaEspecialService.getFechaEspecialByFincaIdAndFecha(fincaId, fecha)
+                .map(fech -> new ResponseEntity<>(fech, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/updateFechaEspecial/{fechaId}")

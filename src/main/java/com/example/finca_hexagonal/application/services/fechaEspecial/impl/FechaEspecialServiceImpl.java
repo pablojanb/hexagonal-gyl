@@ -10,6 +10,7 @@ import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,6 @@ public class FechaEspecialServiceImpl implements FechaEspecialService {
         FechaEspecial fechaEspecial = fechaEspecialModelService.getById(idfecha)
                 .orElseThrow(() -> new EntityNotFoundException("Fecha especial no encontrado: " + idfecha));
         return Optional.of(fechaEspecialDTOMapper.toDto(fechaEspecial));
-
     }
 
     @Override
@@ -70,5 +70,18 @@ public class FechaEspecialServiceImpl implements FechaEspecialService {
     @Override
     public boolean delete(Long idfecha) {
         return fechaEspecialModelService.deleteFechaEspecial(idfecha);
+    }
+
+    @Override
+    public List<FechaEspecialResponseDTO> getAllByFincaId(Long fincaId) {
+        List<FechaEspecial> fechasEspeciales = fechaEspecialModelService.getFechasEspByFincaId(fincaId);
+        return fechaEspecialDTOMapper.toDtoList(fechasEspeciales);
+    }
+
+    @Override
+    public Optional<FechaEspecialResponseDTO> getFechaEspecialByFincaIdAndFecha(Long fincaId, LocalDate fecha) {
+        FechaEspecial fechaEspecial = fechaEspecialModelService.getFechaEspecialByFincaIdAndFecha(fincaId, fecha)
+                .orElseThrow(() -> new EntityNotFoundException("Fecha especial no encontrada: " + fecha));
+        return Optional.of(fechaEspecialDTOMapper.toDto(fechaEspecial));
     }
 }
