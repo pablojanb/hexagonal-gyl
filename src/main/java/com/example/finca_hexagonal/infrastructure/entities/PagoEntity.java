@@ -7,6 +7,8 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,4 +47,9 @@ public class PagoEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_pago")
     private EstadoPago estadoPago;
+
+    @ElementCollection
+    @CollectionTable(name = "pago_intentos", joinColumns = @JoinColumn(name = "pago_id"))
+    @Column(name = "detalle")
+    private List<String> detalles = new ArrayList<>();
 }

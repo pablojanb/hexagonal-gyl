@@ -5,6 +5,8 @@ import com.example.finca_hexagonal.domain.models.enums.MedioPago;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PagoResponseDTO {
     private  Long id;
@@ -17,8 +19,11 @@ public class PagoResponseDTO {
     private BigDecimal montoTotalConImpuestos;
     private BigDecimal descuentoAplicado;
     private BigDecimal recargoAplicado;
+    private List<String> detalles;
 
-    public  PagoResponseDTO(){};
+    public  PagoResponseDTO(){
+        this.detalles = new ArrayList<>();
+    };
 
 
 
@@ -100,5 +105,13 @@ public class PagoResponseDTO {
 
     public void setMedioPago(MedioPago medioPago) {
         this.medioPago = medioPago;
+    }
+
+    public List<String> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<String> detalles) {
+        this.detalles = detalles;
     }
 }

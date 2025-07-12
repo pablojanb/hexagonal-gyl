@@ -34,12 +34,9 @@ public class PagoServiceImpl implements PagoService {
         BigDecimal iva = new BigDecimal("1.21");
         pago.setMontoTotal(pago.getReserva().getTotal().multiply(iva));
         Pago saved = pagoUseCaseService.save(pago);
-        System.out.println(saved.getMedioPago());
+
         PagoResponseDTO responseDTO = pagoDTOMapper.toDto(saved);
 
-        System.out.println(pago.getMedioPago());
-        System.out.println(dto.getMedioPago());
-        System.out.println(responseDTO.getMedioPago());
         String linkPago = crearLinkDePago(responseDTO);
         responseDTO.setLinkPago(linkPago);
         return responseDTO;
@@ -50,11 +47,11 @@ public class PagoServiceImpl implements PagoService {
         List<Pago> pagos = pagoUseCaseService.getAllPago();
         List<PagoResponseDTO> dtoList = pagoDTOMapper.toDtoList(pagos);
         for (PagoResponseDTO dto : dtoList) {
-            if (dto.getEstadoPago().equals(EstadoPago.PENDING)) {
-                dto.setLinkPago(crearLinkDePago(dto));
+            if (dto.getEstadoPago().equals(EstadoPago.PAGADO)) {
+                dto.setLinkPago("Pagado");
 
             } else {
-                dto.setLinkPago("Pagado");
+                dto.setLinkPago(crearLinkDePago(dto));
             }
         }
         return dtoList;
@@ -64,11 +61,11 @@ public class PagoServiceImpl implements PagoService {
     public Optional<PagoResponseDTO> getPagoById(Long id) throws Exception {
         Optional<PagoResponseDTO> pagoResponseDTO = pagoUseCaseService.getPagoById(id)
                 .map(pagoDTOMapper::toDto);
-        if (pagoResponseDTO.get().getEstadoPago().equals(EstadoPago.PENDING)) {
-            pagoResponseDTO.get().setLinkPago(crearLinkDePago(pagoResponseDTO.get()));
+        if (pagoResponseDTO.get().getEstadoPago().equals(EstadoPago.PAGADO)) {
+        pagoResponseDTO.get().setLinkPago("Pagado");
         } else {
 
-        pagoResponseDTO.get().setLinkPago("Pagado");
+            pagoResponseDTO.get().setLinkPago(crearLinkDePago(pagoResponseDTO.get()));
         }
         return pagoResponseDTO;
     }

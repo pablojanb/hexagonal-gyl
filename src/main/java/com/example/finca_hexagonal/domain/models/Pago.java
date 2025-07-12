@@ -5,6 +5,8 @@ import com.example.finca_hexagonal.domain.models.enums.MedioPago;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pago {
     private  Long id;
@@ -16,12 +18,15 @@ public class Pago {
     private EstadoPago estadoPago;
     private BigDecimal montoTotal;
     private MedioPago medioPago;
+    private List<String> detalles;
 
     public Pago(){
         this.fechaPago =  LocalDateTime.now();
-        this.estadoPago = EstadoPago.PENDING;
+        this.estadoPago = EstadoPago.PENDIENTE;
         this.recargoAplicado = new BigDecimal("0");
         this.descuentoAplicado = new BigDecimal("0");
+        this.detalles = new ArrayList<>();
+        this.getDetalles().add("Pendiente de pago");
     };
 
 
@@ -98,6 +103,11 @@ public class Pago {
         this.medioPago = medioPago;
     }
 
+    public List<String> getDetalles() {
+        return detalles;
+    }
 
-
+    public void setDetalles(List<String> detalles) {
+        this.detalles = detalles;
+    }
 }

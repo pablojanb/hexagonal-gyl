@@ -1,6 +1,5 @@
 package com.example.finca_hexagonal.domain.models;
 
-import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
 import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
 
 import java.math.BigDecimal;
@@ -22,7 +21,7 @@ public class Reserva {
 
 
     public Reserva(){
-        this.setEstadoReserva(EstadoReserva.PENDING);
+        this.setEstadoReserva(EstadoReserva.PENDIENTE);
         this.descuento = new BigDecimal("0");
         this.recargo = new BigDecimal("0");
     }

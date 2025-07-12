@@ -70,32 +70,89 @@ public class MercadoPagoApi {
         return preference.getInitPoint();
     }
 
-    public String paymentProcess(Long paymentId) throws MPException, MPApiException {
+    public void paymentProcess(Long paymentId) throws MPException, MPApiException {
         PaymentClient paymentClient = new PaymentClient();
 
         Payment payment = paymentClient.get(paymentId);
 
         String estado = payment.getStatus();
+        String detalle = payment.getStatusDetail();
+        System.out.println(detalle);
 
         Pago pago = pagoUseCaseService.getPagoById(Long.parseLong(payment.getExternalReference()))
                 .orElseThrow(()-> new IllegalArgumentException("Pago no encontrado"));
 
+        pago.getDetalles().add(traducirDetalle(detalle));
 
-        pago.setEstadoPago(encontrarIdPorEstado(estado));
-        pago.getReserva().setEstadoReserva(EstadoReserva.ACTIVE);
+        EstadoPago estadoPago = encontrarIdPorEstado(estado);
+        pago.setEstadoPago(estadoPago);
+        EstadoReserva estadoReserva = cambiarEstadoReserva(estadoPago);
+
+        pago.getReserva().setEstadoReserva(estadoReserva);
         pagoUseCaseService.save(pago);
-        System.out.println(estado);
 
-        return estado;
+
+    }
+
+    private EstadoReserva cambiarEstadoReserva(EstadoPago estadoPago) {
+       switch (estadoPago) {
+           case PAGADO:
+               return EstadoReserva.ACTIVA;
+           case PENDIENTE:
+               return EstadoReserva.PENDIENTE;
+           default:
+               return EstadoReserva.CANCELADA;
+       }
+
     }
 
     private EstadoPago encontrarIdPorEstado(String estado) {
-        if (estado.equals("approved")) {
-            return EstadoPago.PAID;
-        } else if (estado.equals("in_process")) {
-            return EstadoPago.PENDING;
+        switch (estado) {
+            case "approved":
+                return EstadoPago.PAGADO;
+            case "in_process":
+            case "pending":
+                return EstadoPago.PENDIENTE;
+            case "rejected":
+            case "cancelled":
+                return EstadoPago.FALLIDO;
+            case "refunded":
+            case "charged_back":
+                return EstadoPago.REVERTIDO;
+            default:
+                return EstadoPago.DESCONOCIDO;
         }
-        return null;
     }
 
+
+    public String traducirDetalle(String detalle) {
+        switch (detalle) {
+            case "accredited":
+                return "Pago acreditado correctamente.";
+            case "cc_rejected_insufficient_amount":
+                return "Pago rechazado: fondos insuficientes.";
+            case "cc_rejected_other_reason":
+                return "Pago rechazado por error general";
+            case "cc_rejected_bad_filled_security_code":
+                return "Número de tarjeta incorrecto.";
+            case "cc_rejected_bad_filled_date":
+                return "Fecha de expiración inválida.";
+            case "cc_rejected_call_for_authorize":
+                return "Requiere autorización del banco.";
+            case "pending_contingency":
+                return "Pago pendiente por problemas técnicos.";
+            case "pending_review_manual":
+                return "Pago pendiente de revisión manual.";
+            case "rejected":
+                return "El pago fue rechazado.";
+            case "cancelled":
+                return "El pago fue cancelado.";
+            case "refunded":
+                return "El pago fue devuelto.";
+            case "charged_back":
+                return "El pago fue revertido por el banco.";
+            default:
+                return "Estado desconocido: " + detalle;
+        }
+    }
 }
