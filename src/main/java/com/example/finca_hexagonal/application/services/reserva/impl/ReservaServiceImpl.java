@@ -13,6 +13,7 @@ import com.example.finca_hexagonal.domain.models.Horario;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.infrastructure.exceptions.DateConflictException;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import com.example.finca_hexagonal.infrastructure.utils.DiaSemanaConverter;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -53,7 +54,7 @@ public class ReservaServiceImpl implements ReservaService {
             FechaEspecial fecha = fechaEspDeFinca.get();
             reservaModelService.validarFechaEspecial(fecha, reserva);
         } else {
-            List<Horario> horariosDeFinca = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(finca.getId(), reserva.getDiaSemana());
+            List<Horario> horariosDeFinca = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(finca.getId(), DiaSemanaConverter.convertirADiaDeSemana(reserva.getFecha()));
             if (horariosDeFinca.isEmpty()) {
                 throw new DateConflictException("La finca no esta disponible en ese horario");
             }
@@ -88,7 +89,6 @@ public class ReservaServiceImpl implements ReservaService {
         reservaToUpdate.setFecha(newData.getFecha());
         reservaToUpdate.setDesde(newData.getDesde());
         reservaToUpdate.setHasta(newData.getHasta());
-        reservaToUpdate.setDiaSemana(newData.getDiaSemana());
 
         BigDecimal montoBase = reservaModelService.calcularTotalReserva(reservaToUpdate);
         reservaToUpdate.setTotal(montoBase);
@@ -101,7 +101,7 @@ public class ReservaServiceImpl implements ReservaService {
             FechaEspecial fecha = fechaEspDeFinca.get();
             reservaModelService.validarFechaEspecial(fecha, reservaToUpdate);
         } else {
-            List<Horario> horariosDeFinca = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(newData.getFinca().getId(), reservaToUpdate.getDiaSemana());
+            List<Horario> horariosDeFinca = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(newData.getFinca().getId(), DiaSemanaConverter.convertirADiaDeSemana(reservaToUpdate.getFecha()));
             if (horariosDeFinca.isEmpty()) {
                 throw new DateConflictException("La finca no esta disponible en ese horario");
             }

@@ -13,12 +13,9 @@ import java.time.LocalTime;
 public class ReservaRequestDTO {
     private Long idFinca;
     private Long idUsuario;
-    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
-    private BigDecimal descuento = BigDecimal.valueOf(0);
-    private BigDecimal recargo = BigDecimal.valueOf(0);
     private String detalle = "";
-    private EstadoReserva estadoReserva = EstadoReserva.PENDING;
+
 }

@@ -1,5 +1,7 @@
 package com.example.finca_hexagonal.application.dto.horarios;
 
+import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
+
 import java.math.BigDecimal;
 import java.time.LocalTime;
 
@@ -8,21 +10,13 @@ public class HorarioRequestDTO {
     private Long idFinca;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    private String diaSemana;
+    private DiaDeSemana diaSemana;
     private BigDecimal descuento;
     private BigDecimal recargo;
 
     public HorarioRequestDTO() {
     }
 
-    public HorarioRequestDTO(Long idFinca, LocalTime horaInicio, LocalTime horaFin, String diaSemana, BigDecimal descuento, BigDecimal recargo) {
-        this.idFinca = idFinca;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.diaSemana = diaSemana;
-        this.descuento = descuento;
-        this.recargo = recargo;
-    }
 
     public Long getIdFinca() {
         return idFinca;
@@ -48,11 +42,11 @@ public class HorarioRequestDTO {
         this.horaFin = horaFin;
     }
 
-    public String getDiaSemana() {
+    public DiaDeSemana getDiaSemana() {
         return diaSemana;
     }
 
-    public void setDiaSemana(String diaSemana) {
+    public void setDiaSemana(DiaDeSemana diaSemana) {
         this.diaSemana = diaSemana;
     }
 

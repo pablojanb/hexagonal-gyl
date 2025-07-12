@@ -1,35 +1,31 @@
 package com.example.finca_hexagonal.application.dto.pago;
 
-import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
+import com.example.finca_hexagonal.domain.models.enums.MedioPago;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PagoResponseDTO {
     private  Long id;
     private Long idReserva;
-    private LocalDateTime fechaHora;
+    private EstadoPago estadoPago;
+    private MedioPago medioPago;
+    private String linkPago;
+    private LocalDateTime fechaPago;
     private BigDecimal monto;
+    private BigDecimal montoTotalConImpuestos;
     private BigDecimal descuentoAplicado;
     private BigDecimal recargoAplicado;
-    private Long medioDePagoId;
-    private EstadoPago estadoPago;
-    private BigDecimal montoTotal;
+    private List<String> detalles;
 
-    public  PagoResponseDTO(){};
+    public  PagoResponseDTO(){
+        this.detalles = new ArrayList<>();
+    };
 
-    public PagoResponseDTO(Long id, Long idReserva, LocalDateTime fechaHora, BigDecimal monto, BigDecimal descuentoAplicado, BigDecimal recargoAplicado, Long medioDePagoId, EstadoPago estadoPago, BigDecimal montoTotal) {
-        this.id = id;
-        this.idReserva = idReserva;
-        this.fechaHora = fechaHora;
-        this.monto = monto;
-        this.descuentoAplicado = descuentoAplicado;
-        this.recargoAplicado = recargoAplicado;
-        this.medioDePagoId = medioDePagoId;
-        this.estadoPago = estadoPago;
-        this.montoTotal = montoTotal;
-    }
+
 
     public Long getId() {
         return id;
@@ -47,12 +43,12 @@ public class PagoResponseDTO {
         this.idReserva = idReserva;
     }
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
+    public LocalDateTime getFechaPago() {
+        return fechaPago;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public void setFechaPago(LocalDateTime fechaPago) {
+        this.fechaPago = fechaPago;
     }
 
     public BigDecimal getMonto() {
@@ -79,14 +75,6 @@ public class PagoResponseDTO {
         this.recargoAplicado = recargoAplicado;
     }
 
-    public Long getMedioDePagoId() {
-        return medioDePagoId;
-    }
-
-    public void setMedioDePagoId(Long medioDePagoId) {
-        this.medioDePagoId = medioDePagoId;
-    }
-
     public EstadoPago getEstadoPago() {
         return estadoPago;
     }
@@ -95,11 +83,35 @@ public class PagoResponseDTO {
         this.estadoPago = estadoPago;
     }
 
-    public BigDecimal getMontoTotal() {
-        return montoTotal;
+    public BigDecimal getMontoTotalConImpuestos() {
+        return montoTotalConImpuestos;
     }
 
-    public void setMontoTotal(BigDecimal montoTotal) {
-        this.montoTotal = montoTotal;
+    public void setMontoTotalConImpuestos(BigDecimal montoTotalConImpuestos) {
+        this.montoTotalConImpuestos = montoTotalConImpuestos;
+    }
+
+    public String getLinkPago() {
+        return linkPago;
+    }
+
+    public void setLinkPago(String linkPago) {
+        this.linkPago = linkPago;
+    }
+
+    public MedioPago getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(MedioPago medioPago) {
+        this.medioPago = medioPago;
+    }
+
+    public List<String> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<String> detalles) {
+        this.detalles = detalles;
     }
 }

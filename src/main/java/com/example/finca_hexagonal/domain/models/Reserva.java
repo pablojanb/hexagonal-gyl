@@ -10,7 +10,6 @@ public class Reserva {
     private Long id;
     private Finca finca;
     private Usuario usuario;
-    private String diaSemana;
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
@@ -22,22 +21,9 @@ public class Reserva {
 
 
     public Reserva(){
-
-    }
-
-    public Reserva(Long id, Finca finca, Usuario usuario, String diaSemana, LocalDate fecha, LocalTime desde, LocalTime hasta, BigDecimal total, BigDecimal descuento, BigDecimal recargo, String detalle, EstadoReserva estadoReserva) {
-        this.id = id;
-        this.finca = finca;
-        this.usuario = usuario;
-        this.diaSemana = diaSemana;
-        this.fecha = fecha;
-        this.desde = desde;
-        this.hasta = hasta;
-        this.total = total;
-        this.descuento = descuento;
-        this.recargo = recargo;
-        this.detalle = detalle;
-        this.estadoReserva = estadoReserva;
+        this.setEstadoReserva(EstadoReserva.PENDIENTE);
+        this.descuento = new BigDecimal("0");
+        this.recargo = new BigDecimal("0");
     }
 
     public Long getId() {
@@ -62,14 +48,6 @@ public class Reserva {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public String getDiaSemana() {
-        return diaSemana;
-    }
-
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
     }
 
     public LocalDate getFecha() {
