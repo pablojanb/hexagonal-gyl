@@ -7,6 +7,7 @@ import com.example.finca_hexagonal.application.services.finca.impl.FincaModelSer
 import com.example.finca_hexagonal.application.services.horario.HorarioService;
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Horario;
+import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class HorarioServiceImpl implements HorarioService {
     }
 
     @Override
-    public List<HorarioResponseDTO> getAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
+    public List<HorarioResponseDTO> getAllHorariosByFincaIdAndDayOfWeek(Long id, DiaDeSemana dayOfWeek) {
         List<Horario> horarios = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(id, dayOfWeek);
         return horarioDTOMapper.toDtoList(horarios);
     }

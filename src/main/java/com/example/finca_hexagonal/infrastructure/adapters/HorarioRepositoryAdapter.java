@@ -1,6 +1,7 @@
 package com.example.finca_hexagonal.infrastructure.adapters;
 
 import com.example.finca_hexagonal.domain.models.Horario;
+import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
 import com.example.finca_hexagonal.domain.ports.out.HorarioModelPort;
 import com.example.finca_hexagonal.infrastructure.entities.HorarioEntity;
 import com.example.finca_hexagonal.infrastructure.mappers.HorarioModelMappers;
@@ -53,7 +54,7 @@ public class HorarioRepositoryAdapter implements HorarioModelPort {
     }
 
     @Override
-    public List<Horario> findAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
+    public List<Horario> findAllHorariosByFincaIdAndDayOfWeek(Long id, DiaDeSemana dayOfWeek) {
         return jpaHorarioRepository.findByFincaIdAndDiaSemana(id, dayOfWeek).stream()
                 .map(horarioMappers::toDomainModel)
                 .collect(Collectors.toList());

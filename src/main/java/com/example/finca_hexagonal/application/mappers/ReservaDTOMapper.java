@@ -7,12 +7,15 @@ import com.example.finca_hexagonal.application.services.usuario.impl.UsuarioMode
 import com.example.finca_hexagonal.domain.models.Finca;
 import com.example.finca_hexagonal.domain.models.Reserva;
 import com.example.finca_hexagonal.domain.models.Usuario;
+import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
+import com.example.finca_hexagonal.infrastructure.utils.DiaSemanaConverter;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -31,6 +34,7 @@ public abstract class ReservaDTOMapper {
     @Mapping(source = "finca.nombre", target = "finca")
     @Mapping(source = "usuario.id", target = "idUsuario")
     @Mapping(source = "usuario.username", target = "usuario")
+    @Mapping(source = "fecha", target = "diaSemana", qualifiedByName = "mapToDiaSemana")
     public abstract ReservaResponseDTO toDto(Reserva reserva);
 
     public abstract List<ReservaResponseDTO> toDtoList(List<Reserva> reservas);
@@ -45,5 +49,10 @@ public abstract class ReservaDTOMapper {
     protected Usuario mapUsuarioDtoToUsuario(Long idUsuario) {
         return usuarioModelService.getById(idUsuario)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado: " + idUsuario));
+    }
+
+    @Named("mapToDiaSemana")
+    protected DiaDeSemana mapToDiaSemana(LocalDate fecha) {
+        return DiaSemanaConverter.convertirADiaDeSemana(fecha.getDayOfWeek());
     }
 }

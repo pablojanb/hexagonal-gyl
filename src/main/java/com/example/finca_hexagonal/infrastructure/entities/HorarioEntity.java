@@ -1,5 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.entities;
 
+import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,21 +19,12 @@ public class HorarioEntity {
     private LocalTime horaInicio;
     @Temporal(TemporalType.TIME)
     private LocalTime horaFin;
-    private String diaSemana;
+    @Enumerated(EnumType.STRING)
+    private DiaDeSemana diaSemana;
     private BigDecimal descuento;
     private BigDecimal recargo;
 
     public HorarioEntity() {
-    }
-
-    public HorarioEntity(Long id, FincaEntity finca, LocalTime horaInicio, LocalTime horaFin, String diaSemana, BigDecimal descuento, BigDecimal recargo) {
-        this.id = id;
-        this.finca = finca;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.diaSemana = diaSemana;
-        this.descuento = descuento;
-        this.recargo = recargo;
     }
 
     public Long getId() {
@@ -67,11 +59,11 @@ public class HorarioEntity {
         this.horaFin = horaFin;
     }
 
-    public String getDiaSemana() {
+    public DiaDeSemana getDiaSemana() {
         return diaSemana;
     }
 
-    public void setDiaSemana(String diaSemana) {
+    public void setDiaSemana(DiaDeSemana diaSemana) {
         this.diaSemana = diaSemana;
     }
 

@@ -1,6 +1,7 @@
 package com.example.finca_hexagonal.application.services.horario.impl;
 
 import com.example.finca_hexagonal.domain.models.Horario;
+import com.example.finca_hexagonal.domain.models.enums.DiaDeSemana;
 import com.example.finca_hexagonal.domain.ports.in.horario.CreateHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.DeleteHorarioUseCase;
 import com.example.finca_hexagonal.domain.ports.in.horario.GetHorarioUseCase;
@@ -50,7 +51,7 @@ public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioU
     }
 
     @Override
-    public List<Horario> getAllHorariosByFincaIdAndDayOfWeek(Long id, String dayOfWeek) {
+    public List<Horario> getAllHorariosByFincaIdAndDayOfWeek(Long id, DiaDeSemana dayOfWeek) {
         return getHorarioUseCase.getAllHorariosByFincaIdAndDayOfWeek(id, dayOfWeek);
     }
 
@@ -67,7 +68,7 @@ public class HorarioModelService implements CreateHorarioUseCase, DeleteHorarioU
     public void validarSuperposiciones(Horario horario) {
         List<Horario> horariosDelDia = this.getAllHorariosByFincaIdAndDayOfWeek(horario.getFinca().getId(), horario.getDiaSemana());
         for (Horario hora : horariosDelDia){
-            if (hora.getDiaSemana().equalsIgnoreCase(horario.getDiaSemana())){
+            if (hora.getDiaSemana().equals(horario.getDiaSemana())){
                 LocalTime horarioAnteriorInicio = hora.getHoraInicio();
                 LocalTime horarioAnteriorFin = hora.getHoraFin();
 
