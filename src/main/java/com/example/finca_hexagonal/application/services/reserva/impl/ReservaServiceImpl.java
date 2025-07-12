@@ -88,8 +88,28 @@ public class ReservaServiceImpl implements ReservaService {
         reservaToUpdate.setFecha(newData.getFecha());
         reservaToUpdate.setDesde(newData.getDesde());
         reservaToUpdate.setHasta(newData.getHasta());
-        reservaToUpdate.setTotal(newData.getTotal());
-        reservaToUpdate.setEstadoReserva(newData.getEstadoReserva());
+        reservaToUpdate.setDiaSemana(newData.getDiaSemana());
+
+        BigDecimal montoBase = reservaModelService.calcularTotalReserva(reservaToUpdate);
+        reservaToUpdate.setTotal(montoBase);
+
+        if (reservaToUpdate.getDesde().isAfter(reservaToUpdate.getHasta())){
+            throw new DateConflictException("La hora de inicio debe ser anterior a la hora de finalización");
+        }
+        Optional<FechaEspecial> fechaEspDeFinca = fechaEspecialModelService.getFechaEspecialByFincaIdAndFecha(newData.getFinca().getId(), reservaToUpdate.getFecha());
+        if (fechaEspDeFinca.isPresent()){
+            FechaEspecial fecha = fechaEspDeFinca.get();
+            reservaModelService.validarFechaEspecial(fecha, reservaToUpdate);
+        } else {
+            List<Horario> horariosDeFinca = horarioModelService.getAllHorariosByFincaIdAndDayOfWeek(newData.getFinca().getId(), reservaToUpdate.getDiaSemana());
+            if (horariosDeFinca.isEmpty()) {
+                throw new DateConflictException("La finca no esta disponible en ese horario");
+            }
+            reservaModelService.validarHorario(reservaToUpdate, horariosDeFinca);
+        }
+        List<Reserva> reservasAnteriores = reservaModelService.getReservasByFincaIdAndFecha(reservaToUpdate.getFinca().getId(), reservaToUpdate.getFecha());
+        reservaModelService.validarReservasAnteriores(reservaToUpdate, reservasAnteriores);
+
         Reserva reservaUpdated = reservaModelService.updateReserva(reservaId, reservaToUpdate)
                 .orElseThrow(() -> new EntityNotFoundException("Finca no encontrada: " + reservaId));
 

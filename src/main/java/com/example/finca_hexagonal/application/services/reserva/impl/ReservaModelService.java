@@ -115,6 +115,9 @@ public class ReservaModelService implements CreateReservaUseCase, GetReservaUseC
             boolean noHayConflicto = (reservaNuevaInicio.isAfter(reservaAnteriorFin) || reservaNuevaInicio.equals(reservaAnteriorFin)) ||
                     (reservaNuevaFin.isBefore(reservaAnteriorInicio) || reservaNuevaFin.equals(reservaAnteriorInicio));
             if (!noHayConflicto) {
+                if (reservaAnt.getId() == reserva.getId()){
+                    return;
+                }
                 throw new DateConflictException("La finca no esta disponible en ese horario");
             }
         }
