@@ -12,13 +12,12 @@ public interface PagoService {
 
     PagoResponseDTO save(PagoRequestDTO dto) throws Exception;
 
-    List<PagoResponseDTO> getAllPagos();
+    List<PagoResponseDTO> getAllPagos() throws Exception;
 
-    Optional<PagoResponseDTO> getPagoById(Long id);
+    Optional<PagoResponseDTO> getPagoById(Long id) throws Exception;
 
     Optional<PagoResponseDTO> updatePago(Long id, PagoRequestDTO dto);
 
     boolean deletePago(Long id);
 
-    String paymentProcess(Long paymentId) throws MPException, MPApiException;
 }

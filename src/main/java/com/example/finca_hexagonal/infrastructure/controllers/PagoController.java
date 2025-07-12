@@ -1,5 +1,6 @@
 package com.example.finca_hexagonal.infrastructure.controllers;
 
+import com.example.finca_hexagonal.application.api.MercadoPagoApi;
 import com.example.finca_hexagonal.application.dto.pago.PagoRequestDTO;
 import com.example.finca_hexagonal.application.dto.pago.PagoResponseDTO;
 import com.example.finca_hexagonal.application.services.Pago.PagoService;
@@ -18,9 +19,11 @@ import java.util.Map;
 public class PagoController {
 
     private final PagoService pagoService;
+    private final MercadoPagoApi mercadoPagoApi;
 
-    public PagoController(PagoService pagoService) {
+    public PagoController(PagoService pagoService, MercadoPagoApi mercadoPagoApi) {
         this.pagoService = pagoService;
+        this.mercadoPagoApi = mercadoPagoApi;
     }
 
     @PostMapping
@@ -40,7 +43,7 @@ public class PagoController {
 
             if (idObj != null) {
                 Long paymentId = Long.parseLong(idObj.toString());
-        pagoService.paymentProcess(paymentId);
+        mercadoPagoApi.paymentProcess(paymentId);
             }
         }
 
@@ -49,12 +52,12 @@ public class PagoController {
 
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<PagoResponseDTO>> getAllPagos() {
+    public ResponseEntity<List<PagoResponseDTO>> getAllPagos() throws Exception {
         return new ResponseEntity<>(pagoService.getAllPagos(), HttpStatus.OK);
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<PagoResponseDTO> getPagoById(@PathVariable Long id) {
+    public ResponseEntity<PagoResponseDTO> getPagoById(@PathVariable Long id) throws Exception {
         return pagoService.getPagoById(id)
                 .map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

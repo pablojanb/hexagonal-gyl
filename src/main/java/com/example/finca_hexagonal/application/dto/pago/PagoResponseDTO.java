@@ -1,6 +1,7 @@
 package com.example.finca_hexagonal.application.dto.pago;
 
 import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
+import com.example.finca_hexagonal.domain.models.enums.MedioPago;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,27 +9,18 @@ import java.time.LocalDateTime;
 public class PagoResponseDTO {
     private  Long id;
     private Long idReserva;
+    private EstadoPago estadoPago;
+    private MedioPago medioPago;
+    private String linkPago;
     private LocalDateTime fechaPago;
     private BigDecimal monto;
+    private BigDecimal montoTotalConImpuestos;
     private BigDecimal descuentoAplicado;
     private BigDecimal recargoAplicado;
-    private String linkPago;
-
-    private EstadoPago estadoPago;
-    private BigDecimal montoTotalConImpuestos;
 
     public  PagoResponseDTO(){};
 
-    public PagoResponseDTO(Long id, Long idReserva, LocalDateTime fechaPago, BigDecimal monto, BigDecimal descuentoAplicado, BigDecimal recargoAplicado, EstadoPago estadoPago, BigDecimal montoTotal) {
-        this.id = id;
-        this.idReserva = idReserva;
-        this.fechaPago = fechaPago;
-        this.monto = monto;
-        this.descuentoAplicado = descuentoAplicado;
-        this.recargoAplicado = recargoAplicado;
-        this.estadoPago = estadoPago;
-        this.montoTotalConImpuestos = montoTotal;
-    }
+
 
     public Long getId() {
         return id;
@@ -100,5 +92,13 @@ public class PagoResponseDTO {
 
     public void setLinkPago(String linkPago) {
         this.linkPago = linkPago;
+    }
+
+    public MedioPago getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(MedioPago medioPago) {
+        this.medioPago = medioPago;
     }
 }

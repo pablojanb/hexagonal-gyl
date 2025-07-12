@@ -17,17 +17,11 @@ public class Pago {
     private BigDecimal montoTotal;
     private MedioPago medioPago;
 
-    public MedioPago getMedioPago() {
-        return medioPago;
-    }
-
-    public void setMedioPago(MedioPago medioPago) {
-        this.medioPago = medioPago;
-    }
-
     public Pago(){
         this.fechaPago =  LocalDateTime.now();
         this.estadoPago = EstadoPago.PENDING;
+        this.recargoAplicado = new BigDecimal("0");
+        this.descuentoAplicado = new BigDecimal("0");
     };
 
 
@@ -96,6 +90,14 @@ public class Pago {
     public void setMontoTotal(BigDecimal montoTotal) {
         this.montoTotal = montoTotal;
     }
+    public MedioPago getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(MedioPago medioPago) {
+        this.medioPago = medioPago;
+    }
+
 
 
 }

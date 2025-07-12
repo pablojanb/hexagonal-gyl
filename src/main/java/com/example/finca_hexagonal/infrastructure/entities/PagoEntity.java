@@ -30,6 +30,7 @@ public class PagoEntity {
     private BigDecimal monto;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "medio_pago")
     private MedioPago medioPago;
 
     @Column(name = "fecha_hora")
