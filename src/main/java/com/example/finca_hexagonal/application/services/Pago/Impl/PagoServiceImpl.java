@@ -3,15 +3,12 @@ package com.example.finca_hexagonal.application.services.Pago.Impl;
 import com.example.finca_hexagonal.application.dto.pago.PagoRequestDTO;
 import com.example.finca_hexagonal.application.dto.pago.PagoResponseDTO;
 import com.example.finca_hexagonal.application.mappers.PagoDTOMapper;
-import com.example.finca_hexagonal.application.services.ModoDePago.Impl.ModoDePagoUseCaseService;
 import com.example.finca_hexagonal.application.services.Pago.PagoService;
-import com.example.finca_hexagonal.domain.models.ModoDePago;
 import com.example.finca_hexagonal.domain.models.Pago;
 import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
 import com.example.finca_hexagonal.domain.models.enums.EstadoReserva;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 import com.mercadopago.MercadoPagoConfig;
-import com.mercadopago.client.MercadoPagoClient;
 import com.mercadopago.client.payment.PaymentClient;
 import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
 import com.mercadopago.client.preference.PreferenceClient;
@@ -21,8 +18,6 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
 import com.mercadopago.resources.preference.Preference;
-import com.mercadopago.resources.preference.PreferenceBackUrls;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -39,16 +34,13 @@ public class PagoServiceImpl implements PagoService {
     private static final String ACCESS_TOKEN = "TEST-1844219062978505-071012-5fad629452f2e442db5198a7495d1980-62228230";
 
     private final PagoUseCaseService pagoUseCaseService;
-    private final ModoDePagoUseCaseService modoDePagoUseCaseService;
     private final PagoDTOMapper pagoDTOMapper;
 
     public PagoServiceImpl(
             PagoUseCaseService pagoUseCaseService,
-            ModoDePagoUseCaseService modoDePagoUseCaseService,
             PagoDTOMapper pagoDTOMapper
     ) {
         this.pagoUseCaseService = pagoUseCaseService;
-        this.modoDePagoUseCaseService = modoDePagoUseCaseService;
         this.pagoDTOMapper = pagoDTOMapper;
     }
 
@@ -93,11 +85,9 @@ public class PagoServiceImpl implements PagoService {
 
     @Override
     public PagoResponseDTO save(PagoRequestDTO dto) throws Exception {
-        ModoDePago modoDePago = modoDePagoUseCaseService.getById(dto.getMedioDePagoId())
-                .orElseThrow(() -> new EntityNotFoundException("Modo de pago no encontrado con ID: " + dto.getMedioDePagoId()));
 
         Pago pago = pagoDTOMapper.toModel(dto);
-        pago.setModoDePago(modoDePago);
+        pago.setMedioPago(dto.getMedioPago());
         pago.setMonto(pago.getReserva().getTotal());
         BigDecimal iva = new BigDecimal("1.21");
         pago.setMontoTotal(pago.getReserva().getTotal().multiply(iva));

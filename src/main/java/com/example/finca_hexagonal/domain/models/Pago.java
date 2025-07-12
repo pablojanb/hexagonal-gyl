@@ -1,6 +1,7 @@
 package com.example.finca_hexagonal.domain.models;
 
 import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
+import com.example.finca_hexagonal.domain.models.enums.MedioPago;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,24 +15,22 @@ public class Pago {
     private BigDecimal recargoAplicado;
     private EstadoPago estadoPago;
     private BigDecimal montoTotal;
-    private ModoDePago modoDePago;
+    private MedioPago medioPago;
+
+    public MedioPago getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(MedioPago medioPago) {
+        this.medioPago = medioPago;
+    }
 
     public Pago(){
         this.fechaPago =  LocalDateTime.now();
         this.estadoPago = EstadoPago.PENDING;
     };
 
-    public Pago(Long id, Reserva reserva, LocalDateTime fechaHora, BigDecimal monto, BigDecimal descuentoAplicado, BigDecimal recargoAplicado, EstadoPago estadoPago, BigDecimal montoTotal, ModoDePago modoDePago) {
-        this.id = id;
-        this.reserva = reserva;
-        this.fechaPago = fechaHora;
-        this.monto = monto;
-        this.descuentoAplicado = descuentoAplicado;
-        this.recargoAplicado = recargoAplicado;
-        this.estadoPago = estadoPago;
-        this.montoTotal = montoTotal;
-        this.modoDePago = modoDePago;
-    }
+
 
     public Long getId() {
         return id;
@@ -96,14 +95,6 @@ public class Pago {
 
     public void setMontoTotal(BigDecimal montoTotal) {
         this.montoTotal = montoTotal;
-    }
-
-    public ModoDePago getModoDePago() {
-        return modoDePago;
-    }
-
-    public void setModoDePago(ModoDePago modoDePago) {
-        this.modoDePago = modoDePago;
     }
 
 

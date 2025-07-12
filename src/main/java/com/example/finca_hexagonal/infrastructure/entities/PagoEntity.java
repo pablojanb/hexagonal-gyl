@@ -1,6 +1,7 @@
 package com.example.finca_hexagonal.infrastructure.entities;
 
 import com.example.finca_hexagonal.domain.models.enums.EstadoPago;
+import com.example.finca_hexagonal.domain.models.enums.MedioPago;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,9 +29,8 @@ public class PagoEntity {
     @Column(name = "monto")
     private BigDecimal monto;
 
-    @OneToOne
-    @JoinColumn(name = "medio_de_pago_id")
-    private ModoDePagoEntity modoDePago;
+    @Enumerated(EnumType.STRING)
+    private MedioPago medioPago;
 
     @Column(name = "fecha_hora")
     private LocalDateTime fechaPago;

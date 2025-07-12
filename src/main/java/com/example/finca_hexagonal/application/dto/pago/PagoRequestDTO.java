@@ -1,20 +1,15 @@
 package com.example.finca_hexagonal.application.dto.pago;
 
+import com.example.finca_hexagonal.domain.models.enums.MedioPago;
+
 public class PagoRequestDTO {
 
     private Long reservaId;
 
-    private Long medioDePagoId;
-
+    private MedioPago medioPago;
 
 
     public PagoRequestDTO() {
-    }
-
-    public PagoRequestDTO(Long reservaId, Long medioDePagoId) {
-        this.reservaId = reservaId;
-        this.medioDePagoId = medioDePagoId;
-
     }
 
     public Long getReservaId() {
@@ -25,12 +20,11 @@ public class PagoRequestDTO {
         this.reservaId = reservaId;
     }
 
-    public Long getMedioDePagoId() {
-        return medioDePagoId;
+    public MedioPago getMedioPago() {
+        return medioPago;
     }
 
-    public void setMedioDePagoId(Long medioDePagoId) {
-        this.medioDePagoId = medioDePagoId;
+    public void setMedioPago(MedioPago medioPago) {
+        this.medioPago = medioPago;
     }
-
 }

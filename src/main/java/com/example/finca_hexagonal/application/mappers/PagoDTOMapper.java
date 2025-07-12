@@ -2,13 +2,9 @@ package com.example.finca_hexagonal.application.mappers;
 
 import com.example.finca_hexagonal.application.dto.pago.PagoRequestDTO;
 import com.example.finca_hexagonal.application.dto.pago.PagoResponseDTO;
-import com.example.finca_hexagonal.application.services.ModoDePago.Impl.ModoDePagoUseCaseService;
 import com.example.finca_hexagonal.application.services.reserva.impl.ReservaModelService;
-import com.example.finca_hexagonal.domain.models.ModoDePago;
 import com.example.finca_hexagonal.domain.models.Pago;
 import com.example.finca_hexagonal.domain.models.Reserva;
-import com.example.finca_hexagonal.application.services.ModoDePago.Impl.ModoDePagoServiceImpl;
-import com.example.finca_hexagonal.domain.ports.in.modoDePago.GetModoDePagoUseCase;
 import com.example.finca_hexagonal.infrastructure.exceptions.EntityNotFoundException;
 
 import org.mapstruct.*;
@@ -22,12 +18,9 @@ public abstract class PagoDTOMapper {
     @Autowired
     protected ReservaModelService reservaModelService;
 
-    @Autowired
-    protected GetModoDePagoUseCase getModoDePagoUseCase;
 
 
     @Mapping(source = "reservaId", target = "reserva", qualifiedByName = "mapReservaFromId")
-    @Mapping(source = "medioDePagoId", target = "modoDePago", qualifiedByName = "mapModoDePagoFromId")
     public abstract Pago toModel(PagoRequestDTO dto);
 
     @Mapping(source = "reserva.id", target = "idReserva")
@@ -40,14 +33,6 @@ public abstract class PagoDTOMapper {
     protected Reserva mapReservaFromId(Long reservaId) {
         return reservaModelService.getReservaById(reservaId)
                 .orElseThrow(() -> new EntityNotFoundException("Reserva no encontrada con ID: " + reservaId));
-    }
-
-
-
-    @Named("mapModoDePagoFromId")
-    protected ModoDePago mapModoDePagoFromId(Long id) {
-        return getModoDePagoUseCase.getById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Modo de pago no encontrado con ID: " + id));
     }
 
 }
