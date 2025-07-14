@@ -45,6 +45,11 @@ public class UsuarioModelService implements GetUsuarioUseCase, UpdateUsuarioUseC
     }
 
     @Override
+    public Optional<Usuario> getByEmail(String email) {
+        return getUsuarioUseCase.getByEmail(email);
+    }
+
+    @Override
     public Optional<Usuario> updateUsuario(Long id, Usuario usuarioUpdate) {
         return updateUsuarioUseCase.updateUsuario(id, usuarioUpdate);
     }

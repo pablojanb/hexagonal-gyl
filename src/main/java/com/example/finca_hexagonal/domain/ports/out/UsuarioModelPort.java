@@ -13,6 +13,8 @@ public interface UsuarioModelPort {
 
     Optional<Usuario> findById(Long id);
 
+    Optional<Usuario> findByEmail(String email);
+
     Optional<Usuario> updateById(Long id, Usuario usuarioUpdate);
 
     Usuario createUsuario(Usuario usuario);

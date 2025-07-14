@@ -26,4 +26,9 @@ public class GetUsuarioUseCaseImpl implements GetUsuarioUseCase {
     public Optional<Usuario> getById(Long id) {
         return usuarioModelPort.findById(id);
     }
+
+    @Override
+    public Optional<Usuario> getByEmail(String email) {
+        return usuarioModelPort.findByEmail(email);
+    }
 }

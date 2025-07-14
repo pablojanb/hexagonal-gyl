@@ -10,4 +10,6 @@ public interface GetUsuarioUseCase {
     List<Usuario> getAllUsuarios();
 
     Optional<Usuario> getById(Long id);
+
+    Optional<Usuario> getByEmail(String email);
 }

@@ -27,6 +27,7 @@ public class RecuperarPasswordAdapter implements RecuperarPasswordModelPort {
 
     @Override
     public RecuperarPassword findTokenByEmail(String email) {
-        return null;
+        RecuperarPasswordEntity recuperarPasswordEntity = jpaRecuperarPasswordRepository.findByEmail(email);
+        return recuperarPasswordModelMappers.toModel(recuperarPasswordEntity);
     }
 }
