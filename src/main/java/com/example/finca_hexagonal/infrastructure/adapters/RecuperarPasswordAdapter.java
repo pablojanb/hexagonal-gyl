@@ -30,4 +30,12 @@ public class RecuperarPasswordAdapter implements RecuperarPasswordModelPort {
         RecuperarPasswordEntity recuperarPasswordEntity = jpaRecuperarPasswordRepository.findByEmail(email);
         return recuperarPasswordModelMappers.toModel(recuperarPasswordEntity);
     }
+
+    @Override
+    public RecuperarPassword update(Long id, RecuperarPassword recuperarPassword) {
+        RecuperarPasswordEntity recuperarPasswordEntity = recuperarPasswordModelMappers.toEntity(recuperarPassword);
+        recuperarPasswordEntity.setId(id);
+        RecuperarPasswordEntity recuperarPasswordEntitySaved = jpaRecuperarPasswordRepository.save(recuperarPasswordEntity);
+        return recuperarPasswordModelMappers.toModel(recuperarPasswordEntitySaved);
+    }
 }

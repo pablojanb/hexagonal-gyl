@@ -28,7 +28,7 @@ public class RecuperarPasswordController {
 
     @PostMapping("/cambiarPassword")
     public ResponseEntity<RecuperarPassword> cambiarPassword(@RequestBody CambiarPasswordRequestDTO cambiarPasswordDTO){
-        RecuperarPassword recuperarPassword = recuperarPasswordService.geTokenByEmail(cambiarPasswordDTO);
+        RecuperarPassword recuperarPassword = recuperarPasswordService.cambiarPassword(cambiarPasswordDTO);
         return new ResponseEntity<>(recuperarPassword, HttpStatus.OK);
     }
 }

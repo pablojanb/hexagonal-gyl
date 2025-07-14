@@ -8,5 +8,5 @@ import jakarta.mail.MessagingException;
 public interface RecuperarPasswordService {
     RecuperarPassword crearToken(GenerarTokenRequestDTO generarTokenRequestDTO) throws MessagingException;
 
-    RecuperarPassword geTokenByEmail(CambiarPasswordRequestDTO cambiarPasswordRequestDTO);
+    RecuperarPassword cambiarPassword(CambiarPasswordRequestDTO cambiarPasswordRequestDTO);
 }

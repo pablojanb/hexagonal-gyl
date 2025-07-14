@@ -7,4 +7,6 @@ public interface RecuperarPasswordModelPort {
     RecuperarPassword save(RecuperarPassword recuperarPassword);
 
     RecuperarPassword findTokenByEmail(String email);
+
+    RecuperarPassword update(Long id, RecuperarPassword recuperarPassword);
 }
