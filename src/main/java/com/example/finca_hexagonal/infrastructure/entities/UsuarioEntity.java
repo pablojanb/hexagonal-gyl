@@ -24,7 +24,7 @@ public class UsuarioEntity {
     private boolean cuentaActiva;
 
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),

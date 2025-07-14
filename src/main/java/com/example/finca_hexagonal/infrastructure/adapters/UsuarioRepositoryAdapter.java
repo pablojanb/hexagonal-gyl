@@ -48,6 +48,11 @@ public class UsuarioRepositoryAdapter implements UsuarioModelPort {
     }
 
     @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return jpaUsuarioRepository.findByEmail(email).map(usuarioModelMappers::toDomainModel);
+    }
+
+    @Override
     public Optional<Usuario> updateById(Long id, Usuario usuarioUpdate) {
         if (jpaUsuarioRepository.existsById(id)){
             UsuarioEntity usuarioEntity = usuarioModelMappers.fromDomainModel(usuarioUpdate);
