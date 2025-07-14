@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "tokens_recuperar_passwords")
+@Table(name = "tokens_passwords")
 public class RecuperarPasswordEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

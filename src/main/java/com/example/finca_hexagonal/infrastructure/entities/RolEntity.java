@@ -10,7 +10,7 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nombre;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "rol_permiso",
             joinColumns = @JoinColumn(name = "rol_id"),

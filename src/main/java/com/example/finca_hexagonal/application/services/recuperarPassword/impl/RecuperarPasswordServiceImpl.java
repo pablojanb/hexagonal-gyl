@@ -11,7 +11,6 @@ import com.example.finca_hexagonal.domain.models.Usuario;
 import com.example.finca_hexagonal.infrastructure.exceptions.InvalidCredentialsException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,7 +28,7 @@ public class RecuperarPasswordServiceImpl implements RecuperarPasswordService {
     private JavaMailSender mailSender;
 
     @Autowired
-    EncriptPassword encriptPassword;
+    private EncriptPassword encriptPassword;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
@@ -48,31 +47,31 @@ public class RecuperarPasswordServiceImpl implements RecuperarPasswordService {
     @Override
     public RecuperarPassword crearToken(GenerarTokenRequestDTO generarTokenRequestDTO) throws MessagingException {
 
-        RecuperarPassword recuperarPassword = recuperarPasswordDTOMapper.toModel(generarTokenRequestDTO);
-        recuperarPassword.setToken(UUID.randomUUID().toString());
-        recuperarPassword.setExpiresAt(LocalDateTime.now().plusMinutes(15));
-        RecuperarPassword alreadyExists = recuperarPasswordModelService.obtenerToken(recuperarPassword.getEmail());
-        if (alreadyExists != null) {
-            RecuperarPassword recuperarPasswordSaved = recuperarPasswordModelService.updateToken(alreadyExists.getId(), recuperarPassword);
-            String token = recuperarPasswordSaved.getToken();
-            this.enviarMail(token, recuperarPassword.getEmail());
-            return recuperarPasswordSaved;
+        RecuperarPassword userToken = recuperarPasswordDTOMapper.toModel(generarTokenRequestDTO);
+        userToken.setToken(UUID.randomUUID().toString());
+        userToken.setExpiresAt(LocalDateTime.now().plusMinutes(15));
+        RecuperarPassword userTokenAlreadyExists = recuperarPasswordModelService.obtenerToken(userToken.getEmail());
+        if (userTokenAlreadyExists != null) {
+            RecuperarPassword userTokenSaved = recuperarPasswordModelService.updateToken(userTokenAlreadyExists.getId(), userToken);
+            String token = userTokenSaved.getToken();
+            this.enviarMail(token, userToken.getEmail());
+            return userTokenSaved;
         }
-        RecuperarPassword recuperarPasswordSaved = recuperarPasswordModelService.generarToken(recuperarPassword);
-        String token = recuperarPasswordSaved.getToken();
-        this.enviarMail(token, recuperarPassword.getEmail());
-        return recuperarPasswordSaved;
+        RecuperarPassword userTokenSaved = recuperarPasswordModelService.generarToken(userToken);
+        String token = userTokenSaved.getToken();
+        this.enviarMail(token, userToken.getEmail());
+        return userTokenSaved;
     }
 
     @Override
     public RecuperarPassword cambiarPassword(CambiarPasswordRequestDTO cambiarPasswordRequestDTO) {
         RecuperarPassword recuperarPassword = recuperarPasswordModelService.obtenerToken(cambiarPasswordRequestDTO.getEmail());
-        if (recuperarPassword.getExpiresAt().isBefore(LocalDateTime.now())){
+        Optional<Usuario> usuarioDB = usuarioModelService.getByEmail(recuperarPassword.getEmail());
+        if (recuperarPassword.getExpiresAt().isBefore(LocalDateTime.now()) || usuarioDB.isEmpty()){
             throw new InvalidCredentialsException("El token ha expirado, solicite nuevamente el cambio de contraseña");
         }
         if (recuperarPassword.getToken().equalsIgnoreCase(cambiarPasswordRequestDTO.getToken())) {
-            Optional<Usuario> usu = usuarioModelService.getByEmail(recuperarPassword.getEmail());
-            Usuario usuario = usu.get();
+            Usuario usuario = usuarioDB.get();
             String passwordNuevo = encriptPassword.encriptPassword(cambiarPasswordRequestDTO.getNuevoPassword());
             usuario.setPassword(passwordNuevo);
             usuarioModelService.updateUsuario(usuario.getId(), usuario);
@@ -92,6 +91,7 @@ public class RecuperarPasswordServiceImpl implements RecuperarPasswordService {
                 "<p>Hacé clic en el siguiente enlace para restablecer tu contraseña:</p>" +
                 "<p><a href='" + linkRecuperacion + "'>Restablecer contraseña</a></p>" +
                 "<p>Si no te redirige automaticamente copia este link: " + linkRecuperacion +
+                "<br><p style='color: red;'>No compartas este link con nadie.</p>" +
                 "<br><p>Si no solicitaste esto, ignorá este correo.</p>" +
                 "</body>" +
                 "</html>";
