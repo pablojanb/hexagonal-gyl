@@ -43,6 +43,8 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilterValidation, BasicAuthenticationFilter.class)
+                .
+                .oauth2Login()
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/**").permitAll())
                         /*.requestMatchers("/api/auth/login","/api/auth/registro").permitAll()
